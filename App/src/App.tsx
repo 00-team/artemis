@@ -12,11 +12,7 @@ const App: FC = () => {
 
     global.ReactAlert = alert
 
-    return (
-        <div style={{ background: '#040404', position: 'fixed', inset: 0 }}>
-            App
-        </div>
-    )
+    return <div>App</div>
 }
 
 export default App
