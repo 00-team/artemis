@@ -1,0 +1,39 @@
+@use 'config';
+@use 'theme/dark' as t;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+body {
+    @include t.dark;
+
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+}
+
+// // scroll bar
+// ::-webkit-scrollbar {
+//     width: 14px;
+//     background: var(--primary-color);
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background-color: config.$background_color;
+//     border: 3px solid var(--primary-color);
+//     cursor: pointer;
+//     border-radius: 20px;
+// }
+
+// // selection
+// ::selection {
+//     color: var(--primary-color);
+//     background-color: #555;
+// }
