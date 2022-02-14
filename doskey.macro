@@ -1,0 +1,17 @@
+;= python django
+
+a=.env\Scripts\activate
+mk=python manage.py makemigrations
+m=python manage.py migrate
+;= python manage.py migrate --database=temp && python manage.py migrate --database=about
+c=python manage.py createsuperuser --username=$1 --email=$2
+run=python manage.py runserver 7000 --insecure
+
+
+;= npm react
+
+s=npm start
+build=npm run build
+dev=npm run dev
+
+;= doskey /macrofile=doskey.macro
