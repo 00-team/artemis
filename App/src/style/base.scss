@@ -1,5 +1,5 @@
 @use 'config';
-@use 'theme';
+@use 'theme/dark' as theme;
 
 * {
     margin: 0;
@@ -21,11 +21,7 @@ body {
         overflow: hidden;
     }
 
-    @include theme.light;
-
-    &.dark {
-        @include theme.dark;
-    }
+    @include theme.dark;
 
     background-color: var(--primary-color);
     color: var(--accent-color);
