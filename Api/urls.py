@@ -8,7 +8,15 @@ urlpatterns = [
     path(
         'account/',
         include([
-            path('test/', account.test),
+            # telegram
+            path('telegram_callback/', account.telegram_callback),
+
+            # twitter
+            path('twitter_auth/', account.twitter_auth),
+            path('twitter_callback/', account.twitter_callback),
+
+            # main
+            path('logout/', account.logout),
         ]),
     ),
 ]
