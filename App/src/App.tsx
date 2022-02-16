@@ -1,7 +1,13 @@
 import React, { FC } from 'react'
 
+// router
+import { Routes, Route } from 'react-router-dom'
+
 // alert
 import { useAlert } from 'react-alert'
+
+// pages
+import Home from './Pages/Home'
 
 // style
 import './style/base.scss'
@@ -12,7 +18,16 @@ const App: FC = () => {
 
     global.ReactAlert = alert
 
-    return <div>App</div>
+    return (
+        <>
+            {/* <Navbar /> */}
+            <main>
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                </Routes>
+            </main>
+        </>
+    )
 }
 
 export default App
