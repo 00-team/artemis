@@ -1,7 +1,13 @@
 from pathlib import Path
-from .secret import SECRET_KEY
+from json import loads
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+with open(BASE_DIR / 'secrets.json', 'r') as f:
+    secrets = loads(f.read())
+    SECRET_KEY = secrets['SECRET_KEY']
+    BOT_TOKEN = secrets['BOT_TOKEN']
+    del secrets
 
 DEBUG = True
 
