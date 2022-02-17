@@ -45,7 +45,7 @@ class AccountManager(models.Manager):
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    telegram_id = models.PositiveBigIntegerField()
+    telegram_id = models.BigIntegerField()
     username = models.CharField(
         max_length=64,
         blank=True,
