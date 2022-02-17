@@ -67,6 +67,7 @@ databases/*
 !databases/*.py
 
 secrets.json
+Bot/data/
 
 # Flask stuff:
 instance/
