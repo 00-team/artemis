@@ -1,36 +1,134 @@
-from json import loads
-
 # telegram api
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, LoginUrl
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram import Update
+from telegram.ext import Updater, Filters
+
+# handlers
+from telegram.ext import ChatMemberHandler, MessageHandler, CommandHandler
+from telegram.ext import CallbackQueryHandler, CallbackContext
+
+# data
+from utils.data import update_data, update_users
+from utils.data import get_token, read_json
+
+# api
+from utils.api import join_chats, update_join_chats
+from utils.api import login
+
+# langs
+from utils.langs import change_lang, update_lang
+
+# logger
+from logging import getLogger
+
+logger = getLogger(__name__)
+
+admins = []
+chats = []
 
 
-def hello(update: Update, *args):
-    # print(dir(update))
-    login_url = LoginUrl('https://web-00-team.web.app/')
-    keyboard = [
-        [
-            InlineKeyboardButton('Login', login_url=login_url),
-        ],
-    ]
-    markup = InlineKeyboardMarkup(keyboard)
-    # update.message.connected_website = 'http://localhost:7000/'
+def msg(update: Update, *args):
+    user = update.effective_user
+    if not user.id in admins:
+        return
 
-    update.message.reply_text(f'Hello {update.effective_user.first_name}',
-                              reply_markup=markup)
+    photos = update.effective_message.photo
+    chat = update.effective_chat
+
+    for photo in photos:
+        caption = f'''file id: `{photo.file_id}`\n\nfile size: `{photo.file_size}`\n\width: {photo.width}\t\theight: {photo.height}'''
+        chat.send_photo(
+            photo.file_id,
+            caption=caption,
+            parse_mode='MarkdownV2',
+        )
 
 
-def get_token() -> str:
-    with open('../secrets.json', 'r') as f:
-        return loads(f.read())['BOT_TOKEN']
+def start(update: Update, context: CallbackContext):
+    user = update.effective_user
+
+    user_exists = update_users(user.id, change=False)
+
+    try:
+        if context.args[0] == 'login':
+            return login(update)
+    except:
+        pass
+
+    if not user_exists:
+        return change_lang(update, next_step=True)
+
+    join_chats(update)
+
+
+def member_update(update: Update, *args):
+    try:
+        user = update.effective_user
+        chat = update.effective_chat
+
+        if not user.id in admins:
+            return
+
+        if chat.type not in ['supergroup', 'channel']:
+            return
+
+        status = update.my_chat_member.new_chat_member.status
+
+        if status == 'administrator' and chat.id not in chats:
+            chats.append(chat.id)
+            user.send_message(
+                f'chat: **{chat.title}** has been added into chats list',
+                'Markdown')
+        else:
+            if chat.id in chats:
+                chats.remove(chat.id)
+                user.send_message(
+                    f'chat: {chat.title} has been removed from chats list')
+
+        update_data(chats)
+    except Exception as e:
+        logger.error(e)
+
+
+def get_data() -> str:
+    global admins
+    global chats
+    data = read_json('./data/main.json', {})
+    admins = data.get('admins')
+    chats = data.get('chats')
 
 
 def main():
+    get_data()
     updater = Updater(get_token())
 
-    updater.dispatcher.add_handler(CommandHandler('start', hello))
+    dp = updater.dispatcher
+
+    # on bot added to a supergroup or channel as admin
+    dp.add_handler(ChatMemberHandler(member_update))
+
+    # commands
+    dp.add_handler(CommandHandler('start', start))
+    dp.add_handler(CommandHandler(['lang', 'language'], change_lang))
+    dp.add_handler(CommandHandler(['login'], login))
+    dp.add_handler(CommandHandler(['join'], join_chats))
+
+    # callbacks
+    dp.add_handler(
+        CallbackQueryHandler(
+            update_lang,
+            pattern='(next_|)(en|ru)',
+        ))
+    dp.add_handler(
+        CallbackQueryHandler(
+            update_join_chats,
+            pattern='check_chats',
+        ))
+
+    # photos
+    dp.add_handler(MessageHandler(Filters.photo, msg))
 
     updater.start_polling()
+    print('started!')
     updater.idle()
 
 
