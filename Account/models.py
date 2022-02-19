@@ -63,6 +63,8 @@ class Account(models.Model):
         null=True,
         help_text='Optional',
     )
+    wallet = models.CharField(max_length=42, blank=True, null=True)
+
     objects = AccountManager()
 
     def __str__(self):

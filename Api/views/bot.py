@@ -34,6 +34,7 @@ def user_status(request: HttpRequest):
 
         return JsonResponse({
             'user_id': account.telegram_id,
+            'wallet': account.wallet,
         })
 
     except E as e:
