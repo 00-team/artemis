@@ -2,6 +2,7 @@ from pathlib import Path
 from json import loads
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+BOT_USERNAME = 'artemisnftbot'
 
 with open(BASE_DIR / 'secrets.json', 'r') as f:
     secrets = loads(f.read())
@@ -13,7 +14,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-LOGIN_URL = '/'
+LOGIN_URL = f'//t.me/{BOT_USERNAME}?start=login'
 
 INSTALLED_APPS = [
     'django.contrib.admin',

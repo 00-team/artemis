@@ -13,7 +13,8 @@ favicon = RedirectView.as_view(url='/s/icons/favicon.ico', permanent=True)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', favicon),
-    path('api/', include('Api.urls'))
+    path('api/', include('Api.urls')),
+    path('account/', include('Account.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
