@@ -18,6 +18,9 @@ from utils.data import get_token, read_json
 from utils.stages import join_chats, update_join_chats
 from utils.stages import login, invite, check_invite
 
+# admins
+from utils.admin import photo_info, view_user
+
 # langs
 from utils.langs import change_lang, update_lang
 
@@ -26,25 +29,10 @@ from logging import getLogger
 
 logger = getLogger(__name__)
 
-admins = []
-chats = []
-
-
-def msg(update: Update, *args):
-    user = update.effective_user
-    if not user.id in admins:
-        return
-
-    photos = update.effective_message.photo
-    chat = update.effective_chat
-
-    for photo in photos:
-        caption = f'''file id: `{photo.file_id}`\n\nfile size: `{photo.file_size}`\n\width: {photo.width}\t\theight: {photo.height}'''
-        chat.send_photo(
-            photo.file_id,
-            caption=caption,
-            parse_mode='MarkdownV2',
-        )
+data = read_json('./data/main.json', {})
+admins = data.get('admins')
+chats = data.get('chats')
+del data
 
 
 def start(update: Update, context: CallbackContext):
@@ -97,16 +85,8 @@ def member_update(update: Update, *args):
         logger.error(e)
 
 
-def get_data() -> str:
-    global admins
-    global chats
-    data = read_json('./data/main.json', {})
-    admins = data.get('admins')
-    chats = data.get('chats')
-
-
 def main():
-    get_data()
+
     updater = Updater(get_token())
 
     dp = updater.dispatcher
@@ -121,6 +101,9 @@ def main():
     dp.add_handler(CommandHandler('join', join_chats))
     dp.add_handler(CommandHandler('invite', invite))
 
+    # admin commands
+    dp.add_handler(CommandHandler('user', view_user))
+
     # callbacks
     dp.add_handler(
         CallbackQueryHandler(
@@ -134,7 +117,7 @@ def main():
         ))
 
     # photos
-    dp.add_handler(MessageHandler(Filters.photo, msg))
+    dp.add_handler(MessageHandler(Filters.photo, photo_info))
 
     updater.start_polling()
     print('started!')

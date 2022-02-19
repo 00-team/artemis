@@ -23,10 +23,9 @@ def login(update: Update, *args):
         reply_markup=markup)
 
 
-def user_joined(update: Update) -> list[Chat]:
+def user_joined(user: Chat) -> list[Chat]:
     chats = read_json('./data/main.json')['chats']
-    user = update.effective_user
-    bot = update.effective_chat.bot
+    bot = user.bot
     user_chats = []
 
     for chat in chats:
@@ -58,7 +57,7 @@ def join_markup(chats: list[Chat]):
 
 
 def join_chats(update: Update, *args):
-    user_chats = user_joined(update)
+    user_chats = user_joined(update.effective_user)
     chat = update.effective_chat
 
     if user_chats:
@@ -74,7 +73,7 @@ def join_chats(update: Update, *args):
 def update_join_chats(update: Update, *args):
     query = update.callback_query
 
-    user_chats = user_joined(update)
+    user_chats = user_joined(update.effective_user)
 
     if user_chats:
         return query.message.edit_caption(

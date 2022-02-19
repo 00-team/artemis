@@ -124,3 +124,19 @@ def user_by_invite(invite: str) -> User | None:
         return None
 
     return User(user[0])
+
+
+def user_by_id(user_id: int) -> User | None:
+    con = connect(users_db)
+    cur = con.cursor()
+    cur.execute(
+        'SELECT * FROM users WHERE id=:user_id',
+        {'user_id': user_id},
+    )
+    user = cur.fetchone()
+    con.close()
+
+    if not user:
+        return None
+
+    return User(user[0])
