@@ -1,6 +1,7 @@
 from django.urls import path, include
 
 from .views import account
+from .views import bot
 
 urlpatterns = [
 
@@ -19,4 +20,12 @@ urlpatterns = [
             path('logout/', account.logout),
         ]),
     ),
+
+    # Bot Private Api
+    path(
+        'bot/',
+        include([
+            path('user_status/', bot.user_status),
+        ]),
+    )
 ]
