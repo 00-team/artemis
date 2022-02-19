@@ -6,6 +6,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest, Unauthorized
 
 from .data import update_data, read_json
+from .user import User, user_by_invite
 
 JOIN_PHOTO = 'AgACAgQAAxkBAAP1Yg6vVJoia905Dxb0SvOwTylzTAoAAs61MRvJ83FQIfIOlaPnPVsBAAMCAANtAAMjBA'
 LOGIN_URL = LoginUrl('http://127.0.0.1:7000/api/account/telegram_callback/')
@@ -67,7 +68,7 @@ def join_chats(update: Update, *args):
             reply_markup=join_markup(user_chats),
         )
 
-    login(update)
+    invite(update)
 
 
 def update_join_chats(update: Update, *args):
@@ -88,4 +89,52 @@ def update_join_chats(update: Update, *args):
         parse_mode='MarkdownV2',
     )
 
-    login(update)
+    invite(update)
+
+
+def invite_markup(link: str):
+    keyboard = [[InlineKeyboardButton('start the bot now gg', url=link)]]
+
+    return InlineKeyboardMarkup(keyboard)
+
+
+def invite(update: Update, *args):
+    user = update.effective_user
+    chat = update.effective_chat
+    bot_username = user.bot.username
+    user_data = User(user.id)
+    enough_invites = user_data.total_invites >= 1
+
+    user_link = f't.me/{bot_username}?start=invite-{user_data.invite}'
+
+    user.send_message(f'''
+        Your invite Link: {user_link} \n Your invites: {user_data.total_invites}'''
+                      )
+    user.send_message(
+        'makeing a banner for this user',
+        reply_markup=invite_markup(user_link),
+    )
+
+    if enough_invites:
+        chat.send_message('yooo you just invite enough member to the bot')
+
+        login(update)
+
+
+def check_invite(update: Update, invite_hash: str, user_data: User):
+    user = update.effective_user
+    bot = user.bot
+    inviter = user_by_invite(invite_hash)
+
+    # make sure invite url is valid
+    if not inviter:
+        return
+
+    # make sure user doesn't invite him self
+    if user_data.user_id == inviter.user_id:
+        return
+
+    inviter.update(total_invites=inviter.total_invites + 1)
+    bot.send_message(
+        inviter.user_id,
+        f'gg user {user.first_name} has been invited with your link')
