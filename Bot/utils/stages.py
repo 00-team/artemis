@@ -5,11 +5,11 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 # exceptions
 from telegram.error import BadRequest, Unauthorized
 
-from .data import update_data, read_json
+from .data import update_data, read_json, HOST
 from .user import User, user_by_invite
 
 JOIN_PHOTO = 'AgACAgQAAxkBAAP1Yg6vVJoia905Dxb0SvOwTylzTAoAAs61MRvJ83FQIfIOlaPnPVsBAAMCAANtAAMjBA'
-LOGIN_URL = LoginUrl('http://127.0.0.1:7000/api/account/telegram_callback/')
+LOGIN_URL = LoginUrl(HOST + 'api/account/telegram_callback/')
 
 
 def login(update: Update, *args):

@@ -6,14 +6,20 @@ from telegram.ext import CallbackContext
 from telegram.error import BadRequest, Unauthorized
 
 # data
-from .data import read_json
+from .data import read_json, get_token
+from .data import HOST
 
 # user
 from .user import user_by_id
 
+# stages
 from .stages import user_joined
 
+# requests
+import requests
+
 admins = read_json('./data/main.json', {}).get('admins')
+API_URL = HOST + 'api/bot/'
 
 USER_PHOTO = 'AgACAgQAAxkBAAIB1mIQ-B9bGKi7MRGKh9Oqhwi1JWpkAALMuTEbwMCIUGuGyh16ARp-AQADAgADbQADIwQ'
 
@@ -34,6 +40,30 @@ def photo_info(update: Update, *args):
             caption=caption,
             parse_mode='MarkdownV2',
         )
+
+
+def get_user_status(user_id) -> str | dict:
+    BOT_SECRET = get_token()[1]
+
+    headers = {'Authorization': BOT_SECRET}
+
+    params = {'user_id': user_id}
+
+    try:
+        response = requests.get(
+            API_URL + 'user_status/',
+            params=params,
+            headers=headers,
+        )
+
+        response = response.json()
+
+        if response.get('error'):
+            return response.get('error')
+
+        return response
+    except:
+        return 'Error to get update from website'
 
 
 def view_user(update: Update, context: CallbackContext):
@@ -75,7 +105,12 @@ def view_user(update: Update, context: CallbackContext):
         if len(not_joined) == 0:
             return 'chats: Joined All ✅'
 
-        return 'chats: ' + ', '.join(map(lambda c: f'`{c.title}`', not_joined))
+        chats_str = ', '.join(map(lambda c: f'`{c.title}`', not_joined))
+        return f'chats: {chats_str}'
+
+    user_status = get_user_status(user_id)
+    if isinstance(user_status, dict):
+        user_status = 'Loged in ✅'
 
     user_admin.send_photo(
         USER_PHOTO,
@@ -83,6 +118,8 @@ def view_user(update: Update, context: CallbackContext):
         f'username: {user.username}\n'
         f'bio: {user.bio}\n'
         f'lang: {user_data.lang}\n'
-        f'invites: {user_data.total_invites}\n' + chats(),
+        f'invites: {user_data.total_invites}\n'
+        f'{chats()}\n'
+        f'site: {user_status}\n',
         parse_mode='MarkdownV2',
     )

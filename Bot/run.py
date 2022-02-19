@@ -12,7 +12,6 @@ from utils.user import User
 # data
 from utils.data import update_data
 from utils.data import get_token, read_json
-# from utils.data import update_user
 
 # stages
 from utils.stages import join_chats, update_join_chats
@@ -87,7 +86,7 @@ def member_update(update: Update, *args):
 
 def main():
 
-    updater = Updater(get_token())
+    updater = Updater(get_token()[0])
 
     dp = updater.dispatcher
 
