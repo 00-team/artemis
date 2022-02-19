@@ -29,3 +29,6 @@ class E(Exception):
     def response(self):
         context = {'error': self.message, 'code': self.code}
         return JsonResponse(context, status=self.code)
+
+
+ACCOUNT_NOT_FOUND = E('Account Not Found', 404)
