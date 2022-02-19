@@ -6,13 +6,17 @@ from telegram.ext import Updater, Filters
 from telegram.ext import ChatMemberHandler, MessageHandler, CommandHandler
 from telegram.ext import CallbackQueryHandler, CallbackContext
 
-# data
-from utils.data import update_data, update_users
-from utils.data import get_token, read_json
+# user
+from utils.user import User
 
-# api
-from utils.api import join_chats, update_join_chats
-from utils.api import login
+# data
+from utils.data import update_data
+from utils.data import get_token, read_json
+# from utils.data import update_user
+
+# stages
+from utils.stages import join_chats, update_join_chats
+from utils.stages import login, invite, check_invite
 
 # langs
 from utils.langs import change_lang, update_lang
@@ -45,16 +49,20 @@ def msg(update: Update, *args):
 
 def start(update: Update, context: CallbackContext):
     user = update.effective_user
-
-    user_exists = update_users(user.id, change=False)
+    user_data = User(user.id)
 
     try:
-        if context.args[0] == 'login':
+        arg = context.args[0]
+
+        if arg == 'login':
             return login(update)
+
+        if arg[:6] == 'invite' and not user_data.user_exists:
+            check_invite(update, arg[7:], user_data)
     except:
         pass
 
-    if not user_exists:
+    if not user_data.user_exists:
         return change_lang(update, next_step=True)
 
     join_chats(update)
@@ -109,8 +117,9 @@ def main():
     # commands
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler(['lang', 'language'], change_lang))
-    dp.add_handler(CommandHandler(['login'], login))
-    dp.add_handler(CommandHandler(['join'], join_chats))
+    dp.add_handler(CommandHandler('login', login))
+    dp.add_handler(CommandHandler('join', join_chats))
+    dp.add_handler(CommandHandler('invite', invite))
 
     # callbacks
     dp.add_handler(

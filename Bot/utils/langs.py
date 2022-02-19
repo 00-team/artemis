@@ -1,8 +1,8 @@
 from telegram import Update
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-from .data import update_users
-from .api import join_chats
+from .user import User
+from .stages import join_chats
 
 langs = {
     'welcome': {
@@ -60,14 +60,16 @@ def update_lang(update: Update, *args):
     query = update.callback_query
     next_step = False
     ln = 'en'
+
     if query.data[:4] == 'next':
         next_step = True
         ln = query.data[5:]
 
-    update_users(user.id, ln)
+    user_data = User(user.id)
+    user_data.update(lang=ln)
 
     query.message.edit_text(
-        langs['lang_updated'][ln],
+        langs['lang_updated'][user_data.lang],
         reply_markup=None,
         parse_mode='MarkdownV2',
     )
