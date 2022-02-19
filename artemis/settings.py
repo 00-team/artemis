@@ -8,6 +8,7 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
     secrets = loads(f.read())
     SECRET_KEY = secrets['SECRET_KEY']
     BOT_TOKEN = secrets['BOT_TOKEN']
+    BOT_SECRET = secrets['BOT_SECRET']
     del secrets
 
 DEBUG = True
