@@ -109,8 +109,10 @@ def view_user(update: Update, context: CallbackContext):
         return f'chats: {chats_str}'
 
     user_status = get_user_status(user_id)
+
     if isinstance(user_status, dict):
-        user_status = 'Loged in ✅'
+        wallet = user_status.get('wallet')
+        user_status = f'Loged in ✅\nwallet: `{wallet}`'
 
     user_admin.send_photo(
         USER_PHOTO,
