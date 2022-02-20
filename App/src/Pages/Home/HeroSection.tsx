@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 // style
 import './style/herosection.scss'
 
+// icons
+import { ImCross } from '@react-icons/all-files/im/ImCross'
+
 const HeroSection = () => {
     const [ScrollWin, setScrollWin] = useState(0)
 
@@ -25,7 +28,9 @@ const HeroSection = () => {
             <div className='hero-wrapper'>
                 <div className='hero-img-wrapper'></div>
                 <div className='hero-text-wrapper'>
-                    <div className='title'>Welcome To My NFT COLLECTION</div>
+                    <div className='title_hero'>
+                        Welcome To My NFT COLLECTION
+                    </div>
                     {/* <div className='description'>Enjoy</div> */}
                 </div>
             </div>
@@ -45,7 +50,23 @@ const HeroSection = () => {
                     })  translateX(${ScrollWin / 2}px)`,
                 }}
             ></div>
-            <div className='cursor'></div>
+            <div
+                className='cross right'
+                style={{
+                    transform: `rotate(${ScrollWin}deg)`,
+                }}
+            >
+                <ImCross size={50} />
+            </div>
+            <div
+                className='cross left'
+                style={{
+                    transform: `rotate(-${ScrollWin}deg)`,
+                }}
+            >
+                <ImCross size={50} />
+            </div>
+            {/* <div className='cursor'></div> */}
         </section>
     )
 }
