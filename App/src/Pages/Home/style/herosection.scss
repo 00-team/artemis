@@ -104,6 +104,8 @@
         justify-content: center;
         flex-direction: column;
 
+        gap: 3vh;
+
         z-index: 2;
 
         .hero-img-wrapper {
@@ -116,6 +118,11 @@
             background-position: center;
             background-size: cover;
             background-image: url('https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5');
+
+            @media screen and (max-width: 768px) {
+                width: 300px;
+                height: 300px;
+            }
         }
 
         .hero-text-wrapper {
@@ -152,6 +159,11 @@
             height: 200px;
 
             transform: scale(2.8);
+
+            @media screen and (max-width: 768px) {
+                width: 150px;
+                height: 150px;
+            }
         }
         &.left {
             bottom: -50px;
@@ -160,6 +172,67 @@
             width: 200px;
             height: 200px;
             transform: scale(2.8);
+            @media screen and (max-width: 768px) {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    }
+
+    .cross {
+        transition: transform 0.2s linear;
+
+        position: absolute;
+        z-index: 3;
+
+        display: grid;
+        place-items: center;
+
+        mix-blend-mode: difference;
+
+        &.right {
+            bottom: 50px;
+            right: 50px;
+
+            width: 200px;
+            height: 200px;
+
+            svg {
+                transform: scale(2.8);
+            }
+
+            @media screen and (max-width: 768px) {
+                width: 150px;
+                height: 150px;
+
+                bottom: 20px;
+                right: 20px;
+
+                svg {
+                    transform: scale(1.5);
+                }
+            }
+        }
+        &.left {
+            top: 50px;
+            left: 50px;
+
+            width: 200px;
+            height: 200px;
+            svg {
+                transform: scale(2.8);
+            }
+            @media screen and (max-width: 768px) {
+                width: 150px;
+                height: 150px;
+
+                bottom: 20px;
+                right: 20px;
+
+                svg {
+                    transform: scale(1.5);
+                }
+            }
         }
     }
 
