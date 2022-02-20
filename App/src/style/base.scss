@@ -1,4 +1,4 @@
-@use 'config';
+@use 'config' as g;
 @use 'theme/dark' as theme;
 
 * {
@@ -10,6 +10,23 @@
     &:focus {
         outline: 0;
     }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #040404;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #272727;
+    border: 2px solid #040404;
+    border-radius: 20px;
+}
+
+// selection
+::selection {
+    color: #fff;
+    background-color: #555;
 }
 
 body {
@@ -25,4 +42,22 @@ body {
 
     background-color: var(--primary-color);
     color: var(--accent-color);
+}
+
+.title_hero {
+    font-family: 'Redressed', cursive;
+    font-size: g.$TITLE_FONTSIZE_HERO;
+}
+.title_font {
+    font-size: g.$TITLE_FONTSIZE;
+}
+.title_small {
+    font-size: g.$TITLE_FONTSIZE_SMALL;
+}
+.title_smaller {
+    font-size: g.$TITLE_FONTSIZE_SMALLER;
+}
+
+.description {
+    font-size: g.$DESCRIPTION_FONT_SIZE;
 }
