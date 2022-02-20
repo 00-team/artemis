@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // style
 import './style/herosection.scss'
@@ -8,6 +8,25 @@ import { ImCross } from '@react-icons/all-files/im/ImCross'
 
 const HeroSection = () => {
     const [ScrollWin, setScrollWin] = useState(0)
+
+    const LazyRef = useRef<HTMLDivElement>(null)
+    const [isIntersecting, setisIntersecting] = useState(false)
+
+    useEffect(() => {
+        if (LazyRef.current && !isIntersecting) {
+            var observer = new IntersectionObserver(([entry]) => {
+                if (entry && entry.isIntersecting) {
+                    setisIntersecting(true)
+                    observer.disconnect()
+                }
+            })
+
+            observer.observe(LazyRef.current)
+        }
+        return () => {
+            if (observer) observer.disconnect()
+        }
+    }, [LazyRef])
 
     window.onscroll = () => {
         tranfromHandler()
@@ -26,8 +45,11 @@ const HeroSection = () => {
             </div>
             <div className='hero-wrapper'>
                 <div className='hero-img-wrapper'></div>
-                <div className='hero-text-wrapper'>
-                    <div className='title_hero'>
+                <div className='hero-text-wrapper' ref={LazyRef}>
+                    <div
+                        className={`title_hero ${isIntersecting ? 'show' : ''}`}
+                        ref={LazyRef}
+                    >
                         Welcome To My NFT COLLECTION
                     </div>
                     {/* <div className='description'>Enjoy</div> */}
