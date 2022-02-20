@@ -14,7 +14,6 @@ const HeroSection = () => {
     }
 
     const tranfromHandler = () => {
-        console.log(window.scrollY)
         setScrollWin(window.scrollY)
     }
 
