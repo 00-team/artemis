@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 // style
 import './style/collection.scss'
 
+import NFTCard from '../../components/NFTCard'
+
 const Collection = () => {
     const LazyRef = useRef<HTMLDivElement>(null)
     const [isIntersecting, setisIntersecting] = useState(false)
@@ -48,7 +50,11 @@ const Collection = () => {
                 type='text'
                 placeholder='Explore...'
             />
-            <div className='collection-wrapper'></div>
+            <div className='collection-wrapper'>
+                <NFTCard />
+                <NFTCard />
+                <NFTCard />
+            </div>
         </section>
     )
 }
