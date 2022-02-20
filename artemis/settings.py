@@ -1,3 +1,4 @@
+from base64 import b64encode
 from pathlib import Path
 from json import loads
 
@@ -9,6 +10,9 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
     SECRET_KEY = secrets['SECRET_KEY']
     BOT_TOKEN = secrets['BOT_TOKEN']
     BOT_SECRET = secrets['BOT_SECRET']
+    CLIENT_ID = secrets['CLIENT_ID']
+    CLIENT_SECRET = secrets['CLIENT_SECRET']
+    TWITTER_AUTH = b64encode(f'{CLIENT_ID}:{CLIENT_SECRET}'.encode()).decode()
     del secrets
 
 DEBUG = True
