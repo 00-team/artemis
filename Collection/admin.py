@@ -16,17 +16,35 @@ class OwnerAdmin(admin.ModelAdmin):
     list_display = ('username', 'twitter', 'floor_price', 'ceil_price',
                     'small_pic')
     readonly_fields = ('twitter_id', 'small_pic', 'big_pic')
+    save_on_top = True
+
+    fieldsets = (
+        ('Main', {
+            'fields': (
+                'username',
+                'picture',
+                'twitter',
+                'wallet',
+                'description',
+                'floor_price',
+                'ceil_price',
+            )
+        }),
+        ('Details', {
+            'fields': ('twitter_id', 'big_pic')
+        }),
+    )
 
     @admin.display
     def small_pic(self, owner):
         if not owner.picture:
             return 'None'
 
-        return pic(owner.picture.ur)
+        return pic(owner.picture.url)
 
     @admin.display
     def big_pic(self, owner):
         if not owner.picture:
             return 'None'
 
-        return pic(owner.picture.ur, 500)
+        return pic(owner.picture.url, 300)
