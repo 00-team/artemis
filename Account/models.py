@@ -76,5 +76,9 @@ class TwitterAccount(models.Model):
     access_token = models.TextField()
     expires_in = models.DateTimeField()
 
+    class Meta:
+        verbose_name = 'Twitter Account'
+        verbose_name_plural = 'Twitter Accounts'
+
     def __str__(self):
         return username(self.account.user)
