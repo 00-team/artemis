@@ -69,3 +69,12 @@ class Account(models.Model):
 
     def __str__(self):
         return username(self.user)
+
+
+class TwitterAccount(models.Model):
+    account = models.OneToOneField(Account, on_delete=models.CASCADE)
+    access_token = models.TextField()
+    expires_in = models.DateTimeField()
+
+    def __str__(self):
+        return username(self.account.user)
