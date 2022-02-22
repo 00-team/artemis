@@ -68,6 +68,13 @@ class Account(models.Model):
 
     objects = AccountManager()
 
+    @property
+    def _picture(self) -> str | None:
+        if not self.picture:
+            return None
+
+        return self.picture.url
+
     def __str__(self):
         return username(self.user)
 
