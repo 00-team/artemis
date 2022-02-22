@@ -23,6 +23,8 @@
     "dependencies": {
         "@react-icons/all-files": "^4.1.0",
         "@redux-devtools/extension": "^3.2.2",
+        "axios": "^0.26.0",
+        "js-cookie": "^3.0.1",
         "react": "^17.0.2",
         "react-alert": "^7.0.3",
         "react-dom": "^17.0.2",
@@ -32,6 +34,7 @@
         "redux-thunk": "^2.4.1"
     },
     "devDependencies": {
+        "@types/js-cookie": "^3.0.1",
         "@types/react": "^17.0.39",
         "@types/react-alert": "^5.2.1",
         "@types/react-dom": "^17.0.11",
