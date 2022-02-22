@@ -6,7 +6,7 @@ from django.views.decorators.http import require_GET
 
 
 @require_GET
-@login_required
+@login_required()
 def account(request: HttpRequest):
     user = request.user
     account = user.account
