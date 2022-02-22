@@ -1,0 +1,149 @@
+.card-container {
+    position: relative;
+    .card-wrapper {
+        width: 100%;
+        max-width: 400px;
+
+        padding: 0 1rem 1rem 1rem;
+        border-radius: 2rem;
+        background-color: var(--primary-color);
+
+        img.thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 2rem;
+            transform: translateY(-1rem);
+            transition: all 300ms ease-in-out;
+            object-fit: cover;
+            box-shadow: 0 10px 20px -5px #000;
+        }
+        .content {
+            padding: 0 1rem 1.2rem 1rem;
+
+            display: flex;
+            flex-direction: column;
+            gap: 3vh;
+
+            .card-title {
+                span {
+                    position: relative;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 1px;
+                        opacity: 0.7;
+                        background-color: var(--accent-color);
+                    }
+                }
+            }
+            .card-description {
+                word-wrap: break-word;
+
+                height: 110px;
+                overflow: hidden;
+                @supports (display: -webkit-box) and
+                    (-webkit-box-orient: vertical) and (-webkit-line-clamp: 5) {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 4;
+                }
+            }
+        }
+
+        .others-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            padding-top: 1.3em;
+
+            position: relative;
+
+            .others {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .price {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5vw;
+                }
+                .time-published {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5vw;
+                }
+                .icon {
+                    display: grid;
+                    place-items: center;
+                }
+            }
+        }
+        .created-by-wrapper {
+            padding: 1rem;
+            padding-top: 1.5rem;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                width: 80%;
+                height: 1px;
+                opacity: 0.7;
+                background-color: var(--accent-color);
+            }
+
+            .created-by {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1vw;
+
+                @media screen and (max-width: 768px) {
+                    gap: 2.5vw;
+                }
+                .avatar {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+
+                    background-image: url('https://cdn.discordapp.com/avatars/663056543666667532/363040ba873c85a501ac9b1579958dcb.webp?size=128');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+                .text {
+                    font-style: italic;
+
+                    .owner {
+                        font-weight: bold;
+                        font-family: 'Shizuru', cursive;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        &:hover {
+            .thumbnail {
+                transform: translateY(-2rem);
+                box-shadow: 0 20px 40px -5px #000;
+            }
+        }
+    }
+}
