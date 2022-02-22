@@ -6,6 +6,9 @@ import './style/herosection.scss'
 // icons
 import { ImCross } from '@react-icons/all-files/im/ImCross'
 
+// comps
+import OwnerCard from '../../components/OwnerCard'
+
 const HeroSection = () => {
     const [ScrollWin, setScrollWin] = useState(0)
 
@@ -44,7 +47,7 @@ const HeroSection = () => {
                 <div id='stars3'></div>
             </div>
             <div className='hero-wrapper'>
-                <div className='hero-img-wrapper'></div>
+                {/* <div className='hero-img-wrapper'></div> */}
                 <div className='hero-text-wrapper' ref={LazyRef}>
                     <div
                         className={`title_hero ${isIntersecting ? 'show' : ''}`}
@@ -55,11 +58,16 @@ const HeroSection = () => {
                     {/* <div className='description'>Enjoy</div> */}
                 </div>
             </div>
+            <section className='owners-container'>
+                <OwnerCard />
+                <OwnerCard />
+                <OwnerCard />
+            </section>
             <div
                 className='circle right'
                 style={{
                     transform: `scale(${
-                        ScrollWin > 300 ? ScrollWin / 100 : '2.8'
+                        ScrollWin > 300 ? ScrollWin / 150 : '1.5'
                     })  translateX(${-ScrollWin / 2}px)`,
                 }}
             ></div>
@@ -67,7 +75,7 @@ const HeroSection = () => {
                 className='circle left'
                 style={{
                     transform: `scale(${
-                        ScrollWin > 300 ? ScrollWin / 100 : '2.8'
+                        ScrollWin > 300 ? ScrollWin / 150 : '1.5'
                     })  translateX(${ScrollWin / 2}px)`,
                 }}
             ></div>
@@ -87,7 +95,6 @@ const HeroSection = () => {
             >
                 <ImCross size={50} />
             </div>
-            {/* <div className='cursor'></div> */}
         </section>
     )
 }
