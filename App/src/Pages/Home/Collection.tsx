@@ -31,10 +31,6 @@ const Collection = () => {
         }
     }, [LazyRef])
 
-    useEffect(() => {
-        console.log(isIntersecting)
-    }, [isIntersecting])
-
     return (
         <section className='collection'>
             <div
