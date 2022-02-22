@@ -6,8 +6,8 @@ from telegram.ext import CallbackContext
 from telegram.error import BadRequest, Unauthorized
 
 # data
-from .data import read_json, get_token
-from .data import HOST
+from .data import get_date, get_token
+from .data import HOST, markdown_free
 
 # user
 from .user import user_by_id
@@ -18,7 +18,7 @@ from .stages import user_joined
 # requests
 import requests
 
-admins = read_json('./data/main.json', {}).get('admins')
+admins = get_date()['admins']
 API_URL = HOST + 'api/bot/'
 
 USER_PHOTO = 'AgACAgQAAxkBAAIB1mIQ-B9bGKi7MRGKh9Oqhwi1JWpkAALMuTEbwMCIUGuGyh16ARp-AQADAgADbQADIwQ'
@@ -67,7 +67,7 @@ def get_user_status(user_id) -> str:
             twitter = 'Disconnected ❌'
 
         return ('site: Loged in ✅\n'
-                f'wallet: `{response["wallet"]}`\n'
+                f'wallet: `{markdown_free(response["wallet"])}`\n'
                 f'twitter: {twitter}')
     except:
         return 'Error to get update from website'
@@ -112,27 +112,18 @@ def view_user(update: Update, context: CallbackContext):
         if len(not_joined) == 0:
             return 'chats: Joined All ✅'
 
-        chats_str = ', '.join(map(lambda c: f'`{c.title}`', not_joined))
+        chats_str = ', '.join(
+            map(lambda c: f'`{markdown_free(c.title)}`', not_joined))
         return f'chats: {chats_str}'
 
-    user_admin.send_message(
-        f'full name: {user.full_name}\n'
-        f'username: [{user.username}]({user.link})\n'
-        f'bio: {user.bio}\n'
-        f'lang: {user_data.lang}\n'
-        f'invites: {user_data.total_invites}\n'
-        f'{chats()}\n'
-        f'{get_user_status(user_id)}\n',
-        parse_mode='MarkdownV2',
-    )
-    # user_admin.send_photo(
-    #     USER_PHOTO,
-    #     f'{user.full_name}\n'
-    #     f'username: {user.username}\n'
-    #     f'bio: {user.bio}\n'
-    #     f'lang: {user_data.lang}\n'
-    #     f'invites: {user_data.total_invites}\n'
-    #     f'{chats()}\n'
-    #     f'{get_user_status(user_id)}\n',
-    #     parse_mode='MarkdownV2',
-    # )
+    fname = markdown_free(f'full name: {user.full_name}')
+    uname = f'username: [{user.username}]({user.link})'
+    bio = markdown_free(f'bio: {user.bio}')
+    lang = f'lang: {user_data.lang}'
+    invites = f'invites: {user_data.total_invites}'
+    uchats = chats()
+    ustatus = get_user_status(user_id)
+
+    text = '\n'.join((fname, uname, bio, lang, invites, uchats, ustatus))
+
+    user_admin.send_message(text, parse_mode='MarkdownV2')

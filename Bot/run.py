@@ -11,26 +11,26 @@ from utils.user import User
 
 # data
 from utils.data import update_data
-from utils.data import get_token, read_json
+from utils.data import get_token, get_date
 
 # stages
 from utils.stages import join_chats, update_join_chats
 from utils.stages import login, invite, check_invite
+from utils.stages import update_lang, login_markup
 
 # admins
 from utils.admin import photo_info, view_user
 
 # langs
-from utils.langs import change_lang, update_lang
+from utils.langs import change_lang, langs
 
 # logger
 from logging import getLogger
 
 logger = getLogger(__name__)
 
-data = read_json('./data/main.json', {})
+data = get_date()
 admins = data.get('admins')
-chats = data.get('chats')
 del data
 
 
@@ -42,7 +42,10 @@ def start(update: Update, context: CallbackContext):
         arg = context.args[0]
 
         if arg == 'login':
-            return login(update)
+            return user.send_message(
+                langs['external_login'][user_data.lang],
+                reply_markup=login_markup(user_data.lang),
+            )
 
         if arg[:6] == 'invite' and not user_data.user_exists:
             check_invite(update, arg[7:], user_data)
@@ -59,6 +62,7 @@ def member_update(update: Update, *args):
     try:
         user = update.effective_user
         chat = update.effective_chat
+        chats = get_date()['chats']
 
         if not user.id in admins:
             return

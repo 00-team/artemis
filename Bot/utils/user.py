@@ -65,10 +65,10 @@ class User:
         return user
 
     def check_user(self):
+        user = self.get_user()
+
         con = connect(users_db)
         cur = con.cursor()
-
-        user = self.get_user()
 
         if user:
             self.user_exists = True
@@ -82,10 +82,10 @@ class User:
             (self.user_id, inv),
         )
 
-        self.get_user()
-
         con.commit()
         con.close()
+
+        self.get_user()
 
     def update(self, lang: LANG = None, total_invites: int = None):
         self.get_user()

@@ -41,3 +41,36 @@ def get_token() -> str:
     with open('../secrets.json', 'r') as f:
         data = load(f)
         return (data['BOT_TOKEN'], data['BOT_SECRET'])
+
+
+def get_date() -> dict:
+    return read_json('./data/main.json', {})
+
+
+MDC = [
+    '_',
+    '*',
+    '[',
+    ']',
+    '(',
+    ')',
+    '~',
+    '`',
+    '>',
+    '#',
+    '+',
+    '-',
+    '=',
+    '|',
+    '{',
+    '}',
+    '.',
+    '!',
+]
+
+
+def markdown_free(text: str) -> str:
+    for c in MDC:
+        text = text.replace(c, f'\{c}')
+
+    return text
