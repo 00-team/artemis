@@ -15,8 +15,11 @@ from django.contrib.auth import logout as system_logout
 from django.contrib.auth import login as system_login
 
 # decorators
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from Api.decorators import login_required
+
+# csrf
+from django.middleware.csrf import get_token
 
 # execptions
 from utils.api import E
@@ -42,7 +45,7 @@ ACCESS_TOKEN_URL = 'https://api.twitter.com/2/oauth2/token'
 
 
 @require_GET
-@login_required
+@login_required()
 def twitter_auth(request: HttpRequest):
     try:
         session = request.session
@@ -73,7 +76,7 @@ def twitter_auth(request: HttpRequest):
 
 
 @require_GET
-@login_required
+@login_required()
 def twitter_callback(request: HttpRequest):
     try:
         session = request.session
@@ -136,6 +139,7 @@ def twitter_callback(request: HttpRequest):
         return HttpResponseRedirect('/')
 
 
+@require_GET
 def telegram_callback(request: HttpRequest):
     try:
         data = get_data(request)
@@ -160,6 +164,55 @@ def telegram_callback(request: HttpRequest):
         return HttpResponseRedirect('/')
 
 
+@require_GET
 def logout(request: HttpRequest):
     system_logout(request)
     return HttpResponseRedirect('/')
+
+
+@require_GET
+@login_required('json')
+def get_account(request: HttpRequest):
+    try:
+        get_token(request)
+        user = request.user
+        account = request.user.account
+
+        try:
+            ta = TwitterAccount.objects.get(account=account)
+            twitter = {'username': ta.username}
+        except:
+            twitter = None
+
+        return JsonResponse({
+            'first_name': user.first_name or None,
+            'last_name': user.last_name or None,
+            'wallet': account.wallet or None,
+            'username': account.username or None,
+            'picture': account._picture,
+            'twitter': twitter,
+        })
+    except E as e:
+        return e.response
+
+
+@require_POST
+@login_required('json')
+def update(request: HttpRequest):
+    try:
+        account = request.user.account
+        data = get_data(request)
+
+        wallet = str(data.get('wallet'))
+
+        if len(wallet) == 42:
+            account.wallet = wallet
+            account.save()
+
+        return JsonResponse({
+            'ok': 'Your Information successfully updated',
+            'wallet': account.wallet,
+        })
+
+    except E as e:
+        return e.response

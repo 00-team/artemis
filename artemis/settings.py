@@ -12,6 +12,7 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
     BOT_SECRET = secrets['BOT_SECRET']
     CLIENT_ID = secrets['CLIENT_ID']
     CLIENT_SECRET = secrets['CLIENT_SECRET']
+    TWITTER_BEARER = secrets['TWITTER_BEARER']
     TWITTER_AUTH = b64encode(f'{CLIENT_ID}:{CLIENT_SECRET}'.encode()).decode()
     del secrets
 

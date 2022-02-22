@@ -8,6 +8,7 @@ import { useAlert } from 'react-alert'
 
 // pages
 import Home from './Pages/Home'
+import Account from './Pages/Account'
 
 // style
 import './style/base.scss'
@@ -24,6 +25,7 @@ const App: FC = () => {
             <main>
                 <Routes>
                     <Route path='/' element={<Home />} />
+                    <Route path='account' element={<Account />} />
                 </Routes>
             </main>
         </>

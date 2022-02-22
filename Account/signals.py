@@ -28,6 +28,10 @@ def download_picture(acc: Account):
     try:
         temp = NamedTemporaryFile()
         with get(acc.photo_url, allow_redirects=True) as res:
+
+            if res.status_code != 200:
+                return
+
             for chunk in res.iter_content(8192):  # 1024 * 8
                 temp.write(chunk)
 

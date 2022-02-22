@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import CharField
 from django.contrib.auth.models import User
 
 # utils
@@ -46,7 +47,7 @@ class AccountManager(models.Manager):
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     telegram_id = models.BigIntegerField()
-    username = models.CharField(
+    username = CharField(
         max_length=64,
         blank=True,
         null=True,
@@ -67,6 +68,13 @@ class Account(models.Model):
 
     objects = AccountManager()
 
+    @property
+    def _picture(self) -> str | None:
+        if not self.picture:
+            return None
+
+        return self.picture.url
+
     def __str__(self):
         return username(self.user)
 
@@ -74,7 +82,12 @@ class Account(models.Model):
 class TwitterAccount(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     access_token = models.TextField()
+    username = CharField(max_length=30, blank=True, null=True)
     expires_in = models.DateTimeField()
+
+    class Meta:
+        verbose_name = 'Twitter Account'
+        verbose_name_plural = 'Twitter Accounts'
 
     def __str__(self):
         return username(self.account.user)

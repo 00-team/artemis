@@ -18,6 +18,8 @@ urlpatterns = [
 
             # main
             path('logout/', account.logout),
+            path('get/', account.get_account),
+            path('update/', account.update),
         ]),
     ),
 
