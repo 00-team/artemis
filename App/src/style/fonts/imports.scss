@@ -1,19 +1,16 @@
 // main font?
 @import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
 
-@import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
-
 // explore
-@import url('https://fonts.googleapis.com/css2?family=Redressed&family=Shizuru&display=swap');
+@import url(https://fonts.googleapis.com/css2?family=Redressed&family=Shizuru&display=swap);
 
 // search bar
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url(https://fonts.googleapis.com/css2?family=Oswald&display=swap);
 
 // alien
 @font-face {
     font-family: 'Alien';
-    src: url('./alien/Handbag-Regular.eot'),
-        url('./alien/Handbag-Regular.woff2') format('woff2'),
-        url('./alien/Handbag-Regular.ttf') format('truetype'),
-        url('./alien/Handbag-Regular.woff') format('woff');
+    src: url('./alien/Handbag.ttf') format('truetype'),
+        url('./alien/Handbag.woff') format('woff'),
+        url('./alien/Handbag.woff2') format('woff2');
 }
