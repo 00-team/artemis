@@ -42,7 +42,7 @@ def photo_info(update: Update, *args):
         )
 
 
-def get_user_status(user_id) -> str | dict:
+def get_user_status(user_id) -> str:
     BOT_SECRET = get_token()[1]
 
     headers = {'Authorization': BOT_SECRET}
@@ -54,14 +54,21 @@ def get_user_status(user_id) -> str | dict:
             API_URL + 'user_status/',
             params=params,
             headers=headers,
-        )
-
-        response = response.json()
+        ).json()
 
         if response.get('error'):
-            return response.get('error')
+            return 'site: ' + response['error'] + ' ❌'
 
-        return response
+        twitter = response['twitter']
+
+        if twitter:
+            twitter = f'[{twitter}](https://twitter.com/{twitter}) Connected ✅'
+        else:
+            twitter = 'Disconnected ❌'
+
+        return ('site: Loged in ✅\n'
+                f'wallet: `{response["wallet"]}`\n'
+                f'twitter: {twitter}')
     except:
         return 'Error to get update from website'
 
@@ -108,20 +115,24 @@ def view_user(update: Update, context: CallbackContext):
         chats_str = ', '.join(map(lambda c: f'`{c.title}`', not_joined))
         return f'chats: {chats_str}'
 
-    user_status = get_user_status(user_id)
-
-    if isinstance(user_status, dict):
-        wallet = user_status.get('wallet')
-        user_status = f'Loged in ✅\nwallet: `{wallet}`'
-
-    user_admin.send_photo(
-        USER_PHOTO,
-        f'{user.full_name}\n'
-        f'username: {user.username}\n'
+    user_admin.send_message(
+        f'full name: {user.full_name}\n'
+        f'username: [{user.username}]({user.link})\n'
         f'bio: {user.bio}\n'
         f'lang: {user_data.lang}\n'
         f'invites: {user_data.total_invites}\n'
         f'{chats()}\n'
-        f'site: {user_status}\n',
+        f'{get_user_status(user_id)}\n',
         parse_mode='MarkdownV2',
     )
+    # user_admin.send_photo(
+    #     USER_PHOTO,
+    #     f'{user.full_name}\n'
+    #     f'username: {user.username}\n'
+    #     f'bio: {user.bio}\n'
+    #     f'lang: {user_data.lang}\n'
+    #     f'invites: {user_data.total_invites}\n'
+    #     f'{chats()}\n'
+    #     f'{get_user_status(user_id)}\n',
+    #     parse_mode='MarkdownV2',
+    # )

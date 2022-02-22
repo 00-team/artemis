@@ -14,7 +14,7 @@ from utils.api import get_data
 from utils.api import E
 
 # models
-from Account.models import Account
+from Account.models import Account, TwitterAccount
 from utils.api.exception import ACCOUNT_NOT_FOUND
 
 
@@ -32,9 +32,15 @@ def user_status(request: HttpRequest):
 
         account = Account.objects.get(telegram_id=user_id)
 
+        try:
+            twitter = TwitterAccount.objects.get(account=account).username
+        except:
+            twitter = None
+
         return JsonResponse({
             'user_id': account.telegram_id,
             'wallet': account.wallet,
+            'twitter': twitter,
         })
 
     except E as e:
