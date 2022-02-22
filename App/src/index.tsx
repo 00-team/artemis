@@ -7,6 +7,10 @@ import App from './App'
 // router
 import { BrowserRouter as Router } from 'react-router-dom'
 
+// redux
+import { Provider as ReduxProvider } from 'react-redux'
+import { store } from './redux'
+
 // alerts
 import { Provider as AlertProvider, AlertProviderProps } from 'react-alert'
 
@@ -37,11 +41,13 @@ const AlertProps: AlertProviderProps = {
 
 const Root: FC = () => {
     return (
-        <Router>
-            <AlertProvider {...AlertProps}>
-                <App />
-            </AlertProvider>
-        </Router>
+        <ReduxProvider store={store}>
+            <Router>
+                <AlertProvider {...AlertProps}>
+                    <App />
+                </AlertProvider>
+            </Router>
+        </ReduxProvider>
     )
 }
 
