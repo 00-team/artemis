@@ -1,7 +1,7 @@
 import React from 'react'
 
 // style
-import './style/card.scss'
+import './style/nftcard.scss'
 
 // icons
 import { FaEthereum } from '@react-icons/all-files/fa/FaEthereum'
