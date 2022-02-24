@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 // style
 import './style/ownercard.scss'
 
 const OwnerCard = () => {
     const [ShowDetails, setShowDetails] = useState(false)
+    setShowDetails
 
     return (
         <div
@@ -22,7 +24,24 @@ const OwnerCard = () => {
                     <div className='owner-image'></div>
                 </div>
             </div>
-            <div className={`card-details ${ShowDetails ? 'show' : ''}`}></div>
+            <div className={`card-details ${ShowDetails ? 'show' : ''}`}>
+                <div className='details-wrapper'>
+                    <div className='name'>
+                        <span>Alien</span>
+                    </div>
+                    <div className='descriotion'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Nulla voluptatem voluptates ad. Alias, distinctio sit
+                        sequi suscipit culpa eius, ut odio asperiores optio
+                        corrupti ipsa minima tenetur repellat maiores eum?
+                    </div>
+                    <Link to={'/alien'} className='see-more-container'>
+                        <div className='see-more'>
+                            <button>See More</button>
+                        </div>
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }
