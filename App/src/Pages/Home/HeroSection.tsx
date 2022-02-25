@@ -59,9 +59,9 @@ const HeroSection = () => {
                 </div>
             </div>
             <section className='owners-container'>
-                <OwnerCard />
-                <OwnerCard />
-                <OwnerCard />
+                <OwnerCard link='alien' />
+                <OwnerCard link='alien' />
+                <OwnerCard link='alien' />
             </section>
             <div
                 className='circle right'
