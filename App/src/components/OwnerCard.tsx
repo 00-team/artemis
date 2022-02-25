@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // style
 import './style/ownercard.scss'
 
-const OwnerCard = () => {
+interface OwnerCardProps {
+    link: string
+}
+
+const OwnerCard: FC<OwnerCardProps> = ({ link }) => {
     const [ShowDetails, setShowDetails] = useState(false)
     setShowDetails
 
@@ -35,7 +39,7 @@ const OwnerCard = () => {
                         sequi suscipit culpa eius, ut odio asperiores optio
                         corrupti ipsa minima tenetur repellat maiores eum?
                     </div>
-                    <Link to={'/alien'} className='see-more-container'>
+                    <Link to={`/owners/${link}`} className='see-more-container'>
                         <div className='see-more'>
                             <button>See More</button>
                         </div>
