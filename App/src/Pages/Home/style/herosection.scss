@@ -137,6 +137,8 @@
             justify-content: center;
             flex-direction: column;
 
+            text-align: center;
+
             overflow: hidden;
 
             .title_hero {
@@ -186,10 +188,13 @@
 
             width: 200px;
             height: 200px;
-
             @media screen and (max-width: 768px) {
                 width: 150px;
                 height: 150px;
+            }
+            @media screen and (max-width: 500px) {
+                width: 100px;
+                height: 100px;
             }
         }
         &.left {
@@ -201,6 +206,10 @@
             @media screen and (max-width: 768px) {
                 width: 150px;
                 height: 150px;
+            }
+            @media screen and (max-width: 500px) {
+                width: 100px;
+                height: 100px;
             }
         }
     }
@@ -238,6 +247,17 @@
                     transform: scale(1.5);
                 }
             }
+            @media screen and (max-width: 500px) {
+                width: 100px;
+                height: 100px;
+
+                bottom: 50px;
+                right: 10px;
+
+                svg {
+                    transform: scale(1);
+                }
+            }
         }
         &.left {
             top: 50px;
@@ -257,6 +277,17 @@
 
                 svg {
                     transform: scale(1.2);
+                }
+            }
+            @media screen and (max-width: 768px) {
+                width: 100px;
+                height: 100px;
+
+                top: 50px;
+                left: 10px;
+
+                svg {
+                    transform: scale(0.8);
                 }
             }
         }
