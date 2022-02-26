@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 # models
-from .models import Owner
+from .models import Owner, Asset
 
 
 def pic(url: str, height: int = 100):
@@ -48,3 +48,16 @@ class OwnerAdmin(admin.ModelAdmin):
             return 'None'
 
         return pic(owner.picture.url, 300)
+
+
+@admin.register(Asset)
+class AssetAdmin(admin.ModelAdmin):
+    readonly_fields = ('img', )
+    list_display = ('__str__', 'img')
+
+    @admin.display
+    def img(self, asset):
+        if not asset.image:
+            return 'None'
+
+        return pic(asset.image.url, 150)
