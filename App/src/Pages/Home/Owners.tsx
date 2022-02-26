@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // style
-import './style/collection.scss'
+import './style/owners.scss'
 
 const Owners = () => {
     const LazyRef = useRef<HTMLDivElement>(null)
@@ -30,7 +30,7 @@ const Owners = () => {
     }, [LazyRef])
 
     return (
-        <section className='collection'>
+        <section className='owners'>
             <div
                 className={`section-title title ${
                     isIntersecting ? 'shown' : ''
