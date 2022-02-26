@@ -17,7 +17,7 @@ const Alien = () => {
                     className='owner-thumbnail'
                     style={{
                         backgroundImage:
-                            'url(https://cdn.discordapp.com/attachments/818500925660069934/945410974511415336/Sprite-0004.jpg)',
+                            'url(https://cdn.discordapp.com/attachments/860048420253204491/947056906852237322/g224.webp)',
                     }}
                 ></div>
                 <div className='owner-profile'>
