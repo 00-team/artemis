@@ -7,10 +7,12 @@ from django.conf.urls.static import static
 
 # views
 from django.views.generic.base import RedirectView
+from . import views
 
 favicon = RedirectView.as_view(url='/s/icons/favicon.ico', permanent=True)
 
 urlpatterns = [
+    path('', views.index),
     path('admin/', admin.site.urls),
     path('favicon.ico', favicon),
     path('api/', include('Api.urls')),
@@ -18,9 +20,6 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# Error Pages
-from . import views
 
 handler400 = views.error_400
 handler403 = views.error_403
