@@ -11,4 +11,4 @@ def account(request: HttpRequest):
     user = request.user
     account = user.account
 
-    return HttpResponse(f'gg {account.username}')
+    return HttpResponse(f'{account.username}')
