@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 // style
-import './style/collection.scss'
+import './style/owners.scss'
 
-import NFTCard from '../../components/NFTCard'
-
-const Collection = () => {
+const Owners = () => {
     const LazyRef = useRef<HTMLDivElement>(null)
     const [isIntersecting, setisIntersecting] = useState(false)
 
@@ -32,27 +30,17 @@ const Collection = () => {
     }, [LazyRef])
 
     return (
-        <section className='collection'>
+        <section className='owners'>
             <div
                 className={`section-title title ${
                     isIntersecting ? 'shown' : ''
                 }`}
                 ref={LazyRef}
             >
-                <span>Explore Collections</span>
-            </div>
-            <input
-                className='search-bar title_small'
-                type='text'
-                placeholder='Explore...'
-            />
-            <div className='collection-wrapper'>
-                <NFTCard />
-                <NFTCard />
-                <NFTCard />
+                <span>See Our Owners</span>
             </div>
         </section>
     )
 }
 
-export default Collection
+export default Owners

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 
 // style
 import './style/alien.scss'
@@ -9,7 +9,28 @@ import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
 import { FaTelegram } from '@react-icons/all-files/fa/FaTelegram'
 import { FaWhatsapp } from '@react-icons/all-files/fa/FaWhatsapp'
 
+// comps
+import NFTCard from '../../../components/NFTCard'
+
 const Alien = () => {
+    const LazyRef = useRef<HTMLDivElement>(null)
+    const [isIntersecting, setisIntersecting] = useState(false)
+
+    useEffect(() => {
+        if (LazyRef.current && !isIntersecting) {
+            var observer = new IntersectionObserver(([entry]) => {
+                if (entry && entry.isIntersecting) {
+                    setisIntersecting(true)
+                    observer.disconnect()
+                }
+            })
+
+            observer.observe(LazyRef.current)
+        }
+        return () => {
+            if (observer) observer.disconnect()
+        }
+    }, [LazyRef])
     return (
         <section className='owner-container'>
             <section className='thumbnail-container'>
@@ -55,6 +76,23 @@ const Alien = () => {
                             ICON={FaInstagram}
                         />
                     </div>
+                </div>
+            </section>
+            <section className='owner-collection'>
+                <div
+                    className={`collection-title title ${
+                        isIntersecting ? 'shown' : ''
+                    }`}
+                    ref={LazyRef}
+                >
+                    <span>My Collections</span>
+                </div>
+                <div className='collections-wrapper'>
+                    <NFTCard />
+                    <NFTCard />
+                    <NFTCard />
+                    <NFTCard />
+                    <NFTCard />
                 </div>
             </section>
         </section>

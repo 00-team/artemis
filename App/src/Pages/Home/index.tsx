@@ -5,13 +5,13 @@ import './style/index.scss'
 
 // sections
 import HeroSection from './HeroSection'
-import Collection from './Collection'
+import Owners from './Owners'
 
 const Home: FC = () => {
     return (
         <main>
             <HeroSection />
-            <Collection />
+            <Owners />
         </main>
     )
 }
