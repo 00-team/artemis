@@ -4,8 +4,8 @@ from django.http import HttpRequest
 # utils
 from json import loads as json_loads
 from hashlib import sha256
+from django.utils.timezone import now
 import hmac
-from time import time
 
 # confings
 from django.conf import settings
@@ -48,10 +48,9 @@ def get_data(request: HttpRequest) -> dict:
 
 def validate_telegram_data(data: dict):
     try:
-
         data_hash = data.get('hash')
         auth_date = int(data.get('auth_date'))
-        now_date = int(time())
+        now_date = int(now().timestamp())
 
         if now_date - auth_date > 86400:
             raise
