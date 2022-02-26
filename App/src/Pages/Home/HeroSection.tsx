@@ -53,15 +53,24 @@ const HeroSection = () => {
                         className={`title_hero ${isIntersecting ? 'show' : ''}`}
                         ref={LazyRef}
                     >
-                        Welcome To My NFT COLLECTION
+                        Welcome To Our NFT COLLECTION
                     </div>
                     {/* <div className='description'>Enjoy</div> */}
                 </div>
             </div>
             <section className='owners-container'>
-                <OwnerCard link='alien' />
-                <OwnerCard link='alien' />
-                <OwnerCard link='alien' />
+                <OwnerCard
+                    link='#alien'
+                    image='https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5'
+                />
+                <OwnerCard
+                    link='#alien'
+                    image='https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5'
+                />
+                <OwnerCard
+                    link='#alien'
+                    image='https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5'
+                />
             </section>
             <div
                 className='circle right'
