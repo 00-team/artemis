@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 
+// redux
+import { useSelector } from 'react-redux'
+import { RootState } from 'App/src/redux'
+
 // style
 import './style/herosection.scss'
 
@@ -10,8 +14,6 @@ import { ImCross } from '@react-icons/all-files/im/ImCross'
 import OwnerCard from '../../components/OwnerCard'
 
 const HeroSection = () => {
-    const [ScrollWin, setScrollWin] = useState(0)
-
     const LazyRef = useRef<HTMLDivElement>(null)
     const [isIntersecting, setisIntersecting] = useState(false)
 
@@ -31,13 +33,9 @@ const HeroSection = () => {
         }
     }, [LazyRef])
 
-    window.onscroll = () => {
-        tranfromHandler()
-    }
-
-    const tranfromHandler = () => {
-        setScrollWin(window.scrollY)
-    }
+    const winScrollY = useSelector((s: RootState) => s.winScrollTop)
+    console.log(winScrollY)
+    // if (typeof winScrollY !== 'number') return null
 
     return (
         <section className='hero-container'>
@@ -76,22 +74,22 @@ const HeroSection = () => {
                 className='circle right'
                 style={{
                     transform: `scale(${
-                        ScrollWin > 300 ? ScrollWin / 150 : '1.5'
-                    })  translateX(${-ScrollWin / 2}px)`,
+                        winScrollY > 300 ? winScrollY / 150 : '1.5'
+                    })  translateX(${-winScrollY / 2}px)`,
                 }}
             ></div>
             <div
                 className='circle left'
                 style={{
                     transform: `scale(${
-                        ScrollWin > 300 ? ScrollWin / 150 : '1.5'
-                    })  translateX(${ScrollWin / 2}px)`,
+                        winScrollY > 300 ? winScrollY / 150 : '1.5'
+                    })  translateX(${winScrollY / 2}px)`,
                 }}
             ></div>
             <div
                 className='cross right'
                 style={{
-                    transform: `rotate(${ScrollWin}deg)`,
+                    transform: `rotate(${winScrollY}deg)`,
                 }}
             >
                 <ImCross size={50} />
@@ -99,7 +97,7 @@ const HeroSection = () => {
             <div
                 className='cross left'
                 style={{
-                    transform: `rotate(-${ScrollWin}deg)`,
+                    transform: `rotate(-${winScrollY}deg)`,
                 }}
             >
                 <ImCross size={50} />
