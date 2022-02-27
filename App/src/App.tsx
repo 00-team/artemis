@@ -3,6 +3,10 @@ import React, { FC } from 'react'
 // router
 import { Routes, Route } from 'react-router-dom'
 
+// redux
+import { useDispatch } from 'react-redux'
+import { WinScrollTYPE } from './redux/models/WinScrollTop'
+
 // alert
 import { useAlert } from 'react-alert'
 
@@ -20,6 +24,15 @@ const App: FC = () => {
     const alert = useAlert()
 
     global.ReactAlert = alert
+
+    const dispatch = useDispatch()
+
+    window.onscroll = () => {
+        dispatch({
+            type: WinScrollTYPE.SET_SCROLL_TOP,
+            payload: window.scrollY,
+        })
+    }
 
     return (
         <>
