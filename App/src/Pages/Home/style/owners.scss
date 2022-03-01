@@ -65,6 +65,10 @@
         flex-wrap: wrap;
 
         row-gap: 7vh;
-        column-gap: 5vw;
+        column-gap: 3vw;
+
+        @media screen and (max-width: 900px) {
+            column-gap: 5vw;
+        }
     }
 }
