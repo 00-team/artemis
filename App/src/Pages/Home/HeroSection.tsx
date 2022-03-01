@@ -34,8 +34,6 @@ const HeroSection = () => {
     }, [LazyRef])
 
     const winScrollY = useSelector((s: RootState) => s.winScrollTop)
-    console.log(winScrollY)
-    // if (typeof winScrollY !== 'number') return null
 
     return (
         <section className='hero-container'>
