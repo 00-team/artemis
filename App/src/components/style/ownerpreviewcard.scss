@@ -13,6 +13,13 @@
 
     cursor: pointer;
 
+    @media screen and (min-width: 900px) {
+        &:not(:nth-child(2)) {
+            margin-top: 20px;
+            transform: scale(0.85);
+        }
+    }
+
     .owner-prev-image {
         width: 100%;
         height: 100%;
