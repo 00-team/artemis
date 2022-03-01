@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 
+// redux
+import { useSelector } from 'react-redux'
+import { RootState } from 'App/src/redux'
+
 // style
 import './style/owners.scss'
 
@@ -32,6 +36,53 @@ const Owners = () => {
         }
     }, [LazyRef])
 
+    const winScrollY = useSelector((s: RootState) => s.winScrollTop)
+
+    // owners scroll top ref
+    let ostr = useRef<HTMLDivElement>(null)
+
+    if (ostr.current) {
+        // owners scroll top
+        const ost = ostr.current!.offsetTop - winScrollY
+
+        // if(ost )
+        console.log(ost)
+        const element = document.querySelectorAll(
+            '.owner-prev-card'
+        ) as NodeListOf<HTMLDivElement>
+
+        if (ost < 900) {
+            element.forEach((div: HTMLDivElement) => {
+                div.style.transform = `translateY(${75}%)`
+            })
+        }
+        if (ost < 600) {
+            element.forEach((div: HTMLDivElement) => {
+                div.style.transform = `translateY(${50}%)`
+            })
+        }
+        if (ost < 500) {
+            element.forEach((div: HTMLDivElement) => {
+                div.style.transform = `translateY(${25}%)`
+            })
+        }
+        if (ost < 400) {
+            element.forEach((div: HTMLDivElement) => {
+                div.style.transform = `translateY(${12.5}%)`
+            })
+        }
+        if (ost < 300) {
+            element.forEach((div: HTMLDivElement) => {
+                div.style.transform = `translateY(${0}%)`
+            })
+        }
+        if (ost < 0) {
+            element.forEach((div: HTMLDivElement) => {
+                div.style.transform = `translateY(${0}%)`
+            })
+        }
+    }
+
     return (
         <section className='owners'>
             <div
@@ -42,7 +93,7 @@ const Owners = () => {
             >
                 <span>See Our Owners</span>
             </div>
-            <div className='owners-wrapper'>
+            <div className='owners-wrapper' ref={ostr}>
                 <OwnerPreviewCard
                     name='Alien'
                     detail='Tell Me Whats The Secret Of Love I Dont Get It'
