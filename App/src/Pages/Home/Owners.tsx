@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { FC, useRef } from 'react'
 
 // redux
 import { useSelector } from 'react-redux'
@@ -10,32 +10,7 @@ import './style/owners.scss'
 // comps
 import OwnerPreviewCard from '../../components/OwnerPreviewCard'
 
-const Owners = () => {
-    const LazyRef = useRef<HTMLDivElement>(null)
-    const [isIntersecting, setisIntersecting] = useState(false)
-
-    useEffect(() => {
-        if (LazyRef.current && !isIntersecting) {
-            var observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry && entry.isIntersecting) {
-                        setisIntersecting(true)
-                        observer.disconnect()
-                    }
-                },
-                {
-                    threshold: 1,
-                    rootMargin: '-13px',
-                }
-            )
-
-            observer.observe(LazyRef.current)
-        }
-        return () => {
-            if (observer) observer.disconnect()
-        }
-    }, [LazyRef])
-
+const Owners: FC = () => {
     const winScrollY = useSelector((s: RootState) => s.winScrollTop)
 
     // owners scroll top ref
@@ -85,12 +60,7 @@ const Owners = () => {
 
     return (
         <section className='owners'>
-            <div
-                className={`section-title title ${
-                    isIntersecting ? 'shown' : ''
-                }`}
-                ref={LazyRef}
-            >
+            <div className='section-title title shown'>
                 <span>See Our Owners</span>
             </div>
             <div className='owners-wrapper' ref={ostr}>
