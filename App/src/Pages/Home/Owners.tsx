@@ -9,7 +9,7 @@ import './style/owners.scss'
 
 // comps
 import OwnerPreviewCard from '../../components/OwnerPreviewCard'
-import UnderlineText from '../../components/UnderlineText'
+import UnderlineText from '../../components/utils/UnderlineText'
 
 const Owners: FC = () => {
     const winScrollY = useSelector((s: RootState) => s.winScrollTop)
