@@ -14,7 +14,8 @@ const Faq = () => {
         <div className='faq-container'>
             <UnderlineText>FAQ</UnderlineText>
             <div className='faq-wrapper'>
-                <FaqOwner />
+                <FaqOwner title='Alien' />
+                <FaqOwner title='Arina' />
             </div>
         </div>
     )
