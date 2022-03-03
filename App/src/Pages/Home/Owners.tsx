@@ -1,8 +1,4 @@
-import React, {
-    // useEffect,
-    useRef,
-    //   useState
-} from 'react'
+import React, { FC, useRef } from 'react'
 
 // redux
 import { useSelector } from 'react-redux'
@@ -15,7 +11,7 @@ import './style/owners.scss'
 import OwnerPreviewCard from '../../components/OwnerPreviewCard'
 import UnderlineText from '../../components/UnderlineText'
 
-const Owners = () => {
+const Owners: FC = () => {
     const winScrollY = useSelector((s: RootState) => s.winScrollTop)
 
     // owners scroll top ref
