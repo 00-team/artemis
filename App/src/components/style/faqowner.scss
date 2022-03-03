@@ -1,0 +1,49 @@
+.faqOwner-container {
+    position: relative;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 3.5/5;
+
+    box-shadow: 0px 5px 15px 3px #040404;
+    border-radius: 5px;
+    background-color: #1b2735;
+
+    padding: 1rem;
+
+    .faqOwner-title {
+        text-transform: capitalize;
+
+        width: 100%;
+        position: relative;
+        z-index: 1;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:before {
+            border-top: 2px solid #dfdfdf;
+            content: '';
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 95%;
+            z-index: -1;
+        }
+
+        span {
+            font-family: 'Oswald';
+            background-color: #1b2735;
+            padding: 0 10px;
+        }
+    }
+}
