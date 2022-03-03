@@ -7,7 +7,7 @@ import './style/alien.scss'
 import { IconType } from '@react-icons/all-files'
 import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
 import { FaTelegram } from '@react-icons/all-files/fa/FaTelegram'
-import { FaWhatsapp } from '@react-icons/all-files/fa/FaWhatsapp'
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
 
 // comps
 import NFTCard from '../../../components/NFTCard'
@@ -61,16 +61,19 @@ const Alien = () => {
                     </div>
                     <div className='owner-social-wrapper'>
                         <SocialBtn
+                            link='https://web.whatsapp.com/'
                             name='telegram'
                             color='#00ccff'
                             ICON={FaTelegram}
                         />
                         <SocialBtn
+                            link='https://web.whatsapp.com/'
                             name='Whatsapp'
-                            color='#23b32a'
-                            ICON={FaWhatsapp}
+                            color='#1DA1F2'
+                            ICON={FaTwitter}
                         />
                         <SocialBtn
+                            link='https://web.whatsapp.com/'
                             name='instagram'
                             color='#DD2A7B'
                             ICON={FaInstagram}
@@ -127,12 +130,13 @@ interface SocialBtnProps {
     ICON: IconType
     name: string
     color: string
+    link: string
 }
 
-const SocialBtn: FC<SocialBtnProps> = ({ ICON, name, color }) => {
+const SocialBtn: FC<SocialBtnProps> = ({ ICON, name, color, link }) => {
     color
     return (
-        <div className={`social-btn ${name}`}>
+        <a className={`social-btn ${name}`} href={link}>
             <div className='icon'>
                 <ICON size={20} fill={color} />
             </div>
@@ -142,6 +146,6 @@ const SocialBtn: FC<SocialBtnProps> = ({ ICON, name, color }) => {
                 <span></span>
                 <span></span>
             </div>
-        </div>
+        </a>
     )
 }
