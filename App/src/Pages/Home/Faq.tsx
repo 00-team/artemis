@@ -12,7 +12,7 @@ import './style/faq.scss'
 const Faq = () => {
     return (
         <div className='faq-container'>
-            <UnderlineText>Faq</UnderlineText>
+            <UnderlineText>FAQ</UnderlineText>
             <div className='faq-wrapper'>
                 <FaqOwner />
             </div>
