@@ -1,6 +1,10 @@
 import React from 'react'
 
-import UnderlineText from '../../components/UnderlineText'
+// utils
+import UnderlineText from '../../components/utils/UnderlineText'
+
+// comp
+import FaqOwner from '../../components/FaqOwner'
 
 // style
 import './style/faq.scss'
@@ -8,8 +12,10 @@ import './style/faq.scss'
 const Faq = () => {
     return (
         <div className='faq-container'>
-            <UnderlineText>Owners Faq</UnderlineText>
-            <div className='faq-wrapper'></div>
+            <UnderlineText>Faq</UnderlineText>
+            <div className='faq-wrapper'>
+                <FaqOwner />
+            </div>
         </div>
     )
 }
