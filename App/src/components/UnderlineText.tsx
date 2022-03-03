@@ -3,7 +3,7 @@ import React, { FC, ReactNode, useEffect, useRef, useState } from 'react'
 import './style/underlinetext.scss'
 
 interface UnderlineTextProps {
-    rootMargin?: number | -13
+    rootMargin?: string | '13px'
     threshold?: number | 1
 
     children: ReactNode
@@ -28,7 +28,7 @@ const UnderlineText: FC<UnderlineTextProps> = ({
                 },
                 {
                     threshold: threshold,
-                    rootMargin: `${rootMargin}px`,
+                    rootMargin: rootMargin,
                 }
             )
 

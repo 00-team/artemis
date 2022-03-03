@@ -61,9 +61,7 @@ const Owners: FC = () => {
 
     return (
         <section className='owners'>
-            <UnderlineText rootMargin={-13} threshold={1}>
-                See Our Owners
-            </UnderlineText>
+            <UnderlineText threshold={1}>See Our Owners</UnderlineText>
             <div className='owners-wrapper' ref={ostr}>
                 <OwnerPreviewCard
                     name='Arina'
