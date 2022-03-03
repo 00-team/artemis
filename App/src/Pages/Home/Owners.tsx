@@ -95,13 +95,7 @@ const Owners = () => {
             </div>
             <div className='owners-wrapper' ref={ostr}>
                 <OwnerPreviewCard
-                    name='Alien'
-                    detail='Tell Me Whats The Secret Of Love I Dont Get It'
-                    image='https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5'
-                    top_img='https://cdn.discordapp.com/avatars/663056543666667532/363040ba873c85a501ac9b1579958dcb.webp?size=128'
-                />
-                <OwnerPreviewCard
-                    name='Alien'
+                    name='Arina'
                     detail='Tell Me Whats The Secret Of Love I Dont Get It'
                     image='https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5'
                     top_img='https://cdn.discordapp.com/avatars/663056543666667532/363040ba873c85a501ac9b1579958dcb.webp?size=128'
