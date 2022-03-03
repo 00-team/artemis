@@ -3,10 +3,6 @@ import React from 'react'
 // style
 import './style/nftcard.scss'
 
-// icons
-import { FaEthereum } from '@react-icons/all-files/fa/FaEthereum'
-import { BsClockFill } from '@react-icons/all-files/bs/BsClockFill'
-
 const NFTCard = () => {
     return (
         <div className='card-container'>
@@ -27,22 +23,7 @@ const NFTCard = () => {
                         veniam enim. Alias, repellendus minima!
                     </div>
                 </div>
-                <div className='others-wrapper'>
-                    <div className='others title_smaller'>
-                        <div className='price'>
-                            <div className='icon'>
-                                <FaEthereum size={20} />
-                            </div>
-                            <div className='text'>0.041 ETH</div>
-                        </div>
-                        <div className='time-published'>
-                            <div className='icon'>
-                                <BsClockFill size={20} />
-                            </div>
-                            <div className='text'>3 Days Ago</div>
-                        </div>
-                    </div>
-                </div>
+
                 <div className='created-by-wrapper'>
                     <div className='created-by'>
                         <div className='avatar'></div>
