@@ -15,15 +15,18 @@ def pic(url: str, height: int = 100):
 class OwnerAdmin(admin.ModelAdmin):
     list_display = ('username', 'twitter', 'floor_price', 'ceil_price',
                     'small_pic')
-    readonly_fields = ('twitter_id', 'small_pic', 'big_pic')
+    readonly_fields = ('twitter_id', 'small_pic', 'big_pic', '_banner')
     save_on_top = True
 
     fieldsets = (
         ('Main', {
             'fields': (
                 'username',
+                'opensea',
                 'picture',
+                'banner',
                 'twitter',
+                'instagram',
                 'wallet',
                 'description',
                 'floor_price',
@@ -31,7 +34,7 @@ class OwnerAdmin(admin.ModelAdmin):
             )
         }),
         ('Details', {
-            'fields': ('twitter_id', 'big_pic')
+            'fields': ('twitter_id', 'big_pic', '_banner')
         }),
     )
 
@@ -48,6 +51,13 @@ class OwnerAdmin(admin.ModelAdmin):
             return 'None'
 
         return pic(owner.picture.url, 300)
+
+    @admin.display
+    def _banner(self, owner):
+        if not owner.banner:
+            return 'None'
+
+        return pic(owner.banner.url, 400)
 
 
 @admin.register(Asset)
