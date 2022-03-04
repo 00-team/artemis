@@ -96,6 +96,9 @@ const HeroSection = () => {
             >
                 <ImCross size={50} />
             </div>
+            <div className='scroll-down-container'>
+                <div className='scroll-down'></div>
+            </div>
         </section>
     )
 }
