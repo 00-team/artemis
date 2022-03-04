@@ -1,13 +1,6 @@
 .owner-prev-container {
     height: 100%;
 
-    @media screen and (min-width: 900px) {
-        &:not(:nth-child(2)) {
-            margin-top: 20px;
-            transform: scale(0.85);
-        }
-    }
-
     .owner-prev-card {
         position: relative;
 
@@ -24,6 +17,10 @@
         transform: translateY(100%);
 
         transition: transform 0.5s;
+
+        @media screen and (max-width: 768px) {
+            max-width: 300px;
+        }
 
         .owner-prev-image {
             width: 100%;
@@ -69,6 +66,8 @@
                 border-radius: 50%;
 
                 object-fit: cover;
+
+                box-shadow: 0px 0px 50px 5px #161616, 0px 0px 7px 7px #161616;
 
                 @media screen and (max-width: 900px) {
                     width: 60px;
