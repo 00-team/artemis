@@ -5,6 +5,7 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    gap: 5%;
 
     width: 100%;
     max-width: 500px;
@@ -20,6 +21,7 @@
         text-transform: capitalize;
 
         width: 100%;
+        height: 5%;
         position: relative;
         z-index: 1;
 
@@ -36,7 +38,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            width: 95%;
+            width: 100%;
             z-index: -1;
         }
 
@@ -44,6 +46,85 @@
             font-family: 'Oswald';
             background-color: #1b2735;
             padding: 0 10px;
+        }
+    }
+    .faqOwner-faqs {
+        width: 100%;
+        height: 90%;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 3vh;
+
+        overflow-y: auto;
+
+        .faqOwner-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            gap: 1vh;
+
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+
+                width: 100%;
+                height: 1px;
+                background-color: #fff;
+            }
+
+            .faq-question-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                width: 100%;
+                position: relative;
+
+                cursor: pointer;
+
+                .faq-question {
+                    width: 100%;
+
+                    word-wrap: break-word;
+
+                    text-align: left;
+
+                    padding-bottom: 10px;
+                }
+
+                .icon {
+                    display: grid;
+                    place-items: center;
+
+                    transition: transform 0.3s ease-in-out;
+                    &.active {
+                        transform: scaleY(-1);
+                    }
+                }
+            }
+            .faq-answer {
+                width: 100%;
+
+                max-height: 0px;
+                // overflow-x: hidden;
+                // overflow-y: auto;
+                overflow: hidden;
+
+                transition: max-height 500ms ease-in-out;
+
+                &.show {
+                    max-height: 200px;
+                    padding: 0.5em 0 1.5em 0;
+                }
+            }
         }
     }
 }
