@@ -40,7 +40,6 @@ const FaqOwner: FC<FaqOwnerProps> = ({ title }) => {
             </div>
             <div className='faqOwner-faqs'>
                 {SAMPLE_FAQS.map((faq, index) => {
-                    console.log(index)
                     return (
                         <div className='faqOwner-wrapper' key={index}>
                             <div
