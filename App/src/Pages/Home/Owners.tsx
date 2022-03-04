@@ -21,8 +21,6 @@ const Owners: FC = () => {
         // owners scroll top
         const ost = ostr.current!.offsetTop - winScrollY
 
-        // if(ost )
-        console.log(ost)
         const element = document.querySelectorAll(
             '.owner-prev-card'
         ) as NodeListOf<HTMLDivElement>
