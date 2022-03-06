@@ -58,7 +58,7 @@ const Owners: FC = () => {
     }
 
     return (
-        <section className='owners'>
+        <section className='owners' id='owners'>
             <UnderlineText threshold={1}>See Our Owners</UnderlineText>
             <div className='owners-wrapper' ref={ostr}>
                 <OwnerPreviewCard
