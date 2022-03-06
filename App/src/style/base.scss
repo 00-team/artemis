@@ -29,6 +29,10 @@
     background-color: #555;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     overflow-x: overlay;
     position: relative;
