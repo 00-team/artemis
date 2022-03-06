@@ -74,6 +74,24 @@
                 font-family: 'Oswald';
             }
 
+            .owner-wallet {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.3vw;
+
+                cursor: pointer;
+
+                padding: 4px 8px;
+                background-color: #ff5747;
+                border-radius: 16px;
+
+                .icon {
+                    display: grid;
+                    place-items: center;
+                }
+            }
+
             .owner-descriotion {
                 width: 100%;
                 max-width: 800px;
