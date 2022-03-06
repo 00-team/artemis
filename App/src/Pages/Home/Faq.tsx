@@ -32,27 +32,27 @@ const Faq = () => {
         // 1 == manfi
 
         if (element[0] && element[1]) {
-            if (ost < 1000) {
-                element[1].style.transform = `translate(700px,700px)`
-                element[0].style.transform = `translate(-700px,700px)`
+            if (ost < 1100) {
+                element[1].style.transform = `translate(600px,600px)`
+                element[0].style.transform = `translate(-600px,600px)`
             }
-            if (ost < 800) {
-                element[1].style.transform = `translate(400px,400px)`
-                element[0].style.transform = `translate(-400px,400px)`
+            if (ost < 900) {
+                element[1].style.transform = `translate(500px,500px)`
+                element[0].style.transform = `translate(-500px,500px)`
+            }
+            if (ost < 700) {
+                element[1].style.transform = `translate(300px,300px)`
+                element[0].style.transform = `translate(-300px,300px)`
             }
             if (ost < 600) {
-                element[1].style.transform = `translate(250px,250px)`
-                element[0].style.transform = `translate(-250px,250px)`
+                element[1].style.transform = `translate(150px,150px)`
+                element[0].style.transform = `translate(-150px,150px)`
             }
             if (ost < 500) {
-                element[1].style.transform = `translate(100px,100px)`
-                element[0].style.transform = `translate(-100px,100px)`
-            }
-            if (ost < 350) {
                 element[1].style.transform = `translate(50px,50px)`
                 element[0].style.transform = `translate(-50px,50px)`
             }
-            if (ost < 200) {
+            if (ost < 400) {
                 element[1].style.transform = `translate(0,0)`
                 element[0].style.transform = `translate(0,0)`
             }
