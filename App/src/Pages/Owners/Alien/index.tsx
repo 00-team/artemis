@@ -8,6 +8,7 @@ import { IconType } from '@react-icons/all-files'
 import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
 import { FaTelegram } from '@react-icons/all-files/fa/FaTelegram'
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
+import { FaEthereum } from '@react-icons/all-files/fa/FaEthereum'
 
 // comps
 import NFTCard from '../../../components/NFTCard'
@@ -48,6 +49,12 @@ const Alien = () => {
             <section className='owner-content'>
                 <div className='content-container'>
                     <div className='owner-name title'>Alien</div>
+                    <div className='owner-wallet'>
+                        <div className='icon'>
+                            <FaEthereum size={20} />
+                        </div>
+                        <div className='holder'>0x7ae0...ae9a</div>
+                    </div>
                     <div className='owner-descriotion title_small'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Vero corporis labore nulla molestiae est, illum id porro
