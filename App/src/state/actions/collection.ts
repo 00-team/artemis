@@ -32,4 +32,15 @@ const GetOwner: GO = u => async dispatch => {
     }
 }
 
-export { GetXwners, GetOwner }
+type GF = () => D
+const GetFAQs: GF = () => async dispatch => {
+    try {
+        const { data } = await axios.get(BASE_URL + 'faqs/')
+
+        if (data.owners) {
+            dispatch({ type: CollectionTypes.SET_FAQS, payload: data.owners })
+        }
+    } catch (error) {}
+}
+
+export { GetXwners, GetOwner, GetFAQs }

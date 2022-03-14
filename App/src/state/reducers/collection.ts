@@ -23,7 +23,7 @@ const Owner = (state: OwnerState = null, action: Action): OwnerState => {
     }
 }
 
-const Faqs = (state: FaqState = [], action: Action): FaqState => {
+const FAQs = (state: FaqState = [], action: Action): FaqState => {
     switch (action.type) {
         case CollectionTypes.SET_FAQS:
             return action.payload
@@ -33,4 +33,4 @@ const Faqs = (state: FaqState = [], action: Action): FaqState => {
     }
 }
 
-export { Xwners, Owner, Faqs }
+export { Xwners, Owner, FAQs }

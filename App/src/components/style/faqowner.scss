@@ -19,12 +19,12 @@
 
     transition: transform 500ms;
 
-    &:nth-child(1) {
-        transform: translate(1000px, 1000px);
-    }
-    &:nth-child(2) {
-        transform: translate(-1000px, 1000px);
-    }
+    // &:nth-child(1) {
+    //     transform: translate(1000px, 1000px);
+    // }
+    // &:nth-child(2) {
+    //     transform: translate(-1000px, 1000px);
+    // }
 
     .faqOwner-title {
         text-transform: capitalize;
@@ -70,6 +70,7 @@
         overflow-y: auto;
 
         .faqOwner-wrapper {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;

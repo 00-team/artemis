@@ -8,29 +8,15 @@ import { C } from '@00-team/utils'
 
 // icons
 import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp'
+import { FAQModel } from 'state/models/Collection'
 
 interface FaqOwnerProps {
     title: string
     style?: CSSProperties
-    // faqs: Array<[{ question: string; answer: string }]>
+    faqs: FAQModel[]
 }
 
-const SAMPLE_FAQS = [
-    {
-        question: 'What is the purpose of this website?',
-        answer: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia distinctio voluptates itaque quaerat in inventore ipsa architecto perferendis. Ad, exercitationem officia sint incidunt iusto quod recusandae tempora voluptatibus. Facere, dolores.',
-    },
-    {
-        question: 'What is the purpose of this website?',
-        answer: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia distinctio voluptates itaque quaerat in inventore ipsa architecto perferendis. Ad, exercitationem officia sint incidunt iusto quod recusandae tempora voluptatibus. Facere, dolores.',
-    },
-    {
-        question: 'What is the purpose of this website?',
-        answer: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia distinctio voluptates itaque quaerat in inventore ipsa architecto perferendis. Ad, exercitationem officia sint incidunt iusto quod recusandae tempora voluptatibus. Facere, dolores.',
-    },
-]
-
-const FaqOwner: FC<FaqOwnerProps> = ({ title, style }) => {
+const FaqOwner: FC<FaqOwnerProps> = ({ title, style, faqs }) => {
     const [FaqActive, setFaqActive] = useState(-1)
 
     return (
@@ -39,7 +25,7 @@ const FaqOwner: FC<FaqOwnerProps> = ({ title, style }) => {
                 <span>{title}</span>
             </div>
             <div className='faqOwner-faqs'>
-                {SAMPLE_FAQS.map((faq, index) => {
+                {faqs.map(({ question, answer }, index) => {
                     return (
                         <div className='faqOwner-wrapper' key={index}>
                             <div
@@ -49,9 +35,7 @@ const FaqOwner: FC<FaqOwnerProps> = ({ title, style }) => {
                                     else setFaqActive(index)
                                 }}
                             >
-                                <div className='faq-question'>
-                                    {faq.question}
-                                </div>
+                                <div className='faq-question'>{question}</div>
                                 <div
                                     className={`icon ${C(
                                         FaqActive === index,
@@ -67,7 +51,7 @@ const FaqOwner: FC<FaqOwnerProps> = ({ title, style }) => {
                                     'show'
                                 )}`}
                             >
-                                {faq.answer}
+                                {answer}
                             </div>
                         </div>
                     )

@@ -6,14 +6,14 @@ import winScrollTop from './winScrollTop'
 import { Account } from './account'
 
 // Collection
-import { Xwners, Owner, Faqs } from './collection'
+import { Xwners, Owner, FAQs } from './collection'
 
 const reducers = combineReducers({
     Account,
     winScrollTop,
     Xwners,
     Owner,
-    Faqs,
+    FAQs,
 })
 
 export type RootState = ReturnType<typeof reducers>

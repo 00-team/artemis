@@ -1,11 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 
 // router
 import { Routes, Route } from 'react-router-dom'
 
-// redux
+// redux state
 import { useDispatch } from 'react-redux'
 import { WinScrollTYPE } from 'state/models/WinScrollTop'
+import { GetFAQs } from 'state/actions/collection'
 
 // alert
 import { useAlert } from 'react-alert'
@@ -28,12 +29,16 @@ const App: FC = () => {
 
     const dispatch = useDispatch()
 
-    window.onscroll = () => {
-        dispatch({
-            type: WinScrollTYPE.SET_SCROLL_TOP,
-            payload: window.scrollY,
-        })
-    }
+    useEffect(() => {
+        dispatch(GetFAQs())
+
+        window.onscroll = () => {
+            dispatch({
+                type: WinScrollTYPE.SET_SCROLL_TOP,
+                payload: scrollY,
+            })
+        }
+    }, [dispatch])
 
     return (
         <>
