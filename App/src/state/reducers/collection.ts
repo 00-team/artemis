@@ -3,7 +3,7 @@ import { Action } from '../action-types/collection'
 
 import { XwnerState, OwnerState, FaqState } from '../models/Collection'
 
-const Xwners = (state: XwnerState, action: Action): XwnerState => {
+const Xwners = (state: XwnerState = [], action: Action): XwnerState => {
     switch (action.type) {
         case CollectionTypes.SET_XWNERS:
             return action.payload
@@ -13,7 +13,7 @@ const Xwners = (state: XwnerState, action: Action): XwnerState => {
     }
 }
 
-const Owner = (state: OwnerState, action: Action): OwnerState => {
+const Owner = (state: OwnerState = null, action: Action): OwnerState => {
     switch (action.type) {
         case CollectionTypes.SET_OWNER:
             return action.payload
@@ -23,7 +23,7 @@ const Owner = (state: OwnerState, action: Action): OwnerState => {
     }
 }
 
-const Faqs = (state: FaqState, action: Action): FaqState => {
+const Faqs = (state: FaqState = [], action: Action): FaqState => {
     switch (action.type) {
         case CollectionTypes.SET_FAQS:
             return action.payload
