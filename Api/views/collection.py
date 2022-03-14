@@ -87,11 +87,7 @@ def get_owner(request: HttpRequest):
 @require_GET
 def get_faqs(request: HttpRequest):
     try:
-        data = get_data(request)
-        owner_username = data.get('owner')
-
-        owner = Owner.objects.get(username=owner_username)
-        faqs = FAQ.objects.filter(owner=owner)
+        owners = Owner.objects.all()
 
         def GF(faq: FAQ):
             return {
@@ -99,7 +95,11 @@ def get_faqs(request: HttpRequest):
                 'answer': faq.answer,
             }
 
-        return JsonResponse({'faqs': list(map(GF, faqs))})
+        def GOF(o: Owner):
+            faqs = FAQ.objects.filter(owner=o)
+            return {'owner': o.username, 'faqs': list(map(GF, faqs))}
+
+        return JsonResponse({'owners': list(map(GOF, owners))})
 
     except E as e:
         return e.response
