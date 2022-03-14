@@ -46,7 +46,12 @@ export default Account
 const AccountSideBar: FC = () => {
     return (
         <div className='sidebar-container'>
-            <div className='sidebar-wrapper'></div>
+            <div className='sidebar-wrapper'>
+                <div className='sidebar-top'>
+                    <div className='account-profile'></div>
+                    <div className='account-name'>username test</div>
+                </div>
+            </div>
             <div className='sidebar-logout'></div>
         </div>
     )
