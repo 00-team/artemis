@@ -13,58 +13,49 @@ import { RootState } from 'state'
 // style
 import './style/faq.scss'
 
+const Offset = (element: HTMLElement | null, SY: number): number => {
+    if (!element) return 0
+
+    const offset = Math.round((element.offsetTop - SY - 500) / 100)
+    if (offset > 0) return offset * 100
+
+    return 0
+
+    // if (offset < 1100)
+    //     return 600
+    // if (offset < 900)
+    //     return 500
+    // if (offset < 700)
+    //     return 300
+    // if (offset < 600)
+    //     return 200
+    // if (offset < 500)
+    //     return 300
+    // if (offset < 400)
+    //     return 0
+}
+
 const Faq = () => {
     const winScrollY = useSelector((s: RootState) => s.winScrollTop)
-
-    // faqs scroll top ref
-    let fstr = useRef<HTMLDivElement>(null)
-
-    if (fstr.current) {
-        // owners scroll top
-        const ost = fstr.current!.offsetTop - winScrollY
-
-        const element = document.querySelectorAll(
-            '.faqOwner-container'
-        ) as NodeListOf<HTMLDivElement>
-
-        console.log(element, ost)
-
-        // 1 == manfi
-
-        if (element[0] && element[1]) {
-            if (ost < 1100) {
-                element[1].style.transform = `translate(600px,600px)`
-                element[0].style.transform = `translate(-600px,600px)`
-            }
-            if (ost < 900) {
-                element[1].style.transform = `translate(500px,500px)`
-                element[0].style.transform = `translate(-500px,500px)`
-            }
-            if (ost < 700) {
-                element[1].style.transform = `translate(300px,300px)`
-                element[0].style.transform = `translate(-300px,300px)`
-            }
-            if (ost < 600) {
-                element[1].style.transform = `translate(150px,150px)`
-                element[0].style.transform = `translate(-150px,150px)`
-            }
-            if (ost < 500) {
-                element[1].style.transform = `translate(50px,50px)`
-                element[0].style.transform = `translate(-50px,50px)`
-            }
-            if (ost < 400) {
-                element[1].style.transform = `translate(0,0)`
-                element[0].style.transform = `translate(0,0)`
-            }
-        }
-    }
+    const FaqRef = useRef<HTMLDivElement>(null)
+    const offset = Offset(FaqRef.current, winScrollY)
 
     return (
         <div className='faq-container'>
             <UnderlineText>FAQ</UnderlineText>
-            <div className='faq-wrapper' ref={fstr}>
-                <FaqOwner title='Alien' />
-                <FaqOwner title='Arina' />
+            <div className='faq-wrapper' ref={FaqRef}>
+                <FaqOwner
+                    title='Alien'
+                    style={{
+                        transform: `translate(-${offset}px, ${offset}px)`,
+                    }}
+                />
+                <FaqOwner
+                    title='Arina'
+                    style={{
+                        transform: `translate(${offset}px, ${offset}px)`,
+                    }}
+                />
             </div>
         </div>
     )
