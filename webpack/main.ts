@@ -31,6 +31,7 @@ const Main: Configuration = {
         extensions: ['.mjs', '.tsx', '.ts', '.js'],
         alias: {
             state: resolve(SRC_DIR, 'state'),
+            components: resolve(SRC_DIR, 'components'),
         },
     },
 }
