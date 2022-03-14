@@ -19,8 +19,6 @@ const Account: FC = () => {
         dispatch(GetAccount())
     }, [dispatch])
 
-    console.log(AccountState)
-
     return (
         <div>
             <button onClick={() => dispatch(UpdateAccount(getW()))}>
