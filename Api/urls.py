@@ -2,6 +2,7 @@ from django.urls import path, include
 
 from .views import account
 from .views import bot
+from .views import collection
 
 urlpatterns = [
 
@@ -29,5 +30,15 @@ urlpatterns = [
         include([
             path('user_status/', bot.user_status),
         ]),
-    )
+    ),
+
+    # Collection
+    path(
+        'collection/',
+        include([
+            path('owners/', collection.get_owners),
+            path('owner/', collection.get_owner),
+            path('faqs/', collection.get_faqs),
+        ]),
+    ),
 ]
