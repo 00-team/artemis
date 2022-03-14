@@ -30,3 +30,12 @@ class Asset(Model):
 
     def __str__(self):
         return f"{self.owner.username}'s asset"
+
+
+class FAQ(Model):
+    owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
+    question = CharField(max_length=500)
+    answer = models.TextField()
+
+    def __str__(self):
+        return self.question
