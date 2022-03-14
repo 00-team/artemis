@@ -3,6 +3,9 @@ import React, { FC, useEffect } from 'react'
 // style
 import './style/account.scss'
 
+// icons
+import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
+
 // redux
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -48,8 +51,10 @@ const AccountSideBar: FC = () => {
         <div className='sidebar-container'>
             <div className='sidebar-wrapper'>
                 <div className='sidebar-top'>
-                    <div className='account-profile'></div>
-                    <div className='account-name'>username test</div>
+                    <div className='account-profile '></div>
+                    <div className='account-name title_smaller'>
+                        username test
+                    </div>
                 </div>
             </div>
             <div className='sidebar-logout'></div>
@@ -58,5 +63,20 @@ const AccountSideBar: FC = () => {
 }
 
 const AccountContent: FC = () => {
-    return <div className='contant-container'></div>
+    return (
+        <div className='content-container'>
+            <div className='wallet-container column'>
+                <div className='wallet-title title_small'>
+                    <div className='icon'>
+                        <FaWallet />
+                    </div>
+                    <div className='holder'>Wallet</div>
+                    <div className='icon'>
+                        <FaWallet />
+                    </div>
+                </div>
+            </div>
+            <div className='twitter-container column'></div>
+        </div>
+    )
 }
