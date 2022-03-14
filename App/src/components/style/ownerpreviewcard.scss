@@ -1,11 +1,15 @@
 .owner-prev-container {
     height: 100%;
+    width: 100%;
+    max-width: 400px;
+
+    @media screen and (max-width: 768px) {
+        max-width: 300px;
+    }
 
     .owner-prev-card {
         position: relative;
 
-        width: 100%;
-        max-width: 400px;
         aspect-ratio: 3.5/5;
 
         display: flex;
@@ -17,10 +21,6 @@
         transform: translateY(100%);
 
         transition: transform 0.5s;
-
-        @media screen and (max-width: 768px) {
-            max-width: 300px;
-        }
 
         .owner-prev-image {
             width: 100%;
