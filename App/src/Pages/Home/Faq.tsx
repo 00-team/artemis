@@ -61,7 +61,7 @@ const Faq = () => {
 
     return (
         <div className='faq-container'>
-            <UnderlineText>FAQ</UnderlineText>
+            <UnderlineText>Frequently Asked Questions</UnderlineText>
             <div className='faq-wrapper' ref={fstr}>
                 <FaqOwner title='Alien' />
                 <FaqOwner title='Arina' />
