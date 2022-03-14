@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-// redux
+// state
 import { useSelector } from 'react-redux'
 import { RootState } from 'state'
 
@@ -17,6 +17,9 @@ const HeroSection = () => {
     const LazyRef = useRef<HTMLDivElement>(null)
     const [isIntersecting, setisIntersecting] = useState(false)
 
+    const winScrollY = useSelector((s: RootState) => s.winScrollTop)
+    const Xwners = useSelector((s: RootState) => s.Xwners)
+
     useEffect(() => {
         if (LazyRef.current && !isIntersecting) {
             var observer = new IntersectionObserver(([entry]) => {
@@ -32,8 +35,6 @@ const HeroSection = () => {
             if (observer) observer.disconnect()
         }
     }, [LazyRef])
-
-    const winScrollY = useSelector((s: RootState) => s.winScrollTop)
 
     return (
         <section className='hero-container'>
@@ -55,14 +56,13 @@ const HeroSection = () => {
                 </div>
             </div>
             <section className='owners-container'>
-                <OwnerCard
-                    link='#owners'
-                    image='https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5'
-                />
-                <OwnerCard
-                    link='#owners'
-                    image='https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=cb647d991d8897cc8a81d2c33c4406d5'
-                />
+                {Xwners.map(x => (
+                    <OwnerCard
+                        link={'/owners/' + x.username}
+                        image={x.image}
+                        key={x.username}
+                    />
+                ))}
             </section>
             <div
                 className='circle right'
