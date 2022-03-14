@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { CSSProperties, FC, useState } from 'react'
 
 // style
 import './style/faqowner.scss'
@@ -11,6 +11,7 @@ import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp'
 
 interface FaqOwnerProps {
     title: string
+    style?: CSSProperties
     // faqs: Array<[{ question: string; answer: string }]>
 }
 
@@ -29,12 +30,11 @@ const SAMPLE_FAQS = [
     },
 ]
 
-const FaqOwner: FC<FaqOwnerProps> = ({ title }) => {
+const FaqOwner: FC<FaqOwnerProps> = ({ title, style }) => {
     const [FaqActive, setFaqActive] = useState(-1)
 
-    setFaqActive
     return (
-        <div className='faqOwner-container'>
+        <div className='faqOwner-container' style={style}>
             <div className='faqOwner-title title_small'>
                 <span>{title}</span>
             </div>

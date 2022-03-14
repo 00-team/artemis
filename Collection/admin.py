@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 # models
-from .models import Owner, Asset
+from .models import FAQ, Owner, Asset
 
 
 def pic(url: str, height: int = 100):
@@ -71,3 +71,8 @@ class AssetAdmin(admin.ModelAdmin):
             return 'None'
 
         return pic(asset.image.url, 150)
+
+
+@admin.register(FAQ)
+class FaqAdmin(admin.ModelAdmin):
+    list_display = ('question', 'owner')

@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 
 // redux
 import { useDispatch } from 'react-redux'
-import { WinScrollTYPE } from './redux/models/WinScrollTop'
+import { WinScrollTYPE } from 'state/models/WinScrollTop'
 
 // alert
 import { useAlert } from 'react-alert'

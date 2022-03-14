@@ -32,3 +32,4 @@ class E(Exception):
 
 
 ACCOUNT_NOT_FOUND = E('Account Not Found', 404)
+OWNER_NOT_FOUND = E('Owner Not Found', 404)

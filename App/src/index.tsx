@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 // redux
 import { Provider as ReduxProvider } from 'react-redux'
-import { store } from './redux'
+import { store } from 'state'
 
 // alerts
 import { Provider as AlertProvider, AlertProviderProps } from 'react-alert'
