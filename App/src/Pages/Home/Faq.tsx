@@ -43,7 +43,7 @@ const Faq = () => {
 
     return (
         <div className='faq-container'>
-            <UnderlineText>FAQ</UnderlineText>
+            <UnderlineText>Frequently Asked Questions</UnderlineText>
             <div className='faq-wrapper' ref={FaqRef}>
                 {FAQs.map(f => (
                     <FaqOwner title={f.owner} faqs={f.faqs} key={f.owner} />
