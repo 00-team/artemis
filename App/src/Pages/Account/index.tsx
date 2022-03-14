@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
-import { GetAccount, RootState, UpdateAccount } from '../../redux'
+import { GetAccount, RootState, UpdateAccount } from 'state'
 
 // debug only
 // getting a string with 42 char length

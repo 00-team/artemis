@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 // redux
 import { useSelector } from 'react-redux'
-import { RootState } from 'App/src/redux'
+import { RootState } from 'state'
 
 // style
 import './style/herosection.scss'

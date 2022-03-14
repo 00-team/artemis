@@ -29,6 +29,9 @@ const Main: Configuration = {
     plugins: [],
     resolve: {
         extensions: ['.mjs', '.tsx', '.ts', '.js'],
+        alias: {
+            state: resolve(SRC_DIR, 'state'),
+        },
     },
 }
 

@@ -8,7 +8,7 @@ import FaqOwner from '../../components/FaqOwner'
 
 // redux
 import { useSelector } from 'react-redux'
-import { RootState } from 'App/src/redux'
+import { RootState } from 'state'
 
 // style
 import './style/faq.scss'
