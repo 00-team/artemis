@@ -13,8 +13,9 @@ import { useAlert } from 'react-alert'
 // pages
 import Home from './Pages/Home'
 import Account from './Pages/Account'
+
 // owners page
-import Alien from './Pages/Owners/Alien'
+import Owner from './Pages/Owner'
 
 // style
 import './style/base.scss'
@@ -40,7 +41,7 @@ const App: FC = () => {
             <main>
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/owners/alien' element={<Alien />} />
+                    <Route path='/owners/:username' element={<Owner />} />
                     <Route path='account' element={<Account />} />
                 </Routes>
             </main>
