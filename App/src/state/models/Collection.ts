@@ -1,45 +1,45 @@
-interface OwnerX {
+interface XwnerModel {
     username: string
     picture: string
     description: string
     image: string
 }
 
-interface Owner {
+interface OwnerModel {
     username: string
     picture: string
     banner: string
-    wallet: string
+    wallet: string | null
     description: string
     floor_price: string
     ceil_price: string
     opensea: string
-    twitter: string
-    instagram: string
-    assets: Asset[]
+    twitter: string | null
+    instagram: string | null
+    assets: AssetModel[]
 }
 
-interface Asset {
+interface AssetModel {
     image: string
     title: string
     description: string
 }
 
-interface OwnerFAQ {
+interface OwnerFAQModel {
     owner: string
-    faqs: FAQ[]
+    faqs: FAQModel[]
 }
 
-interface FAQ {
+interface FAQModel {
     question: string
     answer: string
 }
 
-export { OwnerX, Owner, Asset, OwnerFAQ, FAQ }
+export { XwnerModel, OwnerModel, AssetModel, OwnerFAQModel, FAQModel }
 
-type OwnerState = Owner | null
-type XwnerState = OwnerX[]
-type FaqState = OwnerFAQ[]
+type OwnerState = OwnerModel | null
+type XwnerState = XwnerModel[]
+type FaqState = OwnerFAQModel[]
 
 export { OwnerState, XwnerState, FaqState }
 

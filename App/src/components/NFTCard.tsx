@@ -1,26 +1,22 @@
-import React from 'react'
+import React, { FC } from 'react'
+
+// state
+import { AssetModel } from 'state/models/Collection'
 
 // style
 import './style/nftcard.scss'
 
-const NFTCard = () => {
+const NFTCard: FC<AssetModel> = ({ description, image, title }) => {
     return (
         <div className='card-container'>
             <div className='card-wrapper'>
-                <img
-                    className='thumbnail'
-                    src='https://www.larazon.es/resizer/eUdlAaViar6ldNv_0ZzrHDdj1z0=/600x400/smart/filters:format(webp):quality(65)/cloudfront-eu-central-1.images.arcpublishing.com/larazon/C3QPAGIE3RBULNY6TPH7GGWBTQ.jpg'
-                />
+                <img className='thumbnail' src={image} />
                 <div className='content'>
                     <div className='card-title title_small'>
-                        <span>title test</span>
+                        <span>{title}</span>
                     </div>
                     <div className='card-description description'>
-                        {' '}
-                        dolor sit amet consectetur adipisicing elit. Quia
-                        consequatur consequuntur amet est doloribus a quas sunt,
-                        cumque, aperiam voluptatem rerum fuga laborum, ab quidem
-                        veniam enim. Alias, repellendus minima!
+                        {description}
                     </div>
                 </div>
 

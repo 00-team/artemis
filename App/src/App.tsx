@@ -1,11 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 
 // router
 import { Routes, Route } from 'react-router-dom'
 
-// redux
+// redux state
 import { useDispatch } from 'react-redux'
 import { WinScrollTYPE } from 'state/models/WinScrollTop'
+import { GetFAQs } from 'state/actions/collection'
 
 // alert
 import { useAlert } from 'react-alert'
@@ -13,8 +14,9 @@ import { useAlert } from 'react-alert'
 // pages
 import Home from './Pages/Home'
 import Account from './Pages/Account'
+
 // owners page
-import Alien from './Pages/Owners/Alien'
+import Owner from './Pages/Owner'
 
 // style
 import './style/base.scss'
@@ -27,12 +29,16 @@ const App: FC = () => {
 
     const dispatch = useDispatch()
 
-    window.onscroll = () => {
-        dispatch({
-            type: WinScrollTYPE.SET_SCROLL_TOP,
-            payload: window.scrollY,
-        })
-    }
+    useEffect(() => {
+        dispatch(GetFAQs())
+
+        window.onscroll = () => {
+            dispatch({
+                type: WinScrollTYPE.SET_SCROLL_TOP,
+                payload: scrollY,
+            })
+        }
+    }, [dispatch])
 
     return (
         <>
@@ -40,7 +46,7 @@ const App: FC = () => {
             <main>
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='/owners/alien' element={<Alien />} />
+                    <Route path='/owners/:username' element={<Owner />} />
                     <Route path='account' element={<Account />} />
                 </Routes>
             </main>

@@ -3,6 +3,9 @@ import React, { FC } from 'react'
 // style
 import './style/ownercard.scss'
 
+// router
+import { Link } from 'react-router-dom'
+
 interface OwnerCardProps {
     link: string
     image: string
@@ -10,9 +13,9 @@ interface OwnerCardProps {
 
 const OwnerCard: FC<OwnerCardProps> = ({ link, image }) => {
     return (
-        <a className='owner-card-container' href={link}>
+        <Link className='owner-card-container' to={link}>
             <img src={image} alt='' draggable={false} />
-        </a>
+        </Link>
     )
 }
 
