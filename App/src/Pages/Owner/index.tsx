@@ -61,17 +61,25 @@ const Owner: FC = () => {
                     }}
                 ></div>
                 <div className='owner-profile'>
-                    <div className='profile-image'></div>
+                    <div
+                        className='profile-image'
+                        style={{
+                            backgroundImage: `url(${OwnerState.picture})`,
+                        }}
+                    />
                 </div>
             </section>
             <section className='owner-content'>
                 <div className='content-container'>
-                    <div className='owner-name title'>Alien</div>
+                    <div className='owner-name title'>
+                        {OwnerState.username}
+                    </div>
                     <div className='owner-wallet'>
                         <div className='icon'>
                             <FaEthereum size={20} />
                         </div>
-                        <div className='holder'>0x7ae0...ae9a</div>
+                        <div className='holder'>{OwnerState.wallet}</div>
+                        {/* <div className='holder'>0x7ae0...ae9a</div> */}
                     </div>
                     <div className='owner-descriotion title_small'>
                         {OwnerState.description}
@@ -79,21 +87,34 @@ const Owner: FC = () => {
                 </div>
                 <div className='owner-social'>
                     <div className='open-sea'>
-                        <OpenSeaBtn color='blue' name='My Open Sea' />
+                        <OpenSeaBtn
+                            color='blue'
+                            name='My Open Sea'
+                            onClick={() => open(OwnerState.opensea)}
+                        />
                     </div>
                     <div className='owner-social-wrapper'>
-                        <SocialBtn
-                            link={'https://twitter.com/' + OwnerState.twitter}
-                            name='twitter'
-                            color='#1DA1F2'
-                            ICON={FaTwitter}
-                        />
-                        <SocialBtn
-                            link='https://web.whatsapp.com/'
-                            name='instagram'
-                            color='#DD2A7B'
-                            ICON={FaInstagram}
-                        />
+                        {OwnerState.twitter && (
+                            <SocialBtn
+                                link={
+                                    'https://twitter.com/' + OwnerState.twitter
+                                }
+                                name='twitter'
+                                color='#1DA1F2'
+                                ICON={FaTwitter}
+                            />
+                        )}
+                        {OwnerState.instagram && (
+                            <SocialBtn
+                                link={
+                                    'https://www.instagram.com/' +
+                                    OwnerState.instagram
+                                }
+                                name='instagram'
+                                color='#DD2A7B'
+                                ICON={FaInstagram}
+                            />
+                        )}
                     </div>
                 </div>
             </section>
@@ -107,11 +128,9 @@ const Owner: FC = () => {
                     <span>My Collections</span>
                 </div>
                 <div className='collections-wrapper'>
-                    <NFTCard />
-                    <NFTCard />
-                    <NFTCard />
-                    <NFTCard />
-                    <NFTCard />
+                    {OwnerState.assets.map((a, index) => (
+                        <NFTCard {...a} key={index} />
+                    ))}
                 </div>
             </section>
         </section>
@@ -123,11 +142,12 @@ export default Owner
 interface OpenSeaBtnProps {
     name: string
     color: string
+    onClick: () => void
 }
 
-const OpenSeaBtn: FC<OpenSeaBtnProps> = ({ name, color }) => {
+const OpenSeaBtn: FC<OpenSeaBtnProps> = ({ name, color, onClick }) => {
     return (
-        <div className={`open-sea-btn title_small ${color}`}>
+        <div className={`open-sea-btn title_small ${color}`} onClick={onClick}>
             <div className='hover'>
                 <span></span>
                 <span></span>
