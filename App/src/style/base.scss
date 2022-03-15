@@ -65,3 +65,11 @@ body {
 .description {
     font-size: g.$DESCRIPTION_FONT_SIZE;
 }
+.description_small {
+    font-size: g.$DESCRIPTION_FONT_SIZE_SMALL;
+}
+
+.icon {
+    display: grid;
+    place-items: center;
+}
