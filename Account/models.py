@@ -10,7 +10,7 @@ class AccountManager(models.Manager):
 
     def submit(self, telegram_id, **kwargs):
         username = kwargs.get('username') or None
-        photo_url = kwargs.get('photo_url') or None
+        picture_url = kwargs.get('picture_url') or None
 
         first_name = kwargs.get('first_name') or ''
         last_name = kwargs.get('last_name') or ''
@@ -25,7 +25,7 @@ class AccountManager(models.Manager):
 
             # account
             account.username = username
-            account.photo_url = photo_url
+            account.picture_url = picture_url
             account.save()
 
         except self.model.DoesNotExist:
@@ -37,7 +37,7 @@ class AccountManager(models.Manager):
                 user=user,
                 telegram_id=telegram_id,
                 username=username,
-                photo_url=photo_url,
+                picture_url=picture_url,
             )
             account.save()
 
@@ -53,16 +53,11 @@ class Account(models.Model):
         null=True,
         help_text='Optional',
     )
-    photo_url = models.URLField(
-        blank=True,
-        null=True,
-        help_text='Optional',
-    )
+    picture_url = models.URLField(blank=True, null=True)
     picture = models.ImageField(
-        upload_to=file_path('Account/picture/'),
+        upload_to=file_path('Account/telegram/picture/'),
         blank=True,
         null=True,
-        help_text='Optional',
     )
     wallet = models.CharField(max_length=42, blank=True, null=True)
 
@@ -81,9 +76,28 @@ class Account(models.Model):
 
 class TwitterAccount(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
+
     access_token = models.TextField()
-    username = CharField(max_length=30, blank=True, null=True)
     expires_in = models.DateTimeField()
+
+    user_id = CharField(max_length=300, blank=True, null=True)
+    username = CharField(max_length=30, blank=True, null=True)
+    followers = models.PositiveBigIntegerField(default=0)
+    followings = models.PositiveBigIntegerField(default=0)
+    description = models.TextField(blank=True, null=True)
+    picture_url = models.URLField(blank=True, null=True)
+    picture = models.ImageField(
+        upload_to=file_path('Account/twitter/picture/'),
+        blank=True,
+        null=True,
+    )
+
+    @property
+    def _picture(self) -> str | None:
+        if not self.picture:
+            return None
+
+        return self.picture.url
 
     class Meta:
         verbose_name = 'Twitter Account'

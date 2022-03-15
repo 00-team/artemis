@@ -31,6 +31,7 @@ from django.conf import settings
 from utils.api import HOST, get_data
 from utils.api import validate_telegram_data
 from utils.api import merge_params, follow_owners
+from utils.api import twitter_info
 # django
 from django.utils.crypto import get_random_string as random_str
 
@@ -131,11 +132,17 @@ def twitter_callback(request: HttpRequest):
 
         twitter.save()
 
+        twitter_info(twitter)
+
         Thread(target=follow_owners, args=(twitter, )).start()
 
         return HttpResponseRedirect('/account/')
     except E as e:
         messages.error(request, e.message)
+        return HttpResponseRedirect('/')
+
+    except:
+        messages.error(request, 'Error to get the Twitter Data')
         return HttpResponseRedirect('/')
 
 
@@ -151,7 +158,7 @@ def telegram_callback(request: HttpRequest):
             'first_name': data.get('first_name'),
             'last_name': data.get('last_name'),
             'username': data.get('username'),
-            'photo_url': data.get('photo_url'),
+            'picture_url': data.get('photo_url'),
         }
 
         account = Account.objects.submit(**submit_data)
@@ -180,7 +187,13 @@ def get_account(request: HttpRequest):
 
         try:
             ta = TwitterAccount.objects.get(account=account)
-            twitter = {'username': ta.username}
+            twitter = {
+                'username': ta.username,
+                'followers': ta.followers,
+                'followings': ta.followings,
+                'description': ta.description,
+                'picture': ta._picture,
+            }
         except:
             twitter = None
 
