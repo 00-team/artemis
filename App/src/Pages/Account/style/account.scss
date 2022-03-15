@@ -125,6 +125,13 @@
                 flex-direction: column;
 
                 gap: 2vh;
+
+                &.wallet-container {
+                    .wallet-title {
+                        display: flex;
+                        gap: 1vw;
+                    }
+                }
             }
         }
     }
