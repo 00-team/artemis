@@ -65,18 +65,18 @@ const AccountSideBar: FC = () => {
 const AccountContent: FC = () => {
     return (
         <div className='content-container'>
-            <div className='wallet-container column'>
+            <div className='column wallet-container '>
                 <div className='wallet-title title_small'>
                     <div className='icon'>
                         <FaWallet />
                     </div>
-                    <div className='holder'>Wallet</div>
+                    <div className='holder'>My Wallet</div>
                     <div className='icon'>
                         <FaWallet />
                     </div>
                 </div>
             </div>
-            <div className='twitter-container column'></div>
+            <div className='column twitter-container '></div>
         </div>
     )
 }
