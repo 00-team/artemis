@@ -92,6 +92,13 @@ class TwitterAccount(models.Model):
         null=True,
     )
 
+    @property
+    def _picture(self) -> str | None:
+        if not self.picture:
+            return None
+
+        return self.picture.url
+
     class Meta:
         verbose_name = 'Twitter Account'
         verbose_name_plural = 'Twitter Accounts'
