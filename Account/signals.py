@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.utils.crypto import get_random_string
 
 # models
-from .models import Account
+from .models import Account, TwitterAccount
 from django.contrib.auth.models import User
 
 # threading
@@ -24,10 +24,10 @@ DEL_KWARGS = {'save': False}
 logger = logging.getLogger(__name__)
 
 
-def download_picture(acc: Account):
+def download_picture(instance: Account | TwitterAccount):
     try:
         temp = NamedTemporaryFile()
-        with get(acc.photo_url, allow_redirects=True) as res:
+        with get(instance.picture_url, allow_redirects=True) as res:
 
             if res.status_code != 200:
                 return
@@ -35,13 +35,14 @@ def download_picture(acc: Account):
             for chunk in res.iter_content(8192):  # 1024 * 8
                 temp.write(chunk)
 
-        acc.picture.save('picture.jpg', File(temp))
-        acc.save()
+        instance.picture.save('picture.jpg', File(temp))
+        instance.save()
     except Exception as e:
         logger.error(e)
 
 
 # images
+@receiver(pre_save, sender=TwitterAccount)
 @receiver(pre_save, sender=Account)
 def account_pre_save(sender, instance, **kwargs):
     try:
@@ -53,8 +54,8 @@ def account_pre_save(sender, instance, **kwargs):
         except:
             pass
 
-        if current_account.photo_url != instance.photo_url or not instance.picture:
-            if not instance.photo_url:
+        if current_account.picture_url != instance.picture_url or not instance.picture:
+            if not instance.picture_url:
                 instance.picture.delete(**DEL_KWARGS)
             else:
                 thread = Thread(target=download_picture, args=(instance, ))

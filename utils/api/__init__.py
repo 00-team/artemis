@@ -10,4 +10,4 @@ from .exception import ACCOUNT_NOT_FOUND
 
 # url
 from .utils import merge_params
-from .utils import s256, follow_owners
+from .utils import s256, follow_owners, twitter_info
