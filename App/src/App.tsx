@@ -32,12 +32,11 @@ const App: FC = () => {
     useEffect(() => {
         dispatch(GetFAQs())
 
-        window.onscroll = () => {
+        window.onscroll = () =>
             dispatch({
                 type: WinScrollTYPE.SET_SCROLL_TOP,
                 payload: scrollY,
             })
-        }
     }, [dispatch])
 
     return (

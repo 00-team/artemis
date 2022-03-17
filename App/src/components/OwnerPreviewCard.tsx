@@ -9,11 +9,19 @@ import { Link } from 'react-router-dom'
 // state
 import { XwnerModel } from 'state/models/Collection'
 
-const OwnerPreviewCard: FC<XwnerModel> = props => {
-    const { username, picture, image, description } = props
+interface OPCProps extends XwnerModel {
+    translate?: number
+}
+
+const OwnerPreviewCard: FC<OPCProps> = props => {
+    const { username, picture, image, description, translate } = props
+
     return (
         <span className='owner-prev-container'>
-            <div className='owner-prev-card'>
+            <div
+                className='owner-prev-card'
+                style={{ transform: `translateY(${translate || 0}%)` }}
+            >
                 <div className='owner-prev-top-img'>
                     <img src={picture} alt='' />
                 </div>

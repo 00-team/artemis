@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 
 // redux
 import { useSelector } from 'react-redux'
@@ -14,56 +14,30 @@ import UnderlineText from '../../components/utils/UnderlineText'
 const Owners: FC = () => {
     const winScrollY = useSelector((s: RootState) => s.winScrollTop)
     const Xwners = useSelector((s: RootState) => s.Xwners)
+    const [translate, setTranslate] = useState(0)
 
     // owners scroll top ref
-    let ostr = useRef<HTMLDivElement>(null)
+    const ostr = useRef<HTMLDivElement>(null)
 
-    if (ostr.current) {
-        // owners scroll top
-        const ost = ostr.current!.offsetTop - winScrollY
+    useEffect(() => {
+        if (!ostr.current) return
 
-        const element = document.querySelectorAll(
-            '.owner-prev-card'
-        ) as NodeListOf<HTMLDivElement>
+        const offset =
+            Math.round((ostr.current.offsetTop - winScrollY) / 300) * 25 - 25
 
-        if (ost < 900) {
-            element.forEach((div: HTMLDivElement) => {
-                div.style.transform = `translateY(${75}%)`
-            })
-        }
-        if (ost < 600) {
-            element.forEach((div: HTMLDivElement) => {
-                div.style.transform = `translateY(${50}%)`
-            })
-        }
-        if (ost < 500) {
-            element.forEach((div: HTMLDivElement) => {
-                div.style.transform = `translateY(${25}%)`
-            })
-        }
-        if (ost < 400) {
-            element.forEach((div: HTMLDivElement) => {
-                div.style.transform = `translateY(${12.5}%)`
-            })
-        }
-        if (ost < 300) {
-            element.forEach((div: HTMLDivElement) => {
-                div.style.transform = `translateY(${0}%)`
-            })
-        }
-        if (ost < 0) {
-            element.forEach((div: HTMLDivElement) => {
-                div.style.transform = `translateY(${0}%)`
-            })
-        }
-    }
+        setTranslate(offset <= 0 ? 0 : offset)
+    }, [winScrollY, ostr])
 
     return (
         <section className='owners' id='owners'>
             <UnderlineText threshold={1}>See Our Owners</UnderlineText>
             <div className='owners-wrapper' ref={ostr}>
                 {Xwners.map(x => (
-                    <OwnerPreviewCard key={x.username} {...x} />
+                    <OwnerPreviewCard
+                        key={x.username}
+                        {...x}
+                        translate={translate}
+                    />
                 ))}
             </div>
         </section>
