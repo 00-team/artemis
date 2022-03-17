@@ -130,11 +130,21 @@
 
                 @include no-user-select;
 
+                transition: transform 0.3s ease-in-out;
+
+                &:hover {
+                    transform: translateY(-1vh);
+                }
+
                 &.wallet-container {
                     background-color: var(--thirty-precent);
                     .wallet-title {
                         display: flex;
                         gap: 0.5vw;
+
+                        @media screen and (max-width: 960px) {
+                            gap: 1vw;
+                        }
                     }
 
                     .wallet-wrapper {
@@ -152,6 +162,12 @@
                             justify-content: center;
                             gap: 0.5vw;
 
+                            &:hover {
+                                &::before {
+                                    width: 70px;
+                                }
+                            }
+
                             &::before {
                                 content: '';
                                 height: 1px;
@@ -161,6 +177,12 @@
 
                                 position: relative;
                                 left: 0px;
+
+                                transition: width 0.25s ease-in-out;
+                            }
+
+                            @media screen and (max-width: 960px) {
+                                gap: 1vw;
                             }
 
                             .column-holder {
