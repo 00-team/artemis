@@ -55,10 +55,20 @@ const AccountSideBar: FC = () => {
         <div className='sidebar-container'>
             <div className='sidebar-wrapper'>
                 <div className='sidebar-top'>
-                    <div className='account-profile '></div>
-                    <div className='account-name title_smaller'>
-                        username test
-                    </div>
+                    <span className='animation'>
+                        <div
+                            className='account-profile transform'
+                            style={{ animationDelay: '0.25s' }}
+                        ></div>
+                    </span>
+                    <span className='animation'>
+                        <div
+                            className='account-name title_smaller transform'
+                            style={{ animationDelay: '0.5s' }}
+                        >
+                            username test
+                        </div>
+                    </span>
                 </div>
             </div>
             <div className='sidebar-logout'></div>
@@ -73,52 +83,68 @@ const AccountContent: FC = () => {
     // debug end
 
     return (
-        <div className='content-container'>
-            <div className='column wallet-container '>
-                <div className='wallet-title title_small'>
-                    <div className='icon'>
-                        <FaWallet />
+        <div className='content-container '>
+            <span
+                className='column-container animation boxShadow'
+                style={{ animationDelay: '1.25s' }}
+            >
+                <div
+                    className='column wallet-container transform '
+                    style={{ animationDelay: '0.75s' }}
+                >
+                    <div className='wallet-title title_small'>
+                        <div className='icon'>
+                            <FaWallet />
+                        </div>
+                        <div className='holder'>My Wallet</div>
+                        <div className='icon'>
+                            <FaWallet />
+                        </div>
                     </div>
-                    <div className='holder'>My Wallet</div>
-                    <div className='icon'>
-                        <FaWallet />
-                    </div>
-                </div>
-                <div className='wallet-wrapper '>
-                    <div className='wrapper-column'>
-                        <div className='column-holder title_small'>
-                            <div className='icon'>
-                                <CgSignal size={24} />
+                    <div className='wallet-wrapper '>
+                        <div className='wrapper-column'>
+                            <div className='column-holder title_small'>
+                                <div className='icon'>
+                                    <CgSignal size={24} />
+                                </div>
+                                <div className='holder'>wallet status:</div>
                             </div>
-                            <div className='holder'>wallet status:</div>
-                        </div>
-                        <div className='column-data linked description'>
-                            linked
-                        </div>
-                    </div>
-                    <div className='wrapper-column'>
-                        <div className='column-holder title_small'>
-                            <div className='icon'>
-                                <FaIdBadge size={24} />
+                            <div className='column-data linked description'>
+                                linked
                             </div>
-                            <div className='holder'>wallet id:</div>
                         </div>
-                        <div
-                            className='column-data wallet_id description'
-                            tabIndex={1}
-                        >
-                            {walletstring}
+                        <div className='wrapper-column'>
+                            <div className='column-holder title_small'>
+                                <div className='icon'>
+                                    <FaIdBadge size={24} />
+                                </div>
+                                <div className='holder'>wallet id:</div>
+                            </div>
+                            <div
+                                className='column-data wallet_id description'
+                                tabIndex={1}
+                            >
+                                {walletstring}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='disconnect-wallet title_small'>
-                    <div className='icon'>
-                        <RiLogoutBoxLine size={25} />
+                    <div className='disconnect-wallet title_small'>
+                        <div className='icon'>
+                            <RiLogoutBoxLine size={25} />
+                        </div>
+                        <div className='holder'>disconenct wallet</div>
                     </div>
-                    <div className='holder'>disconenct wallet</div>
                 </div>
-            </div>
-            <div className='column twitter-container '></div>
+            </span>
+            <span
+                className='column-container animation boxShadow'
+                style={{ animationDelay: '1.5s' }}
+            >
+                <div
+                    className='column twitter-container transform '
+                    style={{ animationDelay: '1s' }}
+                ></div>
+            </span>
         </div>
     )
 }
