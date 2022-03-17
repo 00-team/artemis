@@ -83,29 +83,29 @@ const AccountContent: FC = () => {
                 </div>
                 <div className='wallet-wrapper '>
                     <div className='wrapper-column'>
-                        <div className='column-holder'>
+                        <div className='column-holder title_small'>
                             <div className='icon'>
                                 <CgSignal size={24} />
                             </div>
-                            <div className='holder title_smaller'>
-                                wallet status:
-                            </div>
+                            <div className='holder'>wallet status:</div>
                         </div>
-                        <div className='column-data linked'>linked</div>
+                        <div className='column-data linked description'>
+                            linked
+                        </div>
                     </div>
                     <div className='wrapper-column'>
-                        <div className='column-holder'>
+                        <div className='column-holder title_small'>
                             <div className='icon'>
                                 <FaIdBadge size={24} />
                             </div>
                             <div className='holder'>wallet id:</div>
                         </div>
-                        <div className='column-data wallet_id'>
+                        <div className='column-data wallet_id description'>
                             {walletstring}
                         </div>
                     </div>
                 </div>
-                <div className='disconnect-wallet'>
+                <div className='disconnect-wallet title_small'>
                     <div className='icon'>
                         <RiLogoutBoxLine size={25} />
                     </div>
