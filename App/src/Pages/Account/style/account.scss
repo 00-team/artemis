@@ -113,161 +113,193 @@
                 height: 100%;
             }
 
-            .column {
+            .column-container {
                 width: 100%;
-
-                padding: 2rem 1rem;
-
-                box-shadow: 0 5px 40px #000000;
                 border-radius: 1rem;
-
-                display: flex;
-                align-content: center;
-                justify-content: flex-start;
-                flex-direction: column;
-
-                gap: 4vh;
-
-                @include no-user-select;
-
                 transition: transform 0.3s ease-in-out;
+
+                overflow: hidden;
 
                 &:hover {
                     transform: translateY(-1vh);
                 }
+                .column {
+                    width: 100%;
 
-                &.wallet-container {
-                    background-color: var(--thirty-precent);
-                    .wallet-title {
-                        display: flex;
-                        gap: 0.5vw;
+                    padding: 2rem 1rem;
 
-                        @media screen and (max-width: 960px) {
-                            gap: 1vw;
-                        }
-                    }
+                    border-radius: 1rem;
 
-                    .wallet-wrapper {
-                        flex: 1;
+                    display: flex;
+                    align-content: center;
+                    justify-content: flex-start;
+                    flex-direction: column;
 
-                        display: flex;
-                        align-items: flex-start;
-                        justify-content: flex-start;
-                        flex-direction: column;
-                        gap: 2vh;
+                    gap: 4vh;
 
-                        .wrapper-column {
+                    @include no-user-select;
+
+                    &.wallet-container {
+                        background-color: var(--thirty-precent);
+                        .wallet-title {
                             display: flex;
-                            align-items: center;
-                            justify-content: center;
                             gap: 0.5vw;
-
-                            &:hover {
-                                &::before {
-                                    width: 70px;
-                                }
-                            }
-
-                            &::before {
-                                content: '';
-                                height: 1px;
-                                width: 50px;
-
-                                background: var(--ten-percent);
-
-                                position: relative;
-                                left: 0px;
-
-                                transition: width 0.25s ease-in-out;
-                            }
 
                             @media screen and (max-width: 960px) {
                                 gap: 1vw;
                             }
+                        }
 
-                            .column-holder {
+                        .wallet-wrapper {
+                            flex: 1;
+
+                            display: flex;
+                            align-items: flex-start;
+                            justify-content: flex-start;
+                            flex-direction: column;
+                            gap: 2vh;
+
+                            .wrapper-column {
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                gap: 0.25vw;
+                                gap: 0.5vw;
 
-                                opacity: 0.7;
-
-                                .holder {
-                                    text-transform: capitalize;
-                                }
-                            }
-
-                            .column-data {
-                                &.linked {
-                                    color: #00dc7d;
-                                    text-transform: uppercase;
+                                &:hover {
+                                    &::before {
+                                        width: 70px;
+                                    }
                                 }
 
-                                &.wallet_id {
-                                    padding: 5px 10px;
+                                &::before {
+                                    content: '';
+                                    height: 1px;
+                                    width: 50px;
 
-                                    border: 1px solid rgb(21, 27, 34);
-                                    border-radius: 16px;
+                                    background: var(--ten-percent);
 
                                     position: relative;
+                                    left: 0px;
 
-                                    overflow: hidden;
+                                    transition: width 0.25s ease-in-out;
+                                }
 
-                                    &::before {
-                                        content: 'Click To Show';
-                                        position: absolute;
-                                        inset: 0;
-                                        width: 100%;
-                                        height: 100%;
+                                @media screen and (max-width: 960px) {
+                                    gap: 1vw;
+                                }
 
-                                        cursor: pointer;
+                                .column-holder {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 0.25vw;
 
-                                        border-radius: 16px;
-                                        display: grid;
-                                        place-items: center;
+                                    opacity: 0.7;
 
-                                        backdrop-filter: blur(7px);
+                                    .holder {
+                                        text-transform: capitalize;
+                                    }
+                                }
 
-                                        transition: opacity 0.25s ease-in-out;
+                                .column-data {
+                                    &.linked {
+                                        color: #00dc7d;
+                                        text-transform: uppercase;
                                     }
 
-                                    &:focus::before {
-                                        opacity: 0;
+                                    &.wallet_id {
+                                        padding: 5px 10px;
+
+                                        border: 1px solid rgb(21, 27, 34);
+                                        border-radius: 16px;
+
+                                        position: relative;
+
+                                        overflow: hidden;
+
+                                        &::before {
+                                            content: 'Click To Show';
+                                            position: absolute;
+                                            inset: 0;
+                                            width: 100%;
+                                            height: 100%;
+
+                                            cursor: pointer;
+
+                                            border-radius: 16px;
+                                            display: grid;
+                                            place-items: center;
+
+                                            backdrop-filter: blur(7px);
+
+                                            transition: opacity 0.25s
+                                                ease-in-out;
+                                        }
+
+                                        &:focus::before {
+                                            opacity: 0;
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    .disconnect-wallet {
-                        margin-top: 2vh;
+                        .disconnect-wallet {
+                            margin-top: 2vh;
 
-                        width: fit-content;
+                            width: fit-content;
 
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-start;
-                        gap: 0.25vw;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            gap: 0.25vw;
 
-                        cursor: pointer;
+                            cursor: pointer;
 
-                        transition: transform 0.2s ease;
-                        color: #e20338;
+                            transition: transform 0.2s ease;
+                            color: #e20338;
 
-                        &:hover {
-                            transform: translateX(0.5vw);
-                        }
-                        @media screen and (max-width: 768px) {
                             &:hover {
-                                transform: translateX(1.5vw);
+                                transform: translateX(0.5vw);
                             }
-                        }
+                            @media screen and (max-width: 768px) {
+                                &:hover {
+                                    transform: translateX(1.5vw);
+                                }
+                            }
 
-                        .holder {
-                            text-transform: uppercase;
+                            .holder {
+                                text-transform: uppercase;
+                            }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .animation {
+        overflow: hidden;
+        &.boxShadow {
+            animation: boxShadow 1s ease-in-out both;
+        }
+        .transform {
+            animation: FadeIn 1s ease-in-out both;
+        }
+
+        @keyframes FadeIn {
+            from {
+                transform: translateY(200%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        @keyframes boxShadow {
+            from {
+                box-shadow: none;
+            }
+            to {
+                box-shadow: 0 5px 40px #000000;
             }
         }
     }
