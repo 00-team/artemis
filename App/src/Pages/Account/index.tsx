@@ -67,8 +67,11 @@ const AccountSideBar: FC = () => {
 }
 
 const AccountContent: FC = () => {
-    const walletstring = Math.random().toString(36).slice(2)
-    walletstring
+    // debug
+    let walletstring = Math.random().toString(36).slice(2)
+    walletstring += walletstring
+    // debug end
+
     return (
         <div className='content-container'>
             <div className='column wallet-container '>
@@ -100,7 +103,10 @@ const AccountContent: FC = () => {
                             </div>
                             <div className='holder'>wallet id:</div>
                         </div>
-                        <div className='column-data wallet_id description'>
+                        <div
+                            className='column-data wallet_id description'
+                            tabIndex={1}
+                        >
                             {walletstring}
                         </div>
                     </div>
