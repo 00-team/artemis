@@ -5,6 +5,10 @@ import './style/account.scss'
 
 // icons
 import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
+import { CgSignal } from '@react-icons/all-files/cg/CgSignal'
+import { FaIdBadge } from '@react-icons/all-files/fa/FaIdBadge'
+
+import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
@@ -63,6 +67,8 @@ const AccountSideBar: FC = () => {
 }
 
 const AccountContent: FC = () => {
+    const walletstring = Math.random().toString(36).slice(2)
+    walletstring
     return (
         <div className='content-container'>
             <div className='column wallet-container '>
@@ -74,6 +80,36 @@ const AccountContent: FC = () => {
                     <div className='icon'>
                         <FaWallet />
                     </div>
+                </div>
+                <div className='wallet-wrapper '>
+                    <div className='wrapper-column'>
+                        <div className='column-holder'>
+                            <div className='icon'>
+                                <CgSignal size={24} />
+                            </div>
+                            <div className='holder title_smaller'>
+                                wallet status:
+                            </div>
+                        </div>
+                        <div className='column-data linked'>linked</div>
+                    </div>
+                    <div className='wrapper-column'>
+                        <div className='column-holder'>
+                            <div className='icon'>
+                                <FaIdBadge size={24} />
+                            </div>
+                            <div className='holder'>wallet id:</div>
+                        </div>
+                        <div className='column-data wallet_id'>
+                            {walletstring}
+                        </div>
+                    </div>
+                </div>
+                <div className='disconnect-wallet'>
+                    <div className='icon'>
+                        <RiLogoutBoxLine size={25} />
+                    </div>
+                    <div className='holder'>disconenct wallet</div>
                 </div>
             </div>
             <div className='column twitter-container '></div>
