@@ -64,7 +64,7 @@ const AccountSideBar: FC = () => {
                     </span>
                     <span className='animation'>
                         <div
-                            className='account-name title_smaller transform'
+                            className='account-name title_small transform'
                             style={{ animationDelay: '1s' }}
                         >
                             username test
@@ -128,7 +128,7 @@ const AccountContent: FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='disconnect-wallet title_small'>
+                    <div className='disconnect-column title_small'>
                         <div className='icon'>
                             <RiLogoutBoxLine size={24} />
                         </div>
@@ -137,7 +137,7 @@ const AccountContent: FC = () => {
                 </div>
             </span>
             <span
-                className='column-container animation boxShadow'
+                className='column-container twitter animation boxShadow'
                 style={{ animationDelay: '2.5s' }}
             >
                 <div
@@ -155,24 +155,34 @@ const AccountContent: FC = () => {
                     <div className='twitter-wrapper'>
                         <div className='twitter-profile'>
                             <div className='profile-img'></div>
-                            <div className='profile-name'>
+                            <div className='profile-name title_smaller'>
                                 <span>Sadra Taghavi</span>
+                            </div>
+                            <div className='profile-description description'>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Odius!
                             </div>
                         </div>
                         <div className='twitter-status'>
                             <div className='status'>
-                                <div className='holder'></div>
-                                <div className='data'></div>
+                                <div className='holder'>Following</div>
+                                <div className='data'>1245</div>
                             </div>
                             <div className='status'>
+                                <div className='holder'>Followers</div>
+                                <div className='data'>1234</div>
+                            </div>
+                            {/* <div className='status'>
                                 <div className='holder'></div>
                                 <div className='data'></div>
-                            </div>
-                            <div className='status'>
-                                <div className='holder'></div>
-                                <div className='data'></div>
-                            </div>
+                            </div> */}
                         </div>
+                    </div>
+                    <div className='disconnect-column title_small'>
+                        <div className='icon'>
+                            <RiLogoutBoxLine size={24} />
+                        </div>
+                        <div className='holder'>disconenct twitter</div>
                     </div>
                 </div>
             </span>
