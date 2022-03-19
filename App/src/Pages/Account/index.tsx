@@ -144,7 +144,7 @@ const AccountContent: FC = () => {
                     className='column twitter-container transform '
                     style={{ animationDelay: '2s' }}
                 >
-                    <div className='column-title title_small    '>
+                    <div className='column-title title_small'>
                         <div className='icon'>
                             <FaTwitter size={24} />
                         </div>
@@ -152,7 +152,26 @@ const AccountContent: FC = () => {
                             <div>Twitter</div>
                         </div>
                     </div>
-                    <div className='twitter-wrapper'></div>
+                    <div className='twitter-wrapper'>
+                        <div className='twitter-profile'>
+                            <div className='profile-img'></div>
+                            <div className='profile-name'></div>
+                        </div>
+                        <div className='twitter-status'>
+                            <div className='status'>
+                                <div className='holder'></div>
+                                <div className='data'></div>
+                            </div>
+                            <div className='status'>
+                                <div className='holder'></div>
+                                <div className='data'></div>
+                            </div>
+                            <div className='status'>
+                                <div className='holder'></div>
+                                <div className='data'></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </span>
         </div>
