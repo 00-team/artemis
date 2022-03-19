@@ -121,7 +121,7 @@
             }
 
             .column-container {
-                min-height: 400px;
+                min-height: 500px;
                 width: 100%;
 
                 border-radius: 1rem;
@@ -182,6 +182,35 @@
 
                         .icon:hover + .holder div {
                             transform: translateX(0%);
+                        }
+                    }
+
+                    .disconnect-column {
+                        margin-top: 2vh;
+
+                        width: fit-content;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        gap: 0.25vw;
+
+                        cursor: pointer;
+
+                        transition: transform 0.2s ease;
+                        color: #e20338;
+
+                        &:hover {
+                            transform: translateX(0.5vw);
+                        }
+                        @media screen and (max-width: 768px) {
+                            &:hover {
+                                transform: translateX(1.5vw);
+                            }
+                        }
+
+                        .holder {
+                            text-transform: uppercase;
                         }
                     }
 
@@ -320,34 +349,6 @@
                                 }
                             }
                         }
-                        .disconnect-wallet {
-                            margin-top: 2vh;
-
-                            width: fit-content;
-
-                            display: flex;
-                            align-items: center;
-                            justify-content: flex-start;
-                            gap: 0.25vw;
-
-                            cursor: pointer;
-
-                            transition: transform 0.2s ease;
-                            color: #e20338;
-
-                            &:hover {
-                                transform: translateX(0.5vw);
-                            }
-                            @media screen and (max-width: 768px) {
-                                &:hover {
-                                    transform: translateX(1.5vw);
-                                }
-                            }
-
-                            .holder {
-                                text-transform: uppercase;
-                            }
-                        }
                     }
 
                     &.twitter-container {
@@ -356,6 +357,7 @@
 
                         .twitter-wrapper {
                             width: 100%;
+                            flex: 1;
 
                             display: flex;
                             align-items: center;
@@ -378,6 +380,49 @@
                                     background-image: url(https://picsum.photos/100/100);
                                     background-repeat: no-repeat;
                                     background-size: cover;
+                                }
+
+                                .profile-name {
+                                    position: relative;
+
+                                    display: flex;
+                                    align-items: center;
+
+                                    width: 100%;
+
+                                    &::before,
+                                    &::after {
+                                        content: '';
+                                        width: 100%;
+                                        height: 2px;
+                                        background-color: #fff;
+                                    }
+
+                                    span {
+                                        padding: 0 10px;
+                                        white-space: nowrap;
+                                    }
+                                }
+                                .profile-description {
+                                    text-align: center;
+                                }
+                            }
+
+                            .twitter-status {
+                                width: 100%;
+
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-around;
+                                flex-wrap: wrap;
+
+                                .status {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    flex-direction: column;
+
+                                    gap: 1vh;
                                 }
                             }
                         }
