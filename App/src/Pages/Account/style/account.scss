@@ -22,6 +22,10 @@
         border-radius: 7px;
         overflow: hidden;
 
+        @media screen and (max-width: 1440px) {
+            width: 90%;
+            height: 90%;
+        }
         @media screen and (max-width: 768px) {
             width: 100%;
             height: 100%;
@@ -108,13 +112,18 @@
 
             padding: 2rem 1rem;
 
+            overflow-y: auto;
+            scroll-behavior: smooth;
+
             @media screen and (max-width: 768px) {
                 width: 100%;
                 height: 100%;
             }
 
             .column-container {
+                min-height: 400px;
                 width: 100%;
+
                 border-radius: 1rem;
                 transition: transform 0.3s ease-in-out;
 
@@ -125,6 +134,7 @@
                 }
                 .column {
                     width: 100%;
+                    height: 100%;
 
                     padding: 2rem;
 
@@ -342,6 +352,35 @@
 
                     &.twitter-container {
                         background-color: #1da1f2;
+                        gap: 3vh;
+
+                        .twitter-wrapper {
+                            width: 100%;
+
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            flex-direction: column;
+                            gap: 4vh;
+
+                            .twitter-profile {
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-start;
+                                flex-direction: column;
+                                gap: 2vh;
+
+                                .profile-img {
+                                    width: 100px;
+                                    height: 100px;
+
+                                    border-radius: 50%;
+                                    background-image: url(https://picsum.photos/100/100);
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                }
+                            }
+                        }
                     }
                 }
             }
