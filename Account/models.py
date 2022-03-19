@@ -89,9 +89,11 @@ class TwitterAccount(models.Model):
     expires_in = models.DateTimeField()
 
     user_id = CharField(max_length=300, blank=True, null=True)
+    nickname = CharField(max_length=300, blank=True, null=True)
     username = CharField(max_length=30, blank=True, null=True)
     followers = models.PositiveBigIntegerField(default=0)
     followings = models.PositiveBigIntegerField(default=0)
+    tweets = models.PositiveBigIntegerField(default=0)
     description = models.TextField(blank=True, null=True)
     picture_url = models.URLField(blank=True, null=True)
     picture = models.ImageField(

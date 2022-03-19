@@ -39,6 +39,7 @@ def twitter_info(ta: TwitterAccount):
     response = requests.get(USER_INFO, headers=headers).json()
     response = response['data']
 
+    ta.nickname = response['name']
     ta.user_id = response['id']
     ta.username = response['username']
     ta.description = response['description']
@@ -52,6 +53,7 @@ def twitter_info(ta: TwitterAccount):
 
     ta.followers = response['followers_count']
     ta.followings = response['friends_count']
+    ta.tweets = response['statuses_count']
     ta.save()
 
 
