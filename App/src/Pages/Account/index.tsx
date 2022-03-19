@@ -155,7 +155,9 @@ const AccountContent: FC = () => {
                     <div className='twitter-wrapper'>
                         <div className='twitter-profile'>
                             <div className='profile-img'></div>
-                            <div className='profile-name'></div>
+                            <div className='profile-name'>
+                                <span>Sadra Taghavi</span>
+                            </div>
                         </div>
                         <div className='twitter-status'>
                             <div className='status'>
