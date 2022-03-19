@@ -70,6 +70,14 @@ class Account(models.Model):
 
         return self.picture.url
 
+    @property
+    def nickname(self) -> str:
+        nick = self.user.first_name
+        if self.user.last_name:
+            nick += f' {self.user.last_name}'
+
+        return nick
+
     def __str__(self):
         return username(self.user)
 

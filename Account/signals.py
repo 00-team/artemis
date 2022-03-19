@@ -1,7 +1,7 @@
 import logging
 
 # signals
-from django.db.models.signals import pre_delete, pre_save
+from django.db.models.signals import pre_delete, pre_save, post_save
 from django.dispatch import receiver
 from django.utils.crypto import get_random_string
 
@@ -14,6 +14,9 @@ from threading import Thread
 
 # requests
 from requests import get
+
+# webhooks
+from utils.webhook.hooks import account_hook
 
 # files
 from django.core.files import File
@@ -65,6 +68,7 @@ def account_pre_save(sender, instance, **kwargs):
         pass
 
 
+@receiver(pre_delete, sender=TwitterAccount)
 @receiver(pre_delete, sender=Account)
 def account_pre_delete(instance, **kwargs):
     try:
@@ -84,3 +88,15 @@ def user_pre_save(sender, instance, **kwargs):
             else:
                 instance.username = username
                 break
+
+
+# webhooks
+@receiver(post_save, sender=Account)
+def webhook_account(instance, created, **kwargs):
+    try:
+        if created:
+            account_hook(instance, 'new')
+        else:
+            account_hook(instance, 'update')
+    except:
+        pass
