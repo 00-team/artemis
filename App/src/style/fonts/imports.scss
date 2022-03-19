@@ -14,6 +14,13 @@
         url('./alien/Handbag.woff') format('woff'),
         url('./alien/Handbag.woff2') format('woff2');
 }
+// futura
+@font-face {
+    font-family: 'futura';
+    src: url('./futura/futur.ttf') format('truetype'),
+        url('./futura/futur.woff') format('woff'),
+        url('./futura/futur.woff2') format('woff2');
+}
 
 // pacfico
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
