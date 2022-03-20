@@ -1,15 +1,15 @@
 type strnull = string | null
 
-interface Account {
+interface AccountModel {
     first_name: string
     last_name: strnull
     wallet: strnull
     username: strnull
     picture: strnull
-    twitter: Twitter | null
+    twitter: TwitterModel | null
 }
 
-interface Twitter {
+interface TwitterModel {
     user_id: string
     nickname: string
     username: string
@@ -20,7 +20,7 @@ interface Twitter {
     picture: strnull
 }
 
-type State = Account | null
+type State = AccountModel | null
 const DefaultState: State = null
 
 enum AccountTypes {
@@ -28,4 +28,4 @@ enum AccountTypes {
     SET_WALLET = 'SET_WALLET',
 }
 
-export { strnull, Account, Twitter, State, DefaultState, AccountTypes }
+export { AccountModel, TwitterModel, State, DefaultState, AccountTypes }

@@ -13,45 +13,36 @@ import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
-import {
-    GetAccount,
-    RootState,
-    // UpdateAccount
-} from 'state'
-
-// debug only
-// getting a string with 42 char length
-// const getW = () =>
-//     Array.from(Array(42).keys())
-//         .map(() => Math.floor(Math.random() * 10))
-//         .join('')
+import { GetAccount, RootState } from 'state'
+import { AccountModel, TwitterModel } from 'state/models/Account'
+import { Avatar } from '@00-team/utils'
 
 const Account: FC = () => {
     const dispatch = useDispatch()
-    const AccountState = useSelector((s: RootState) => s.Account)
-    console.log(AccountState)
 
     useEffect(() => {
         dispatch(GetAccount())
     }, [dispatch])
 
+    const AccountState = useSelector((s: RootState) => s.Account)
+
+    if (!AccountState) return <></>
+
     return (
         <div className='account-container'>
             <div className='account-wrapper'>
-                <AccountContent />
-                <AccountSideBar />
+                <AccountContent {...AccountState} />
+                <AccountSideBar {...AccountState} />
             </div>
-            {/* <button onClick={() => dispatch(UpdateAccount(getW()))}>
-                UpdateAccount Wallet
-            </button>
-            <div>{JSON.stringify(AccountState)}</div> */}
         </div>
     )
 }
 
 export default Account
 
-const AccountSideBar: FC = () => {
+const AccountSideBar: FC<AccountModel> = props => {
+    const { picture, first_name } = props
+
     return (
         <div className='sidebar-container'>
             <div className='sidebar-wrapper'>
@@ -60,7 +51,9 @@ const AccountSideBar: FC = () => {
                         <div
                             className='account-profile transform'
                             style={{ animationDelay: '0.5s' }}
-                        ></div>
+                        >
+                            <Avatar picture={picture} username={first_name} />
+                        </div>
                     </span>
                     <span className='animation'>
                         <div
@@ -77,10 +70,12 @@ const AccountSideBar: FC = () => {
     )
 }
 
-const AccountContent: FC = () => {
+const AccountContent: FC<AccountModel> = props => {
     // debug
     let walletstring = Math.random().toString(36).slice(2)
     walletstring += walletstring
+
+    const { twitter } = props
     // debug end
 
     return (
@@ -136,56 +131,67 @@ const AccountContent: FC = () => {
                     </div>
                 </div>
             </span>
-            <span
-                className='column-container twitter animation boxShadow'
-                style={{ animationDelay: '2.5s' }}
+            {twitter && <TwitterCard {...twitter} />}
+        </div>
+    )
+}
+
+const TwitterCard: FC<TwitterModel> = props => {
+    const { followers, followings, tweets, picture } = props
+    const { nickname, username, description } = props
+
+    return (
+        <span
+            className='column-container twitter animation boxShadow'
+            style={{ animationDelay: '2.5s' }}
+        >
+            <div
+                className='column twitter-container transform '
+                style={{ animationDelay: '2s' }}
             >
-                <div
-                    className='column twitter-container transform '
-                    style={{ animationDelay: '2s' }}
-                >
-                    <div className='column-title title_small'>
-                        <div className='icon'>
-                            <FaTwitter size={24} />
-                        </div>
-                        <div className='holder'>
-                            <div>Twitter</div>
-                        </div>
+                <div className='column-title title_small'>
+                    <div className='icon'>
+                        <FaTwitter size={24} />
                     </div>
-                    <div className='twitter-wrapper'>
-                        <div className='twitter-profile'>
-                            <div className='profile-img'></div>
-                            <div className='profile-name title_smaller'>
-                                <span>Sadra Taghavi</span>
-                            </div>
-                            <div className='profile-description description'>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Odius!
-                            </div>
-                        </div>
-                        <div className='twitter-status'>
-                            <div className='status'>
-                                <div className='holder'>Following</div>
-                                <div className='data'>1245</div>
-                            </div>
-                            <div className='status'>
-                                <div className='holder'>Followers</div>
-                                <div className='data'>1234</div>
-                            </div>
-                            {/* <div className='status'>
-                                <div className='holder'></div>
-                                <div className='data'></div>
-                            </div> */}
-                        </div>
-                    </div>
-                    <div className='disconnect-column title_small'>
-                        <div className='icon'>
-                            <RiLogoutBoxLine size={24} />
-                        </div>
-                        <div className='holder'>disconenct twitter</div>
+                    <div className='holder'>
+                        <div>Twitter</div>
                     </div>
                 </div>
-            </span>
-        </div>
+                <div className='twitter-wrapper'>
+                    <div className='twitter-profile'>
+                        <div className='profile-img'>
+                            <Avatar picture={picture} username={username} />
+                        </div>
+                        <div className='profile-name title_smaller'>
+                            <span>{nickname}</span>
+                            <span>{username}</span>
+                        </div>
+                        <div className='profile-description description'>
+                            {description}
+                        </div>
+                    </div>
+                    <div className='twitter-status'>
+                        <div className='status'>
+                            <div className='holder'>Following</div>
+                            <div className='data'>{followings}</div>
+                        </div>
+                        <div className='status'>
+                            <div className='holder'>Followers</div>
+                            <div className='data'>{followers}</div>
+                        </div>
+                        <div className='status'>
+                            <div className='holder'>Tweets</div>
+                            <div className='data'>{tweets}</div>
+                        </div>
+                    </div>
+                </div>
+                <div className='disconnect-column title_small'>
+                    <div className='icon'>
+                        <RiLogoutBoxLine size={24} />
+                    </div>
+                    <div className='holder'>disconenct twitter</div>
+                </div>
+            </div>
+        </span>
     )
 }

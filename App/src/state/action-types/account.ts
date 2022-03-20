@@ -1,4 +1,4 @@
-import { AccountTypes, State, strnull } from '../models/Account'
+import { AccountTypes, State } from '../models/Account'
 
 interface SET_ACCOUNT {
     type: AccountTypes.SET_ACCOUNT
@@ -6,7 +6,7 @@ interface SET_ACCOUNT {
 }
 interface SET_WALLET {
     type: AccountTypes.SET_WALLET
-    payload: strnull
+    payload: string | null
 }
 
 export type Action = SET_ACCOUNT | SET_WALLET
