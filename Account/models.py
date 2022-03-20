@@ -47,12 +47,7 @@ class AccountManager(models.Manager):
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     telegram_id = models.BigIntegerField()
-    username = CharField(
-        max_length=64,
-        blank=True,
-        null=True,
-        help_text='Optional',
-    )
+    username = CharField(max_length=64, blank=True, null=True)
     picture_url = models.URLField(blank=True, null=True)
     picture = models.ImageField(
         upload_to=file_path('Account/telegram/picture/'),

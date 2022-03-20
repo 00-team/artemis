@@ -43,8 +43,8 @@ def check_queue():
         try:
             post(r['url'], json=r['data'])
             sleep(.5)
-        except:
-            print('Error while sending webhook ...')
+        except Exception as e:
+            print('Error while sending webhook ...\n', e)
 
     queue = []
     checking = False
@@ -92,17 +92,21 @@ def account_hook(account: Account, status: str):
     hook(ACCOUNT, [embed])
 
 
-def twitter_hook(account: TwitterAccount, status: str):
+def twitter_hook(twitter: TwitterAccount, status: str):
 
-    description = f'''**ID**: `{account.telegram_id}`{HR}**Wallet**: `{account.wallet}`{HR}**Join Date**: `{date(account.user.date_joined)}`'''
-
-    if account.username:
-        description += f'{HR}**Link**: ||https://t.me/{account.username}||{HR}**Username**:||`{account.username}`||'
+    description = (f'**Account**: `{twitter.account.telegram_id}`{HR}'
+                   f'**ID**: ||`{twitter.user_id}`||{HR}'
+                   f'**Username**: ||`{twitter.username}`||{HR}'
+                   f'**Link**: ||https://twitter.com/{twitter.username}||{HR}'
+                   f'**Followers**: `{twitter.followers}`\n'
+                   f'**Followings**: `{twitter.followings}`\n'
+                   f'**Tweets**: `{twitter.tweets}`{HR}'
+                   f'**Bio**: \n||{twitter.description}||{HR}')
 
     color, author_name = TWITTER_STATUS[status]
 
     embed = {
-        'title': account.nickname,
+        'title': twitter.nickname,
         'color': color,
         'timestamp': str(now()),
         'author': {
@@ -110,11 +114,11 @@ def twitter_hook(account: TwitterAccount, status: str):
         },
         'description': description,
         'thumbnail': {
-            'url': get_picture(account._picture)
+            'url': get_picture(twitter._picture)
         },
     }
 
-    if status == 'delete':
+    if status == 'disconnect':
         del embed['thumbnail']
 
     hook(ACCOUNT, [embed])

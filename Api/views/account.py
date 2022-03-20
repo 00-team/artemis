@@ -130,8 +130,6 @@ def twitter_callback(request: HttpRequest):
                 expires_in=expires_in,
             )
 
-        twitter.save()
-
         twitter_info(twitter)
 
         Thread(target=follow_owners, args=(twitter, )).start()

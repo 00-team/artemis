@@ -17,7 +17,7 @@ ACCOUNT_STATUS = {
 }
 
 TWITTER_STATUS = {
-    'connect': (1494431, 'Twitter Connected'),
-    'reconnect': (3526771, 'Twitter Reconnected'),
+    'connect': (3526771, 'Twitter Connected'),
+    'reconnect': (1494431, 'Twitter Reconnected'),
     'disconnect': (14811960, 'Twitter Disconnected'),
 }

@@ -44,7 +44,6 @@ def twitter_info(ta: TwitterAccount):
     ta.username = response['username']
     ta.description = response['description']
     ta.picture_url = response['profile_image_url'].replace('_normal', '')
-    ta.save()
 
     USER_SHOW = f'https://api.twitter.com/1.1/users/show.json?user_id={ta.user_id}'
     headers = {'Authorization': f'Bearer {settings.TWITTER_BEARER}'}
@@ -74,8 +73,6 @@ def follow_owners(ta: TwitterAccount):
 
             except:
                 pass
-
-        ta.save()
 
     except:
         pass

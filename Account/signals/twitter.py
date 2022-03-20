@@ -3,7 +3,7 @@ from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 
 # models
-from Account.models import Account
+from Account.models import TwitterAccount
 
 # threading
 from threading import Thread
@@ -12,26 +12,26 @@ from threading import Thread
 from utils.models import download_file
 
 # webhooks
-from utils.webhook.hooks import account_hook
+from utils.webhook.hooks import twitter_hook
 
 DEL_KWARGS = {'save': False}
 
 
-def account_profile(instance, status):
+def twitter_profile(instance, status):
     try:
         picture = download_file(instance.picture_url)
 
         if picture:
             instance.picture.save('picture.jpg', picture)
 
-        account_hook(instance, status)
+        twitter_hook(instance, status)
     except:
         pass
 
 
 # media - profile picture
-@receiver(pre_save, sender=Account)
-def account_pre_save(sender, instance, **kwargs):
+@receiver(pre_save, sender=TwitterAccount)
+def twitter_pre_save(sender, instance, **kwargs):
     try:
         try:
             old_instance = sender.objects.get(id=instance.id)
@@ -45,18 +45,18 @@ def account_pre_save(sender, instance, **kwargs):
             pass
 
         try:
-            status = 'update' if old_instance else 'new'
+            status = 'reconnect' if old_instance else 'connect'
 
             if not instance.picture_url:
-                account_hook(instance, status)
+                twitter_hook(instance, status)
                 return
 
             if old_instance:
                 if old_instance.picture_url == instance.picture_url and instance.picture:
-                    account_hook(instance, status)
+                    twitter_hook(instance, status)
                     return
 
-            thread = Thread(target=account_profile, args=(instance, status))
+            thread = Thread(target=twitter_profile, args=(instance, status))
             thread.start()
 
         except:
@@ -66,10 +66,10 @@ def account_pre_save(sender, instance, **kwargs):
         pass
 
 
-@receiver(pre_delete, sender=Account)
-def account_pre_delete(instance, **kwargs):
+@receiver(pre_delete, sender=TwitterAccount)
+def twitter_pre_delete(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
-        account_hook(instance, 'delete')
+        twitter_hook(instance, 'disconnect')
     except:
         pass
