@@ -186,20 +186,25 @@ def get_account(request: HttpRequest):
         try:
             ta = TwitterAccount.objects.get(account=account)
             twitter = {
+                'user_id': ta.user_id,
+                'nickname': ta.nickname,
+                'tweets': ta.tweets,
                 'username': ta.username,
                 'followers': ta.followers,
                 'followings': ta.followings,
-                'description': ta.description,
+                'description': ta.description or None,
                 'picture': ta._picture,
             }
         except:
             twitter = None
 
         return JsonResponse({
-            'first_name': user.first_name or None,
+            'first_name': user.first_name,
             'last_name': user.last_name or None,
-            'wallet': account.wallet or None,
-            'username': account.username or None,
+            'nickname': account.nickname,
+            'wallet': account.wallet,
+            'telegram_id': account.telegram_id,
+            'username': account.username,
             'picture': account._picture,
             'twitter': twitter,
         })

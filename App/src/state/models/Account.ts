@@ -1,7 +1,7 @@
 type strnull = string | null
 
 interface Account {
-    first_name: strnull
+    first_name: string
     last_name: strnull
     wallet: strnull
     username: strnull
@@ -10,7 +10,14 @@ interface Account {
 }
 
 interface Twitter {
+    user_id: string
+    nickname: string
     username: string
+    tweets: number
+    followers: number
+    followings: number
+    description: strnull
+    picture: strnull
 }
 
 type State = Account | null
