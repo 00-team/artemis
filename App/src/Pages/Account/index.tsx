@@ -7,6 +7,7 @@ import './style/account.scss'
 import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
 import { CgSignal } from '@react-icons/all-files/cg/CgSignal'
 import { FaIdBadge } from '@react-icons/all-files/fa/FaIdBadge'
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
 
 import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
 
@@ -58,13 +59,13 @@ const AccountSideBar: FC = () => {
                     <span className='animation'>
                         <div
                             className='account-profile transform'
-                            style={{ animationDelay: '0.25s' }}
+                            style={{ animationDelay: '0.5s' }}
                         ></div>
                     </span>
                     <span className='animation'>
                         <div
-                            className='account-name title_smaller transform'
-                            style={{ animationDelay: '0.5s' }}
+                            className='account-name title_small transform'
+                            style={{ animationDelay: '1s' }}
                         >
                             username test
                         </div>
@@ -86,19 +87,18 @@ const AccountContent: FC = () => {
         <div className='content-container '>
             <span
                 className='column-container animation boxShadow'
-                style={{ animationDelay: '1.25s' }}
+                style={{ animationDelay: '2s' }}
             >
                 <div
                     className='column wallet-container transform '
-                    style={{ animationDelay: '0.75s' }}
+                    style={{ animationDelay: '1.5s' }}
                 >
-                    <div className='wallet-title title_small'>
+                    <div className='column-title title_small'>
                         <div className='icon'>
-                            <FaWallet />
+                            <FaWallet size={24} />
                         </div>
-                        <div className='holder'>My Wallet</div>
-                        <div className='icon'>
-                            <FaWallet />
+                        <div className='holder'>
+                            <div>Wallet</div>
                         </div>
                     </div>
                     <div className='wallet-wrapper '>
@@ -128,22 +128,63 @@ const AccountContent: FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='disconnect-wallet title_small'>
+                    <div className='disconnect-column title_small'>
                         <div className='icon'>
-                            <RiLogoutBoxLine size={25} />
+                            <RiLogoutBoxLine size={24} />
                         </div>
                         <div className='holder'>disconenct wallet</div>
                     </div>
                 </div>
             </span>
             <span
-                className='column-container animation boxShadow'
-                style={{ animationDelay: '1.5s' }}
+                className='column-container twitter animation boxShadow'
+                style={{ animationDelay: '2.5s' }}
             >
                 <div
                     className='column twitter-container transform '
-                    style={{ animationDelay: '1s' }}
-                ></div>
+                    style={{ animationDelay: '2s' }}
+                >
+                    <div className='column-title title_small'>
+                        <div className='icon'>
+                            <FaTwitter size={24} />
+                        </div>
+                        <div className='holder'>
+                            <div>Twitter</div>
+                        </div>
+                    </div>
+                    <div className='twitter-wrapper'>
+                        <div className='twitter-profile'>
+                            <div className='profile-img'></div>
+                            <div className='profile-name title_smaller'>
+                                <span>Sadra Taghavi</span>
+                            </div>
+                            <div className='profile-description description'>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Odius!
+                            </div>
+                        </div>
+                        <div className='twitter-status'>
+                            <div className='status'>
+                                <div className='holder'>Following</div>
+                                <div className='data'>1245</div>
+                            </div>
+                            <div className='status'>
+                                <div className='holder'>Followers</div>
+                                <div className='data'>1234</div>
+                            </div>
+                            {/* <div className='status'>
+                                <div className='holder'></div>
+                                <div className='data'></div>
+                            </div> */}
+                        </div>
+                    </div>
+                    <div className='disconnect-column title_small'>
+                        <div className='icon'>
+                            <RiLogoutBoxLine size={24} />
+                        </div>
+                        <div className='holder'>disconenct twitter</div>
+                    </div>
+                </div>
             </span>
         </div>
     )
