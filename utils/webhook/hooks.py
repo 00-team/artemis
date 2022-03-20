@@ -66,7 +66,9 @@ def hook(url, embeds, username=USERNAME, avatar=AVATAR):
 
 def account_hook(account: Account, status: str):
 
-    description = f'''**ID**: `{account.telegram_id}`{HR}**Wallet**: `{account.wallet}`{HR}**Join Date**: `{date(account.user.date_joined)}`'''
+    description = (f'**ID**: `{account.telegram_id}`{HR}'
+                   f'**Wallet**: `{account.wallet}`{HR}'
+                   f'**Join Date**: `{date(account.user.date_joined)}`')
 
     if account.username:
         description += f'{HR}**Link**: ||https://t.me/{account.username}||{HR}**Username**:||`{account.username}`||'
