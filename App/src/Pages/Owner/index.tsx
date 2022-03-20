@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useState, useRef } from 'react'
 
 // style
 import './style/owner.scss'
 
-// ICONS
+// icons
 import { IconType } from '@react-icons/all-files'
 import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
@@ -20,9 +20,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'state'
 import { GetOwner } from 'state/actions/collection'
 
+// utils
+import { C } from '@00-team/utils'
+
 const Owner: FC = () => {
-    const LazyRef = useRef<HTMLDivElement>(null)
-    const [isIntersecting, setisIntersecting] = useState(false)
     const { username } = useParams()
 
     const OwnerState = useSelector((s: RootState) => s.Owner)
@@ -32,22 +33,6 @@ const Owner: FC = () => {
         if (!username) return
         dispatch(GetOwner(username))
     }, [dispatch])
-
-    useEffect(() => {
-        if (LazyRef.current && !isIntersecting) {
-            var observer = new IntersectionObserver(([entry]) => {
-                if (entry && entry.isIntersecting) {
-                    setisIntersecting(true)
-                    observer.disconnect()
-                }
-            })
-
-            observer.observe(LazyRef.current)
-        }
-        return () => {
-            if (observer) observer.disconnect()
-        }
-    }, [LazyRef])
 
     if (!OwnerState) return <></>
 
@@ -119,14 +104,7 @@ const Owner: FC = () => {
                 </div>
             </section>
             <section className='owner-collection'>
-                <div
-                    className={`collection-title title ${
-                        isIntersecting ? 'shown' : ''
-                    }`}
-                    ref={LazyRef}
-                >
-                    <span>My Collections</span>
-                </div>
+                <CollectionTitle />
                 <div className='collections-wrapper'>
                     {OwnerState.assets.map((a, index) => (
                         <NFTCard {...a} key={index} />
@@ -138,6 +116,36 @@ const Owner: FC = () => {
 }
 
 export default Owner
+
+const CollectionTitle: FC = () => {
+    const LazyRef = useRef<HTMLDivElement>(null)
+    const [isIntersecting, setisIntersecting] = useState(false)
+
+    useEffect(() => {
+        if (LazyRef.current && !isIntersecting) {
+            var observer = new IntersectionObserver(([entry]) => {
+                if (entry && entry.isIntersecting) {
+                    setisIntersecting(true)
+                    observer.disconnect()
+                }
+            })
+
+            observer.observe(LazyRef.current)
+        }
+        return () => {
+            if (observer) observer.disconnect()
+        }
+    }, [LazyRef])
+
+    return (
+        <div
+            className={'collection-title title' + C(isIntersecting, 'shown')}
+            ref={LazyRef}
+        >
+            <span>My Collections</span>
+        </div>
+    )
+}
 
 interface OpenSeaBtnProps {
     name: string
