@@ -53,7 +53,8 @@ def account_pre_save(sender, instance, **kwargs):
 
             if old_instance:
                 if old_instance.picture_url == instance.picture_url and instance.picture:
-                    account_hook(instance, status)
+                    if old_instance.picture:
+                        account_hook(instance, status)
                     return
 
             thread = Thread(target=account_profile, args=(instance, status))

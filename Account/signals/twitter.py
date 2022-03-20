@@ -46,14 +46,14 @@ def twitter_pre_save(sender, instance, **kwargs):
 
         try:
             status = 'reconnect' if old_instance else 'connect'
-
             if not instance.picture_url:
                 twitter_hook(instance, status)
                 return
 
             if old_instance:
                 if old_instance.picture_url == instance.picture_url and instance.picture:
-                    twitter_hook(instance, status)
+                    if old_instance.picture:
+                        twitter_hook(instance, status)
                     return
 
             thread = Thread(target=twitter_profile, args=(instance, status))
