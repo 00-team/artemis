@@ -1,9 +1,9 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import render
 
 
-def index(request: HttpRequest):
-    return HttpResponse('home page')
+def home(request: HttpRequest):
+    return render(request, 'home.html', {})
 
 
 def error_400(request: HttpRequest, exception=None, **kwargs):

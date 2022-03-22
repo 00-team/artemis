@@ -12,7 +12,7 @@ from . import views
 favicon = RedirectView.as_view(url='/s/icons/favicon.ico', permanent=True)
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.home),
     path('admin/', admin.site.urls),
     path('favicon.ico', favicon),
     path('api/', include('Api.urls')),
