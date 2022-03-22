@@ -1,9 +1,29 @@
 from django.db import models
 from django.db.models import CharField, PositiveBigIntegerField
+from django.db.models import SET_NULL
 from django.contrib.auth.models import User
 
 # utils
 from utils.models import file_path, username
+
+
+class BotUser(models.Model):
+    LANGS = (('EN', 'English'), ('RU', 'Russian'))
+
+    user_id = models.BigIntegerField(unique=True)
+    lang = CharField(max_length=2, choices=LANGS, default='EN')
+    invite_hash = CharField(max_length=128, null=True, blank=True, unique=True)
+    total_invites = PositiveBigIntegerField(default=0)
+    CFI = models.BooleanField(default=False, help_text='Counted for inviter')
+    inviter = models.ForeignKey(
+        'BotUser',
+        on_delete=SET_NULL,
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return str(self.user_id)
 
 
 class AccountManager(models.Manager):
@@ -41,12 +61,19 @@ class AccountManager(models.Manager):
             )
             account.save()
 
+        try:
+            account.bot_user = BotUser.objects.get(user_id=telegram_id)
+            account.save()
+        except:
+            pass
+
         return account
 
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    telegram_id = models.BigIntegerField()
+    bot_user = models.OneToOneField(BotUser, on_delete=SET_NULL, null=True)
+    telegram_id = models.BigIntegerField(unique=True)
     username = CharField(max_length=64, blank=True, null=True)
     picture_url = models.URLField(blank=True, null=True)
     picture = models.ImageField(

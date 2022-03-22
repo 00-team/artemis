@@ -3,13 +3,14 @@ from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 
 # models
-from Account.models import Account
+from Account.models import Account, BotUser
 
 # threading
 from threading import Thread
 
 # utils
 from utils.models import download_file
+from utils.api import s1
 
 # webhooks
 from utils.webhook.hooks import account_hook
@@ -72,5 +73,17 @@ def account_pre_delete(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
         account_hook(instance, 'delete')
+    except:
+        pass
+
+
+@receiver(pre_save, sender=BotUser)
+def bot_user_pre_save(instance, **kwargs):
+    try:
+        if not instance.invite_hash:
+            instance.invite_hash = s1(instance.user_id)
+
+        if instance.inviter == instance:
+            instance.inviter = None
     except:
         pass

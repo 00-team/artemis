@@ -1,7 +1,14 @@
 from django.contrib import admin
 
 # models
-from .models import Account, TwitterAccount
+from .models import BotUser
+from .models import Account
+from .models import TwitterAccount
+
+
+@admin.register(BotUser)
+class BotUserAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Account)
