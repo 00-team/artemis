@@ -9,6 +9,8 @@ from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
 from . import views
 
+from Collection.views import owners
+
 favicon = RedirectView.as_view(url='/s/icons/favicon.ico', permanent=True)
 
 urlpatterns = [
@@ -16,7 +18,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', favicon),
     path('api/', include('Api.urls')),
-    path('account/', include('Account.urls'))
+    path('account/', include('Account.urls')),
+    path('owners/<slug:username>', owners)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
