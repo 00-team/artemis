@@ -85,5 +85,8 @@ def bot_user_pre_save(instance, **kwargs):
 
         if instance.inviter == instance:
             instance.inviter = None
+
+        if not instance.inviter:
+            instance.CFI = False
     except:
         pass
