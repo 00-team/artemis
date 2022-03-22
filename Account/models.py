@@ -7,6 +7,57 @@ from django.contrib.auth.models import User
 from utils.models import file_path, username
 
 
+class BotUserManager(models.Manager):
+
+    def submit(self, user_id: int, **kwargs):
+        lang = kwargs.get('lang')
+        CFI = bool(kwargs.get('CFI'))
+
+        try:
+            bot_user = self.get(user_id=user_id)
+            change = False
+
+            if lang and bot_user.lang != lang:
+                bot_user.lang = str(lang)[:2]
+                change = True
+
+            if CFI and bot_user.CFI != CFI:
+                bot_user.CFI = CFI
+                change = True
+
+            try:
+                total_invites = int(kwargs['total_invites'])
+                if total_invites and bot_user.total_invites != total_invites:
+                    bot_user.total_invites = total_invites
+                    change = True
+            except:
+                pass
+
+            if change:
+                bot_user.save()
+
+        except self.model.DoesNotExist:
+            inviter_hash = kwargs.get('inviter')
+
+            bot_user = BotUser(user_id=user_id)
+
+            if lang:
+                bot_user.lang = lang
+
+            if CFI:
+                bot_user.CFI = CFI
+
+            try:
+                inviter = self.get(invite_hash=inviter_hash)
+                bot_user.inviter = inviter
+            except:
+                pass
+
+            bot_user.save()
+
+        return bot_user
+
+
 class BotUser(models.Model):
     LANGS = (('EN', 'English'), ('RU', 'Russian'))
 
@@ -22,6 +73,28 @@ class BotUser(models.Model):
         null=True,
         blank=True,
     )
+
+    objects = BotUserManager()
+
+    @property
+    def to_json(self):
+        data = {
+            'user_id': self.user_id,
+            'is_admin': self.is_admin,
+            'lang': self.lang,
+            'invite_hash': self.invite_hash,
+            'total_invites': self.total_invites,
+            'CFI': self.CFI,
+            'inviter': None
+        }
+
+        if self.inviter:
+            data['inviter'] = {
+                'user_id': self.inviter.user_id,
+                'invite_hash': self.inviter.invite_hash,
+            }
+
+        return data
 
     def __str__(self):
         return str(self.user_id)
