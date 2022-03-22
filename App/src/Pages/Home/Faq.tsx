@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // utils
 import UnderlineText from '../../components/utils/UnderlineText'
@@ -20,32 +20,26 @@ import './style/faq.scss'
 //     if (offset > 0) return offset * 100
 
 //     return 0
-
-//     // if (offset < 1100)
-//     //     return 600
-//     // if (offset < 900)
-//     //     return 500
-//     // if (offset < 700)
-//     //     return 300
-//     // if (offset < 600)
-//     //     return 200
-//     // if (offset < 500)
-//     //     return 300
-//     // if (offset < 400)
-//     //     return 0
 // }
 
 const Faq = () => {
     // const winScrollY = useSelector((s: RootState) => s.winScrollTop)
     const FAQs = useSelector((s: RootState) => s.FAQs)
     const FaqRef = useRef<HTMLDivElement>(null)
+    const [shown, setShown] = useState(false)
     // const offset = Offset(FaqRef.current, winScrollY)
+
+    useEffect(() => {
+        setShown(FAQs.some(o => o.faqs.length > 0))
+    }, [FAQs])
+
+    if (!shown) return <></>
 
     return (
         <div className='faq-container'>
             <UnderlineText>Frequently Asked Questions</UnderlineText>
             <div className='faq-wrapper' ref={FaqRef}>
-                {FAQs.map(f => (
+                {FAQs.filter(o => o.faqs.length > 0).map(f => (
                     <FaqOwner title={f.owner} faqs={f.faqs} key={f.owner} />
                 ))}
                 {/* <FaqOwner
