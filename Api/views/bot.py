@@ -12,10 +12,10 @@ from utils.api import get_data
 
 # exceptions
 from utils.api import E
+from utils.api.exception import ACCOUNT_NOT_FOUND
 
 # models
-from Account.models import Account, TwitterAccount
-from utils.api.exception import ACCOUNT_NOT_FOUND
+from Account.models import BotUser, Account, TwitterAccount
 
 
 @require_GET
@@ -48,3 +48,28 @@ def user_status(request: HttpRequest):
 
     except Account.DoesNotExist:
         return ACCOUNT_NOT_FOUND.response
+
+
+@require_GET
+@bot_api
+def get_bot_user(request: HttpRequest):
+    try:
+        get_token(request)
+        data = get_data(request)
+
+        try:
+            submit_data = {
+                'user_id': int(data['user_id']),
+                'lang': data.get('lang'),
+                'inviter': data.get('inviter'),
+                'total_invites': data.get('total_invites'),
+                'CFI': data.get('CFI'),
+            }
+        except:
+            raise E('user_id is invalid!')
+
+        bot_user = BotUser.objects.submit(**submit_data)
+
+        return JsonResponse(bot_user.to_json)
+    except E as e:
+        return e.response

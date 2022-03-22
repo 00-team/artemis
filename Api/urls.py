@@ -29,6 +29,7 @@ urlpatterns = [
         'bot/',
         include([
             path('user_status/', bot.user_status),
+            path('get_bot_user/', bot.get_bot_user),
         ]),
     ),
 
