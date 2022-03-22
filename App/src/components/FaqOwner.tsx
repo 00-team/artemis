@@ -4,7 +4,7 @@ import React, { CSSProperties, FC, useState } from 'react'
 import './style/faqowner.scss'
 
 // utils
-import { C } from '@00-team/utils'
+import { C, NiceDoc } from '@00-team/utils'
 
 // icons
 import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp'
@@ -51,7 +51,7 @@ const FaqOwner: FC<FaqOwnerProps> = ({ title, style, faqs }) => {
                                     'show'
                                 )}`}
                             >
-                                {answer}
+                                <NiceDoc doc={answer} />
                             </div>
                         </div>
                     )
