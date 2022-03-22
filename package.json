@@ -5,9 +5,9 @@
     "main": "",
     "scripts": {
         "start": "webpack serve --config webpack/dev.ts",
-        "build": "webpack --config webpack/webpack.build.ts",
-        "build:watch": "webpack --config webpack/webpack.build.ts --watch",
-        "dev": "webpack --config webpack/webpack.django.ts"
+        "build": "webpack --config webpack/build.ts",
+        "build:watch": "webpack --config webpack/build.ts --watch",
+        "dev": "webpack --config webpack/django.ts"
     },
     "repository": {
         "type": "git",
