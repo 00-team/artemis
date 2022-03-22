@@ -108,6 +108,7 @@ STATIC_URL = '/s/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    BASE_DIR / 'App/dist',
 ]
 
 MEDIA_URL = '/m/'
