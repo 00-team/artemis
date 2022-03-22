@@ -1,5 +1,5 @@
 # hash
-from hashlib import sha256
+from hashlib import sha256, sha1
 
 # time
 from django.utils.timezone import now
@@ -23,8 +23,12 @@ def merge_params(url: str, params: dict) -> str:
     return url + '?' + params_str
 
 
-def s256(s):
-    return sha256(s.encode()).hexdigest()
+def s256(s) -> str:
+    return sha256(str(s).encode()).hexdigest()
+
+
+def s1(s) -> str:
+    return sha1(str(s).encode()).hexdigest()
 
 
 USER_INFO = 'https://api.twitter.com/2/users/me?user.fields=description,profile_image_url'
