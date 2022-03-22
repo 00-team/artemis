@@ -122,8 +122,6 @@
                 width: 100%;
 
                 max-height: 0px;
-                // overflow-x: hidden;
-                // overflow-y: auto;
                 overflow: hidden;
 
                 transition: max-height 500ms linear, padding 500ms linear;
@@ -131,6 +129,20 @@
                 &.show {
                     max-height: 200px;
                     padding: 0.5em 0 1.5em 0;
+                    overflow: auto;
+                }
+
+                &::-webkit-scrollbar {
+                    background-color: transparent;
+                }
+
+                &::-webkit-scrollbar-button {
+                    height: 10px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: #dfdfdf;
+                    border-color: var(--sixty-precent);
                 }
             }
         }
