@@ -10,6 +10,7 @@ from utils.models import file_path, username
 class BotUser(models.Model):
     LANGS = (('EN', 'English'), ('RU', 'Russian'))
 
+    is_admin = models.BooleanField(default=False)
     user_id = models.BigIntegerField(unique=True)
     lang = CharField(max_length=2, choices=LANGS, default='EN')
     invite_hash = CharField(max_length=128, null=True, blank=True, unique=True)
