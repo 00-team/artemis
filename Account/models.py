@@ -20,7 +20,7 @@ class BotUserManager(models.Manager):
             change = False
 
             if lang and bot_user.lang != lang:
-                bot_user.lang = str(lang)[:2]
+                bot_user.lang = str(lang)[:10]
                 change = True
 
             if CFI and bot_user.CFI != CFI:
@@ -44,7 +44,7 @@ class BotUserManager(models.Manager):
             bot_user = BotUser(user_id=user_id)
 
             if lang:
-                bot_user.lang = lang
+                bot_user.lang = str(lang)[:10]
 
             if CFI:
                 bot_user.CFI = CFI
@@ -61,11 +61,9 @@ class BotUserManager(models.Manager):
 
 
 class BotUser(models.Model):
-    LANGS = (('EN', 'English'), ('RU', 'Russian'))
-
     is_admin = models.BooleanField(default=False)
     user_id = models.BigIntegerField(unique=True)
-    lang = CharField(max_length=2, choices=LANGS, default='EN')
+    lang = CharField(max_length=10, default='en')
     invite_hash = CharField(max_length=128, null=True, blank=True, unique=True)
     total_invites = PositiveBigIntegerField(default=0)
     CFI = models.BooleanField(default=False, help_text='Counted for inviter')
