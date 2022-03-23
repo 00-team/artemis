@@ -6,11 +6,10 @@ from telegram.ext import CallbackContext
 from telegram.error import BadRequest, Unauthorized
 
 # data
-from .data import get_date, get_token
-from .data import HOST, markdown_free
+from .data import markdown_free
 
-# user
-from .user import user_by_id
+# conf
+from .config import HOST
 
 # stages
 from .stages import user_joined
@@ -18,7 +17,6 @@ from .stages import user_joined
 # requests
 import requests
 
-admins = get_date()['admins']
 API_URL = HOST + 'api/bot/'
 
 USER_PHOTO = 'AgACAgQAAxkBAAIB1mIQ-B9bGKi7MRGKh9Oqhwi1JWpkAALMuTEbwMCIUGuGyh16ARp-AQADAgADbQADIwQ'

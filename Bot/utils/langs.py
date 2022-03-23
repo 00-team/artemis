@@ -1,8 +1,3 @@
-from telegram import Update
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-
-from .user import User
-
 langs = {
     'welcome': {
         'en': '🌀 Welcome to the Artemis Bot',
@@ -56,43 +51,40 @@ langs = {
         'Зарегистрируйтесь на последний шаг на сайте и отправьте свой кошелек\nNft будет отправлен на ваш счет в течение 24 часов.'
     },
     'external_login': {
-        'en': 'Login with this button 👇',
-        'ru': 'Войти с помощью этой кнопки 👇'
+        'en': 'cool',
+        'ru': ' с помощью этВойтиой кнопки 👇'
     }
 }
 
+CONTNET_EN = {
+    'start': ('welcome to bot XXX\n'
+              'if you join our chats and invite 3 ppl into the bot\n'
+              'we give you a free 10$ NFT\n'
+              '...'),
+    'help': ('-------- Help Title --------\n\n'
+             '/start - welcome message and info\n'
+             '/join - for joining into our chats\n'
+             '/invite - for inviting your frinds\n'
+             '/login - for loging into the website\n'
+             '/help - for showing this message\n'),
+    'external_login': ('Login with this button 👇'),
+    'login_button': ('Login!'),
+    'login': ('Register for the last step on the site and send your wallet\n'
+              'Nft will be sent to your account within 24 hours.'),
+    'chats_check_button': ('check ✅'),
+    'join_chats': ('Subscribe to the channel below 👇'),
+    'joined_chats': ('you already join all the channels'),
+    'join_complete': ('Congratulations\nSuccessfully joined the channels 🎉'),
+    'invite_button': ('To get NFT enter the robot ✅'),
+    'invites': ('Ask three of your friends to join'
+                'the bot with your special link. 🔗'),
+    'invite_banner': ('The first valid bot that gives free nft as a gift 🎁'
+                      '\n\nFrom the opensea site ⛵️\n\n'
+                      'Gain multi-dollar nfts in just three steps 💵💰'),
+    'enough_invites': ('Congratulations, you have successfully'
+                       'invited three people to the robot 🎉'),
+    'success_invite': ('You have succeeded adding someone into the bot 🎉'),
+}
 
-def lang_markup(next_step=False):
-    en = 'en'
-    ru = 'ru'
-
-    if next_step:
-        en = 'next_en'
-        ru = 'next_ru'
-
-    lang_keyboard = [
-        [
-            InlineKeyboardButton(langs['lang']['en'], callback_data=en),
-            InlineKeyboardButton(langs['lang']['ru'], callback_data=ru),
-        ],
-    ]
-    return InlineKeyboardMarkup(lang_keyboard)
-
-
-choose_lang_msg = f'''
-{langs['welcome']['en']}
-{langs['welcome']['ru']}
-
-    {langs['choose_lang']['en']}
-    {langs['choose_lang']['ru']}
-'''
-
-
-def change_lang(update: Update, *args, next_step=False):
-    chat = update.effective_chat
-    chat.send_message(choose_lang_msg, reply_markup=lang_markup(next_step))
-
-
-def user_lang(user_id: int) -> str:
-    user_data = User(user_id)
-    return user_data.lang
+TRANSLATED_CONTENT = ['en', 'ru']
+CONTNET = {'en': CONTNET_EN, 'ru': CONTNET_EN}

@@ -1,142 +1,64 @@
-from sqlite3 import connect
 from typing import Literal
 
-from hashlib import sha1
+# requests
+import requests
 
-users_db = './data/users.db'
+# conf
+from .config import HEADERS
+
+HOST = 'http://127.0.0.1:7000/api/bot/'
+
+
+class Inviter:
+    user_id: int
+    invite_hash: str
+    total_invites: int
+
+    def __init__(self, obj):
+        self.user_id = obj['user_id']
+        self.invite_hash = obj['invite_hash']
+        self.total_invites = obj['total_invites']
 
 
 class User:
-    LANG = Literal['en', 'ru']
-
-    table = '''CREATE TABLE users (
-        id INTEGER UNIQUE, 
-        lang VARCHAR(2), 
-        invite VARCHAR(40) UNIQUE, 
-        total_invites INTEGER)'''
+    LANG = Literal['EN', 'RU']
 
     user_id: int
-    user_exists: bool
+    is_admin: bool
     lang: LANG
-    invite: str
+    invite_hash: str
     total_invites: int
+    CFI: bool
+    inviter: Inviter | None = None
+    exists: bool
 
-    def __init__(self, user_id):
+    def __init__(self, user_id, inviter=None, lang='en'):
         self.user_id = user_id
-        self.setup_table()
-        self.check_user()
+        params = {'user_id': self.user_id, 'lang': lang}
 
-    def setup_table(self):
-        con = connect(users_db)
-        cur = con.cursor()
+        if inviter:
+            params['inviter'] = inviter
 
-        try:
-            cur.execute(
-                'SELECT name FROM sqlite_master WHERE type="table" AND name="users"'
-            )
-            if not cur.fetchone():
-                cur.execute(self.table)
-        except:
-            pass
-
-        con.commit()
-        con.close()
-
-    def hash_invite(self):
-        inv = str(self.user_id).encode()
-        return sha1(inv).hexdigest()
-
-    def get_user(self):
-        con = connect(users_db)
-        cur = con.cursor()
-
-        cur.execute(
-            'SELECT * FROM users WHERE id=:user_id',
-            {'user_id': self.user_id},
-        )
-        user = cur.fetchone()
-        con.close()
-
-        if user:
-            self.lang = user[1]
-            self.invite = user[2]
-            self.total_invites = user[3]
-
-        return user
-
-    def check_user(self):
-        user = self.get_user()
-
-        con = connect(users_db)
-        cur = con.cursor()
-
-        if user:
-            self.user_exists = True
-            return
-
-        self.user_exists = False
-        inv = self.hash_invite()
-
-        cur.execute(
-            'INSERT INTO users VALUES (?, "en", ?, 0)',
-            (self.user_id, inv),
+        res = requests.get(
+            HOST + 'get_bot_user/',
+            params=params,
+            headers=HEADERS,
         )
 
-        con.commit()
-        con.close()
+        if res.status_code != 200:
+            raise
 
-        self.get_user()
+        res = res.json()
+
+        self.is_admin = res['is_admin']
+        self.lang = res['lang']
+        self.invite_hash = res['invite_hash']
+        self.total_invites = res['total_invites']
+        self.CFI = res['CFI']
+        self.exists = res['exists']
+
+        if res['inviter']:
+            self.inviter = Inviter(res['inviter'])
 
     def update(self, lang: LANG = None, total_invites: int = None):
-        self.get_user()
-
-        lang = str(lang)
-
-        if len(lang) != 2:
-            lang = self.lang
-
-        if not isinstance(total_invites, int):
-            total_invites = self.total_invites
-
-        if lang != self.lang or total_invites != self.total_invites:
-            con = connect(users_db)
-            cur = con.cursor()
-            cur.execute(
-                'UPDATE users SET lang = ?, total_invites = ? WHERE id = ?',
-                (lang, total_invites, self.user_id),
-            )
-            con.commit()
-            con.close()
-            self.get_user()
-
-
-def user_by_invite(invite: str) -> User | None:
-    con = connect(users_db)
-    cur = con.cursor()
-    cur.execute(
-        'SELECT * FROM users WHERE invite=:invite',
-        {'invite': invite},
-    )
-    user = cur.fetchone()
-    con.close()
-
-    if not user:
-        return None
-
-    return User(user[0])
-
-
-def user_by_id(user_id: int) -> User | None:
-    con = connect(users_db)
-    cur = con.cursor()
-    cur.execute(
-        'SELECT * FROM users WHERE id=:user_id',
-        {'user_id': user_id},
-    )
-    user = cur.fetchone()
-    con.close()
-
-    if not user:
-        return None
-
-    return User(user[0])
+        pass

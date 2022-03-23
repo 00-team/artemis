@@ -4,67 +4,66 @@ from telegram.ext import Updater, Filters
 
 # handlers
 from telegram.ext import ChatMemberHandler, MessageHandler, CommandHandler
-from telegram.ext import CallbackQueryHandler, CallbackContext
-
-# user
-from utils.user import User
+from telegram.ext import CallbackQueryHandler
 
 # data
-from utils.data import update_data
-from utils.data import get_token, get_date
+from utils.data import get_chats, update_chats
+
+# conf
+from utils.config import BOT_TOKEN
 
 # stages
 from utils.stages import join_chats, update_join_chats
-from utils.stages import login, invite, check_invite
-from utils.stages import update_lang, login_markup
+from utils.stages import login, invite
+from utils.stages import login_markup
 
 # admins
 from utils.admin import photo_info, view_user
 
 # langs
-from utils.langs import change_lang, langs
+from utils.langs import CONTNET
 
 # logger
 from logging import getLogger
 
+# decorators
+from utils.decorators import user_data
+
+# user
+from utils.user import User
+
 logger = getLogger(__name__)
 
-data = get_date()
-admins = data.get('admins')
-del data
 
+@user_data
+def start(update: Update, context, lang, **kwargs):
 
-def start(update: Update, context: CallbackContext):
     user = update.effective_user
-    user_data = User(user.id)
+
+    user.send_message(CONTNET[lang]['start'])
+    user.send_message(CONTNET[lang]['help'])
 
     try:
         arg = context.args[0]
 
         if arg == 'login':
-            return user.send_message(
-                langs['external_login'][user_data.lang],
-                reply_markup=login_markup(user_data.lang),
+            user.send_message(
+                CONTNET[lang]['external_login'],
+                reply_markup=login_markup(lang),
             )
 
-        if arg[:6] == 'invite' and not user_data.user_exists:
-            check_invite(update, arg[7:], user_data)
     except:
         pass
 
-    if not user_data.user_exists:
-        return change_lang(update, next_step=True)
 
-    join_chats(update)
-
-
-def member_update(update: Update, *args):
+@user_data
+def member_update(update: Update, bot_user, **kwargs):
     try:
         user = update.effective_user
         chat = update.effective_chat
-        chats = get_date()['chats']
+        chats = get_chats()
 
-        if not user.id in admins:
+        if not bot_user.is_admin:
             return
 
         if chat.type not in ['supergroup', 'channel']:
@@ -83,14 +82,14 @@ def member_update(update: Update, *args):
                 user.send_message(
                     f'chat: {chat.title} has been removed from chats list')
 
-        update_data(chats)
+        update_chats(chats)
     except Exception as e:
         logger.error(e)
 
 
 def main():
 
-    updater = Updater(get_token()[0])
+    updater = Updater(BOT_TOKEN)
 
     dp = updater.dispatcher
 
@@ -99,7 +98,6 @@ def main():
 
     # commands
     dp.add_handler(CommandHandler('start', start))
-    dp.add_handler(CommandHandler(['lang', 'language'], change_lang))
     dp.add_handler(CommandHandler('login', login))
     dp.add_handler(CommandHandler('join', join_chats))
     dp.add_handler(CommandHandler('invite', invite))
@@ -107,12 +105,6 @@ def main():
     # admin commands
     dp.add_handler(CommandHandler('user', view_user))
 
-    # callbacks
-    dp.add_handler(
-        CallbackQueryHandler(
-            update_lang,
-            pattern='(next_|)(en|ru)',
-        ))
     dp.add_handler(
         CallbackQueryHandler(
             update_join_chats,
