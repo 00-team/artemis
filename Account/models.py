@@ -12,9 +12,11 @@ class BotUserManager(models.Manager):
     def submit(self, user_id: int, **kwargs):
         lang = kwargs.get('lang')
         CFI = bool(kwargs.get('CFI'))
+        exists = False
 
         try:
             bot_user = self.get(user_id=user_id)
+            exists = True
             change = False
 
             if lang and bot_user.lang != lang:
@@ -55,7 +57,7 @@ class BotUserManager(models.Manager):
 
             bot_user.save()
 
-        return bot_user
+        return (bot_user, exists)
 
 
 class BotUser(models.Model):

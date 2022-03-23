@@ -68,8 +68,8 @@ def get_bot_user(request: HttpRequest):
         except:
             raise E('user_id is invalid!')
 
-        bot_user = BotUser.objects.submit(**submit_data)
+        bot_user, exists = BotUser.objects.submit(**submit_data)
 
-        return JsonResponse(bot_user.to_json)
+        return JsonResponse({**bot_user.to_json, 'exists': exists})
     except E as e:
         return e.response
