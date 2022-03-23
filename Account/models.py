@@ -94,6 +94,7 @@ class BotUser(models.Model):
             data['inviter'] = {
                 'user_id': self.inviter.user_id,
                 'invite_hash': self.inviter.invite_hash,
+                'total_invites': self.inviter.total_invites,
             }
 
         return data
