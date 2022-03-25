@@ -31,8 +31,8 @@ const Account: FC = () => {
     return (
         <div className='account-container'>
             <div className='account-wrapper'>
-                <AccountContent {...AccountState} />
                 <AccountSideBar {...AccountState} />
+                <AccountContent {...AccountState} />
             </div>
         </div>
     )
@@ -131,7 +131,7 @@ const AccountContent: FC<AccountModel> = props => {
                     </div>
                 </div>
             </span>
-            {!twitter && <TwitterCard />}
+            {twitter && <TwitterCard {...twitter} />}
         </div>
     )
 }
