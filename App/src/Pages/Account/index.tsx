@@ -131,7 +131,7 @@ const AccountContent: FC<AccountModel> = props => {
                     </div>
                 </div>
             </span>
-            {twitter && <TwitterCard {...twitter} />}
+            {!twitter && <TwitterCard />}
         </div>
     )
 }
