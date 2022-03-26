@@ -89,7 +89,7 @@ const AccountContent: FC<AccountModel> = props => {
                     style={{ animationDelay: '1.5s' }}
                 >
                     <div className='column-title title_small'>
-                        <div className='icon'>
+                        <div className='icon wallet'>
                             <FaWallet size={24} />
                         </div>
                         <div className='holder'>
@@ -150,7 +150,7 @@ const TwitterCard: FC<TwitterModel> = props => {
                 style={{ animationDelay: '2s' }}
             >
                 <div className='column-title title_small'>
-                    <div className='icon'>
+                    <div className='icon twitter'>
                         <FaTwitter size={24} />
                     </div>
                     <div className='holder'>
@@ -163,8 +163,14 @@ const TwitterCard: FC<TwitterModel> = props => {
                             <Avatar picture={picture} username={username} />
                         </div>
                         <div className='profile-name title_smaller'>
-                            <span>{nickname}</span>
-                            <span>{username}</span>
+                            <div className='profile-name-wrapper'>
+                                <div className='profile-name-nickname'>
+                                    {nickname}
+                                </div>
+                                <div className='profile-name-username'>
+                                    @{username}
+                                </div>
+                            </div>
                         </div>
                         <div className='profile-description description'>
                             {description}
@@ -173,15 +179,15 @@ const TwitterCard: FC<TwitterModel> = props => {
                     <div className='twitter-status'>
                         <div className='status'>
                             <div className='holder'>Following</div>
-                            <div className='data'>{followings}</div>
+                            <div className='data'>{170 || followings}</div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Followers</div>
-                            <div className='data'>{followers}</div>
+                            <div className='data'>{154 || followers}</div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Tweets</div>
-                            <div className='data'>{tweets}</div>
+                            <div className='data'>{10 || tweets}</div>
                         </div>
                     </div>
                 </div>
