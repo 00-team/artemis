@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { GetAccount, RootState } from 'state'
 import { AccountModel, TwitterModel } from 'state/models/Account'
 import { Avatar } from '@00-team/utils'
+import CountUpAnim from 'components/utils/CountUpAnim'
 
 const Account: FC = () => {
     const dispatch = useDispatch()
@@ -179,15 +180,27 @@ const TwitterCard: FC<TwitterModel> = props => {
                     <div className='twitter-status'>
                         <div className='status'>
                             <div className='holder'>Following</div>
-                            <div className='data'>{170 || followings}</div>
+                            <div className='data'>
+                                <CountUpAnim
+                                    end={170 || followings}
+                                    speed={50}
+                                />
+                            </div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Followers</div>
-                            <div className='data'>{154 || followers}</div>
+                            <div className='data'>
+                                <CountUpAnim
+                                    end={11054 || followers}
+                                    speed={50}
+                                />
+                            </div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Tweets</div>
-                            <div className='data'>{10 || tweets}</div>
+                            <div className='data'>
+                                <CountUpAnim end={11020 || tweets} speed={50} />
+                            </div>
                         </div>
                     </div>
                 </div>
