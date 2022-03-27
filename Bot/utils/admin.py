@@ -67,7 +67,7 @@ def view_user(update: Update, context: CallbackContext, **kwargs):
 
     text = '\n'.join((fname, uname, bio, uchats))
 
-    user_admin.send_message(text, parse_mode='MarkdownV2')
+    user_admin.send_message(text)
 
 
 @user_data

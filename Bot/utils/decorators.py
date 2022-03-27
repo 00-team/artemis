@@ -13,6 +13,10 @@ from .langs import TRANSLATED_CONTENT
 def user_data(handler):
 
     def wrap(update: Update, context):
+
+        if update.effective_user.is_bot:
+            return
+
         user_id = update.effective_user.id
         lang = update.effective_user.language_code
         inviter = None
