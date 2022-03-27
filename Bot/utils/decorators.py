@@ -12,7 +12,7 @@ from .langs import TRANSLATED_CONTENT
 
 def user_data(handler):
 
-    def wrap(update: Update, context):
+    def wrap(update: Update, context, *args, **kwargs):
 
         if update.effective_user.is_bot:
             return

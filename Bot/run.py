@@ -13,15 +13,15 @@ from utils.data import get_chats, update_chats
 from utils.config import BOT_TOKEN
 
 # stages
-from utils.stages import join_chats, update_join_chats
-from utils.stages import login, invite
-from utils.stages import login_markup
+from utils.sections import join_chats, update_join_chats
+from utils.sections import invite, login, start
+from utils.sections import help_cmd, help_callback
 
 # admins
 from utils.admin import photo_info, view_user, admin_help
 
 # langs
-from utils.langs import CONTNET
+from utils.langs import HELP_PATTERN
 
 # logger
 from logging import getLogger
@@ -30,33 +30,6 @@ from logging import getLogger
 from utils.decorators import user_data
 
 logger = getLogger(__name__)
-
-
-@user_data
-def start(update: Update, context, lang, **kwargs):
-
-    user = update.effective_user
-
-    user.send_message(CONTNET[lang]['start'])
-    user.send_message(CONTNET[lang]['help'])
-
-    try:
-        arg = context.args[0]
-
-        if arg == 'login':
-            user.send_message(
-                CONTNET[lang]['external_login'],
-                reply_markup=login_markup(lang),
-            )
-
-    except:
-        pass
-
-
-@user_data
-def help_cmd(update: Update, lang, **kwargs):
-    user = update.effective_user
-    user.send_message(CONTNET[lang]['help'])
 
 
 @user_data
@@ -116,8 +89,16 @@ def main():
             pattern='check_chats',
         ))
 
+    dp.add_handler(CallbackQueryHandler(
+        help_callback,
+        pattern=HELP_PATTERN,
+    ))
+
     # photos
     dp.add_handler(MessageHandler(Filters.photo, photo_info))
+
+    # help
+    dp.add_handler(MessageHandler(Filters.text('help'), help_cmd))
 
     updater.start_polling()
     print('started!')

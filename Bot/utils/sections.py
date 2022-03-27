@@ -1,6 +1,5 @@
 # types
-from telegram import Chat, Update, LoginUrl
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Chat, Update
 
 # exceptions
 from telegram.error import BadRequest, Unauthorized
@@ -8,8 +7,9 @@ from telegram.error import BadRequest, Unauthorized
 # user
 from .user import User
 
-# conf
-from .config import HOST
+# keyboards
+from .keyboards import help_keyboard, login_keyboard
+from .keyboards import join_keyboard, invite_keyboard
 
 # decorators
 from .decorators import user_data
@@ -23,14 +23,6 @@ from .langs import CONTNET
 
 JOIN_PHOTO = 'AgACAgQAAxkBAAICT2IUoWhe2dqMs5JH4KQOsVUIYBXnAAJWuTEbX9OgUMou1QABxjrs5wEAAwIAA20AAyME'
 INVITE_PHOTO = 'AgACAgQAAxkBAAICjWIUvJR2Ij73vIEeNU4VHJaH_JVDAALUtzEbTt2oUH7o1bYu7AtdAQADAgADeQADIwQ'
-LOGIN_URL = LoginUrl(HOST + 'api/account/telegram_callback/')
-
-
-def login_markup(lang):
-    text = CONTNET[lang]['login_button']
-    keyboard = [[InlineKeyboardButton(text, login_url=LOGIN_URL)]]
-
-    return InlineKeyboardMarkup(keyboard)
 
 
 @user_data
@@ -39,7 +31,7 @@ def login(update: Update, lang, **kwargs):
 
     chat.send_message(
         CONTNET[lang]['login'],
-        reply_markup=login_markup(lang),
+        reply_markup=login_keyboard(lang),
     )
 
 
@@ -62,19 +54,6 @@ def user_joined(user: Chat) -> list[Chat]:
             update_chats(chats)
 
     return user_chats
-
-
-def join_markup(chats: list[Chat], lang):
-    text = text = CONTNET[lang]['chats_check_button']
-
-    def GKB(c: Chat):
-        return [InlineKeyboardButton(c.title, url=c.invite_link)]
-
-    keyboard = list(map(GKB, chats)) + [[
-        InlineKeyboardButton(text, callback_data='check_chats')
-    ]]
-
-    return InlineKeyboardMarkup(keyboard)
 
 
 def check_inviter(user_chats: list[Chat], bot_user: User):
@@ -106,7 +85,7 @@ def join_chats(update: Update, bot_user, lang, **kwargs):
         chat.send_photo(
             JOIN_PHOTO,
             caption=CONTNET[lang]['join_chats'],
-            reply_markup=join_markup(user_chats, lang),
+            reply_markup=join_keyboard(user_chats, lang),
         )
     else:
         chat.send_photo(
@@ -132,13 +111,6 @@ def update_join_chats(update: Update, bot_user, lang, **kwargs):
     )
 
 
-def invite_markup(link: str, lang):
-    text = CONTNET[lang]['invite_button']
-    keyboard = [[InlineKeyboardButton(text, url=link)]]
-
-    return InlineKeyboardMarkup(keyboard)
-
-
 @user_data
 def invite(update: Update, bot_user: User, lang, **kwargs):
     user = update.effective_user
@@ -148,12 +120,8 @@ def invite(update: Update, bot_user: User, lang, **kwargs):
 
     user_link = f'https://t.me/{bot_username}?start=invite-{bot_user.invite_hash}'
 
-    text = (f'\n[Your Link]({user_link})\n'
-            f'Your total invites: {bot_user.total_invites}/3')
-
-    if lang == 'ru':
-        text = (f'\n[Ваша ссылка]({user_link})\n'
-                f'Всего приглашений: {bot_user.total_invites}/3')
+    text = CONTNET[lang]['invite_user_link']
+    text = text.format(user_link, bot_user.total_invites)
 
     user.send_message(
         markdown_free(CONTNET[lang]['invites']) + text,
@@ -163,8 +131,54 @@ def invite(update: Update, bot_user: User, lang, **kwargs):
     user.send_photo(
         INVITE_PHOTO,
         CONTNET[lang]['invite_banner'],
-        reply_markup=invite_markup(user_link, lang),
+        reply_markup=invite_keyboard(user_link, lang),
     )
 
     if enough_invites:
         chat.send_message(CONTNET[lang]['enough_invites'])
+
+
+@user_data
+def start(update: Update, context, lang, **kwargs):
+
+    user = update.effective_user
+
+    user.send_message(CONTNET[lang]['start'])
+    user.send_message(CONTNET[lang]['help'], reply_markup=help_keyboard(lang))
+
+    try:
+        arg = context.args[0]
+
+        if arg == 'login':
+            user.send_message(
+                CONTNET[lang]['external_login'],
+                reply_markup=login_keyboard(lang),
+            )
+
+    except:
+        pass
+
+
+@user_data
+def help_cmd(update: Update, lang, **kwargs):
+    user = update.effective_user
+    user.send_message(CONTNET[lang]['help'], reply_markup=help_keyboard(lang))
+
+
+@user_data
+def help_callback(update: Update, **kwrags):
+    query = update.callback_query
+
+    match query.data[5:]:
+        case 'start':
+            start(update=update, **kwrags)
+        case 'help':
+            help_cmd(update=update, **kwrags)
+        case 'login':
+            login(update=update, **kwrags)
+        case 'join':
+            join_chats(update=update, **kwrags)
+        case 'invite':
+            invite(update=update, **kwrags)
+        case _:
+            return

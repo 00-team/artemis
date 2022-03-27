@@ -9,7 +9,7 @@ from .decorators import user_data, require_admin
 from .data import markdown_free
 
 # stages
-from .stages import user_joined
+from .sections import user_joined
 
 
 @user_data
@@ -19,10 +19,12 @@ def photo_info(update: Update, **kwargs):
     chat = update.effective_chat
 
     for photo in photos:
-        caption = (f'file id: \n`{photo.file_id}`\n\n'
-                   f'file size: `{photo.file_size // 1000} KB`\n'
-                   f'width: {photo.width}\n'
-                   f'height: {photo.height}')
+        caption = (
+            f'file id: \n`{photo.file_id}`\n\n'
+            f'file size: `{photo.file_size // 1000} KB`\n'
+            f'width: {photo.width}\n'
+            f'height: {photo.height}'
+        )
         chat.send_photo(
             photo.file_id,
             caption=caption,
@@ -42,7 +44,8 @@ def view_user(update: Update, context: CallbackContext, **kwargs):
         return user_admin.send_message(
             'use this command like this:\n'
             '/user <user-id:number>\n'
-            '/user 12', )
+            '/user 12'
+        )
 
     try:
         user = bot.get_chat(user_id)
@@ -74,7 +77,9 @@ def view_user(update: Update, context: CallbackContext, **kwargs):
 @require_admin
 def admin_help(update: Update, **kwargs):
     chat = update.effective_chat
-    text = ('/user <user:id> - for viewing the users\n'
-            '/admin - for showing this message\n'
-            'sending or forwarding a photo - getting info about that photo')
+    text = (
+        '/user <user:id> - for viewing the users\n'
+        '/admin - for showing this message\n'
+        'sending or forwarding a photo - getting info about that photo'
+    )
     chat.send_message(text)
