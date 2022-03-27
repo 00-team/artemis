@@ -18,7 +18,7 @@ from utils.stages import login, invite
 from utils.stages import login_markup
 
 # admins
-from utils.admin import photo_info, view_user
+from utils.admin import photo_info, view_user, admin_help
 
 # langs
 from utils.langs import CONTNET
@@ -28,9 +28,6 @@ from logging import getLogger
 
 # decorators
 from utils.decorators import user_data
-
-# user
-from utils.user import User
 
 logger = getLogger(__name__)
 
@@ -54,6 +51,12 @@ def start(update: Update, context, lang, **kwargs):
 
     except:
         pass
+
+
+@user_data
+def help_cmd(update: Update, lang, **kwargs):
+    user = update.effective_user
+    user.send_message(CONTNET[lang]['help'])
 
 
 @user_data
@@ -98,12 +101,14 @@ def main():
 
     # commands
     dp.add_handler(CommandHandler('start', start))
+    dp.add_handler(CommandHandler('help', help_cmd))
     dp.add_handler(CommandHandler('login', login))
     dp.add_handler(CommandHandler('join', join_chats))
     dp.add_handler(CommandHandler('invite', invite))
 
     # admin commands
     dp.add_handler(CommandHandler('user', view_user))
+    dp.add_handler(CommandHandler('admin', admin_help))
 
     dp.add_handler(
         CallbackQueryHandler(
