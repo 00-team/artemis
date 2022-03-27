@@ -77,11 +77,30 @@ def join_markup(chats: list[Chat], lang):
     return InlineKeyboardMarkup(keyboard)
 
 
+def check_inviter(user_chats: list[Chat], bot_user: User):
+    if not bot_user.inviter or bot_user.CFI:
+        return
+
+    try:
+        if not user_chats:
+            the_inviter = User(bot_user.inviter.user_id)
+            old_total_invites = the_inviter.total_invites
+            the_inviter.increase_invites()
+            new_total_invites = the_inviter.total_invites
+
+            if new_total_invites > old_total_invites:
+                bot_user.CFI_done()
+    except:
+        pass
+
+
 @user_data
-def join_chats(update: Update, lang, **kwargs):
+def join_chats(update: Update, bot_user, lang, **kwargs):
     user = update.effective_user
     user_chats = user_joined(user)
     chat = update.effective_chat
+
+    check_inviter(user_chats, bot_user)
 
     if user_chats:
         chat.send_photo(
@@ -102,7 +121,7 @@ def update_join_chats(update: Update, bot_user, lang, **kwargs):
     user = update.effective_user
     user_chats = user_joined(user)
 
-    print(bot_user.inviter, bot_user.CFI)
+    check_inviter(user_chats, bot_user)
 
     if user_chats:
         return
@@ -149,35 +168,3 @@ def invite(update: Update, bot_user: User, lang, **kwargs):
 
     if enough_invites:
         chat.send_message(CONTNET[lang]['enough_invites'])
-
-
-'''
-def check_invite(update: Update, invite_hash: str, user_data: User):
-    user = update.effective_user
-    bot = user.bot
-    inviter = user_by_invite(invite_hash)
-
-    # make sure invite url is valid
-    if not inviter:
-        return
-
-    # make sure user doesn't invite him self
-    if user_data.user_id == inviter.user_id:
-        return
-
-    total_invites = inviter.total_invites + 1
-
-    inviter.update(total_invites=total_invites)
-    bot.send_message(inviter.user_id, langs['success_invite'][inviter.lang])
-
-    if total_invites >= 3:
-        bot.send_message(
-            inviter.user_id,
-            langs['enough_invites'][inviter.lang],
-        )
-        bot.send_message(
-            inviter.user_id,
-            langs['login'][inviter.lang],
-            reply_markup=login_markup(inviter.lang),
-        )
-'''

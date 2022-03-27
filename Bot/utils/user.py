@@ -39,6 +39,10 @@ class User:
         if inviter:
             params['inviter'] = inviter
 
+        self.get_user(params)
+
+    def get_user(self, params):
+
         res = requests.get(
             HOST + 'get_bot_user/',
             params=params,
@@ -60,5 +64,14 @@ class User:
         if res['inviter']:
             self.inviter = Inviter(res['inviter'])
 
-    def update(self, lang: LANG = None, total_invites: int = None):
-        pass
+    # TODO: moving this two method into the backend (api) side
+    def increase_invites(self):
+        params = {
+            'user_id': self.user_id,
+            'total_invites': self.total_invites + 1
+        }
+        self.get_user(params)
+
+    def CFI_done(self):
+        params = {'user_id': self.user_id, 'CFI': True}
+        self.get_user(params)
