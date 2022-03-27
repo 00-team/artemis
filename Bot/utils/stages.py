@@ -97,7 +97,7 @@ def join_chats(update: Update, lang, **kwargs):
 
 
 @user_data
-def update_join_chats(update: Update, bot_user, lang, *kwargs):
+def update_join_chats(update: Update, bot_user, lang, **kwargs):
     query = update.callback_query
     user = update.effective_user
     user_chats = user_joined(user)

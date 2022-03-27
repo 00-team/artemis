@@ -1,3 +1,6 @@
+# traceback
+from traceback import print_exception
+
 from telegram import Update
 
 # user
@@ -33,8 +36,9 @@ def user_data(handler):
                 bot_user=bot_user,
                 lang=lang,
             )
-        except:
+        except Exception as e:
             print('Error while processing the user_data')
+            print_exception(e)
 
     return wrap
 
