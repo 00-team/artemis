@@ -12,13 +12,14 @@ def user_data(handler):
     def wrap(update: Update, context):
         user_id = update.effective_user.id
         lang = update.effective_user.language_code
+        inviter = None
 
         try:
             arg = context.args[0]
-            if arg[:6] == 'invite':
+            if arg[:6] == 'invite' and update.message.text[:6] == '/start':
                 inviter = arg[7:]
         except:
-            inviter = None
+            pass
 
         try:
             bot_user = User(user_id, inviter=inviter, lang=lang)
@@ -32,7 +33,17 @@ def user_data(handler):
                 bot_user=bot_user,
                 lang=lang,
             )
-        except Exception as e:
+        except:
             print('Error while processing the user_data')
+
+    return wrap
+
+
+def require_admin(handler):
+
+    def wrap(bot_user: User, **kwargs):
+
+        if bot_user.is_admin:
+            return handler(bot_user=bot_user, **kwargs)
 
     return wrap
