@@ -35,7 +35,11 @@ def login(update: Update, lang, **kwargs):
     )
 
 
-def user_joined(user: Chat) -> list[Chat]:
+def user_not_joined(user: Chat) -> list[Chat]:
+    '''
+    return list of chats that user need to join 
+    e.g. chats that user not joined into them.
+    '''
     chats = get_chats()
     bot = user.bot
     user_chats = []
@@ -86,7 +90,7 @@ def check_inviter(update: Update, user_chats: list[Chat], bot_user: User):
 @user_data
 def join_chats(update: Update, bot_user, lang, **kwargs):
     user = update.effective_user
-    user_chats = user_joined(user)
+    user_chats = user_not_joined(user)
     chat = update.effective_chat
 
     check_inviter(update, user_chats, bot_user)
@@ -108,7 +112,7 @@ def join_chats(update: Update, bot_user, lang, **kwargs):
 def update_join_chats(update: Update, bot_user, lang, **kwargs):
     query = update.callback_query
     user = update.effective_user
-    user_chats = user_joined(user)
+    user_chats = user_not_joined(user)
 
     check_inviter(update, user_chats, bot_user)
 

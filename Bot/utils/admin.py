@@ -5,11 +5,9 @@ from telegram.ext import CallbackContext
 # decorators
 from .decorators import user_data, require_admin
 
-# data
-from .data import markdown_free
 
 # stages
-from .sections import user_joined
+from .sections import user_not_joined
 
 
 @user_data
@@ -53,23 +51,29 @@ def view_user(update: Update, context: CallbackContext, **kwargs):
         return user_admin.send_message('Error to get this chat')
 
     def chats():
-        not_joined = user_joined(user)
+        not_joined = user_not_joined(user)
 
-        if len(not_joined) == 0:
-            return 'chats: Joined All ✅'
+        if not not_joined:
+            return 'chats: joined all ✅'
 
-        chats_str = ', '.join(
-            map(lambda c: f'`{markdown_free(c.title)}`', not_joined))
-        return f'chats: {chats_str}'
+        chats_str = '\n'.join(map(lambda c: f'{c.title}', not_joined))
+        return (
+            '---------- chats that user need to join ----------\n'
+            f'{chats_str}'
+            '\n' + '-' * 62
+        )
 
-    fname = markdown_free(f'full name: {user.full_name}')
-    uname = f'username: [{user.username}]({user.link})'
-    bio = markdown_free(f'bio: {user.bio}')
+    text = f'full name: {user.full_name}\n'
 
-    uchats = chats()
+    if user.username:
+        text += f'username: {user.username}\n{user.link}\n'
 
-    text = '\n'.join((fname, uname, bio, uchats))
+    if user.bio:
+        text += ('---------- bio ----------\n'
+                 f'{user.bio}'
+                 '\n--------------------------\n')
 
+    text += chats()
     user_admin.send_message(text)
 
 
