@@ -13,12 +13,12 @@ from .langs import TRANSLATED_CONTENT
 def user_data(handler):
 
     def wrap(update: Update, context, *args, **kwargs):
+        user = update.effective_user
 
-        if update.effective_user.is_bot:
+        if user.is_bot:
             return
 
-        user_id = update.effective_user.id
-        lang = update.effective_user.language_code
+        lang = user.language_code
         inviter = None
 
         try:
@@ -29,7 +29,10 @@ def user_data(handler):
             pass
 
         try:
-            bot_user = User(user_id, inviter=inviter, lang=lang)
+            bot_user = User(
+                user.id, inviter=inviter,
+                lang=lang, fullname=user.full_name,
+            )
 
             if lang not in TRANSLATED_CONTENT:
                 lang = 'en'

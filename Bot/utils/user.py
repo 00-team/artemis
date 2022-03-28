@@ -32,9 +32,9 @@ class User:
     inviter: Inviter | None = None
     exists: bool
 
-    def __init__(self, user_id, inviter=None, lang='en'):
+    def __init__(self, user_id, inviter=None, lang='en', fullname=None):
         self.user_id = user_id
-        params = {'user_id': self.user_id, 'lang': lang}
+        params = {'user_id': self.user_id, 'lang': lang, 'fullname': fullname}
 
         if inviter:
             params['inviter'] = inviter

@@ -60,6 +60,7 @@ def get_bot_user(request: HttpRequest):
         try:
             submit_data = {
                 'user_id': int(data['user_id']),
+                'fullname': data.get('fullname'),
                 'lang': data.get('lang'),
                 'inviter': data.get('inviter'),
                 'total_invites': data.get('total_invites'),
