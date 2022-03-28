@@ -102,7 +102,7 @@ class BotUser(models.Model):
         return data
 
     def __str__(self):
-        return str(self.user_id)
+        return f'{self.fullname} - {self.user_id}'
 
 
 class AccountManager(models.Manager):
@@ -151,7 +151,10 @@ class AccountManager(models.Manager):
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bot_user = models.OneToOneField(BotUser, on_delete=SET_NULL, null=True)
+    bot_user = models.OneToOneField(
+        BotUser, on_delete=SET_NULL,
+        null=True, blank=True
+    )
     telegram_id = models.BigIntegerField(unique=True)
     username = CharField(max_length=64, blank=True, null=True)
     picture_url = models.URLField(blank=True, null=True)
