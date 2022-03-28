@@ -106,7 +106,7 @@
             align-items: center;
             justify-content: flex-start;
             flex-direction: column;
-            gap: 5vh;
+            gap: 3vh;
 
             padding: 2rem 1rem;
 
@@ -116,7 +116,7 @@
             }
 
             .column-container {
-                min-height: 500px;
+                // min-height: 500px;
                 width: 100%;
 
                 border-radius: 1rem;
@@ -142,7 +142,7 @@
 
                     background-color: var(--thirty-precent);
 
-                    gap: 6vh;
+                    gap: 3vh;
 
                     @include no-user-select;
 
@@ -202,6 +202,8 @@
                         justify-content: center;
 
                         flex-direction: column;
+
+                        margin-top: 3vh;
                         .bottom-column {
                             margin-top: 2vh;
 
@@ -328,6 +330,7 @@
 
                                 .column-data {
                                     &.linked {
+                                        font-family: 'Executionist';
                                         color: #00dc7d;
                                         text-transform: uppercase;
                                     }
@@ -371,7 +374,7 @@
                     }
 
                     &.twitter-container {
-                        gap: 3vh;
+                        gap: 0;
 
                         .twitter-wrapper {
                             width: 100%;
