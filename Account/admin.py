@@ -37,7 +37,19 @@ class BotUserAdmin(admin.ModelAdmin):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('__str__', 'telegram_id', 'username', 'pic')
+    readonly_fields = ('pic', )
+    search_fields = ('username', 'telegram_id')
+
+    @admin.display
+    def pic(self, obj):
+        if obj._picture:
+            return format_html((
+                f'<img src="{obj._picture}" '
+                'height="121" style="border-radius:7px" />'
+            ))
+
+        return 'None'
 
 
 @admin.register(TwitterAccount)
