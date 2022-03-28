@@ -9,6 +9,8 @@
     place-items: center;
 
     .account-wrapper {
+        position: relative;
+
         width: 100%;
         height: 100%;
 
@@ -104,7 +106,7 @@
             align-items: center;
             justify-content: flex-start;
             flex-direction: column;
-            gap: 5vh;
+            gap: 3vh;
 
             padding: 2rem 1rem;
 
@@ -114,7 +116,7 @@
             }
 
             .column-container {
-                min-height: 500px;
+                // min-height: 500px;
                 width: 100%;
 
                 border-radius: 1rem;
@@ -140,7 +142,7 @@
 
                     background-color: var(--thirty-precent);
 
-                    gap: 6vh;
+                    gap: 3vh;
 
                     @include no-user-select;
 
@@ -194,33 +196,43 @@
                             transform: translateX(0%);
                         }
                     }
-
-                    .disconnect-column {
-                        margin-top: 2vh;
-
-                        width: fit-content;
-
+                    .bottom-columns {
                         display: flex;
-                        align-items: center;
-                        justify-content: flex-start;
-                        gap: 0.25vw;
+                        align-items: flex-start;
+                        justify-content: center;
 
-                        cursor: pointer;
+                        flex-direction: column;
 
-                        transition: transform 0.2s ease;
-                        color: #e20338;
+                        margin-top: 3vh;
+                        .bottom-column {
+                            margin-top: 2vh;
 
-                        &:hover {
-                            transform: translateX(0.5vw);
-                        }
-                        @media screen and (max-width: 768px) {
+                            width: fit-content;
+
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            gap: 0.5vw;
+
+                            cursor: pointer;
+
+                            transition: transform 0.2s ease;
+
                             &:hover {
-                                transform: translateX(1.5vw);
+                                transform: translateX(0.75vw);
                             }
-                        }
+                            @media screen and (max-width: 768px) {
+                                &:hover {
+                                    transform: translateX(1.5vw);
+                                }
+                            }
 
-                        .holder {
-                            text-transform: uppercase;
+                            .holder {
+                                text-transform: uppercase;
+                            }
+                            &.disconnect-column {
+                                color: #e20338;
+                            }
                         }
                     }
 
@@ -318,6 +330,7 @@
 
                                 .column-data {
                                     &.linked {
+                                        font-family: 'Executionist';
                                         color: #00dc7d;
                                         text-transform: uppercase;
                                     }
@@ -361,7 +374,7 @@
                     }
 
                     &.twitter-container {
-                        gap: 3vh;
+                        gap: 0;
 
                         .twitter-wrapper {
                             width: 100%;
@@ -451,6 +464,79 @@
                                     gap: 1vh;
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+        .change-wallet-container {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            display: grid;
+            place-items: center;
+
+            backdrop-filter: blur(10px);
+
+            .change-wallet-wrapper {
+                display: flex;
+                align-content: center;
+                justify-content: flex-start;
+                flex-direction: column;
+                gap: 2vh;
+
+                width: 80%;
+                height: 80%;
+
+                background-color: var(--sixty-precent);
+
+                padding: 2rem;
+
+                border-radius: 1rem;
+
+                position: relative;
+
+                @media screen and (max-width: 960px) {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 0;
+                }
+                .change-wallet-title {
+                    text-align: center;
+                    text-transform: uppercase;
+
+                    font-family: 'Executionist';
+                }
+
+                .close-btn {
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+
+                    cursor: pointer;
+
+                    @media screen and (max-width: 960px) {
+                        top: 12px;
+                        right: 12px;
+                    }
+
+                    svg {
+                        width: 45px;
+                        height: 45px;
+
+                        @media screen and (max-width: 960px) {
+                            width: 30px;
+                            height: 30px;
+                        }
+
+                        transition: transform 0.7s ease-in-out;
+                    }
+
+                    &:hover {
+                        svg {
+                            transform: rotate(-360deg);
                         }
                     }
                 }
