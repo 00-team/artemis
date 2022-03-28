@@ -262,6 +262,22 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                 <div className='change-wallet-title title'>
                     change wallet ID
                 </div>
+                <div className='change-wallet-inps'>
+                    <div className='change-wallet-inp'>
+                        <label htmlFor='inp'>
+                            <div className='icon'></div>
+                            <div className='holder'></div>
+                        </label>
+                        <input id='inp' type='text' />
+                    </div>
+                    <div className='change-wallet-inp repeat'>
+                        <label htmlFor='inp-repeat'>
+                            <div className='icon'></div>
+                            <div className='holder'></div>
+                        </label>
+                        <input id='inp-repeat' type='text' />
+                    </div>
+                </div>
             </div>
         </div>
     )
