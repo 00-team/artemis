@@ -35,6 +35,13 @@ def account_profile(instance, status):
 def account_pre_save(sender, instance, **kwargs):
     try:
         try:
+            if not instance.bot_user:
+                bot_user = BotUser.objects.get(user_id=instance.telegram_id)
+                instance.bot_user = bot_user
+        except:
+            pass
+
+        try:
             old_instance = sender.objects.get(id=instance.id)
         except:
             old_instance = None
