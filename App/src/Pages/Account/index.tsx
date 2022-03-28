@@ -120,7 +120,7 @@ const AccountContent: FC<AccountContentProps> = props => {
                                 </div>
                                 <div className='holder'>wallet status:</div>
                             </div>
-                            <div className='column-data linked description'>
+                            <div className='column-data linked title_small'>
                                 linked
                             </div>
                         </div>
