@@ -120,13 +120,10 @@ def invite(update: Update, bot_user: User, lang, **kwargs):
 
     user_link = f'https://t.me/{bot_username}?start=invite-{bot_user.invite_hash}'
 
-    text = CONTNET[lang]['invite_user_link']
+    text = CONTNET[lang]['invites']
     text = text.format(user_link, bot_user.total_invites)
 
-    user.send_message(
-        markdown_free(CONTNET[lang]['invites']) + text,
-        parse_mode='MarkdownV2',
-    )
+    user.send_message(text)
 
     user.send_photo(
         INVITE_PHOTO,
@@ -170,15 +167,11 @@ def help_callback(update: Update, **kwrags):
     query = update.callback_query
 
     match query.data[5:]:
-        case 'start':
-            start(update=update, **kwrags)
-        case 'help':
-            help_cmd(update=update, **kwrags)
-        case 'login':
-            login(update=update, **kwrags)
         case 'join':
             join_chats(update=update, **kwrags)
         case 'invite':
             invite(update=update, **kwrags)
+        case 'login':
+            login(update=update, **kwrags)
         case _:
             return

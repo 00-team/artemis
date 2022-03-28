@@ -42,7 +42,7 @@ langs = {
     }
 }
 
-HELP_PATTERN = '^help_(join|help|login|start|invite)$'
+HELP_PATTERN = '^help_(join|invite|login)$'
 
 CONTNET_EN = {
     'start': (
@@ -53,39 +53,20 @@ CONTNET_EN = {
     ),
     'help': (
         '-------- Help Title --------\n\n'
-        'Start! - welcome message and info\n'
+        'describing how users can get a free NFT\n'
+        '1.join all the channels\n'
+        '2.invite 3 ppl into the bot\n'
+        '3.login to the website and give us your wallet\n'
+        'after 24H admin will gift you a free NFT\n\n'
         'Join! - for joining into our chats\n'
         'Invite - for inviting your frinds\n'
         'Login - for loging into the website\n'
-        'Help 🆘 - for showing this message\n'
+        'type help'
     ),
     'help_keyboard': [
-        [
-            {
-                'text': 'Start!',
-                'callback_data': 'help_start'
-            },
-            {
-                'text': 'Join!',
-                'callback_data': 'help_join'
-            },
-        ],
-        [
-            {
-                'text': 'Login',
-                'callback_data': 'help_login'
-            },
-            {
-                'text': 'Invite Others',
-                'callback_data': 'help_invite'
-            },
-        ],
-        [
-            {
-                'text': 'Help 🆘',
-                'callback_data': 'help_help'
-            },
-        ],
+        [{'text': 'Join!', 'callback_data': 'help_join'}],
+        [{'text': 'Invite Others', 'callback_data': 'help_invite'}],
+        [{'text': 'Login', 'callback_data': 'help_login'}],
     ],
 
     'external_login': 'Login with this button 👇',
@@ -103,8 +84,8 @@ CONTNET_EN = {
     'invite_button': 'To get NFT enter the robot ✅',
     'invites': (
         'Ask three of your friends to join'
-        'the bot with your special link\. 🔗\n'
-        '[Your Link]({})\nYour total invites: {}/3'
+        'the bot with your special link. 🔗\n'
+        'Your Link: {}\nYour total invites: {}/3'
     ),
     'invite_banner': (
         'The first valid bot that gives free nft as a gift 🎁\n\n'
