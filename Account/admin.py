@@ -54,4 +54,38 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(TwitterAccount)
 class TwitterAccountAdmin(admin.ModelAdmin):
-    readonly_fields = ('account', 'access_token', 'expires_in')
+    list_display = (
+        '__str__', 'nickname', 'username',
+        'account', 'followers', 'pic'
+    )
+    readonly_fields = (
+        'account', 'access_token',
+        'expires_in', 'pic', 'user_id'
+    )
+
+    fieldsets = (
+        ('Info', {
+            'fields': (
+                'nickname', 'username',
+                'followers', 'followings', 'tweets',
+                'description'
+            )
+        }),
+        ('picture', {'fields': ('picture_url', 'picture')}),
+        ('Details', {
+            'fields': (
+                'account', 'access_token',
+                'expires_in', 'user_id', 'pic'
+            )
+        }),
+    )
+
+    @admin.display
+    def pic(self, obj):
+        if obj._picture:
+            return format_html((
+                f'<img src="{obj._picture}" '
+                'height="121" style="border-radius:7px" />'
+            ))
+
+        return 'None'
