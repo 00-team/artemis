@@ -12,13 +12,15 @@ class BotUserManager(models.Manager):
     def submit(self, user_id: int, **kwargs):
         lang = kwargs.get('lang')
         CFI = bool(kwargs.get('CFI'))
-        fullname = str(kwargs.get('fullname'))[:200]
+        fullname = kwargs.get('fullname')
         exists = False
 
         try:
             bot_user = self.get(user_id=user_id)
             exists = True
-            bot_user.fullname = fullname
+
+            if fullname:
+                bot_user.fullname = str(fullname)[:200]
 
             if lang and bot_user.lang != lang:
                 bot_user.lang = str(lang)[:10]
@@ -39,7 +41,10 @@ class BotUserManager(models.Manager):
         except self.model.DoesNotExist:
             inviter_hash = kwargs.get('inviter')
 
-            bot_user = BotUser(user_id=user_id, fullname=fullname)
+            bot_user = BotUser(user_id=user_id)
+
+            if fullname:
+                bot_user.fullname = str(fullname)[:200]
 
             if lang:
                 bot_user.lang = str(lang)[:10]

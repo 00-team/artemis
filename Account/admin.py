@@ -8,7 +8,12 @@ from .models import TwitterAccount
 
 @admin.register(BotUser)
 class BotUserAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'user_id', 'fullname', 'lang',
+        'total_invites', 'inviter', 'CFI',
+        'is_admin',
+    )
+    readonly_fields = ('user_id', 'lang')
 
 
 @admin.register(Account)
