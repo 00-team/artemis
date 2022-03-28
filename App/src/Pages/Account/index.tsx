@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 // style
 import './style/account.scss'
@@ -11,6 +11,8 @@ import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
 import { AiOutlineEdit } from '@react-icons/all-files/ai/AiOutlineEdit'
 
 import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
+
+import { IoClose } from '@react-icons/all-files/io5/IoClose'
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
@@ -28,13 +30,21 @@ const Account: FC = () => {
 
     const AccountState = useSelector((s: RootState) => s.Account)
 
+    const [ShowChangeWallet, setShowChangeWallet] = useState(false)
+
     if (!AccountState) return <></>
 
     return (
         <div className='account-container'>
             <div className='account-wrapper'>
                 <AccountSideBar {...AccountState} />
-                <AccountContent {...AccountState} />
+                <AccountContent
+                    {...AccountState}
+                    setShowChangeWallet={setShowChangeWallet}
+                />
+                {ShowChangeWallet && (
+                    <ChangeWallet setShowChangeWallet={setShowChangeWallet} />
+                )}
             </div>
         </div>
     )
@@ -72,12 +82,16 @@ const AccountSideBar: FC<AccountModel> = props => {
     )
 }
 
-const AccountContent: FC<AccountModel> = props => {
+interface AccountContentProps extends AccountModel {
+    setShowChangeWallet(show: boolean): void
+}
+
+const AccountContent: FC<AccountContentProps> = props => {
     // debug
     let walletstring = Math.random().toString(36).slice(2)
     walletstring += walletstring
 
-    const { twitter } = props
+    const { twitter, setShowChangeWallet } = props
     // debug end
 
     return (
@@ -130,7 +144,12 @@ const AccountContent: FC<AccountModel> = props => {
                             <div className='icon'>
                                 <AiOutlineEdit size={24} />
                             </div>
-                            <div className='holder'>Edit Wallet</div>
+                            <div
+                                className='holder'
+                                onClick={() => setShowChangeWallet(true)}
+                            >
+                                Edit Wallet
+                            </div>
                         </div>
                         <div className='disconnect-column bottom-column title_small'>
                             <div className='icon'>
@@ -223,5 +242,27 @@ const TwitterCard: FC<TwitterModel> = props => {
                 </div>
             </div>
         </span>
+    )
+}
+
+interface ChangeWalletProps {
+    setShowChangeWallet(show: boolean): void
+}
+
+const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
+    return (
+        <div className='change-wallet-container'>
+            <div className='change-wallet-wrapper'>
+                <div
+                    className='close-btn'
+                    onClick={() => setShowChangeWallet(false)}
+                >
+                    <IoClose />
+                </div>
+                <div className='change-wallet-title title'>
+                    change wallet ID
+                </div>
+            </div>
+        </div>
     )
 }
