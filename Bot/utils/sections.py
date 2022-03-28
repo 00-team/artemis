@@ -56,7 +56,7 @@ def user_joined(user: Chat) -> list[Chat]:
     return user_chats
 
 
-def check_inviter(user_chats: list[Chat], bot_user: User):
+def check_inviter(update: Update, user_chats: list[Chat], bot_user: User):
     if not bot_user.inviter or bot_user.CFI:
         return
 
@@ -69,6 +69,16 @@ def check_inviter(user_chats: list[Chat], bot_user: User):
 
             if new_total_invites > old_total_invites:
                 bot_user.CFI_done()
+
+                try:
+                    the_bot = update.effective_user.bot
+                    inviter_chat = the_bot.get_chat(the_inviter.user_id)
+                    inviter_chat.send_message(
+                        CONTNET[the_inviter.lang]['success_invite']
+                    )
+                except:
+                    pass
+
     except:
         pass
 
@@ -79,7 +89,7 @@ def join_chats(update: Update, bot_user, lang, **kwargs):
     user_chats = user_joined(user)
     chat = update.effective_chat
 
-    check_inviter(user_chats, bot_user)
+    check_inviter(update, user_chats, bot_user)
 
     if user_chats:
         chat.send_photo(
@@ -100,7 +110,7 @@ def update_join_chats(update: Update, bot_user, lang, **kwargs):
     user = update.effective_user
     user_chats = user_joined(user)
 
-    check_inviter(user_chats, bot_user)
+    check_inviter(update, user_chats, bot_user)
 
     if user_chats:
         return
