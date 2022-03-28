@@ -8,6 +8,7 @@ import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
 import { CgSignal } from '@react-icons/all-files/cg/CgSignal'
 import { FaIdBadge } from '@react-icons/all-files/fa/FaIdBadge'
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
+import { AiOutlineEdit } from '@react-icons/all-files/ai/AiOutlineEdit'
 
 import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
 
@@ -124,11 +125,19 @@ const AccountContent: FC<AccountModel> = props => {
                             </div>
                         </div>
                     </div>
-                    <div className='disconnect-column title_small'>
-                        <div className='icon'>
-                            <RiLogoutBoxLine size={24} />
+                    <div className='bottom-columns'>
+                        <div className='edit-column bottom-column title_small'>
+                            <div className='icon'>
+                                <AiOutlineEdit size={24} />
+                            </div>
+                            <div className='holder'>Edit Wallet</div>
                         </div>
-                        <div className='holder'>disconenct wallet</div>
+                        <div className='disconnect-column bottom-column title_small'>
+                            <div className='icon'>
+                                <RiLogoutBoxLine size={24} />
+                            </div>
+                            <div className='holder'>disconenct wallet</div>
+                        </div>
                     </div>
                 </div>
             </span>
@@ -204,11 +213,13 @@ const TwitterCard: FC<TwitterModel> = props => {
                         </div>
                     </div>
                 </div>
-                <div className='disconnect-column title_small'>
-                    <div className='icon'>
-                        <RiLogoutBoxLine size={24} />
+                <div className='bottom-columns'>
+                    <div className='disconnect-column bottom-column title_small'>
+                        <div className='icon'>
+                            <RiLogoutBoxLine size={24} />
+                        </div>
+                        <div className='holder'>disconenct twitter</div>
                     </div>
-                    <div className='holder'>disconenct twitter</div>
                 </div>
             </div>
         </span>
