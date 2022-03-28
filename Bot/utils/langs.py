@@ -1,52 +1,8 @@
-langs = {
-    'welcome': {
-        'en': '🌀 Welcome to the Artemis Bot',
-        'ru': '🌀 Добро пожаловать в бота Artemis',
-    },
-    'join_chats': {
-        'en': 'Subscribe to the channel below 👇',
-        'ru': 'Подпишитесь на канал ниже 👇'
-    },
-    'join_complete': {
-        'en': 'Congratulations\nSuccessfully joined the channels 🎉',
-        'ru': 'Поздравления\nУспешно присоединился к каналу 🎉',
-    },
-    'invites': {
-        'en': 'Ask three of your friends to join the bot with your special link. 🔗',
-        'ru':
-        'Попросите трех своих друзей присоединиться к роботу по вашей специальной ссылке. 🔗'
-    },
-    'invite_banner': {
-        'en':
-        'The first valid bot that gives free nft as a gift 🎁\n\nFrom the opensea site ⛵️\n\nGain multi-dollar nfts in just three steps 💵💰',
-        'ru':
-        'Первый робот, раздающий nft бесплатно 🎁\n\nС сайта: opensea ⛵️\n\nПолучите многодолларовую NFT всего за три шага 💵💰'
-    },
-    'success_invite': {
-        'en': 'You have succeeded adding someone into the bot 🎉',
-        'ru': 'Вам удалось добавить кого-то в бота 🎉'
-    },
-    'enough_invites': {
-        'en':
-        'Congratulations, you have successfully invited three people to the robot 🎉',
-        'ru': 'Поздравляем, вы успешно пригласили в робота трех человек 🎉',
-    },
-    'login': {
-        'en': 'Register for the last step on the site and send your wallet\nNft will be sent to your account within 24 hours.',
-        'ru':
-        'Зарегистрируйтесь на последний шаг на сайте и отправьте свой кошелек\nNft будет отправлен на ваш счет в течение 24 часов.'
-    },
-    'external_login': {
-        'en': 'cool',
-        'ru': ' с помощью этВойтиой кнопки 👇'
-    }
-}
-
 HELP_PATTERN = '^help_(join|invite|login)$'
 
 CONTNET_EN = {
     'start': (
-        'welcome to bot XXX\n'
+        '🌀 Welcome to the Artemis Bot\n'
         'if you join our chats and invite 3 ppl into the bot\n'
         'we give you a free 10$ NFT\n'
         '...'
@@ -99,5 +55,62 @@ CONTNET_EN = {
     'success_invite': 'You have succeeded adding someone into the bot 🎉',
 }
 
+
+CONTNET_RU = {
+    'start': (
+        '🌀 Добро пожаловать в бота Artemis\n'
+        'if you join our chats and invite 3 ppl into the bot\n'
+        'we give you a free 10$ NFT\n'
+        '...'
+    ),
+    'help': (
+        '-------- Help Title --------\n\n'
+        'describing how users can get a free NFT\n'
+        '1.join all the channels\n'
+        '2.invite 3 ppl into the bot\n'
+        '3.login to the website and give us your wallet\n'
+        'after 24H admin will gift you a free NFT\n\n'
+        'Join! - for joining into our chats\n'
+        'Invite - for inviting your frinds\n'
+        'Login - for loging into the website\n'
+        'type help'
+    ),
+    'help_keyboard': [
+        [{'text': 'Join!', 'callback_data': 'help_join'}],
+        [{'text': 'Invite Others', 'callback_data': 'help_invite'}],
+        [{'text': 'Login', 'callback_data': 'help_login'}],
+    ],
+
+    'external_login': 'Login with this button 👇',
+    'login_button': 'Login!',
+    'login': (
+        'Зарегистрируйтесь на последний шаг на '
+        'сайте и отправьте свой кошелек\n'
+        'Nft будет отправлен на ваш счет в течение 24 часов.'
+    ),
+
+    'chats_check_button': 'check ✅',
+    'join_chats': 'Подпишитесь на канал ниже 👇',
+    'joined_chats': 'you already join all the channels',
+    'join_complete': 'Поздравления\nУспешно присоединился к каналу 🎉',
+
+    'invite_button': 'To get NFT enter the robot ✅',
+    'invites': (
+        'Попросите трех своих друзей присоединиться '
+        'к роботу по вашей специальной ссылке. 🔗\n'
+        'Your Link: {}\nYour total invites: {}/3'
+    ),
+    'invite_banner': (
+        'Первый робот, раздающий nft бесплатно 🎁'
+        'С сайта: opensea ⛵️\n\n'
+        'Получите многодолларовую NFT всего за три шага 💵💰'
+    ),
+    'enough_invites': (
+        'Поздравляем, вы успешно пригласили '
+        'в робота трех человек 🎉'
+    ),
+    'success_invite': 'Вам удалось добавить кого-то в бота 🎉',
+}
+
 TRANSLATED_CONTENT = ['en', 'ru']
-CONTNET = {'en': CONTNET_EN, 'ru': CONTNET_EN}
+CONTNET = {'en': CONTNET_EN, 'ru': CONTNET_RU}
