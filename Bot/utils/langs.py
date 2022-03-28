@@ -114,3 +114,16 @@ CONTNET_RU = {
 
 TRANSLATED_CONTENT = ['en', 'ru']
 CONTNET = {'en': CONTNET_EN, 'ru': CONTNET_RU}
+
+COMMANDS = (
+    ('en', (
+        ('join', 'join to our channels'),
+        ('invite', 'invite your friends into the bot!'),
+        ('login', 'login to our website!'),
+    )),
+    ('ru', (
+        ('join', 'присоединяйтесь к нашим каналам'),
+        ('invite', 'пригласить друзей в бота!'),
+        ('login', 'войти на наш сайт!'),
+    )),
+)

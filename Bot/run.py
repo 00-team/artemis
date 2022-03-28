@@ -6,11 +6,15 @@ from telegram.ext import Updater, Filters
 from telegram.ext import ChatMemberHandler, MessageHandler, CommandHandler
 from telegram.ext import CallbackQueryHandler
 
+
 # data
 from utils.data import get_chats, update_chats
 
 # conf
 from utils.config import BOT_TOKEN
+
+# lang
+from utils.langs import COMMANDS
 
 # stages
 from utils.sections import join_chats, update_join_chats
@@ -30,6 +34,7 @@ from logging import getLogger
 from utils.decorators import user_data
 
 logger = getLogger(__name__)
+DEBUG = True
 
 
 @user_data
@@ -99,6 +104,10 @@ def main():
 
     # help
     dp.add_handler(MessageHandler(Filters.text('help'), help_cmd))
+
+    if not DEBUG:
+        for lang_code, commands in COMMANDS:
+            updater.bot.set_my_commands(commands, language_code=lang_code)
 
     updater.start_polling()
     print('started!')
