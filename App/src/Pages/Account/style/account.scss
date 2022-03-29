@@ -110,6 +110,8 @@
 
             padding: 2rem 1rem;
 
+            position: relative;
+
             @media screen and (max-width: 768px) {
                 width: 100%;
                 height: 100%;
@@ -485,7 +487,7 @@
                 align-content: center;
                 justify-content: flex-start;
                 flex-direction: column;
-                gap: 2vh;
+                gap: 5vh;
 
                 width: 80%;
                 height: 80%;
@@ -537,6 +539,56 @@
                     &:hover {
                         svg {
                             transform: rotate(-360deg);
+                        }
+                    }
+                }
+
+                .change-wallet-inps {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex-direction: column;
+                    gap: 4vh;
+
+                    height: 100%;
+                    width: 100%;
+
+                    .change-wallet-inp {
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-start;
+                        flex-direction: column;
+                        gap: 1vh;
+
+                        width: 100%;
+
+                        label {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5vw;
+
+                            @media screen and (max-width: 960px) {
+                                gap: 0.75vw;
+                            }
+                        }
+
+                        input {
+                            width: 50%;
+                            position: relative;
+
+                            padding: 5px;
+
+                            // reset
+                            background: none;
+                            outline: none;
+                            border: none;
+                            // end reset
+
+                            border-bottom: 1px solid;
+
+                            @media screen and (max-width: 960px) {
+                                width: 100%;
+                            }
                         }
                     }
                 }
