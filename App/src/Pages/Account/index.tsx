@@ -14,6 +14,9 @@ import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
 
 import { IoClose } from '@react-icons/all-files/io5/IoClose'
 
+// btn icons
+import { HiOutlineArrowNarrowRight } from '@react-icons/all-files/hi/HiOutlineArrowNarrowRight'
+
 // redux
 import { useSelector, useDispatch } from 'react-redux'
 import { GetAccount, RootState } from 'state'
@@ -256,7 +259,7 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                     change wallet ID
                 </div>
                 <div className='change-wallet-inps'>
-                    <div className='change-wallet-inp'>
+                    <div className='change-wallet-inp title_smaller'>
                         <label htmlFor='inp'>
                             <div className='icon'>
                                 <FaIdBadge size={24} />
@@ -265,7 +268,7 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                         </label>
                         <input id='inp' type='text' />
                     </div>
-                    <div className='change-wallet-inp repeat'>
+                    <div className='change-wallet-inp repeat title_smaller'>
                         <label htmlFor='inp-repeat'>
                             <div className='icon'>
                                 <FaIdBadge size={24} />
@@ -275,10 +278,47 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                         <input id='inp-repeat' type='text' />
                     </div>
                 </div>
-                <div className='chnage-btn'>
-                    <button>change </button>
+                <div className='change-btn'>
+                    <ButtonWithArrow border classname='title_smaller'>
+                        Change My Wallet
+                    </ButtonWithArrow>
                 </div>
             </div>
         </div>
+    )
+}
+
+interface ButtonProps {
+    onClick?: (e: React.MouseEvent) => void
+    classname?: string
+    backgroundColor?: string
+    color?: string
+    borderRadius?: number
+    border?: boolean
+    borderColor?: string
+}
+
+const ButtonWithArrow: FC<ButtonProps> = ({
+    children,
+    onClick,
+    classname,
+    borderColor,
+}) => {
+    return (
+        <button
+            className={`arrow-button basic-button ${
+                classname ? classname : ''
+            }`}
+            onClick={e => (onClick ? onClick(e) : {})}
+            style={borderColor ? { borderColor: borderColor } : {}}
+        >
+            <div className='icon-arrow before'>
+                <HiOutlineArrowNarrowRight size={24} />
+            </div>
+            <div className='label'>{children}</div>
+            <div className='icon-arrow after'>
+                <HiOutlineArrowNarrowRight size={24} />
+            </div>
+        </button>
     )
 }
