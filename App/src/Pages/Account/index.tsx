@@ -30,21 +30,13 @@ const Account: FC = () => {
 
     const AccountState = useSelector((s: RootState) => s.Account)
 
-    const [ShowChangeWallet, setShowChangeWallet] = useState(false)
-
     if (!AccountState) return <></>
 
     return (
         <div className='account-container'>
             <div className='account-wrapper'>
                 <AccountSideBar {...AccountState} />
-                <AccountContent
-                    {...AccountState}
-                    setShowChangeWallet={setShowChangeWallet}
-                />
-                {ShowChangeWallet && (
-                    <ChangeWallet setShowChangeWallet={setShowChangeWallet} />
-                )}
+                <AccountContent {...AccountState} />
             </div>
         </div>
     )
@@ -82,17 +74,15 @@ const AccountSideBar: FC<AccountModel> = props => {
     )
 }
 
-interface AccountContentProps extends AccountModel {
-    setShowChangeWallet(show: boolean): void
-}
-
-const AccountContent: FC<AccountContentProps> = props => {
+const AccountContent: FC<AccountModel> = props => {
     // debug
     let walletstring = Math.random().toString(36).slice(2)
     walletstring += walletstring
 
-    const { twitter, setShowChangeWallet } = props
+    const { twitter } = props
     // debug end
+
+    const [ShowChangeWallet, setShowChangeWallet] = useState(false)
 
     return (
         <div className='content-container '>
@@ -161,6 +151,9 @@ const AccountContent: FC<AccountContentProps> = props => {
                 </div>
             </span>
             {twitter && <TwitterCard {...twitter} />}
+            {ShowChangeWallet && (
+                <ChangeWallet setShowChangeWallet={setShowChangeWallet} />
+            )}
         </div>
     )
 }
@@ -265,18 +258,25 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                 <div className='change-wallet-inps'>
                     <div className='change-wallet-inp'>
                         <label htmlFor='inp'>
-                            <div className='icon'></div>
-                            <div className='holder'></div>
+                            <div className='icon'>
+                                <FaIdBadge size={24} />
+                            </div>
+                            <div className='holder'>New Wallet ID</div>
                         </label>
                         <input id='inp' type='text' />
                     </div>
                     <div className='change-wallet-inp repeat'>
                         <label htmlFor='inp-repeat'>
-                            <div className='icon'></div>
-                            <div className='holder'></div>
+                            <div className='icon'>
+                                <FaIdBadge size={24} />
+                            </div>
+                            <div className='holder'>Repeat Wallet ID</div>
                         </label>
                         <input id='inp-repeat' type='text' />
                     </div>
+                </div>
+                <div className='chnage-btn'>
+                    <button>change </button>
                 </div>
             </div>
         </div>
