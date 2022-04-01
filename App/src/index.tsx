@@ -18,7 +18,7 @@ import AlertTemplate from './layouts/Alert'
 const AlertProps: AlertProviderProps = {
     template: AlertTemplate,
     position: 'top right',
-    timeout: 0,
+    timeout: 5_000,
     transition: 'fade',
     containerStyle: {
         top: innerWidth <= 768 ? '10px' : '70px',
