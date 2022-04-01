@@ -89,71 +89,73 @@ const AccountContent: FC<AccountModel> = props => {
 
     return (
         <div className='content-container '>
-            <span
-                className='column-container animation boxShadow'
-                style={{ animationDelay: '2s' }}
-            >
-                <div
-                    className='column wallet-container transform '
-                    style={{ animationDelay: '1.5s' }}
+            <div className='columns-wrapper'>
+                <span
+                    className='column-container animation boxShadow'
+                    style={{ animationDelay: '2s' }}
                 >
-                    <div className='column-title title_small'>
-                        <div className='icon wallet'>
-                            <FaWallet size={24} />
+                    <div
+                        className='column wallet-container transform '
+                        style={{ animationDelay: '1.5s' }}
+                    >
+                        <div className='column-title title_small'>
+                            <div className='icon wallet'>
+                                <FaWallet size={24} />
+                            </div>
+                            <div className='holder'>
+                                <div>Wallet</div>
+                            </div>
                         </div>
-                        <div className='holder'>
-                            <div>Wallet</div>
-                        </div>
-                    </div>
-                    <div className='wallet-wrapper '>
-                        <div className='wrapper-column'>
-                            <div className='column-holder title_small'>
-                                <div className='icon'>
-                                    <CgSignal size={24} />
+                        <div className='wallet-wrapper '>
+                            <div className='wrapper-column'>
+                                <div className='column-holder title_small'>
+                                    <div className='icon'>
+                                        <CgSignal size={24} />
+                                    </div>
+                                    <div className='holder'>wallet status:</div>
                                 </div>
-                                <div className='holder'>wallet status:</div>
-                            </div>
-                            <div className='column-data linked title_small'>
-                                linked
-                            </div>
-                        </div>
-                        <div className='wrapper-column'>
-                            <div className='column-holder title_small'>
-                                <div className='icon'>
-                                    <FaIdBadge size={24} />
+                                <div className='column-data linked title_small'>
+                                    linked
                                 </div>
-                                <div className='holder'>wallet id:</div>
                             </div>
-                            <div
-                                className='column-data wallet_id description'
-                                tabIndex={1}
-                            >
-                                {walletstring}
+                            <div className='wrapper-column'>
+                                <div className='column-holder title_small'>
+                                    <div className='icon'>
+                                        <FaIdBadge size={24} />
+                                    </div>
+                                    <div className='holder'>wallet id:</div>
+                                </div>
+                                <div
+                                    className='column-data wallet_id description'
+                                    tabIndex={1}
+                                >
+                                    {walletstring}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='bottom-columns'>
+                            <div className='edit-column bottom-column title_small'>
+                                <div className='icon'>
+                                    <AiOutlineEdit size={24} />
+                                </div>
+                                <div
+                                    className='holder'
+                                    onClick={() => setShowChangeWallet(true)}
+                                >
+                                    Edit Wallet
+                                </div>
+                            </div>
+                            <div className='disconnect-column bottom-column title_small'>
+                                <div className='icon'>
+                                    <RiLogoutBoxLine size={24} />
+                                </div>
+                                <div className='holder'>disconenct wallet</div>
                             </div>
                         </div>
                     </div>
-                    <div className='bottom-columns'>
-                        <div className='edit-column bottom-column title_small'>
-                            <div className='icon'>
-                                <AiOutlineEdit size={24} />
-                            </div>
-                            <div
-                                className='holder'
-                                onClick={() => setShowChangeWallet(true)}
-                            >
-                                Edit Wallet
-                            </div>
-                        </div>
-                        <div className='disconnect-column bottom-column title_small'>
-                            <div className='icon'>
-                                <RiLogoutBoxLine size={24} />
-                            </div>
-                            <div className='holder'>disconenct wallet</div>
-                        </div>
-                    </div>
-                </div>
-            </span>
-            {twitter && <TwitterCard {...twitter} />}
+                </span>
+                {twitter && <TwitterCard {...twitter} />}
+            </div>
             {ShowChangeWallet && (
                 <ChangeWallet setShowChangeWallet={setShowChangeWallet} />
             )}
