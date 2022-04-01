@@ -251,17 +251,41 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
         message: '',
         status: '',
     })
-    setLoadingStatus
 
     const CheckForm = () => {
         let inp1 = document.getElementById('inp') as HTMLInputElement
         let inp2 = document.getElementById('inp-repeat') as HTMLInputElement
 
+        if (!inp1.value || !inp2.value) {
+            return ReactAlert.error('Please Fill All The Fields')
+        }
         if (inp1.value !== inp2.value) {
-            console.log('test')
             return ReactAlert.error("Wallet IDs Don't Match")
         }
-        return ReactAlert.success('Wallet IDs Match')
+        if (inp1.value.indexOf(' ') >= 0 || inp2.value.indexOf(' ') >= 0) {
+            return ReactAlert.error('Please Enter A Valid Wallet ID')
+        }
+        if (inp1.value.length < 24 || inp2.value.length < 24) {
+            return ReactAlert.error('Please Enter A Valid Wallet ID')
+        }
+
+        SendForm()
+        return ReactAlert.success('your request has been sent')
+    }
+
+    const SendForm = () => {
+        setLoadingStatus({
+            show: true,
+            message: 'Sending Your Request...',
+            status: 'loading',
+        })
+        setTimeout(() => {
+            setLoadingStatus({
+                show: true,
+                message: '',
+                status: '',
+            })
+        }, 3000)
     }
 
     return (
