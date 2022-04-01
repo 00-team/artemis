@@ -246,6 +246,24 @@ interface ChangeWalletProps {
 }
 
 const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
+    const [LoadingStatus, setLoadingStatus] = useState({
+        show: false,
+        message: '',
+        status: '',
+    })
+    setLoadingStatus
+
+    const CheckForm = () => {
+        let inp1 = document.getElementById('inp') as HTMLInputElement
+        let inp2 = document.getElementById('inp-repeat') as HTMLInputElement
+
+        if (inp1.value !== inp2.value) {
+            console.log('test')
+            return ReactAlert.error("Wallet IDs Don't Match")
+        }
+        return ReactAlert.success('Wallet IDs Match')
+    }
+
     return (
         <div className='change-wallet-container'>
             <div className='change-wallet-wrapper'>
@@ -279,11 +297,16 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                     </div>
                 </div>
                 <div className='change-btn'>
-                    <ButtonWithArrow border classname='title_smaller'>
+                    <ButtonWithArrow
+                        border
+                        classname='title_smaller'
+                        onClick={() => CheckForm()}
+                    >
                         Change My Wallet
                     </ButtonWithArrow>
                 </div>
             </div>
+            {LoadingStatus.show && <div className='loading-container'></div>}
         </div>
     )
 }
