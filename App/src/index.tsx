@@ -13,15 +13,12 @@ import { store } from 'state'
 
 // alerts
 import { Provider as AlertProvider, AlertProviderProps } from 'react-alert'
-
-const AlertTemplate: FC = () => {
-    return <></>
-}
+import AlertTemplate from './layouts/Alert'
 
 const AlertProps: AlertProviderProps = {
     template: AlertTemplate,
     position: 'top right',
-    timeout: 5_000,
+    timeout: 0,
     transition: 'fade',
     containerStyle: {
         top: innerWidth <= 768 ? '10px' : '70px',
