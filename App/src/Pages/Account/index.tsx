@@ -3,6 +3,9 @@ import React, { FC, useEffect, useState } from 'react'
 // style
 import './style/account.scss'
 
+// utils
+import Loading from 'components/utils/Loading'
+
 // icons
 import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
 import { CgSignal } from '@react-icons/all-files/cg/CgSignal'
@@ -272,7 +275,7 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
         }
 
         SendForm()
-        return ReactAlert.success('your request has been sent')
+        return ReactAlert.info('your request has been sent')
     }
 
     const SendForm = () => {
@@ -287,7 +290,7 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                 message: '',
                 status: '',
             })
-        }, 3000)
+        }, 10000)
     }
 
     return (
@@ -332,7 +335,15 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                     </ButtonWithArrow>
                 </div>
             </div>
-            {LoadingStatus.show && <div className='loading-container'></div>}
+            {LoadingStatus.show && (
+                <div className='loading-wrapper'>
+                    <div className='loading-container'>
+                        {LoadingStatus.status === 'loading' && (
+                            <Loading message={LoadingStatus.message} />
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
