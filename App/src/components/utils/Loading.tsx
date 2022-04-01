@@ -19,7 +19,7 @@ const Loading: FC<LoadingProps> = ({ message }) => {
                 <div className='loading__square'></div>
                 <div className='loading__square'></div>
             </div>
-            <div className='title_small'>{message}</div>
+            <div className='title_small loading_message'>{message}</div>
         </div>
     )
 }
