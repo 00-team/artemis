@@ -5,6 +5,7 @@ import './style/account.scss'
 
 // utils
 import Loading from 'components/utils/Loading'
+import Success from 'components/utils/Success'
 
 // icons
 import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
@@ -281,14 +282,14 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
     const SendForm = () => {
         setLoadingStatus({
             show: true,
+            status: 'success',
             message: 'Sending Your Request...',
-            status: 'loading',
         })
         setTimeout(() => {
             setLoadingStatus({
                 show: true,
-                message: '',
-                status: '',
+                status: 'success',
+                message: 'your wallet has changed successfully',
             })
         }, 10000)
     }
@@ -337,11 +338,12 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
             </div>
             {LoadingStatus.show && (
                 <div className='loading-wrapper'>
-                    <div className='loading-container'>
-                        {LoadingStatus.status === 'loading' && (
-                            <Loading message={LoadingStatus.message} />
-                        )}
-                    </div>
+                    {LoadingStatus.status === 'loading' && (
+                        <Loading message={LoadingStatus.message} />
+                    )}
+                    {LoadingStatus.status === 'success' && (
+                        <Success message={LoadingStatus.message} />
+                    )}
                 </div>
             )}
         </div>
