@@ -101,8 +101,9 @@ $duration: 10s;
 
     backdrop-filter: blur(10px);
 
+    text-transform: capitalize;
+
     .loading-container {
-        // debug
         width: 80%;
         height: 80%;
 
