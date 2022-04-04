@@ -11,32 +11,44 @@ class BotUserManager(models.Manager):
 
     def submit(self, user_id: int, **kwargs):
         lang = kwargs.get('lang')
-        CFI = bool(kwargs.get('CFI'))
+        if lang:
+            lang = str(lang)[:10]
+
         fullname = kwargs.get('fullname')
+        if fullname:
+            fullname = str(fullname)[:200]
+
+        CFI = bool(kwargs.get('CFI'))
         exists = False
 
         try:
             bot_user = self.get(user_id=user_id)
             exists = True
+            changed = False
 
-            if fullname:
-                bot_user.fullname = str(fullname)[:200]
+            if fullname and bot_user.fullname != fullname:
+                bot_user.fullname = fullname
+                changed = True
 
             if lang and bot_user.lang != lang:
-                bot_user.lang = str(lang)[:10]
+                bot_user.lang = lang
+                changed = True
 
             if CFI and bot_user.CFI != CFI:
                 bot_user.CFI = CFI
+                changed = True
 
             try:
                 total_invites = int(kwargs['total_invites'])
                 if total_invites and bot_user.total_invites != total_invites:
                     bot_user.total_invites = total_invites
+                    changed = True
 
             except:
                 pass
 
-            bot_user.save()
+            if changed:
+                bot_user.save()
 
         except self.model.DoesNotExist:
             inviter_hash = kwargs.get('inviter')
