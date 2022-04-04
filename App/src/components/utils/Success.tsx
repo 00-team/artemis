@@ -37,9 +37,9 @@ const Success: FC<SuccessProps> = ({ message }) => {
                             id='Oval-2'
                             stroke='#A5DC86'
                             stroke-width='4'
-                            cx='41.5'
-                            cy='41.5'
-                            r='41.5'
+                            cx='46'
+                            cy='44'
+                            r='42'
                         ></circle>
                         <polyline
                             className='ui-success-path'
