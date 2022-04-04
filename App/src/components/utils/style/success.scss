@@ -5,7 +5,7 @@
 
         overflow: visible;
 
-        circle {
+        .ui-success-circle {
             stroke-dasharray: 260.75219024795285px, 260.75219024795285px;
             stroke-dashoffset: 260.75219024795285px;
             transform: rotate(220deg);
@@ -13,7 +13,8 @@
             stroke-linecap: round;
             animation: ani-success-circle 1s ease-in both;
         }
-        path {
+
+        .ui-success-path {
             stroke-dasharray: 60px 64px;
             stroke-dashoffset: 62px;
             stroke-linecap: round;
