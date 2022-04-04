@@ -6,6 +6,7 @@ import './style/account.scss'
 // utils
 import Loading from 'components/utils/Loading'
 import Success from 'components/utils/Success'
+import Error from 'components/utils/Error'
 
 // icons
 import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
@@ -282,16 +283,22 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
     const SendForm = () => {
         setLoadingStatus({
             show: true,
-            status: 'success',
+            status: 'loading',
             message: 'Sending Your Request...',
         })
         setTimeout(() => {
             setLoadingStatus({
                 show: true,
                 status: 'success',
-                message: 'your wallet has changed successfully',
+                message: 'There Was An error changing your wallet',
             })
-        }, 10000)
+
+            //// to close change wallet
+            // setTimeout(() => {
+            //     setShowChangeWallet(false)
+            // }, 2000)
+            ////
+        }, 3000)
     }
 
     return (
@@ -343,6 +350,9 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                     )}
                     {LoadingStatus.status === 'success' && (
                         <Success message={LoadingStatus.message} />
+                    )}
+                    {LoadingStatus.status === 'error' && (
+                        <Error message={LoadingStatus.message} />
                     )}
                 </div>
             )}
