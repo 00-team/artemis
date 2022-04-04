@@ -13,10 +13,7 @@ import { store } from 'state'
 
 // alerts
 import { Provider as AlertProvider, AlertProviderProps } from 'react-alert'
-
-const AlertTemplate: FC = () => {
-    return <></>
-}
+import AlertTemplate from './layouts/Alert'
 
 const AlertProps: AlertProviderProps = {
     template: AlertTemplate,
