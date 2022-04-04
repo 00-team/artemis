@@ -9,7 +9,7 @@ interface SuccessProps {
 
 const Success: FC<SuccessProps> = ({ message }) => {
     return (
-        <div className='ui-success'>
+        <div className='ui-success show-status'>
             <svg
                 viewBox='0 0 87 87'
                 version='1.1'

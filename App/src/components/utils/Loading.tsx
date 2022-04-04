@@ -9,7 +9,7 @@ interface LoadingProps {
 
 const Loading: FC<LoadingProps> = ({ message }) => {
     return (
-        <div className='loading-container'>
+        <div className='loading-container show-status'>
             <div className='loading'>
                 <div className='loading__square'></div>
                 <div className='loading__square'></div>
