@@ -12,7 +12,7 @@ import { GetFAQs } from 'state/actions/collection'
 import { useAlert } from 'react-alert'
 
 // layouts
-import Navbar from 'layouts/Navbar'
+import Navbar from './layouts/Navbar'
 
 // pages
 import Home from './Pages/Home'
