@@ -11,6 +11,9 @@ import { GetFAQs } from 'state/actions/collection'
 // alert
 import { useAlert } from 'react-alert'
 
+// layouts
+import Navbar from 'layouts/Navbar'
+
 // pages
 import Home from './Pages/Home'
 import Account from './Pages/Account'
@@ -41,7 +44,7 @@ const App: FC = () => {
 
     return (
         <>
-            {/* <Navbar /> */}
+            <Navbar />
             <main>
                 <Routes>
                     <Route path='/' element={<Home />} />
