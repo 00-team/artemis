@@ -2,7 +2,9 @@ from json import load
 from json import dump
 from os.path import exists
 
-CHATS_FILENAME = './chats.json'
+from .config import BASE_DIR
+
+CHATS_FILENAME = BASE_DIR / 'Bot/chats.json'
 
 
 def update_chats(chats: list[str]):
