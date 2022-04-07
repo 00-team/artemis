@@ -8,7 +8,7 @@ import { resolve } from 'path'
 import HtmlWP from 'html-webpack-plugin'
 
 const BaseFile = new HtmlWP({
-    filename: resolve(BASE_DIR, 'artemis/templates/base.html'),
+    filename: resolve(BASE_DIR, 'nightcurly/templates/base.html'),
     template: resolve(APP_DIR, 'templates/django.html'),
     inject: true,
     publicPath: '/s/dist/',

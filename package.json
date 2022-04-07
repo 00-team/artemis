@@ -1,5 +1,5 @@
 {
-    "name": "artemis",
+    "name": "nightcurly",
     "version": "0.0.1",
     "description": "",
     "main": "",
@@ -11,15 +11,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/00-team/artemis.git"
+        "url": "git+https://github.com/00-team/nightcurly.git"
     },
     "keywords": [],
     "author": "00 Team",
     "license": "GPL",
     "bugs": {
-        "url": "https://github.com/00-team/artemis/issues"
+        "url": "https://github.com/00-team/nightcurly/issues"
     },
-    "homepage": "https://github.com/00-team/artemis#readme",
+    "homepage": "https://github.com/00-team/nightcurly#readme",
     "dependencies": {
         "@00-team/utils": "^0.1.0",
         "@react-icons/all-files": "^4.1.0",

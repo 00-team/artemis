@@ -2,7 +2,7 @@ HELP_PATTERN = '^help_(join|invite|login)$'
 
 CONTNET_EN = {
     'start': (
-        '🌀 Welcome to the Artemis Bot\n'
+        '🌀 Welcome to the Nightcurly Bot\n'
         'if you join our chats and invite 3 ppl into the bot\n'
         'we give you a free 10$ NFT\n'
         '...'
@@ -58,7 +58,7 @@ CONTNET_EN = {
 
 CONTNET_RU = {
     'start': (
-        '🌀 Добро пожаловать в бота Artemis\n'
+        '🌀 Добро пожаловать в бота Nightcurly\n'
         'if you join our chats and invite 3 ppl into the bot\n'
         'we give you a free 10$ NFT\n'
         '...'

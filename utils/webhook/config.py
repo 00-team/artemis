@@ -3,7 +3,7 @@ from django.conf import settings
 
 HOST = 'http://localhost:7000'
 
-DEFAULT_USERNAME = 'Artemis'
+DEFAULT_USERNAME = 'Nightcurly'
 DEFAULT_AVATAR = 'https://cdn.discordapp.com/attachments/731174051170746500/814603567704047646/00_logo_f27.png'
 
 ACCOUNT = settings.WEBHOOKS['ACCOUNT']

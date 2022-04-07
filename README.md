@@ -1,6 +1,6 @@
-# Artemis Project
+# Nightcurly Project
 
-artemis is amazing :)
+Nightcurly is amazing :)
 
 ## How to setup
 
@@ -18,19 +18,16 @@ then put your variables on it.
     "CLIENT_SECRET": "YOUR TWITTER APP CLIENT SECRET",
     "TWITTER_BEARER": "YOUR TWITTER BEARER TOKEN",
     "WEBHOOKS": {
-        "ACCOUNT": [
-            "STRING OR LIST OF STRINGS - YOUR DISCORD WEBHOOKS"
-        ]
+        "ACCOUNT": ["STRING OR LIST OF STRINGS - YOUR DISCORD WEBHOOKS"]
     }
 }
-
 ```
 
 \
 after that you can run the Django
 
 ```bash
-python pip install -r requirements.txt 
+python pip install -r requirements.txt
 python manage.py runserver 7000 --insecure
 ```
 
@@ -44,7 +41,7 @@ after that you'll need to make `main.json` file inside that data dir
 // Bot/data/main.json
 
 {
-    "chats": [], 
+    "chats": [],
     "admins": []
 }
 ```
