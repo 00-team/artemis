@@ -1,7 +1,7 @@
 from json import load
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 with open(BASE_DIR / 'secrets.json', 'r') as f:
