@@ -45,12 +45,16 @@
             transform: rotate(0deg);
 
             @media screen and (max-width: 960px) {
-                transform-origin: 80px;
+                transform-origin: 65px;
             }
 
             &:nth-child(2) {
                 transition-delay: calc(0.1s * 1);
                 transform-origin: 170px;
+
+                @media screen and (max-width: 960px) {
+                    transform-origin: 120px;
+                }
             }
             div {
                 transition: 0.2s;
@@ -68,11 +72,15 @@
             li {
                 transform: rotate(160deg);
 
+                @media screen and (max-width: 960px) {
+                    transform: rotate(180deg);
+                }
+
                 &:nth-child(2) {
                     transform: rotate(40deg);
 
                     @media screen and (max-width: 960px) {
-                        transform: rotate(65deg);
+                        transform: rotate(50deg);
                     }
                 }
                 div {
@@ -92,12 +100,19 @@
                         transform: rotate(140deg);
 
                         @media screen and (max-width: 960px) {
-                            transform: rotate(115deg);
+                            transform: rotate(130deg);
                         }
                     }
 
                     &.sec {
                         transform: rotate(20deg);
+                        @media screen and (max-width: 960px) {
+                            transform: rotate(10deg);
+                        }
+
+                        @media screen and (max-width: 960px) {
+                            transform: rotate(0deg);
+                        }
                     }
                     a {
                         display: grid;
