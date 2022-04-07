@@ -27,12 +27,16 @@ const Navbar = () => {
 
                 <li>
                     <div className='first'>
-                        <FaWallet size={25} />
+                        <a href='/account'>
+                            <FaWallet size={25} />
+                        </a>
                     </div>
                 </li>
                 <li>
                     <div className='sec'>
-                        <AiFillHome size={25} />
+                        <a href='/'>
+                            <AiFillHome size={25} />
+                        </a>
                     </div>
                 </li>
             </div>
