@@ -3,7 +3,7 @@ from pathlib import Path
 from json import loads
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-BOT_USERNAME = 'artemisnftbot'
+BOT_USERNAME = 'nightcurlybot'
 
 with open(BASE_DIR / 'secrets.json', 'r') as f:
     secrets = loads(f.read())
@@ -46,13 +46,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'artemis.urls'
+ROOT_URLCONF = 'nightcurly.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'artemis/templates',
+            BASE_DIR / 'nightcurly/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -66,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'artemis.wsgi.application'
+WSGI_APPLICATION = 'nightcurly.wsgi.application'
 
 DATABASES_DIR = BASE_DIR / 'databases'
 
