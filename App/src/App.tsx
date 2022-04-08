@@ -13,6 +13,7 @@ import { useAlert } from 'react-alert'
 
 // layouts
 import Navbar from './layouts/Navbar'
+import Footer from './layouts/Footer'
 
 // pages
 import Home from './Pages/Home'
@@ -52,6 +53,7 @@ const App: FC = () => {
                     <Route path='account' element={<Account />} />
                 </Routes>
             </main>
+            <Footer />
         </>
     )
 }
