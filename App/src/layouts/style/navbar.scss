@@ -63,6 +63,10 @@
                 &:nth-child(2) {
                     transform: rotate(calc(-360deg / 7 * 1));
                 }
+
+                a {
+                    all: unset;
+                }
             }
         }
 
@@ -117,6 +121,8 @@
                     a {
                         display: grid;
                         place-items: center;
+
+                        all: unset;
                     }
                 }
                 div svg path {
