@@ -13,7 +13,7 @@ const Footer = () => {
             <div className='footer-wrapper'>
                 <div className='footer-columns'>
                     <div className='footer-column'>
-                        <div className='start title_small'>NightCurly</div>
+                        <div className='start'>NightCurly</div>
                         <a
                             data-text='&nbsp;home'
                             href=''
@@ -37,7 +37,7 @@ const Footer = () => {
                         </a>
                     </div>
                     <div className='footer-column'>
-                        <div className='start title_small'>community</div>
+                        <div className='start'>community</div>
                         <a
                             data-text='&nbsp;disocrd'
                             href=''
