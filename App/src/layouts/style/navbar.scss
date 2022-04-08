@@ -1,0 +1,159 @@
+.navbar-container {
+    display: grid;
+    place-items: center;
+
+    position: fixed;
+    inset: 25px 30px auto auto;
+
+    z-index: 998;
+
+    .menu {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: transform 0.5s;
+
+        width: 60px;
+        height: 60px;
+
+        @media screen and (max-width: 960px) {
+            inset: 20px 15px auto auto;
+            width: 40px;
+            height: 40px;
+        }
+        @media screen and (max-width: 768px) {
+            inset: 15px 10px auto auto;
+            width: 30px;
+            height: 30px;
+        }
+        li {
+            //def
+            list-style: none;
+            // end def
+
+            position: absolute;
+
+            transform-origin: 80px;
+            transition: all linear 0.5s calc(0.1s * 0);
+
+            transform: rotate(0deg);
+
+            @media screen and (max-width: 960px) {
+                transform-origin: 65px;
+            }
+
+            &:nth-child(2) {
+                transition-delay: calc(0.1s * 1);
+                transform-origin: 170px;
+
+                @media screen and (max-width: 960px) {
+                    transform-origin: 120px;
+                }
+            }
+            div {
+                transition: 0.2s;
+                transform: rotate(calc(-360deg / 7 * 0));
+
+                &:nth-child(2) {
+                    transform: rotate(calc(-360deg / 7 * 1));
+                }
+
+                a {
+                    all: unset;
+                }
+            }
+        }
+
+        &.active {
+            transform: rotate(180deg);
+
+            li {
+                transform: rotate(160deg);
+
+                @media screen and (max-width: 960px) {
+                    transform: rotate(180deg);
+                }
+
+                &:nth-child(2) {
+                    transform: rotate(40deg);
+
+                    @media screen and (max-width: 960px) {
+                        transform: rotate(50deg);
+                    }
+                }
+                div {
+                    padding: 10px;
+                    border-radius: 12px;
+                    background-color: white;
+
+                    cursor: pointer;
+
+                    transition: 0.2s;
+
+                    @media screen and (max-width: 960px) {
+                        padding: 7px;
+                    }
+
+                    &.first {
+                        transform: rotate(140deg);
+
+                        @media screen and (max-width: 960px) {
+                            transform: rotate(130deg);
+                        }
+                    }
+
+                    &.sec {
+                        transform: rotate(20deg);
+                        @media screen and (max-width: 960px) {
+                            transform: rotate(10deg);
+                        }
+
+                        @media screen and (max-width: 960px) {
+                            transform: rotate(0deg);
+                        }
+                    }
+                    a {
+                        display: grid;
+                        place-items: center;
+
+                        all: unset;
+                    }
+                }
+                div svg path {
+                    stroke-width: 5px;
+                    color: #404040;
+                    stroke: #fff;
+                }
+            }
+        }
+        .toggle {
+            position: absolute;
+
+            width: 60px;
+            height: 60px;
+
+            border-radius: 50%;
+
+            background-image: url('https://picsum.photos/200');
+            background-size: cover;
+            background-position: center;
+
+            box-shadow: 0 1px 10px -1px #f7f7f7;
+
+            cursor: pointer;
+
+            transition: 1.25s;
+
+            z-index: 2;
+        }
+        &.active .toggle {
+            transform: rotate(220deg);
+        }
+    }
+}

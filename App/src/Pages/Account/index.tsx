@@ -293,11 +293,11 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
                 message: 'There Was An error changing your wallet',
             })
 
-            //// to close change wallet
-            // setTimeout(() => {
-            //     setShowChangeWallet(false)
-            // }, 2000)
-            ////
+            // to close change wallet
+            setTimeout(() => {
+                setShowChangeWallet(false)
+            }, 3000)
+            //
         }, 3000)
     }
 
