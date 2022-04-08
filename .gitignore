@@ -67,6 +67,8 @@ nightcurly/templates/base.html
 databases/*
 !databases/*.py
 
+static/admin/
+
 secrets.json
 Bot/chats.json
 
