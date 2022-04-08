@@ -19,66 +19,28 @@ const Footer = () => {
                         &nbsp;home
                     </a>
                     <a
-                        data-text='&nbsp;test'
+                        data-text='&nbsp;FAQ'
                         href=''
                         className='link title_smaller'
                     >
-                        &nbsp;test
+                        &nbsp;FAQ
                     </a>
                     <a
-                        data-text='&nbsp;test'
+                        data-text='&nbsp;Owners'
                         href=''
                         className='link title_smaller'
                     >
-                        &nbsp;test
-                    </a>
-                </div>
-                <div className='footer-column'>
-                    <div className='start title_small'>test</div>
-                    <a
-                        data-text='&nbsp;test'
-                        href=''
-                        className='link title_smaller'
-                    >
-                        &nbsp;test
-                    </a>
-                    <a
-                        data-text='&nbsp;test'
-                        href=''
-                        className='link title_smaller'
-                    >
-                        &nbsp;test
-                    </a>
-                    <a
-                        data-text='&nbsp;test'
-                        href=''
-                        className='link title_smaller'
-                    >
-                        &nbsp;test
+                        &nbsp;Owners
                     </a>
                 </div>
                 <div className='footer-column'>
                     <div className='start title_small'>community</div>
                     <a
-                        data-text='&nbsp;test'
+                        data-text='&nbsp;disocrd'
                         href=''
                         className='link title_smaller'
                     >
-                        &nbsp;test
-                    </a>
-                    <a
-                        data-text='&nbsp;test'
-                        href=''
-                        className='link title_smaller'
-                    >
-                        &nbsp;test
-                    </a>
-                    <a
-                        data-text='&nbsp;test'
-                        href=''
-                        className='link title_smaller'
-                    >
-                        &nbsp;test
+                        &nbsp;discord
                     </a>
                 </div>
             </div>
