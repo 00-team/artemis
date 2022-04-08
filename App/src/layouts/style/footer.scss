@@ -10,6 +10,10 @@
 
     padding: 2rem 2rem 0 2rem;
 
+    @media screen and (max-width: 768px) {
+        gap: 7vh;
+    }
+
     .footer-wrapper {
         position: relative;
 
@@ -20,7 +24,14 @@
         max-width: 1200px;
         margin: 0 auto;
 
-        gap: 2vh;
+        gap: 3vh;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+
+            align-items: center;
+            gap: 7vh;
+        }
 
         .footer-columns {
             display: flex;
@@ -31,6 +42,10 @@
             flex: 1;
 
             gap: 2vh;
+
+            @media screen and (max-width: 768px) {
+                gap: 6vh;
+            }
             .footer-column {
                 display: flex;
                 align-items: center;
@@ -38,12 +53,22 @@
 
                 gap: 0.75vw;
 
+                @media screen and (max-width: 768px) {
+                    flex-direction: column;
+                    gap: 1vh;
+                }
+
                 .start {
                     margin-right: 0.5vw;
 
                     text-transform: capitalize;
 
                     font-family: 'Executionist';
+                    font-size: clamp(1.7rem, 2.5vw + 1rem, 2rem);
+                    @media screen and (max-width: 768px) {
+                        margin-right: 0;
+                        margin-bottom: 0.5vh;
+                    }
                 }
 
                 .link {
@@ -108,6 +133,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-wrap: wrap;
 
         width: 100%;
         text-align: center;
