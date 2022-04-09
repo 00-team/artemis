@@ -19,7 +19,8 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['5.9.226.21', 'nightcurly.art']
+ALLOWED_HOSTS = ['5.9.226.21', 'nightcurly.art',
+                 '0.0.0.0', 'localhost', '127.0.0.1']
 
 LOGIN_URL = f'//t.me/{BOT_USERNAME}?start=login'
 
