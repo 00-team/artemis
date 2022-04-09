@@ -22,7 +22,11 @@ urlpatterns = [
     path('owners/<slug:username>', owners)
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
 
 handler400 = views.error_400
 handler403 = views.error_403

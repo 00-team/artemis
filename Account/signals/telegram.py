@@ -31,7 +31,7 @@ def account_profile(instance, status):
 
 
 # media - profile picture
-@receiver(pre_save, sender=Account)
+@receiver(pre_save, sender=Account, weak=False)
 def account_pre_save(sender, instance, **kwargs):
     try:
         try:
@@ -75,7 +75,7 @@ def account_pre_save(sender, instance, **kwargs):
         pass
 
 
-@receiver(pre_delete, sender=Account)
+@receiver(pre_delete, sender=Account, weak=False)
 def account_pre_delete(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
@@ -84,7 +84,7 @@ def account_pre_delete(instance, **kwargs):
         pass
 
 
-@receiver(pre_save, sender=BotUser)
+@receiver(pre_save, sender=BotUser, weak=False)
 def bot_user_pre_save(instance, **kwargs):
     try:
         if not instance.invite_hash:

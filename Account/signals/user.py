@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 
 # random username
-@receiver(pre_save, sender=User)
+@receiver(pre_save, sender=User, weak=False)
 def user_pre_save(instance, **kwargs):
     if not instance.username:
         while True:

@@ -30,7 +30,7 @@ def twitter_profile(instance, status):
 
 
 # media - profile picture
-@receiver(pre_save, sender=TwitterAccount)
+@receiver(pre_save, sender=TwitterAccount, weak=False)
 def twitter_pre_save(sender, instance, **kwargs):
     try:
         try:
@@ -66,7 +66,7 @@ def twitter_pre_save(sender, instance, **kwargs):
         pass
 
 
-@receiver(pre_delete, sender=TwitterAccount)
+@receiver(pre_delete, sender=TwitterAccount, weak=False)
 def twitter_pre_delete(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
