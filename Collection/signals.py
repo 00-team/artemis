@@ -2,7 +2,6 @@ import logging
 
 # signals
 from django.db.models.signals import pre_delete, pre_save
-from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # models
@@ -16,6 +15,9 @@ from threading import Thread
 
 # requests
 from requests import get
+
+# exception
+from traceback import print_exception
 
 DEL_KWARGS = {'save': False}
 
@@ -52,10 +54,12 @@ def owner_pre_save(sender, instance, **kwargs):
         if instance.twitter:
             if not cowner:
                 instance.twitter_id = get_twitter_id(instance.twitter)
-            elif cowner.twitter != instance.twitter:
+            elif cowner.twitter != instance.twitter or not instance.twitter_id:
                 instance.twitter_id = get_twitter_id(instance.twitter)
-    except:
-        pass
+        else:
+            instance.twitter_id = None
+    except Exception as e:
+        print_exception(e)
 
 
 @receiver(pre_delete, sender=Owner)
