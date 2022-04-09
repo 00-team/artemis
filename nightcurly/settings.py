@@ -19,7 +19,7 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['5.9.226.21', 'nightcurly.art']
 
 LOGIN_URL = f'//t.me/{BOT_USERNAME}?start=login'
 
@@ -106,7 +106,10 @@ USE_TZ = True
 
 STATIC_URL = '/s/'
 
-STATIC_ROOT = BASE_DIR / 'static'
+# STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
 
 MEDIA_URL = '/m/'

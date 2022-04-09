@@ -2,7 +2,7 @@ name: Deploy to Nightcurly private
 on:
     push:
         branches:
-            - release
+            - main
 jobs:
     deploy:
         name: Deploy
