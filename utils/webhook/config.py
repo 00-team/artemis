@@ -7,6 +7,7 @@ DEFAULT_USERNAME = 'Nightcurly'
 DEFAULT_AVATAR = 'https://cdn.discordapp.com/attachments/731174051170746500/814603567704047646/00_logo_f27.png'
 
 ACCOUNT = settings.WEBHOOKS['ACCOUNT']
+ERROR_HOOK = settings.WEBHOOKS['ERROR']
 
 HR = '\n' + ('-' * 50) + '\n'
 

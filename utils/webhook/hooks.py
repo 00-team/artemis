@@ -4,12 +4,10 @@ from django.utils.timezone import now
 
 from threading import Thread
 
-from utils.models.user import username
-
 from collections.abc import Iterable
 
 # configs
-from .config import HOST, ACCOUNT
+from .config import HOST, ACCOUNT, ERROR_HOOK
 from .config import DEFAULT_USERNAME as USERNAME
 from .config import DEFAULT_AVATAR as AVATAR
 from .config import HR
@@ -19,6 +17,9 @@ from django.conf import settings
 
 # modeles
 from Account.models import Account, TwitterAccount
+
+# exception
+from traceback import format_exception
 
 queue = []
 checking = False
@@ -124,3 +125,20 @@ def twitter_hook(twitter: TwitterAccount, status: str):
         del embed['thumbnail']
 
     hook(ACCOUNT, [embed])
+
+
+def error_hook(error_message: str):
+
+    if isinstance(error_message, BaseException):
+        error_message = ''.join(format_exception(error_message))
+    else:
+        error_message = str(error_message)
+
+    embed = {
+        'title': 'Error',
+        'color': 14811960,
+        'timestamp': str(now()),
+        'description': error_message,
+    }
+
+    hook(ERROR_HOOK, [embed])

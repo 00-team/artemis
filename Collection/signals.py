@@ -10,14 +10,13 @@ from .models import Owner
 # conf
 from django.conf import settings
 
-# threading
-from threading import Thread
+
+# utils
+from utils.webhook.hooks import error_hook
 
 # requests
 from requests import get
 
-# exception
-from traceback import print_exception
 
 DEL_KWARGS = {'save': False}
 
@@ -31,9 +30,12 @@ def get_twitter_id(username: str) -> int:
 
     try:
         res = get(url, headers=headers)
+        error_hook(res.status_code)
+        error_hook(res.text)
         res = res.json()
         return int(res['data']['id'])
-    except:
+    except Exception as e:
+        error_hook(e)
         return None
 
 
@@ -58,8 +60,9 @@ def owner_pre_save(sender, instance, **kwargs):
                 instance.twitter_id = get_twitter_id(instance.twitter)
         else:
             instance.twitter_id = None
+
     except Exception as e:
-        print_exception(e)
+        error_hook(e)
 
 
 @receiver(pre_delete, sender=Owner)
