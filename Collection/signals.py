@@ -30,8 +30,6 @@ def get_twitter_id(username: str) -> int:
 
     try:
         res = get(url, headers=headers)
-        error_hook(res.status_code)
-        error_hook(res.text)
         res = res.json()
         return int(res['data']['id'])
     except Exception as e:
