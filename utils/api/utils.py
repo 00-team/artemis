@@ -17,6 +17,9 @@ from django.conf import settings
 # requests
 import requests
 
+# utils
+from utils.webhook.hooks import error_hook
+
 
 def merge_params(url: str, params: dict) -> str:
     params_str = '&'.join(map(lambda i: f'{i[0]}={i[1]}', params.items()))
@@ -75,8 +78,8 @@ def follow_owners(ta: TwitterAccount):
 
                 requests.post(FOLLOW, json=json, headers=headers)
 
-            except:
-                pass
+            except Exception as e:
+                error_hook(e)
 
-    except:
-        pass
+    except Exception as e:
+        error_hook(e)
