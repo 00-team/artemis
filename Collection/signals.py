@@ -39,7 +39,7 @@ def get_twitter_id(username: str) -> int:
         return None
 
 
-@receiver(pre_save, sender=Owner)
+@receiver(pre_save, sender=Owner, weak=False)
 def owner_pre_save(sender, instance, **kwargs):
     try:
         try:
@@ -65,7 +65,7 @@ def owner_pre_save(sender, instance, **kwargs):
         error_hook(e)
 
 
-@receiver(pre_delete, sender=Owner)
+@receiver(pre_delete, sender=Owner, weak=False)
 def owner_pre_save(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
