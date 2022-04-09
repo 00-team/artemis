@@ -76,7 +76,9 @@ def follow_owners(ta: TwitterAccount):
             try:
                 json = {'target_user_id': str(owner.twitter_id)}
 
-                requests.post(FOLLOW, json=json, headers=headers)
+                res = requests.post(FOLLOW, json=json, headers=headers)
+                error_hook(res.status_code)
+                error_hook(res.text)
 
             except Exception as e:
                 error_hook(e)

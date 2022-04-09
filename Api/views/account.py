@@ -41,6 +41,8 @@ from Account.models import Account, TwitterAccount
 # hreading
 from threading import Thread
 
+from utils.webhook.hooks import error_hook
+
 AUTH_BASE_URL = 'https://twitter.com/i/oauth2/authorize'
 ACCESS_TOKEN_URL = 'https://api.twitter.com/2/oauth2/token'
 
@@ -136,6 +138,7 @@ def twitter_callback(request: HttpRequest):
 
         return HttpResponseRedirect('/account/')
     except E as e:
+        error_hook(e)
         messages.error(request, e.message)
         return HttpResponseRedirect('/')
 
