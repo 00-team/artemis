@@ -3,7 +3,7 @@ from pathlib import Path
 from json import loads
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-BOT_USERNAME = 'nightcurlybot'
+BOT_USERNAME = 'freenftnightbot'
 
 with open(BASE_DIR / 'secrets.json', 'r') as f:
     secrets = loads(f.read())
