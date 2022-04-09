@@ -6,7 +6,7 @@ import requests
 # conf
 from .config import HEADERS
 
-HOST = 'http://127.0.0.1:7000/api/bot/'
+HOST = 'http://0.0.0.0/api/bot/'
 
 
 class Inviter:
