@@ -17,7 +17,7 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
     TWITTER_AUTH = b64encode(f'{CLIENT_ID}:{CLIENT_SECRET}'.encode()).decode()
     del secrets
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -106,7 +106,9 @@ USE_TZ = True
 
 STATIC_URL = '/s/'
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
 
 MEDIA_URL = '/m/'
