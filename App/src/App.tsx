@@ -19,6 +19,9 @@ import Footer from './layouts/Footer'
 import Home from './Pages/Home'
 import Account from './Pages/Account'
 
+// 404
+import Error404 from './Pages/Error/Error404'
+
 // owners page
 import Owner from './Pages/Owner'
 
@@ -51,6 +54,9 @@ const App: FC = () => {
                     <Route path='/' element={<Home />} />
                     <Route path='/owners/:username' element={<Owner />} />
                     <Route path='account' element={<Account />} />
+
+                    {/* 404  */}
+                    <Route path='*' element={<Error404 />} />
                 </Routes>
             </main>
             <Footer />
