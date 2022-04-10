@@ -6,7 +6,14 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nightcurly.settings')
+    if os.environ.get('NIGHTCURLY_MODE') == 'DEV':
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nightcurly.settings')
+    else:
+        os.environ.setdefault(
+            'DJANGO_SETTINGS_MODULE',
+            'nightcurly.build_settings'
+        )
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
