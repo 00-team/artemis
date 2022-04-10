@@ -4,9 +4,9 @@ from typing import Literal
 import requests
 
 # conf
-from .config import HEADERS
+from .config import HEADERS, INTERNAL_HOST
 
-HOST = 'http://0.0.0.0/api/bot/'
+HOST = INTERNAL_HOST + '/api/bot/'
 
 
 class Inviter:

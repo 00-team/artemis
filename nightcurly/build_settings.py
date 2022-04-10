@@ -1,9 +1,9 @@
 from .settings import *
 
-
+MODE = 'BUILD'
 DEBUG = False
 
-ALLOWED_HOSTS = ['5.9.226.21', 'nightcurly.art', '0.0.0.0']
+ALLOWED_HOSTS = SECRETS[MODE]['ALLOWED_HOSTS']
 
 del STATICFILES_DIRS
 

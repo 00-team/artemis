@@ -3,20 +3,25 @@ from pathlib import Path
 from base64 import b64encode
 
 
+MODE = 'DEV'
 BASE_DIR = Path(__file__).resolve().parent.parent
-BOT_USERNAME = 'freenftnightbot'
+
 
 with open(BASE_DIR / 'secrets.json', 'r') as f:
-    secrets = loads(f.read())
-    SECRET_KEY = secrets['SECRET_KEY']
-    BOT_TOKEN = secrets['BOT_TOKEN']
-    BOT_SECRET = secrets['BOT_SECRET']
-    CLIENT_ID = secrets['CLIENT_ID']
-    CLIENT_SECRET = secrets['CLIENT_SECRET']
-    TWITTER_BEARER = secrets['TWITTER_BEARER']
-    WEBHOOKS = secrets['WEBHOOKS']
+    SECRETS = loads(f.read())
+    SECRET_KEY = SECRETS['SECRET_KEY']
+
+    BOT_TOKEN = SECRETS['BOT']['TOKEN']
+    BOT_SECRET = SECRETS['BOT']['SECRET']
+    BOT_USERNAME = SECRETS['BOT']['USERNAME']
+
+    CLIENT_ID = SECRETS['TWITTER']['CLIENT_ID']
+    CLIENT_SECRET = SECRETS['TWITTER']['CLIENT_SECRET']
+    TWITTER_BEARER = SECRETS['TWITTER']['BEARER_TOKEN']
     TWITTER_AUTH = b64encode(f'{CLIENT_ID}:{CLIENT_SECRET}'.encode()).decode()
-    del secrets
+
+    WEBHOOKS = SECRETS['WEBHOOKS']
+
 
 DEBUG = True
 
