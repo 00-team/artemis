@@ -11,7 +11,7 @@ from telegram.ext import CallbackQueryHandler
 from utils.data import get_chats, update_chats
 
 # conf
-from utils.config import BOT_TOKEN
+from utils.config import BOT_TOKEN, MODE
 
 # lang
 from utils.langs import COMMANDS
@@ -34,7 +34,8 @@ from logging import getLogger
 from utils.decorators import user_data
 
 logger = getLogger(__name__)
-DEBUG = True
+
+DEBUG = MODE == 'DEV'
 
 
 @user_data
