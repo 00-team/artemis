@@ -117,11 +117,13 @@ CONTNET = {'en': CONTNET_EN, 'ru': CONTNET_RU}
 
 COMMANDS = (
     ('en', (
+        ('help', 'Help!'),
         ('join', 'join to our channels'),
         ('invite', 'invite your friends into the bot!'),
         ('login', 'login to our website!'),
     )),
     ('ru', (
+        ('help', 'помощь!'),
         ('join', 'присоединяйтесь к нашим каналам'),
         ('invite', 'пригласить друзей в бота!'),
         ('login', 'войти на наш сайт!'),
