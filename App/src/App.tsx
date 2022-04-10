@@ -45,7 +45,6 @@ const App: FC = () => {
 
     return (
         <>
-            {/* test */}
             <Navbar />
             <main>
                 <Routes>
