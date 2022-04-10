@@ -7,7 +7,7 @@ from .config import EXTERNAL_HOST
 # langs
 from .langs import CONTNET
 
-LOGIN_URL = LoginUrl(EXTERNAL_HOST + 'api/account/telegram_callback/')
+LOGIN_URL = LoginUrl(EXTERNAL_HOST + '/api/account/telegram_callback/')
 
 
 def help_keyboard(lang):
