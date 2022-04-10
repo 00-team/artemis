@@ -25,13 +25,13 @@ const Error404 = () => {
                 <div className='error__content'>
                     <div className='error__message message'>
                         <h1 className='message__title title'>Page Not Found</h1>
-                        <p className='message__text title_smaller'>
+                        <p className='message__text title_small'>
                             We're sorry, the page you were looking for couldn't
                             be found.
                         </p>
                     </div>
                     <div className='error__nav e-nav'>
-                        <a href='' target='_blanck' className='e-nav__link'></a>
+                        <a href='' target='_blank' className='e-nav__link'></a>
                     </div>
                 </div>
             </section>
