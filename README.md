@@ -1,6 +1,6 @@
 # Nightcurly Project
 
-Nightcurly is amazing :)
+Nightcurly ...
 
 ## How to setup
 
@@ -11,14 +11,34 @@ then put your variables on it.
 // BASE_DIR/secrets.json
 
 {
-    "SECRET_KEY": "RANDOM STRING FOR DJANGO SECRET KEY",
-    "BOT_TOKEN": "YOUR TELEGRAM BOT TOKEN",
-    "BOT_SECRET": "RANDOM STRING FOR BOT_SECRET",
-    "CLIENT_ID": "YOUR TWITTER APP CLIENT ID",
-    "CLIENT_SECRET": "YOUR TWITTER APP CLIENT SECRET",
-    "TWITTER_BEARER": "YOUR TWITTER BEARER TOKEN",
+    "SECRET_KEY": "django random secret key",
+
+    "BOT": {
+        "TOKEN": "your telegram bot token",
+        "SECRET": "bot random secret",
+        "USERNAME": "your bot username"
+    },
+
+    "TWITTER": {
+        "CLIENT_ID": "twitter api client id",
+        "CLIENT_SECRET": "twitter api client secret",
+        "BEARER_TOKEN": "twitter api bearer token"
+    },
+
     "WEBHOOKS": {
-        "ACCOUNT": ["STRING OR LIST OF STRINGS - YOUR DISCORD WEBHOOKS"]
+        "ACCOUNT": ["a list or a single url for discord account webhooks"],
+        "ERROR": "a list or a single url for discord account webhooks"
+    },
+
+    "DEV": {
+        "INTERNAL_HOST": "127.0.0.1:8000", // sample
+        "EXTERNAL_HOST": "localhost:8000" // sample
+    },
+
+    "BUILD": {
+        "INTERNAL_HOST": "0.0.0.0", // a local ip for connecting the bot to django ...
+        "EXTERNAL_HOST": "your server ip OR your domain name",
+        "ALLOWED_HOSTS": ["django allowed hosts"]
     }
 }
 ```
@@ -27,26 +47,13 @@ then put your variables on it.
 after that you can run the Django
 
 ```bash
-python pip install -r requirements.txt
-python manage.py runserver 7000 --insecure
+# set your env mode | DEV or BUILD
+NIGHTCURLY_MODE="DEV"
+pip install -r requirements.txt
+python manage.py runserver 7000
 ```
 
-if you want to run the bot you need to make directory call `data` in Bot dir \
-for short: `mkdir Bot/data`
-
-\
-after that you'll need to make `main.json` file inside that data dir
-
-```json
-// Bot/data/main.json
-
-{
-    "chats": [],
-    "admins": []
-}
-```
-
-and then you can run the bot
+you can run the bot with:
 
 ```bash
 cd Bot
