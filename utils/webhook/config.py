@@ -1,7 +1,7 @@
 # conf
 from django.conf import settings
 
-HOST = 'http://' + settings.SECRETS[settings.MODE]['EXTERNAL_HOST']
+HOST = 'https://' + settings.SECRETS[settings.MODE]['EXTERNAL_HOST']
 
 
 DEFAULT_USERNAME = 'Nightcurly'

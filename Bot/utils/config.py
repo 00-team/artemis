@@ -18,4 +18,4 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
     HEADERS = {'Authorization': BOT_SECRET}
 
     INTERNAL_HOST = 'http://' + SECRETS[MODE]['INTERNAL_HOST']
-    EXTERNAL_HOST = 'http://' + SECRETS[MODE]['EXTERNAL_HOST']
+    EXTERNAL_HOST = 'https://' + SECRETS[MODE]['EXTERNAL_HOST']
