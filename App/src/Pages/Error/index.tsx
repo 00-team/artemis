@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
+
+import { Link } from 'react-router-dom'
 
 // style
 import './style/error404.scss'
 
-const Error404 = () => {
+const Error: FC = () => {
     return (
         <div className='error-container'>
             <div className='stars'>
@@ -24,14 +26,11 @@ const Error404 = () => {
             <section className='error'>
                 <div className='error__content'>
                     <div className='error__message message'>
-                        <h1 className='message__title title'>Page Not Found</h1>
-                        <p className='message__text title_small'>
-                            We're sorry, the page you were looking for couldn't
-                            be found.
-                        </p>
+                        <h1 className='message__title title'>Title</h1>
+                        <p className='message__text title_small'>Description</p>
                     </div>
                     <div className='error__nav e-nav'>
-                        <a href='' target='_blank' className='e-nav__link'></a>
+                        <Link to='/' className='e-nav__link' />
                     </div>
                 </div>
             </section>
@@ -39,4 +38,4 @@ const Error404 = () => {
     )
 }
 
-export default Error404
+export default Error
