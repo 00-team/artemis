@@ -16,7 +16,7 @@ const Footer = () => {
                         <div className='start'>NightCurly</div>
                         <a
                             data-text='&nbsp;home'
-                            href=''
+                            href='/'
                             className='link title_smaller'
                         >
                             &nbsp;home
@@ -30,7 +30,7 @@ const Footer = () => {
                         </a>
                         <a
                             data-text='&nbsp;Owners'
-                            href=''
+                            href='/#owners'
                             className='link title_smaller'
                         >
                             &nbsp;Owners
@@ -40,7 +40,7 @@ const Footer = () => {
                         <div className='start'>community</div>
                         <a
                             data-text='&nbsp;disocrd'
-                            href=''
+                            href='https://discord.gg/uegB2v4Q8a'
                             className='link title_smaller'
                         >
                             &nbsp;discord
