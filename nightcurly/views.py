@@ -7,20 +7,36 @@ def home(request: HttpRequest):
 
 
 def error_400(request: HttpRequest, exception=None, **kwargs):
-    context = {'error_code': '400', 'error_text': 'Bad Request'}
+    context = {'error': {
+        'code': '400',
+        'title': 'Bad Request',
+        'description': 'Bad Request description ...'
+    }}
     return render(request, 'error.html', context, status=400)
 
 
 def error_403(request: HttpRequest, exception=None, **kwargs):
-    context = {'error_code': '403', 'error_text': 'Permission Denied'}
+    context = {'error': {
+        'code': '403',
+        'title': 'Permission Denied',
+        'description': 'description ...'
+    }}
     return render(request, 'error.html', context, status=403)
 
 
 def error_404(request: HttpRequest, exception=None, **kwargs):
-    context = {'error_code': '404', 'error_text': 'Page Not Found'}
+    context = {'error': {
+        'code': '404',
+        'title': 'Page Not Found',
+        'description': ':('
+    }}
     return render(request, 'error.html', context, status=404)
 
 
 def error_500(request: HttpRequest, exception=None, **kwargs):
-    context = {'error_code': '500', 'error_text': 'Server Error'}
+    context = {'error': {
+        'code': '500',
+        'title': 'Server Error',
+        'description': 'Server Error description'
+    }}
     return render(request, 'error.html', context, status=500)
