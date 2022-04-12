@@ -222,16 +222,27 @@ def update(request: HttpRequest):
         account = request.user.account
         data = get_data(request)
 
-        wallet = str(data.get('wallet'))
+        wallet = data.get('wallet')
+
+        if not wallet:
+            account.wallet = None
+            account.save()
+            return JsonResponse({
+                'ok': 'Your Wallet Successfully Removed',
+                'wallet': account.wallet,
+            })
+
+        wallet = str(wallet)
 
         if len(wallet) == 42:
             account.wallet = wallet
             account.save()
+            return JsonResponse({
+                'ok': 'Your Wallet Successfully Updated',
+                'wallet': account.wallet,
+            })
 
-        return JsonResponse({
-            'ok': 'Your Information successfully updated',
-            'wallet': account.wallet,
-        })
+        raise E('Invalid Wallet')
 
     except E as e:
         return e.response

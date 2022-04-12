@@ -16,7 +16,6 @@ from .decorators import user_data
 
 # data
 from .data import get_chats, update_chats
-from .data import markdown_free
 
 # langs
 from .langs import CONTNET
@@ -179,6 +178,7 @@ def help_cmd(update: Update, lang, **kwargs):
 @user_data
 def help_callback(update: Update, **kwrags):
     query = update.callback_query
+    query.message.edit_text('use /help or type help', reply_markup=None)
 
     match query.data[5:]:
         case 'join':

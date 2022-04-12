@@ -1,13 +1,9 @@
-import React from 'react'
-
-// utils
+import React, { FC } from 'react'
 
 // style
 import './style/footer.scss'
 
-const SiteLogo = require('../../../static/img/00-Team.png')
-
-const Footer = () => {
+const Footer: FC = () => {
     return (
         <div className='footer-container'>
             <div className='footer-wrapper'>
@@ -51,20 +47,19 @@ const Footer = () => {
                 <div className='footer-logo'>
                     <a href='/'>
                         <img
-                            src={SiteLogo}
+                            src='/s/img/00-Team.png'
                             alt='siteLogo site-logo site_logo'
+                            draggable={false}
                         />
                     </a>
                     <div className='footer-description description'>
-                        ©2022 NightCurly
+                        © {new Date().getFullYear()} NightCurly
                     </div>
                 </div>
             </div>
             <div className='creator'>
                 Created With ❤ By:
-                <a href='https://web-00-team.web.app/'>
-                    00 Team © {new Date().getFullYear()}
-                </a>
+                <a href='https://web-00-team.web.app/'>00 Team</a>
             </div>
         </div>
     )
