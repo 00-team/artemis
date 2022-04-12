@@ -18,6 +18,7 @@ import { AiOutlineEdit } from '@react-icons/all-files/ai/AiOutlineEdit'
 import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
 
 import { IoClose } from '@react-icons/all-files/io5/IoClose'
+import { BiLogOut } from '@react-icons/all-files/bi/BiLogOut'
 
 // btn icons
 import { HiOutlineArrowNarrowRight } from '@react-icons/all-files/hi/HiOutlineArrowNarrowRight'
@@ -81,10 +82,13 @@ const AccountSideBar: FC<AccountModel> = props => {
                     </span>
                 </div>
             </div>
-            <div className='sidebar-logout'>
-                <div className='icon'></div>
-
-                <div className='holder'></div>
+            <div className='sidebar-logout title_small'>
+                <a className='logout-wrapper' href=''>
+                    <div className='icon'>
+                        <BiLogOut size={24} />
+                    </div>
+                    <div className='holder'>Log Out</div>
+                </a>
             </div>
         </div>
     )
