@@ -18,32 +18,3 @@ def get_chats() -> list[str]:
 
     with open(CHATS_FILENAME, 'r') as f:
         return load(f)
-
-
-MDC = [
-    '_',
-    '*',
-    '[',
-    ']',
-    '(',
-    ')',
-    '~',
-    '`',
-    '>',
-    '#',
-    '+',
-    '-',
-    '=',
-    '|',
-    '{',
-    '}',
-    '.',
-    '!',
-]
-
-
-def markdown_free(text: str) -> str:
-    for c in MDC:
-        text = text.replace(c, f'\{c}')
-
-    return text
