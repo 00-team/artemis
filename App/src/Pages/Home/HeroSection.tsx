@@ -44,7 +44,6 @@ const HeroSection = () => {
                 <div id='stars3'></div>
             </div>
             <div className='hero-wrapper'>
-                {/* <div className='hero-img-wrapper'></div> */}
                 <div className='hero-text-wrapper' ref={LazyRef}>
                     <div
                         className={`title_hero ${isIntersecting ? 'show' : ''}`}
@@ -52,7 +51,6 @@ const HeroSection = () => {
                     >
                         Welcome To Our NFT COLLECTION
                     </div>
-                    {/* <div className='description'>Enjoy</div> */}
                 </div>
             </div>
             <section className='owners-container'>
