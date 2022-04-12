@@ -81,7 +81,11 @@ const AccountSideBar: FC<AccountModel> = props => {
                     </span>
                 </div>
             </div>
-            <div className='sidebar-logout'></div>
+            <div className='sidebar-logout'>
+                <div className='icon'></div>
+
+                <div className='holder'></div>
+            </div>
         </div>
     )
 }
