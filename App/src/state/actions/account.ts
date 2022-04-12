@@ -56,9 +56,7 @@ const UpdateAccount: UA = wallet => async dispatch => {
 
         if (data.ok) ReactAlert.success(data.ok)
 
-        if (data.wallet) {
-            dispatch({ type: AccountTypes.SET_WALLET, payload: data.wallet })
-        }
+        dispatch({ type: AccountTypes.SET_WALLET, payload: data.wallet })
     } catch (error) {
         HandleError(error)
     }

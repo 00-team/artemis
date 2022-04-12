@@ -24,9 +24,13 @@ import { HiOutlineArrowNarrowRight } from '@react-icons/all-files/hi/HiOutlineAr
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
-import { GetAccount, RootState } from 'state'
+import { GetAccount, RootState, UpdateAccount } from 'state'
 import { AccountModel, TwitterModel } from 'state/models/Account'
+
+// utils
 import { Avatar } from '@00-team/utils'
+
+// components
 import CountUpAnim from 'components/utils/CountUpAnim'
 
 const Account: FC = () => {
@@ -83,13 +87,8 @@ const AccountSideBar: FC<AccountModel> = props => {
 }
 
 const AccountContent: FC<AccountModel> = props => {
-    // debug
-    let walletstring = Math.random().toString(36).slice(2)
-    walletstring += walletstring
-
-    const { twitter } = props
-    // debug end
-
+    const dispatch = useDispatch()
+    const { twitter, wallet } = props
     const [ShowChangeWallet, setShowChangeWallet] = useState(false)
 
     return (
@@ -134,7 +133,7 @@ const AccountContent: FC<AccountModel> = props => {
                                     className='column-data wallet_id description'
                                     tabIndex={1}
                                 >
-                                    {walletstring}
+                                    {wallet ? wallet : '-- Empty --'}
                                 </div>
                             </div>
                         </div>
@@ -150,7 +149,12 @@ const AccountContent: FC<AccountModel> = props => {
                                     Edit Wallet
                                 </div>
                             </div>
-                            <div className='disconnect-column bottom-column title_small'>
+                            <div
+                                className='disconnect-column bottom-column title_small'
+                                onClick={() =>
+                                    wallet && dispatch(UpdateAccount(''))
+                                }
+                            >
                                 <div className='icon'>
                                     <RiLogoutBoxLine size={24} />
                                 </div>
@@ -253,6 +257,7 @@ interface ChangeWalletProps {
 }
 
 const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
+    const dispatch = useDispatch()
     const [LoadingStatus, setLoadingStatus] = useState({
         show: false,
         message: '',
@@ -272,21 +277,22 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
         if (inp1.value.indexOf(' ') >= 0 || inp2.value.indexOf(' ') >= 0) {
             return ReactAlert.error('Please Enter A Valid Wallet ID')
         }
-        if (inp1.value.length < 24 || inp2.value.length < 24) {
+        if (inp1.value.length < 42 || inp2.value.length < 42) {
             return ReactAlert.error('Please Enter A Valid Wallet ID')
         }
 
-        SendForm()
+        SendForm(inp1.value)
         return ReactAlert.info('your request has been sent')
     }
 
-    const SendForm = () => {
+    const SendForm = (wallet: string) => {
         setLoadingStatus({
             show: true,
             status: 'loading',
             message: 'Sending Your Request...',
         })
         setTimeout(() => {
+            dispatch(UpdateAccount(wallet))
             setLoadingStatus({
                 show: true,
                 status: 'success',
