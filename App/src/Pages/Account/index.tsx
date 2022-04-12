@@ -16,6 +16,7 @@ import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
 import { AiOutlineEdit } from '@react-icons/all-files/ai/AiOutlineEdit'
 
 import { RiLogoutBoxLine } from '@react-icons/all-files/ri/RiLogoutBoxLine'
+import { FiLogIn } from '@react-icons/all-files/fi/FiLogIn'
 
 import { IoClose } from '@react-icons/all-files/io5/IoClose'
 import { BiLogOut } from '@react-icons/all-files/bi/BiLogOut'
@@ -94,9 +95,22 @@ const AccountSideBar: FC<AccountModel> = props => {
     )
 }
 
+const TWITTER_DEFAULT: TwitterModel = {
+    description: ' ',
+    followers: 0,
+    followings: 0,
+    tweets: 0,
+    nickname: 'unknown',
+    picture: 'https://identix.state.gov/qotw/images/no-photo.gif',
+    user_id: '0000000000',
+    username: 'unknown',
+}
+
 const AccountContent: FC<AccountModel> = props => {
     const dispatch = useDispatch()
-    const { twitter, wallet } = props
+    const { twitter } = props
+    const { wallet } = props
+
     const [ShowChangeWallet, setShowChangeWallet] = useState(false)
 
     return (
@@ -171,7 +185,12 @@ const AccountContent: FC<AccountModel> = props => {
                         </div>
                     </div>
                 </span>
-                {twitter && <TwitterCard {...twitter} />}
+
+                {twitter ? (
+                    <TwitterCard twitter={twitter} status={true} />
+                ) : (
+                    <TwitterCard twitter={TWITTER_DEFAULT} status={false} />
+                )}
             </div>
             {ShowChangeWallet && (
                 <ChangeWallet setShowChangeWallet={setShowChangeWallet} />
@@ -180,9 +199,14 @@ const AccountContent: FC<AccountModel> = props => {
     )
 }
 
-const TwitterCard: FC<TwitterModel> = props => {
-    const { followers, followings, tweets, picture } = props
-    const { nickname, username, description } = props
+interface TwitterCardProps {
+    twitter: TwitterModel
+    status: boolean
+}
+
+const TwitterCard: FC<TwitterCardProps> = ({ twitter, status }) => {
+    const { followers, followings, tweets, picture } = twitter
+    const { nickname, username, description } = twitter
 
     return (
         <span
@@ -224,36 +248,42 @@ const TwitterCard: FC<TwitterModel> = props => {
                         <div className='status'>
                             <div className='holder'>Following</div>
                             <div className='data'>
-                                <CountUpAnim
-                                    end={170 || followings}
-                                    speed={50}
-                                />
+                                <CountUpAnim end={followings} speed={50} />
                             </div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Followers</div>
                             <div className='data'>
-                                <CountUpAnim
-                                    end={11054 || followers}
-                                    speed={50}
-                                />
+                                <CountUpAnim end={followers} speed={50} />
                             </div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Tweets</div>
                             <div className='data'>
-                                <CountUpAnim end={11020 || tweets} speed={50} />
+                                <CountUpAnim end={tweets} speed={50} />
                             </div>
                         </div>
                     </div>
+                    {!status && (
+                        <div className='connect-twitter title_small'>
+                            <div className='connect-wrapper'>
+                                <div className='icon'>
+                                    <FiLogIn size={24} />
+                                </div>
+                                <div className='holder'>connect twitter</div>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className='bottom-columns'>
-                    <div className='disconnect-column bottom-column title_small'>
-                        <div className='icon'>
-                            <RiLogoutBoxLine size={24} />
+                    {status && (
+                        <div className='disconnect-column bottom-column title_small'>
+                            <div className='icon'>
+                                <RiLogoutBoxLine size={24} />
+                            </div>
+                            <div className='holder'>disconenct twitter</div>
                         </div>
-                        <div className='holder'>disconenct twitter</div>
-                    </div>
+                    )}
                 </div>
             </div>
         </span>
