@@ -1,14 +1,19 @@
 import { Configuration } from 'webpack'
 
 // path
-import { DIST_DIR, SRC_DIR } from './config/path'
-import { resolve } from 'path'
+import { DIST_DIR, SRC_DIR, resolve } from './config/path'
+
+// entries
+import Entries from './config/entries'
+
+// plugins
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 const Main: Configuration = {
-    entry: resolve(SRC_DIR, 'index.tsx'),
+    entry: Entries,
     output: {
         path: DIST_DIR,
-        filename: '[name].bundle.js',
+        filename: '[name].[contenthash].js',
         chunkFilename: '[name].[id].chunk.js',
         clean: true,
         sourceMapFilename: 'source_maps/[file].map',
@@ -26,7 +31,7 @@ const Main: Configuration = {
             },
         ],
     },
-    plugins: [],
+    plugins: [new BundleAnalyzerPlugin({ openAnalyzer: false })],
     resolve: {
         extensions: ['.mjs', '.tsx', '.ts', '.js'],
         alias: {

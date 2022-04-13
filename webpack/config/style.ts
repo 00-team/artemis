@@ -1,23 +1,24 @@
 import { RuleSetRule, RuleSetUseItem } from 'webpack'
 
-export const CssLoaders: RuleSetUseItem[] = ['style-loader', 'css-loader']
+// plugins
+import CssExtract from 'mini-css-extract-plugin'
 
-export const SassLoaders: RuleSetUseItem[] = [
-    {
-        loader: 'sass-loader',
-        options: {
-            sassOptions: {
-                includePaths: ['./App/src/style'],
-            },
+const SassLoader: RuleSetUseItem = {
+    loader: 'sass-loader',
+    options: {
+        sassOptions: {
+            includePaths: ['./App/src/style'],
         },
     },
-]
+}
 
-export const DevStyle: RuleSetRule = {
+const DevStyle: RuleSetRule = {
     test: /\.(s|)[ac]ss$/i,
-    use: [...CssLoaders, ...SassLoaders],
+    use: ['style-loader', 'css-loader', SassLoader],
 }
-export const BuildStyle: RuleSetRule = {
+const BuildStyle: RuleSetRule = {
     test: /\.(s|)[ac]ss$/i,
-    use: [...CssLoaders, 'postcss-loader', ...SassLoaders],
+    use: [CssExtract.loader, 'css-loader', 'postcss-loader', SassLoader],
 }
+
+export { DevStyle, BuildStyle, CssExtract }

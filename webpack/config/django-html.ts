@@ -1,8 +1,5 @@
-import { WebpackPluginInstance } from 'webpack'
-
 // path
-import { BASE_DIR, APP_DIR } from './path'
-import { resolve } from 'path'
+import { BASE_DIR, APP_DIR, resolve } from './path'
 
 // plugins
 import HtmlWP from 'html-webpack-plugin'
@@ -15,6 +12,4 @@ const BaseFile = new HtmlWP({
     minify: false,
 })
 
-const plugins: WebpackPluginInstance[] = [BaseFile]
-
-export default plugins
+export default BaseFile

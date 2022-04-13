@@ -2,9 +2,12 @@
 import { Configuration } from 'webpack'
 
 // styles
-import { BuildStyle } from './config/style'
+import { BuildStyle, CssExtract } from './config/style'
 
-import HtmlFiles from './config/django-html'
+// plugins
+import HtmlPG from './config/django-html'
+import Compression from 'compression-webpack-plugin'
+import CssMinimizer from 'css-minimizer-webpack-plugin'
 
 // Main configs
 import Main from './main'
@@ -15,15 +18,17 @@ const BuildConfig: Configuration = {
     module: {
         rules: [...Main.module!.rules!, BuildStyle],
     },
-    plugins: [...Main.plugins!, ...HtmlFiles],
+    plugins: [
+        ...Main.plugins!,
+        new CssExtract(),
+        new Compression({ exclude: /\.(html)$/ }),
+        HtmlPG,
+    ],
     optimization: {
         emitOnErrors: false,
         chunkIds: 'deterministic',
         minimize: true,
-        splitChunks: {
-            chunks: 'all',
-            maxSize: 200000,
-        },
+        minimizer: [new CssMinimizer()],
     },
 }
 

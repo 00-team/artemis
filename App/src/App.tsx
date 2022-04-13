@@ -1,5 +1,8 @@
 import React, { FC, useEffect } from 'react'
 
+// loadable
+import loadable from '@loadable/component'
+
 // router
 import { Routes, Route } from 'react-router-dom'
 
@@ -16,14 +19,12 @@ import Navbar from './layouts/Navbar'
 import Footer from './layouts/Footer'
 
 // pages
-import Home from './Pages/Home'
-import Account from './Pages/Account'
+const Home = loadable(() => import('./Pages/Home'))
+const Account = loadable(() => import('./Pages/Account'))
+const Owner = loadable(() => import('./Pages/Owner'))
 
 // Error
 import Error from './Pages/Error'
-
-// owners page
-import Owner from './Pages/Owner'
 
 // style
 import './style/base.scss'
