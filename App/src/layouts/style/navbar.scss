@@ -141,7 +141,6 @@
             height: 60px;
 
             border-radius: 50%;
-            background-image: url('https://nightcurly.art/s/img/00-Team.png');
             background-size: cover;
             background-position: center;
 
@@ -149,12 +148,13 @@
 
             cursor: pointer;
 
-            transition: 1.25s;
+            transition: transform 1.25s;
 
             z-index: 2;
         }
+
         &.active .toggle {
-            transform: rotate(220deg);
+            transform: rotate(90deg);
         }
     }
 }

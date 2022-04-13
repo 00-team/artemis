@@ -16,7 +16,10 @@ const Navbar = () => {
                 onClick={() => setMenuActive(!MenuActive)}
                 className={`menu ${MenuActive ? 'active' : ''}`}
             >
-                <div className='toggle'></div>
+                <div
+                    className='toggle'
+                    style={{ backgroundImage: 'url(/s/img/navbar-icon.png)' }}
+                />
 
                 <li>
                     <div className='first'>
