@@ -152,12 +152,6 @@ class AccountManager(models.Manager):
             )
             account.save()
 
-        try:
-            account.bot_user = BotUser.objects.get(user_id=telegram_id)
-            account.save()
-        except:
-            pass
-
         return account
 
 
