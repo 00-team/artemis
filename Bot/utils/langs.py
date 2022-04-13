@@ -36,7 +36,7 @@ CONTNET_EN = {
         'We have 3 winners every night in the @XIXNFT channel.'
     ),
 
-    'chats_check_button': 'check ✅',
+    'chats_check_button': 'Check ✅',
     'join_chats': 'Subscribe to the channel below 👇',
     'joined_chats': 'you already join all the channels',
     'join_complete': 'Congratulations\nSuccessfully joined the channels 🎉',
@@ -45,7 +45,7 @@ CONTNET_EN = {
         'Join all channels and click the check button'
     ),
 
-    'invite_button': 'To get NFT enter the robot ✅',
+    'invite_button': 'TO GET NFT ENTER THE BOT ✅',
     'invites': (
         'Ask three of your friends to join'
         'the bot with your special link. 🔗\n'
@@ -92,7 +92,7 @@ CONTNET_RU = {
     ],
     'help_edit': 'используйте /help или введите help',
 
-    'external_login': 'Login with this button 👇',
+    'external_login': 'Войти с помощью этой кнопки 👇',
     'login_button': 'Логин!',
     'login': (
         'Зарегистрируйтесь на последний шаг на '
@@ -101,7 +101,7 @@ CONTNET_RU = {
         'Каждую ночь на канале @XIXNFT у нас 3 победителя.'
     ),
 
-    'chats_check_button': 'check ✅',
+    'chats_check_button': 'Проверьте ✅',
     'join_chats': 'Подпишитесь на канал ниже 👇',
     'joined_chats': 'you already join all the channels',
     'join_complete': 'Поздравления\nУспешно присоединился к каналу 🎉',
@@ -110,7 +110,7 @@ CONTNET_RU = {
         'Присоединяйтесь ко всем каналам и нажмите кнопку проверки'
     ),
 
-    'invite_button': 'To get NFT enter the robot ✅',
+    'invite_button': 'ЧТОБЫ ПОЛУЧИТЬ NFT, ВОЙДИТЕ В РОБОТА ✅',
     'invites': (
         'Попросите трех своих друзей присоединиться '
         'к роботу по вашей специальной ссылке. 🔗\n\n'
