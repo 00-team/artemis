@@ -392,9 +392,8 @@
                                 }
 
                                 .column-data {
-                                    &.linked {
+                                    &.wallet-status {
                                         font-family: 'Executionist';
-                                        color: #00dc7d;
                                         text-transform: uppercase;
                                     }
 
@@ -541,6 +540,11 @@
                                 z-index: 2;
 
                                 backdrop-filter: blur(10px);
+
+                                a {
+                                    text-decoration: none;
+                                    color: inherit;
+                                }
 
                                 .connect-wrapper {
                                     cursor: pointer;

@@ -84,13 +84,11 @@ const AccountSideBar: FC<AccountModel> = props => {
                 </div>
             </div>
             <div className='sidebar-logout title_small'>
-                <a className='logout-wrapper' href=''>
+                <a className='logout-wrapper' href='/api/account/logout/'>
                     <div className='icon'>
                         <BiLogOut size={24} />
                     </div>
-                    <a className='holder' href='/api/account/logout/'>
-                        Log Out
-                    </a>
+                    <div className='holder'>Log Out</div>
                 </a>
             </div>
         </div>
@@ -142,8 +140,13 @@ const AccountContent: FC<AccountModel> = props => {
                                     </div>
                                     <div className='holder'>wallet status:</div>
                                 </div>
-                                <div className='column-data linked title_small'>
-                                    linked
+                                <div
+                                    className='column-data wallet-status title_small'
+                                    style={{
+                                        color: wallet ? '#00dc7d' : '#e20338',
+                                    }}
+                                >
+                                    {wallet ? 'linked' : 'disconnected'}
                                 </div>
                             </div>
                             <div className='wrapper-column'>
@@ -272,7 +275,12 @@ const TwitterCard: FC<TwitterCardProps> = ({ twitter, status }) => {
                                 <div className='icon'>
                                     <FiLogIn size={24} />
                                 </div>
-                                <div className='holder'>connect twitter</div>
+                                <a
+                                    className='holder'
+                                    href='/api/account/twitter_auth/'
+                                >
+                                    connect twitter
+                                </a>
                             </div>
                         </div>
                     )}
