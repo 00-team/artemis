@@ -19,15 +19,15 @@ const Success: FC<SuccessProps> = ({ message }) => {
                 <g
                     id='Page-1'
                     stroke='none'
-                    stroke-width='1'
+                    strokeWidth='1'
                     fill='none'
-                    fill-rule='evenodd'
+                    fillRule='evenodd'
                 >
                     <g id='Group-3' transform='translate(2.000000, 2.000000)'>
                         <circle
                             id='Oval-2'
                             stroke='rgba(165, 220, 134, 0.2)'
-                            stroke-width='4'
+                            strokeWidth='4'
                             cx='41.5'
                             cy='41.5'
                             r='41.5'
@@ -36,7 +36,7 @@ const Success: FC<SuccessProps> = ({ message }) => {
                             className='ui-success-circle'
                             id='Oval-2'
                             stroke='#A5DC86'
-                            stroke-width='4'
+                            strokeWidth='4'
                             cx='46'
                             cy='44'
                             r='42'
@@ -45,7 +45,7 @@ const Success: FC<SuccessProps> = ({ message }) => {
                             className='ui-success-path'
                             id='Path-2'
                             stroke='#A5DC86'
-                            stroke-width='4'
+                            strokeWidth='4'
                             points='19 38.8036813 31.1020744 54.8046875 63.299221 28'
                         ></polyline>
                     </g>

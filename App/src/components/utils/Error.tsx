@@ -19,15 +19,15 @@ const Error: FC<ErrorProps> = ({ message }) => {
                 <g
                     id='Page-1'
                     stroke='none'
-                    stroke-width='1'
+                    strokeWidth='1'
                     fill='none'
-                    fill-rule='evenodd'
+                    fillRule='evenodd'
                 >
                     <g id='Group-2' transform='translate(2.000000, 2.000000)'>
                         <circle
                             id='Oval-2'
                             stroke='rgba(252, 191, 191, .5)'
-                            stroke-width='4'
+                            strokeWidth='4'
                             cx='41.5'
                             cy='41.5'
                             r='41.5'
@@ -35,7 +35,7 @@ const Error: FC<ErrorProps> = ({ message }) => {
                         <circle
                             className='ui-error-circle'
                             stroke='#F74444'
-                            stroke-width='4'
+                            strokeWidth='4'
                             cx='41.5'
                             cy='41.5'
                             r='41.5'
@@ -45,7 +45,7 @@ const Error: FC<ErrorProps> = ({ message }) => {
                             d='M22.244224,22 L60.4279902,60.1837662'
                             id='Line'
                             stroke='#F74444'
-                            stroke-width='3'
+                            strokeWidth='3'
                             stroke-linecap='square'
                         ></path>
                         <path
@@ -53,7 +53,7 @@ const Error: FC<ErrorProps> = ({ message }) => {
                             d='M60.755776,21 L23.244224,59.8443492'
                             id='Line'
                             stroke='#F74444'
-                            stroke-width='3'
+                            strokeWidth='3'
                             stroke-linecap='square'
                         ></path>
                     </g>
