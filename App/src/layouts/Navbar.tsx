@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useState } from 'react'
 
 // style
 import './style/navbar.scss'
@@ -9,13 +8,7 @@ import { AiFillHome } from '@react-icons/all-files/ai/AiFillHome'
 import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
 
 const Navbar = () => {
-    let location = useLocation()
-
     const [MenuActive, setMenuActive] = useState(false)
-
-    useEffect(() => {
-        console.log(location)
-    }, [location])
 
     return (
         <div className='navbar-container'>

@@ -64,7 +64,6 @@ const Owner: FC = () => {
                             <FaEthereum size={20} />
                         </div>
                         <div className='holder'>{OwnerState.wallet}</div>
-                        {/* <div className='holder'>0x7ae0...ae9a</div> */}
                     </div>
                     <div className='owner-descriotion title_small'>
                         {OwnerState.description}

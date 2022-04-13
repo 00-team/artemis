@@ -42,18 +42,6 @@ const Faq = () => {
                 {FAQs.filter(o => o.faqs.length > 0).map(f => (
                     <FaqOwner title={f.owner} faqs={f.faqs} key={f.owner} />
                 ))}
-                {/* <FaqOwner
-                    title='Alien'
-                    style={{
-                        transform: `translate(-${offset}px, ${offset}px)`,
-                    }}
-                />
-                <FaqOwner
-                    title='Arina'
-                    style={{
-                        transform: `translate(${offset}px, ${offset}px)`,
-                    }}
-                /> */}
             </div>
         </div>
     )
