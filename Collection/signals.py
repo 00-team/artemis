@@ -67,6 +67,17 @@ def owner_pre_delete(instance, **kwargs):
         pass
 
 
+@receiver(pre_save, sender=Asset, weak=False)
+def assets_pre_save(sender, instance, **kwargs):
+    try:
+        casset = sender.objects.get(id=instance.id)
+
+        if casset.image != instance.image:
+            casset.image.delete(**DEL_KWARGS)
+    except:
+        pass
+
+
 @receiver(pre_delete, sender=Asset, weak=False)
 def assets_pre_delete(instance, **kwargs):
     try:
