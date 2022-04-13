@@ -88,7 +88,9 @@ const AccountSideBar: FC<AccountModel> = props => {
                     <div className='icon'>
                         <BiLogOut size={24} />
                     </div>
-                    <div className='holder'>Log Out</div>
+                    <a className='holder' href='/api/account/logout/'>
+                        Log Out
+                    </a>
                 </a>
             </div>
         </div>

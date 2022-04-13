@@ -140,6 +140,11 @@
                     @media screen and (max-width: 960px) {
                         gap: 1.5vw;
                     }
+
+                    a {
+                        color: inherit;
+                        text-decoration: none;
+                    }
                 }
                 &:hover .logout-wrapper {
                     transform: translateX(-0.75vw);
