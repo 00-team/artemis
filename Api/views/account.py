@@ -220,6 +220,11 @@ def update(request: HttpRequest):
         account = request.user.account
         data = get_data(request)
 
+        try:
+            account.twitteraccount
+        except TwitterAccount.DoesNotExist:
+            raise E('You first need to connect your twitter!')
+
         wallet = data.get('wallet')
 
         if not wallet:
