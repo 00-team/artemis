@@ -69,7 +69,7 @@ def get_owner(request: HttpRequest):
             'description': owner.description,
             'floor_price': owner.floor_price,
             'ceil_price': owner.ceil_price,
-            'opensea': owner.opensea,
+            'rarible': owner.rarible,
             'twitter': owner.twitter,
             'instagram': owner.instagram,
             'assets': list(filter(lambda a: a, map(GA, assets)))

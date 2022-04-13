@@ -70,12 +70,8 @@ const Owner: FC = () => {
                     </div>
                 </div>
                 <div className='owner-social'>
-                    <div className='open-sea'>
-                        <OpenSeaBtn
-                            color='blue'
-                            name='My Open Sea'
-                            onClick={() => open(OwnerState.opensea)}
-                        />
+                    <div className='rarible'>
+                        <RaribleBtn link={OwnerState.rarible} />
                     </div>
                     <div className='owner-social-wrapper'>
                         {OwnerState.twitter && (
@@ -146,15 +142,9 @@ const CollectionTitle: FC = () => {
     )
 }
 
-interface OpenSeaBtnProps {
-    name: string
-    color: string
-    onClick: () => void
-}
-
-const OpenSeaBtn: FC<OpenSeaBtnProps> = ({ name, color, onClick }) => {
+const RaribleBtn: FC<{ link: string }> = ({ link }) => {
     return (
-        <div className={`open-sea-btn title_small ${color}`} onClick={onClick}>
+        <div className={`rarible-btn title_small`} onClick={() => open(link)}>
             <div className='hover'>
                 <span></span>
                 <span></span>
@@ -164,7 +154,7 @@ const OpenSeaBtn: FC<OpenSeaBtnProps> = ({ name, color, onClick }) => {
                 <span></span>
                 <span></span>
             </div>
-            {name}
+            My Rarible
         </div>
     )
 }

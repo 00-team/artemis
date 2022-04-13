@@ -108,7 +108,7 @@
             flex-direction: column;
             gap: 10vh;
 
-            .open-sea {
+            .rarible {
                 width: 100%;
                 display: flex;
                 align-content: center;
@@ -116,7 +116,7 @@
                 flex-wrap: wrap;
                 gap: 1vw;
 
-                .open-sea-btn {
+                .rarible-btn {
                     position: relative;
                     padding: 1rem 2rem;
                     z-index: 1;
@@ -214,13 +214,9 @@
                         content: '';
                     }
 
-                    &:hover {
-                        color: white;
-                    }
-
                     &:hover,
                     &:focus {
-                        color: white;
+                        color: #000;
 
                         .hover {
                             span:first-child {
@@ -294,17 +290,8 @@
                         }
                     }
 
-                    &.red {
-                        background: #ff5747;
-                    }
-
-                    &.green {
-                        background: #2bdc33;
-                    }
-
-                    &.blue {
-                        background: #16bfff;
-                    }
+                    background-color: #feda03;
+                    color: #000;
                 }
             }
             .owner-social-wrapper {

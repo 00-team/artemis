@@ -22,7 +22,7 @@ class OwnerAdmin(admin.ModelAdmin):
         ('Main', {
             'fields': (
                 'username',
-                'opensea',
+                'rarible',
                 'picture',
                 'banner',
                 'twitter',

@@ -13,7 +13,7 @@ class Owner(Model):
     description = models.TextField()
     floor_price = CharField(max_length=64)
     ceil_price = CharField(max_length=64)
-    opensea = models.URLField()
+    rarible = models.URLField()
     twitter = CharField(max_length=30, blank=True, null=True, unique=True)
     twitter_id = models.BigIntegerField(null=True, blank=True)
     instagram = CharField(max_length=30, blank=True, null=True)

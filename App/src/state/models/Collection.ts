@@ -13,7 +13,7 @@ interface OwnerModel {
     description: string
     floor_price: string
     ceil_price: string
-    opensea: string
+    rarible: string
     twitter: string | null
     instagram: string | null
     assets: AssetModel[]

@@ -45,7 +45,7 @@ CONTNET_EN = {
     ),
     'invite_banner': (
         'The first valid bot that gives free nft as a gift 🎁\n\n'
-        'From the opensea site ⛵️\n\n'
+        'From the rarible site ⛵️\n\n'
         'Gain multi-dollar nfts in just three steps 💵💰'
     ),
     'enough_invites': (
@@ -102,7 +102,7 @@ CONTNET_RU = {
     ),
     'invite_banner': (
         'Первый робот, раздающий nft бесплатно 🎁'
-        'С сайта: opensea ⛵️\n\n'
+        'С сайта: rarible ⛵️\n\n'
         'Получите многодолларовую NFT всего за три шага 💵💰'
     ),
     'enough_invites': (
