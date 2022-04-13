@@ -225,6 +225,12 @@ def update(request: HttpRequest):
         except TwitterAccount.DoesNotExist:
             raise E('You first need to connect your twitter!')
 
+        try:
+            if account.bot_user.total_invites < 3:
+                raise
+        except:
+            raise E('You need to invite 3 PPL in the bot first.')
+
         wallet = data.get('wallet')
 
         if not wallet:
