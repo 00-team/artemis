@@ -47,9 +47,10 @@ const Footer: FC = () => {
                 <div className='footer-logo'>
                     <a href='/'>
                         <img
-                            src='/s/img/00-Team.png'
+                            src='/s/img/logo.png'
                             alt='siteLogo site-logo site_logo'
                             draggable={false}
+                            onContextMenu={e => e.preventDefault()}
                         />
                     </a>
                     <div className='footer-description description'>
