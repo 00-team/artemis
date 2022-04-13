@@ -37,14 +37,16 @@ def owner_pre_save(sender, instance, **kwargs):
     try:
         try:
             cowner = sender.objects.get(id=instance.id)
+
+            if cowner.picture != instance.picture:
+                if cowner.picture:
+                    cowner.picture.delete(**DEL_KWARGS)
+
+            if cowner.banner != instance.banner:
+                if cowner.banner:
+                    cowner.banner.delete(**DEL_KWARGS)
         except:
             cowner = None
-
-        try:
-            if cowner.picture != instance.picture:
-                cowner.picture.delete(**DEL_KWARGS)
-        except:
-            pass
 
         if instance.twitter:
             if not cowner:
