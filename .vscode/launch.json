@@ -10,7 +10,10 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "cwd": "${fileDirname}"
+            "cwd": "${fileDirname}",
+            "env": {
+                "NIGHTCURLY_MODE": "DEV"
+            }
         },
         {
             "name": "Django",
@@ -18,7 +21,10 @@
             "request": "launch",
             "program": "${workspaceFolder}\\manage.py",
             "args": ["runserver", "7000", "--insecure"],
-            "django": true
+            "django": true,
+            "env": {
+                "NIGHTCURLY_MODE": "DEV"
+            }
         },
         {
             "name": "React",
