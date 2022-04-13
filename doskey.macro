@@ -7,6 +7,9 @@ m=python manage.py migrate
 c=python manage.py createsuperuser --username=$1 --email=$2
 run=run.cmd
 
+;= runnign the bot
+bot=set NIGHTCURLY_MODE=DEV && python Bot/run.py
+
 
 ;= npm react
 
