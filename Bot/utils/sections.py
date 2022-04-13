@@ -68,8 +68,19 @@ def check_inviter(update: Update, bot_user: User):
     if not bot_user.inviter or bot_user.CFI:
         return
 
+    the_bot = update.effective_user.bot
+
     try:
-        the_inviter = User(bot_user.inviter.user_id)
+        inviter_id = bot_user.inviter.user_id
+        inviter_chat = the_bot.get_chat(inviter_id)
+        the_inviter = User(inviter_id)
+
+        if user_not_joined(inviter_chat):
+            inviter_chat.send_message(
+                CONTNET[the_inviter.lang]['unsuccess_invite'])
+            bot_user.CFI_done()
+            raise
+
         old_total_invites = the_inviter.total_invites
         the_inviter.increase_invites()
         new_total_invites = the_inviter.total_invites
@@ -77,17 +88,10 @@ def check_inviter(update: Update, bot_user: User):
         if new_total_invites > old_total_invites:
             bot_user.CFI_done()
 
-            try:
-                the_bot = update.effective_user.bot
-                inviter_chat = the_bot.get_chat(the_inviter.user_id)
-                inviter_chat.send_message(
-                    CONTNET[the_inviter.lang]['success_invite']
-                )
-            except:
-                pass
-
+            inviter_chat.send_message(
+                CONTNET[the_inviter.lang]['success_invite'])
     except:
-        pass
+        return
 
 
 @user_data

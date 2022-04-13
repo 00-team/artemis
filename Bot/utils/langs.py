@@ -61,6 +61,7 @@ CONTNET_EN = {
         'invited three people to the robot 🎉'
     ),
     'success_invite': 'You have succeeded adding someone into the bot 🎉',
+    'unsuccess_invite': 'Unsuccessful invite! ❌',
 }
 
 
@@ -126,6 +127,7 @@ CONTNET_RU = {
         'в робота трех человек 🎉'
     ),
     'success_invite': 'Вам удалось добавить кого-то в бота 🎉',
+    'unsuccess_invite': 'Неудачное приглашение ❌',
 }
 
 TRANSLATED_CONTENT = ['en', 'ru']
