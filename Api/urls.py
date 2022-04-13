@@ -16,6 +16,7 @@ urlpatterns = [
             # twitter
             path('twitter_auth/', account.twitter_auth),
             path('twitter_callback/', account.twitter_callback),
+            path('disconnect_twitter/', account.disconnect_twitter),
 
             # main
             path('logout/', account.logout),

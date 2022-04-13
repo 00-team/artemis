@@ -62,3 +62,13 @@ const UpdateAccount: UA = wallet => async dispatch => {
     }
 }
 export { GetAccount, UpdateAccount }
+
+type DT = () => (d: Dispatch<any>) => Promise<void>
+const DisconnectTwitter: DT = () => async dispatch => {
+    try {
+        await axios.get(BASE_URL + 'disconnect_twitter/')
+
+        dispatch(GetAccount())
+    } catch (error) {}
+}
+export { DisconnectTwitter }

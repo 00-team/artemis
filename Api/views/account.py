@@ -246,3 +246,19 @@ def update(request: HttpRequest):
 
     except E as e:
         return e.response
+
+
+@require_GET
+@login_required('json')
+def disconnect_twitter(request: HttpRequest):
+    try:
+        account = request.user.account
+
+        try:
+            account.twitteraccount.delete()
+        except:
+            pass
+
+        return JsonResponse({'ok': 'your twitter was successfully disconnected'})
+    except E as e:
+        return e.response

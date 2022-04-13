@@ -26,7 +26,7 @@ import { HiOutlineArrowNarrowRight } from '@react-icons/all-files/hi/HiOutlineAr
 
 // redux
 import { useSelector, useDispatch } from 'react-redux'
-import { GetAccount, RootState, UpdateAccount } from 'state'
+import { DisconnectTwitter, GetAccount, RootState, UpdateAccount } from 'state'
 import { AccountModel, TwitterModel } from 'state/models/Account'
 
 // utils
@@ -59,7 +59,7 @@ const Account: FC = () => {
 export default Account
 
 const AccountSideBar: FC<AccountModel> = props => {
-    const { picture, first_name } = props
+    const { picture, first_name, username } = props
 
     return (
         <div className='sidebar-container'>
@@ -78,7 +78,7 @@ const AccountSideBar: FC<AccountModel> = props => {
                             className='account-name title_small transform'
                             style={{ animationDelay: '1s' }}
                         >
-                            username test
+                            {username || first_name}
                         </div>
                     </span>
                 </div>
@@ -96,12 +96,12 @@ const AccountSideBar: FC<AccountModel> = props => {
 }
 
 const TWITTER_DEFAULT: TwitterModel = {
-    description: ' ',
+    description: '',
     followers: 0,
     followings: 0,
     tweets: 0,
     nickname: 'unknown',
-    picture: 'https://identix.state.gov/qotw/images/no-photo.gif',
+    picture: '/s/img/no-photo.png',
     user_id: '0000000000',
     username: 'unknown',
 }
@@ -210,6 +210,7 @@ interface TwitterCardProps {
 }
 
 const TwitterCard: FC<TwitterCardProps> = ({ twitter, status }) => {
+    const dispatch = useDispatch()
     const { followers, followings, tweets, picture } = twitter
     const { nickname, username, description } = twitter
 
@@ -287,7 +288,10 @@ const TwitterCard: FC<TwitterCardProps> = ({ twitter, status }) => {
                 </div>
                 <div className='bottom-columns'>
                     {status && (
-                        <div className='disconnect-column bottom-column title_small'>
+                        <div
+                            className='disconnect-column bottom-column title_small'
+                            onClick={() => dispatch(DisconnectTwitter())}
+                        >
                             <div className='icon'>
                                 <RiLogoutBoxLine size={24} />
                             </div>
