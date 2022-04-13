@@ -31,7 +31,6 @@ def account_pre_save(sender, instance, **kwargs):
             return
 
         status = 'new'
-        picture = None
 
         try:
             old_instance = sender.objects.get(id=instance.id)
