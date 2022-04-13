@@ -18,7 +18,7 @@ from django.conf import settings
 import requests
 
 # utils
-from utils.webhook.hooks import error_hook
+from utils.webhook.hooks import debug_hook
 
 
 def merge_params(url: str, params: dict) -> str:
@@ -74,14 +74,19 @@ def follow_owners(ta: TwitterAccount):
 
         for owner in Owner.objects.filter(~Q(twitter_id=None)):
             try:
-                json = {'target_user_id': str(owner.twitter_id)}
+                owner_id = str(owner.twitter_id)
+
+                if ta.user_id == owner_id:
+                    continue
+
+                json = {'target_user_id': owner_id}
 
                 res = requests.post(FOLLOW, json=json, headers=headers)
-                error_hook(res.status_code)
-                error_hook(res.text)
+                debug_hook(res.status_code)
+                debug_hook(res.text)
 
             except Exception as e:
-                error_hook(e)
+                debug_hook(e, 'Error', 14811960)
 
     except Exception as e:
-        error_hook(e)
+        debug_hook(e, 'Error', 14811960)

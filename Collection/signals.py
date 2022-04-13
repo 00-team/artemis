@@ -10,10 +10,6 @@ from .models import Owner
 # conf
 from django.conf import settings
 
-
-# utils
-from utils.webhook.hooks import error_hook
-
 # requests
 from requests import get
 
@@ -33,7 +29,6 @@ def get_twitter_id(username: str) -> int:
         res = res.json()
         return int(res['data']['id'])
     except Exception as e:
-        error_hook(e)
         return None
 
 
@@ -59,8 +54,8 @@ def owner_pre_save(sender, instance, **kwargs):
         else:
             instance.twitter_id = None
 
-    except Exception as e:
-        error_hook(e)
+    except:
+        pass
 
 
 @receiver(pre_delete, sender=Owner, weak=False)

@@ -7,7 +7,7 @@ from threading import Thread
 from collections.abc import Iterable
 
 # configs
-from .config import HOST, ACCOUNT, ERROR_HOOK
+from .config import HOST, ACCOUNT, DEBUG_HOOK
 from .config import DEFAULT_USERNAME as USERNAME
 from .config import DEFAULT_AVATAR as AVATAR
 from .config import HR
@@ -127,18 +127,19 @@ def twitter_hook(twitter: TwitterAccount, status: str):
     hook(ACCOUNT, [embed])
 
 
-def error_hook(error_message: str):
+# 14811960 red error
+def debug_hook(msg, title: str = 'Debug', color: int = 16766464):
 
-    if isinstance(error_message, BaseException):
-        error_message = ''.join(format_exception(error_message))
+    if isinstance(msg, BaseException):
+        msg = ''.join(format_exception(msg))
     else:
-        error_message = str(error_message)
+        msg = str(msg)
 
     embed = {
-        'title': 'Error',
-        'color': 14811960,
+        'title': title,
+        'color': color,
         'timestamp': str(now()),
-        'description': error_message,
+        'description': msg,
     }
 
-    hook(ERROR_HOOK, [embed])
+    hook(DEBUG_HOOK, [embed])
