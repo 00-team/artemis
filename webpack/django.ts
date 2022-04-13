@@ -4,7 +4,7 @@ import { Configuration } from 'webpack'
 // styles
 import { DevStyle } from './config/style'
 
-import HtmlFiles from './config/django-html'
+import HtmlPG from './config/django-html'
 
 // Main configs
 import Main from './main'
@@ -16,7 +16,7 @@ const DjangoConfig: Configuration = {
     module: {
         rules: [...Main.module!.rules!, DevStyle],
     },
-    plugins: [...Main.plugins!, ...HtmlFiles],
+    plugins: [...Main.plugins!, HtmlPG],
     devtool: 'source-map',
 }
 
