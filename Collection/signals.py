@@ -5,7 +5,7 @@ from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 
 # models
-from .models import Owner
+from .models import Asset, Owner
 
 # conf
 from django.conf import settings
@@ -59,8 +59,17 @@ def owner_pre_save(sender, instance, **kwargs):
 
 
 @receiver(pre_delete, sender=Owner, weak=False)
-def owner_pre_save(instance, **kwargs):
+def owner_pre_delete(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
+        instance.banner.delete(**DEL_KWARGS)
+    except:
+        pass
+
+
+@receiver(pre_delete, sender=Asset, weak=False)
+def assets_pre_delete(instance, **kwargs):
+    try:
+        instance.image.delete(**DEL_KWARGS)
     except:
         pass
