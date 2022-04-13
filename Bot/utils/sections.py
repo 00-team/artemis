@@ -20,13 +20,8 @@ from .data import get_chats, update_chats
 # langs
 from .langs import CONTNET
 
-# dev
-JOIN_PHOTO = 'AgACAgQAAxkBAAN4YlcGc-LEZrXrrV6EAmvOeEoabNIAAu63MRtlLXhSLdmNOuKcNnsBAAMCAAN5AAMjBA'
-INVITE_PHOTO = 'AgACAgQAAxkBAAN4YlcGc-LEZrXrrV6EAmvOeEoabNIAAu63MRtlLXhSLdmNOuKcNnsBAAMCAAN5AAMjBA'
-
-# Build
-# JOIN_PHOTO = 'AgACAgQAAxkBAAMcYlPE6VOaIQGeI7qRwoHqokPZPiAAAkq4MRtrw3BQ5voxhZtnD_sBAAMCAAN4AAMjBA'
-# INVITE_PHOTO = 'AgACAgQAAxkBAAMcYlPE6VOaIQGeI7qRwoHqokPZPiAAAkq4MRtrw3BQ5voxhZtnD_sBAAMCAAN4AAMjBA'
+# config
+from .config import JOIN_PHOTO, INVITE_PHOTO
 
 
 @user_data

@@ -17,6 +17,9 @@ with open(BASE_DIR / 'secrets.json', 'r') as f:
     BOT_SECRET = SECRETS['BOT']['SECRET']
     HEADERS = {'Authorization': BOT_SECRET}
 
+    JOIN_PHOTO = SECRETS[MODE]['JOIN_PHOTO']
+    INVITE_PHOTO = SECRETS[MODE]['INVITE_PHOTO']
+
     INTERNAL_HOST = 'http://' + SECRETS[MODE]['INTERNAL_HOST']
 
     if MODE == 'DEV':
