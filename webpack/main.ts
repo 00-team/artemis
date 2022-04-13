@@ -7,7 +7,8 @@ import { DIST_DIR, SRC_DIR, resolve } from './config/path'
 import Entries from './config/entries'
 
 // plugins
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+// new BundleAnalyzerPlugin({ openAnalyzer: false })
 
 const Main: Configuration = {
     entry: Entries,
@@ -31,7 +32,7 @@ const Main: Configuration = {
             },
         ],
     },
-    plugins: [new BundleAnalyzerPlugin({ openAnalyzer: false })],
+    plugins: [],
     resolve: {
         extensions: ['.mjs', '.tsx', '.ts', '.js'],
         alias: {
