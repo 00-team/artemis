@@ -45,6 +45,8 @@ class Secrets:
     BOT_SECRET: str
     BOT_USERNAME: str
 
+    data: dict
+
     def __init__(self):
         self.mode = get_mode()
         self.__set_data__()
@@ -55,6 +57,7 @@ class Secrets:
 
     def __set_data__(self):
         data = self.__get_data__()
+        self.data = data
 
         self.SECRET_KEY = data['SECRET_KEY']
 

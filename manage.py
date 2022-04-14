@@ -3,16 +3,12 @@
 import os
 import sys
 
+from nightcurly.secrets import get_settings
+
 
 def main():
     """Run administrative tasks."""
-    if os.environ.get('NIGHTCURLY_MODE') == 'DEV':
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nightcurly.settings')
-    else:
-        os.environ.setdefault(
-            'DJANGO_SETTINGS_MODULE',
-            'nightcurly.build_settings'
-        )
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', get_settings())
 
     try:
         from django.core.management import execute_from_command_line
