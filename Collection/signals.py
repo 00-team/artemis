@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 def get_twitter_id(username: str) -> int:
     url = f'https://api.twitter.com/2/users/by/username/{username}'
 
-    headers = {'Authorization': f'Bearer {settings.TWITTER_BEARER}'}
+    headers = {'Authorization': f'Bearer {settings.SECRETS.TWITTER_BEARER}'}
 
     try:
         res = get(url, headers=headers)

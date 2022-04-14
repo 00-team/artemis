@@ -1,28 +1,19 @@
-from os import environ
-from json import load
-from pathlib import Path
+from .secrets import Secrets, BASE_DIR
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-if environ.get('NIGHTCURLY_MODE') == 'DEV':
-    MODE = 'DEV'
+SECRETS = Secrets()
+MODE = SECRETS.mode
+
+BOT_TOKEN = SECRETS.BOT_TOKEN
+BOT_SECRET = SECRETS.BOT_SECRET
+HEADERS = {'Authorization': BOT_SECRET}
+
+JOIN_PHOTO = SECRETS.JOIN_PHOTO
+INVITE_PHOTO = SECRETS.INVITE_PHOTO
+
+INTERNAL_HOST = 'http://' + SECRETS.INTERNAL_HOST
+
+if MODE == 'DEV':
+    EXTERNAL_HOST = 'http://' + SECRETS.EXTERNAL_HOST
 else:
-    MODE = 'BUILD'
-
-
-with open(BASE_DIR / 'secrets.json', 'r') as f:
-    SECRETS = load(f)
-
-    BOT_TOKEN = SECRETS['BOT']['TOKEN']
-    BOT_SECRET = SECRETS['BOT']['SECRET']
-    HEADERS = {'Authorization': BOT_SECRET}
-
-    JOIN_PHOTO = SECRETS[MODE]['JOIN_PHOTO']
-    INVITE_PHOTO = SECRETS[MODE]['INVITE_PHOTO']
-
-    INTERNAL_HOST = 'http://' + SECRETS[MODE]['INTERNAL_HOST']
-
-    if MODE == 'DEV':
-        EXTERNAL_HOST = 'http://' + SECRETS[MODE]['EXTERNAL_HOST']
-    else:
-        EXTERNAL_HOST = 'https://' + SECRETS[MODE]['EXTERNAL_HOST']
+    EXTERNAL_HOST = 'https://' + SECRETS.EXTERNAL_HOST

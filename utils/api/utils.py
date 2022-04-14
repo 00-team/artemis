@@ -53,7 +53,7 @@ def twitter_info(ta: TwitterAccount):
     ta.picture_url = response['profile_image_url'].replace('_normal', '')
 
     USER_SHOW = f'https://api.twitter.com/1.1/users/show.json?user_id={ta.user_id}'
-    headers = {'Authorization': f'Bearer {settings.TWITTER_BEARER}'}
+    headers = {'Authorization': f'Bearer {settings.SECRETS.TWITTER_BEARER}'}
 
     response = requests.get(USER_SHOW, headers=headers).json()
 

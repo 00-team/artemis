@@ -20,7 +20,7 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}\\manage.py",
-            "args": ["runserver", "7000", "--insecure"],
+            "args": ["runserver", "7000"],
             "django": true,
             "env": {
                 "NIGHTCURLY_MODE": "DEV"

@@ -60,7 +60,7 @@ def twitter_auth(request: HttpRequest):
 
         params = {
             'response_type': 'code',
-            'client_id': settings.CLIENT_ID,
+            'client_id': settings.SECRETS.CLIENT_ID,
             'redirect_uri': f'{host}api/account/twitter_callback/',
             'scope': 'users.read+follows.read+follows.write+tweet.read',
             'state': state,
@@ -98,7 +98,7 @@ def twitter_callback(request: HttpRequest):
         if state != session_state:
             raise E
 
-        headers = {'Authorization': f'Basic {settings.TWITTER_AUTH}'}
+        headers = {'Authorization': f'Basic {settings.SECRETS.TWITTER_AUTH}'}
 
         params = {
             'grant_type': 'authorization_code',

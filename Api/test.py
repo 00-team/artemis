@@ -30,7 +30,7 @@ class AccountTestCase(TestCase):
 
         data_message = '\n'.join(data_list).encode()
 
-        token = sha256(settings.BOT_TOKEN.encode()).digest()
+        token = sha256(settings.SECRETS.BOT_TOKEN.encode()).digest()
 
         hashed = hmac.new(token, msg=data_message, digestmod=sha256)
         hashed = hashed.hexdigest()

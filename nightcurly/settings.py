@@ -1,33 +1,14 @@
-from json import loads
-from pathlib import Path
-from base64 import b64encode
+from .secrets import BASE_DIR, Secrets
 
-
-MODE = 'DEV'
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-with open(BASE_DIR / 'secrets.json', 'r') as f:
-    SECRETS = loads(f.read())
-    SECRET_KEY = SECRETS['SECRET_KEY']
-
-    BOT_TOKEN = SECRETS['BOT']['TOKEN']
-    BOT_SECRET = SECRETS['BOT']['SECRET']
-    BOT_USERNAME = SECRETS['BOT']['USERNAME']
-
-    CLIENT_ID = SECRETS['TWITTER']['CLIENT_ID']
-    CLIENT_SECRET = SECRETS['TWITTER']['CLIENT_SECRET']
-    TWITTER_BEARER = SECRETS['TWITTER']['BEARER_TOKEN']
-    TWITTER_AUTH = b64encode(f'{CLIENT_ID}:{CLIENT_SECRET}'.encode()).decode()
-
-    WEBHOOKS = SECRETS['WEBHOOKS']
+SECRETS = Secrets()
+SECRET_KEY = SECRETS.SECRET_KEY
 
 
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-LOGIN_URL = f'//t.me/{BOT_USERNAME}?start=login'
+LOGIN_URL = f'//t.me/{SECRETS.BOT_USERNAME}?start=login'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
