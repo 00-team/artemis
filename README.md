@@ -13,12 +13,6 @@ then put your variables on it.
 {
     "SECRET_KEY": "django random secret key",
 
-    "BOT": {
-        "TOKEN": "your telegram bot token",
-        "SECRET": "bot random secret",
-        "USERNAME": "your bot username"
-    },
-
     "TWITTER": {
         "CLIENT_ID": "twitter api client id",
         "CLIENT_SECRET": "twitter api client secret",
@@ -32,13 +26,31 @@ then put your variables on it.
 
     "DEV": {
         "INTERNAL_HOST": "127.0.0.1:8000", // sample
-        "EXTERNAL_HOST": "localhost:8000" // sample
+        "EXTERNAL_HOST": "localhost:8000", // sample
+
+        "JOIN_PHOTO": "a photo id for telegram bot",
+        "INVITE_PHOTO": "just forward the photos for the bot",
+
+        "BOT": {
+            "TOKEN": "your telegram bot token",
+            "SECRET": "bot random secret",
+            "USERNAME": "your bot username"
+        }
     },
 
     "BUILD": {
         "INTERNAL_HOST": "0.0.0.0", // a local ip for connecting the bot to django ...
         "EXTERNAL_HOST": "your server ip OR your domain name",
-        "ALLOWED_HOSTS": ["django allowed hosts"]
+        "ALLOWED_HOSTS": ["django allowed hosts"],
+
+        "JOIN_PHOTO": "a photo id for telegram bot",
+        "INVITE_PHOTO": "just forward the photos for the bot",
+
+        "BOT": {
+            "TOKEN": "your telegram bot token",
+            "SECRET": "bot random secret",
+            "USERNAME": "your bot username"
+        }
     }
 }
 ```
