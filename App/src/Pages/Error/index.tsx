@@ -1,11 +1,15 @@
 import React, { FC } from 'react'
 
-import { Link } from 'react-router-dom'
-
 // style
 import './style/error404.scss'
 
-const Error: FC = () => {
+interface ErrorProps {
+    code?: string | number
+    title?: string
+    description?: string
+}
+
+const Error: FC<ErrorProps> = ({ title, description }) => {
     return (
         <div className='error-container'>
             <div className='stars'>
@@ -26,11 +30,13 @@ const Error: FC = () => {
             <section className='error'>
                 <div className='error__content'>
                     <div className='error__message message'>
-                        <h1 className='message__title title'>Title</h1>
-                        <p className='message__text title_small'>Description</p>
+                        <h1 className='message__title title'>{title}</h1>
+                        <p className='message__text title_small'>
+                            {description}
+                        </p>
                     </div>
                     <div className='error__nav e-nav'>
-                        <Link to='/' className='e-nav__link' />
+                        <a href='/' className='e-nav__link' />
                     </div>
                 </div>
             </section>

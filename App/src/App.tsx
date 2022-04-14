@@ -47,6 +47,15 @@ const App: FC = () => {
             })
     }, [dispatch])
 
+    if (typeof errorCode !== 'undefined')
+        return (
+            <Error
+                code={errorCode}
+                title={errorTitle}
+                description={errorDescription}
+            />
+        )
+
     return (
         <>
             <Navbar />
@@ -55,9 +64,6 @@ const App: FC = () => {
                     <Route path='/' element={<Home />} />
                     <Route path='/owners/:username' element={<Owner />} />
                     <Route path='account' element={<Account />} />
-
-                    {/* Error  */}
-                    <Route path='*' element={<Error />} />
                 </Routes>
             </main>
             <Footer />
