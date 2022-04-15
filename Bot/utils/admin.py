@@ -16,18 +16,27 @@ def photo_info(update: Update, **kwargs):
     photos = update.effective_message.photo
     chat = update.effective_chat
 
-    for photo in photos:
-        caption = (
-            f'file id: \n`{photo.file_id}`\n\n'
-            f'file size: `{photo.file_size // 1000} KB`\n'
-            f'width: {photo.width}\n'
-            f'height: {photo.height}'
-        )
-        chat.send_photo(
-            photo.file_id,
-            caption=caption,
-            parse_mode='MarkdownV2',
-        )
+    photo = None
+
+    for p in photos:
+        if not photo:
+            photo = p
+            continue
+
+        if photo.file_size < p.file_size:
+            photo = p
+
+    caption = (
+        f'file id: \n`{photo.file_id}`\n\n'
+        f'file size: `{photo.file_size // 1000} KB`\n'
+        f'width: {photo.width}\n'
+        f'height: {photo.height}'
+    )
+    chat.send_photo(
+        photo.file_id,
+        caption=caption,
+        parse_mode='MarkdownV2',
+    )
 
 
 @user_data

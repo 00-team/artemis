@@ -21,7 +21,7 @@ from .data import get_chats, update_chats
 from .langs import CONTNET, TRANSLATED_CONTENT
 
 # config
-from .config import JOIN_PHOTO, INVITE_PHOTO
+from .config import get_photo
 
 
 @user_data
@@ -96,7 +96,7 @@ def join_chats(update: Update, bot_user, lang, **kwargs):
 
     if user_chats:
         chat.send_photo(
-            JOIN_PHOTO,
+            get_photo(),
             caption=CONTNET[lang]['join_chats'],
             reply_markup=join_keyboard(user_chats, lang),
         )
@@ -105,7 +105,7 @@ def join_chats(update: Update, bot_user, lang, **kwargs):
 
     check_inviter(update, bot_user)
     chat.send_photo(
-        JOIN_PHOTO,
+        get_photo(),
         caption=CONTNET[lang]['joined_chats'],
     )
 
@@ -150,7 +150,7 @@ def invite(update: Update, bot_user: User, lang, **kwargs):
     user.send_message(text)
 
     user.send_photo(
-        INVITE_PHOTO,
+        get_photo(),
         CONTNET[lang]['invite_banner'],
         reply_markup=invite_keyboard(user_link, lang),
     )

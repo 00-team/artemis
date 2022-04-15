@@ -31,12 +31,11 @@ class Secrets:
 
     INTERNAL_HOST: str
     EXTERNAL_HOST: str
-    JOIN_PHOTO: str
-    INVITE_PHOTO: str
 
     BOT_TOKEN: str
     BOT_SECRET: str
     BOT_USERNAME: str
+    PHOTOS: list
 
     def __init__(self):
         self.mode = get_mode()
@@ -59,12 +58,11 @@ class Secrets:
 
         self.INTERNAL_HOST = data[self.mode]['INTERNAL_HOST']
         self.EXTERNAL_HOST = data[self.mode]['EXTERNAL_HOST']
-        self.JOIN_PHOTO = data[self.mode]['JOIN_PHOTO']
-        self.INVITE_PHOTO = data[self.mode]['INVITE_PHOTO']
 
         self.BOT_TOKEN = data[self.mode]['BOT']['TOKEN']
         self.BOT_SECRET = data[self.mode]['BOT']['SECRET']
         self.BOT_USERNAME = data[self.mode]['BOT']['USERNAME']
+        self.PHOTOS = data[self.mode]['BOT']['PHOTOS']
 
         self.__twitter_auth__()
 
