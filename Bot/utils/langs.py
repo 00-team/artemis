@@ -39,7 +39,10 @@ CONTNET_EN = {
     'chats_check_button': 'Check ✅',
     'join_chats': 'Subscribe to the channel below 👇',
     'joined_chats': 'you already join all the channels',
-    'join_complete': 'Congratulations\nSuccessfully joined the channels 🎉',
+    'join_complete': (
+        'Congratulations\nSuccessfully joined the channels 🎉\n'
+        'Click to go to the next step 👉  /invite'
+    ),
     'join_incomplete': (
         'You have not joined the channels yet\n'
         'Join all channels and click the check button'
@@ -105,7 +108,10 @@ CONTNET_RU = {
     'chats_check_button': 'Проверьте ✅',
     'join_chats': 'Подпишитесь на канал ниже 👇',
     'joined_chats': 'you already join all the channels',
-    'join_complete': 'Поздравления\nУспешно присоединился к каналу 🎉',
+    'join_complete': (
+        'Поздравления\nУспешно присоединился к каналу 🎉\n'
+        'Нажмите, чтобы перейти к следующему шагу 👉  /invite'
+    ),
     'join_incomplete': (
         'Вы еще не присоединились к каналам\n'
         'Присоединяйтесь ко всем каналам и нажмите кнопку проверки'
