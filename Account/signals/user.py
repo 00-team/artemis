@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 def user_pre_save(instance, **kwargs):
     if not instance.username:
         while True:
-            username = get_random_string(32)
+            username = 'random_user-' + get_random_string(32)
             if User.objects.filter(username=username).exists():
                 continue
             else:
