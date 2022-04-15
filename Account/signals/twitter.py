@@ -1,5 +1,5 @@
 # signals
-from django.db.models.signals import pre_delete, pre_save
+from django.db.models.signals import pre_delete, pre_save, post_save
 from django.dispatch import receiver
 
 # models
@@ -23,11 +23,8 @@ def twitter_pre_save(sender, instance, **kwargs):
             instance.picture.delete(**DEL_KWARGS)
             return
 
-        status = 'connect'
-
         try:
             old_instance = sender.objects.get(id=instance.id)
-            status = 'reconnect'
             old_instance.picture.delete(**DEL_KWARGS)
         except:
             pass
@@ -37,6 +34,14 @@ def twitter_pre_save(sender, instance, **kwargs):
         if picture:
             instance.picture = picture
 
+    except:
+        pass
+
+
+@receiver(post_save, sender=TwitterAccount, weak=False)
+def twitter_post_save(instance, created, **kwargs):
+    try:
+        status = 'connect' if created else 'reconnect'
         twitter_hook(instance, status)
     except:
         pass

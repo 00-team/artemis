@@ -1,5 +1,5 @@
 # signals
-from django.db.models.signals import pre_delete, pre_save
+from django.db.models.signals import pre_delete, pre_save, post_save
 from django.dispatch import receiver
 
 # models
@@ -16,7 +16,7 @@ DEL_KWARGS = {'save': False}
 
 
 # media - profile picture
-@receiver(pre_save, sender=Account)
+@receiver(pre_save, sender=Account, weak=False)
 def account_pre_save(sender, instance, **kwargs):
     try:
         try:
@@ -30,11 +30,8 @@ def account_pre_save(sender, instance, **kwargs):
             instance.picture.delete(**DEL_KWARGS)
             return
 
-        status = 'new'
-
         try:
             old_instance = sender.objects.get(id=instance.id)
-            status = 'update'
             old_instance.picture.delete(**DEL_KWARGS)
         except:
             pass
@@ -44,6 +41,14 @@ def account_pre_save(sender, instance, **kwargs):
         if picture:
             instance.picture = picture
 
+    except:
+        pass
+
+
+@receiver(post_save, sender=Account, weak=False)
+def account_post_save(instance, created, **kwargs):
+    try:
+        status = 'new' if created else 'update'
         account_hook(instance, status)
     except:
         pass

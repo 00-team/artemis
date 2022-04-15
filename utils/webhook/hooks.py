@@ -25,7 +25,8 @@ from traceback import format_exception
 def get_picture(url: None | str) -> str | None:
     if settings.DEBUG:
         return 'https://loremflickr.com/300/300'
-    elif url:
+
+    if url:
         return HOST + url
 
 
