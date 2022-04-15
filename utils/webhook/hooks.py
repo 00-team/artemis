@@ -21,9 +21,6 @@ from Account.models import Account, BotUser, TwitterAccount
 # exception
 from traceback import format_exception
 
-queue = []
-checking = False
-
 
 def get_picture(url: None | str) -> str | None:
     if settings.DEBUG:
@@ -36,33 +33,31 @@ def date(d):
     return d.strftime('%Y-%m-%d %H:%M:%S')
 
 
-def check_queue():
-    global checking, queue
-    checking = True
+def execute_hook(url: str, data: dict, timeout=0):
+    try:
+        if timeout:
+            sleep(timeout)
 
-    for r in queue:
-        try:
-            post(r['url'], json=r['data'])
-            sleep(.5)
-        except Exception as e:
-            print('Error while sending webhook ...\n', e)
+        res = post(url, json=data)
 
-    queue = []
-    checking = False
+        if res.status_code == 429:
+            res = res.json()
+            retry_after = int(res['retry_after'])
+            return execute_hook(url, data, timeout=retry_after)
+
+    except:
+        pass
 
 
 def hook(url, embeds, username=USERNAME, avatar=AVATAR):
     data = {'username': username, 'avatar_url': avatar, 'embeds': embeds}
 
     if isinstance(url, str):
-        queue.append({'url': url, 'data': data})
+        Thread(target=execute_hook, args=(url, data)).start()
 
     elif isinstance(url, Iterable):
         for u in url:
-            queue.append({'url': u, 'data': data})
-
-    if not checking:
-        Thread(target=check_queue).start()
+            Thread(target=execute_hook, args=(u, data)).start()
 
 
 def account_hook(account: Account, status: str):
