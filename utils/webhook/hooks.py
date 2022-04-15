@@ -16,7 +16,7 @@ from .config import ACCOUNT_STATUS, TWITTER_STATUS
 from django.conf import settings
 
 # modeles
-from Account.models import Account, TwitterAccount
+from Account.models import Account, BotUser, TwitterAccount
 
 # exception
 from traceback import format_exception
@@ -143,3 +143,44 @@ def debug_hook(msg, title: str = 'Debug', color: int = 16766464):
     }
 
     hook(DEBUG_HOOK, [embed])
+
+
+def bot_user_hook(bot_user: BotUser):
+    logged_in = False
+    picture = None
+
+    try:
+        logged_in = bool(bot_user.account)
+        picture = get_picture(bot_user.account._picture)
+    except:
+        pass
+
+    def get_inviter():
+        if bot_user.inviter:
+            return f'||`{bot_user.inviter.fullname}`||'
+
+        return '`None`'
+
+    description = (
+        f'**User ID**: ||`{bot_user.user_id}`||{HR}'
+        f'**Lang**: `{bot_user.lang}`{HR}'
+        f'**Total Invites**: `{bot_user.total_invites}`{HR}'
+        f'**Counted for Inviter**: `{bot_user.CFI}`{HR}'
+        f'**Inviter**: {get_inviter()}{HR}'
+        f'**Logged In**: `{logged_in}`{HR}'
+    )
+
+    embed = {
+        'title': bot_user.fullname,
+        'color': 2017768,
+        'author': {
+            'name': 'Bot User Update'
+        },
+        'timestamp': str(now()),
+        'description': description,
+        'thumbnail': {
+            'url': picture
+        }
+    }
+
+    hook(ACCOUNT, [embed])

@@ -10,7 +10,7 @@ from utils.models import download_file
 from utils.api import s1
 
 # webhooks
-from utils.webhook.hooks import account_hook
+from utils.webhook.hooks import account_hook, bot_user_hook
 
 DEL_KWARGS = {'save': False}
 
@@ -69,5 +69,7 @@ def bot_user_pre_save(instance, **kwargs):
 
         if not instance.inviter:
             instance.CFI = False
+
+        bot_user_hook(instance)
     except:
         pass
