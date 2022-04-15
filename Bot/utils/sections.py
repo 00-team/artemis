@@ -18,7 +18,7 @@ from .decorators import user_data
 from .data import get_chats, update_chats
 
 # langs
-from .langs import CONTNET
+from .langs import CONTNET, TRANSLATED_CONTENT
 
 # config
 from .config import JOIN_PHOTO, INVITE_PHOTO
@@ -67,24 +67,23 @@ def check_inviter(update: Update, bot_user: User):
 
     try:
         inviter_id = bot_user.inviter.user_id
-        inviter_chat = the_bot.get_chat(inviter_id)
-        the_inviter = User(inviter_id)
+        inviter_user = the_bot.get_chat_member(inviter_id, inviter_id).user
+        inviter_lang = inviter_user.language_code
 
-        if user_not_joined(inviter_chat):
-            inviter_chat.send_message(
-                CONTNET[the_inviter.lang]['unsuccess_invite'])
-            bot_user.CFI_done()
-            raise
+        if inviter_lang not in TRANSLATED_CONTENT:
+            inviter_lang = 'en'
 
-        old_total_invites = the_inviter.total_invites
-        the_inviter.increase_invites()
-        new_total_invites = the_inviter.total_invites
+        if user_not_joined(inviter_user):
+            bot_user.update_inviter(increase=False)
 
-        if new_total_invites > old_total_invites:
-            bot_user.CFI_done()
+            unsuccess_invite = CONTNET[inviter_lang]['unsuccess_invite']
+            inviter_user.send_message(unsuccess_invite)
 
-            inviter_chat.send_message(
-                CONTNET[the_inviter.lang]['success_invite'])
+            return
+
+        bot_user.update_inviter()
+
+        inviter_user.send_message(CONTNET[inviter_lang]['success_invite'])
     except:
         return
 

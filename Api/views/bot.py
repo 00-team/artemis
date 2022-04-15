@@ -74,3 +74,32 @@ def get_bot_user(request: HttpRequest):
         return JsonResponse({**bot_user.to_json, 'exists': exists})
     except E as e:
         return e.response
+
+
+@require_GET
+@bot_api
+def update_inviter(request: HttpRequest):
+    try:
+        data = get_data(request)
+
+        try:
+            user_id = int(data['user_id'])
+            increase = bool(data.get('increase'))
+            bot_user = BotUser.objects.get(user_id=user_id)
+        except:
+            raise E('user_id is invalid!')
+
+        inviter = bot_user.inviter
+
+        if inviter and not bot_user.CFI:
+            bot_user.CFI = True
+            bot_user.save()
+
+            if increase:
+                inviter.total_invites = inviter.total_invites + 1
+                inviter.save()
+
+        return JsonResponse({'ok': 'Done!'})
+
+    except E as e:
+        return e.response

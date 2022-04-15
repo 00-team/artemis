@@ -67,14 +67,14 @@ class User:
         if res['inviter']:
             self.inviter = Inviter(res['inviter'])
 
-    # TODO: moving this two method into the backend (api) side
-    def increase_invites(self):
-        params = {
-            'user_id': self.user_id,
-            'total_invites': self.total_invites + 1
-        }
-        self.get_user(params)
+    def update_inviter(self, increase: bool = True):
+        params = {'user_id': self.user_id}
 
-    def CFI_done(self):
-        params = {'user_id': self.user_id, 'CFI': True}
-        self.get_user(params)
+        if increase:
+            params['increase'] = 'true'
+
+        requests.get(
+            HOST + 'update_inviter/',
+            params=params,
+            headers=HEADERS,
+        )
