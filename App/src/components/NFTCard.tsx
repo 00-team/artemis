@@ -20,14 +20,14 @@ const NFTCard: FC<AssetModel> = ({ description, image, title }) => {
                     </div>
                 </div>
 
-                <div className='created-by-wrapper'>
+                {/* <div className='created-by-wrapper'>
                     <div className='created-by'>
                         <div className='avatar'></div>
                         <div className='text title_smaller'>
                             Creation Of: <span className='owner'>ALIEN</span>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
