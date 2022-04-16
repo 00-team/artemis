@@ -275,6 +275,11 @@
                 border-top-right-radius: 50%;
                 position: relative;
                 z-index: 200;
+
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                color: black;
             }
             .in-cover {
                 width: 100%;
