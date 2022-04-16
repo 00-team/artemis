@@ -35,11 +35,24 @@ class BotUserAdmin(admin.ModelAdmin):
             return 'No'
 
 
+@admin.action(description='Participated')
+def participated(modeladmin, request, queryset):
+    queryset.update(participated=True)
+
+
+@admin.action(description='No Participated')
+def no_participated(modeladmin, request, queryset):
+    queryset.update(participated=False)
+
+
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'telegram_id', 'username', 'pic')
+    list_display = ('__str__', 'telegram_id',
+                    'username', 'participated', 'pic')
     readonly_fields = ('pic', )
     search_fields = ('username', 'telegram_id')
+    list_filter = ('participated', )
+    actions = (participated, no_participated)
 
     @admin.display
     def pic(self, obj):

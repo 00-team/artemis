@@ -3,6 +3,7 @@ from django.urls import path, include
 from .views import account
 from .views import bot
 from .views import collection
+from .views import tools
 
 urlpatterns = [
 
@@ -42,6 +43,14 @@ urlpatterns = [
             path('owners/', collection.get_owners),
             path('owner/', collection.get_owner),
             path('faqs/', collection.get_faqs),
+        ]),
+    ),
+
+    # Tools
+    path(
+        'tools/',
+        include([
+            path('wallets/', tools.wallets),
         ]),
     ),
 ]

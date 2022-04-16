@@ -170,6 +170,7 @@ class Account(models.Model):
         null=True,
     )
     wallet = models.CharField(max_length=42, blank=True, null=True)
+    participated = models.BooleanField(default=False)
 
     objects = AccountManager()
 
