@@ -43,14 +43,21 @@ const Account: FC = () => {
     }, [dispatch])
 
     const AccountState = useSelector((s: RootState) => s.Account)
+    const [SectionActive, setSectionActive] = useState('all')
 
     if (!AccountState) return <></>
 
     return (
         <div className='account-container'>
             <div className='account-wrapper'>
-                <AccountSideBar {...AccountState} />
-                <AccountContent {...AccountState} />
+                <AccountSideBar
+                    setSectionActive={setSectionActive}
+                    {...AccountState}
+                />
+                <AccountContent
+                    SectionActive={SectionActive}
+                    {...AccountState}
+                />
             </div>
         </div>
     )
@@ -58,8 +65,12 @@ const Account: FC = () => {
 
 export default Account
 
-const AccountSideBar: FC<AccountModel> = props => {
-    const { picture, first_name, username } = props
+interface AccountSideBarProps extends AccountModel {
+    setSectionActive: (section: string) => void
+}
+
+const AccountSideBar: FC<AccountSideBarProps> = props => {
+    const { picture, first_name, username, setSectionActive } = props
 
     return (
         <div className='sidebar-container'>
@@ -81,6 +92,32 @@ const AccountSideBar: FC<AccountModel> = props => {
                             {username || first_name}
                         </div>
                     </span>
+                </div>
+                <div className='sidebar-sections'>
+                    <a
+                        className='section-wrapper'
+                        href='#wallet'
+                        onClick={() => setSectionActive('wallet')}
+                    >
+                        <div className='section'>
+                            <div className='icon'>
+                                <FaWallet size={24} />
+                            </div>
+                            <div className='holder'>My Wallet</div>
+                        </div>
+                    </a>
+                    <a
+                        className='section-wrapper'
+                        href='#twitter'
+                        onClick={() => setSectionActive('twitter')}
+                    >
+                        <div className='section'>
+                            <div className='icon'>
+                                <FaTwitter size={24} />
+                            </div>
+                            <div className='holder'>My Twitter</div>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div className='sidebar-logout title_small'>
@@ -106,95 +143,117 @@ const TWITTER_DEFAULT: TwitterModel = {
     username: 'unknown',
 }
 
-const AccountContent: FC<AccountModel> = props => {
+interface AccountContentProps extends AccountModel {
+    SectionActive: string
+}
+
+const AccountContent: FC<AccountContentProps> = props => {
     const dispatch = useDispatch()
     const { twitter } = props
     const { wallet } = props
+    let { SectionActive } = props
 
     const [ShowChangeWallet, setShowChangeWallet] = useState(false)
 
     return (
         <div className='content-container '>
             <div className='columns-wrapper'>
-                <span
-                    className='column-container animation boxShadow'
-                    style={{ animationDelay: '2s' }}
-                >
-                    <div
-                        className='column wallet-container transform '
-                        style={{ animationDelay: '1.5s' }}
+                {['all', 'wallet'].includes(SectionActive) && (
+                    <span
+                        id='wallet'
+                        className='column-container animation boxShadow'
+                        style={{ animationDelay: '2s' }}
                     >
-                        <div className='column-title title_small'>
-                            <div className='icon wallet'>
-                                <FaWallet size={24} />
+                        <div
+                            className='column wallet-container transform '
+                            style={{ animationDelay: '1.5s' }}
+                        >
+                            <div className='column-title title_small'>
+                                <div className='icon wallet'>
+                                    <FaWallet size={24} />
+                                </div>
+                                <div className='holder'>
+                                    <div>Wallet</div>
+                                </div>
                             </div>
-                            <div className='holder'>
-                                <div>Wallet</div>
-                            </div>
-                        </div>
-                        <div className='wallet-wrapper '>
-                            <div className='wrapper-column'>
-                                <div className='column-holder title_small'>
-                                    <div className='icon'>
-                                        <CgSignal size={24} />
+                            <div className='wallet-wrapper '>
+                                <div className='wrapper-column'>
+                                    <div className='column-holder title_small'>
+                                        <div className='icon'>
+                                            <CgSignal size={24} />
+                                        </div>
+                                        <div className='holder'>
+                                            wallet status:
+                                        </div>
                                     </div>
-                                    <div className='holder'>wallet status:</div>
-                                </div>
-                                <div
-                                    className='column-data wallet-status title_small'
-                                    style={{
-                                        color: wallet ? '#00dc7d' : '#e20338',
-                                    }}
-                                >
-                                    {wallet ? 'linked' : 'disconnected'}
-                                </div>
-                            </div>
-                            <div className='wrapper-column'>
-                                <div className='column-holder title_small'>
-                                    <div className='icon'>
-                                        <FaIdBadge size={24} />
+                                    <div
+                                        className='column-data wallet-status title_small'
+                                        style={{
+                                            color: wallet
+                                                ? '#00dc7d'
+                                                : '#e20338',
+                                        }}
+                                    >
+                                        {wallet ? 'linked' : 'disconnected'}
                                     </div>
-                                    <div className='holder'>wallet id:</div>
+                                </div>
+                                <div className='wrapper-column'>
+                                    <div className='column-holder title_small'>
+                                        <div className='icon'>
+                                            <FaIdBadge size={24} />
+                                        </div>
+                                        <div className='holder'>wallet id:</div>
+                                    </div>
+                                    <div
+                                        className='column-data wallet_id description'
+                                        tabIndex={1}
+                                    >
+                                        {wallet ? wallet : '-- Empty --'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='bottom-columns'>
+                                <div className='edit-column bottom-column title_small'>
+                                    <div className='icon'>
+                                        <AiOutlineEdit size={24} />
+                                    </div>
+                                    <div
+                                        className='holder'
+                                        onClick={() =>
+                                            setShowChangeWallet(true)
+                                        }
+                                    >
+                                        Edit Wallet
+                                    </div>
                                 </div>
                                 <div
-                                    className='column-data wallet_id description'
-                                    tabIndex={1}
+                                    className='disconnect-column bottom-column title_small'
+                                    onClick={() =>
+                                        wallet && dispatch(UpdateAccount(''))
+                                    }
                                 >
-                                    {wallet ? wallet : '-- Empty --'}
+                                    <div className='icon'>
+                                        <RiLogoutBoxLine size={24} />
+                                    </div>
+                                    <div className='holder'>
+                                        disconenct wallet
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className='bottom-columns'>
-                            <div className='edit-column bottom-column title_small'>
-                                <div className='icon'>
-                                    <AiOutlineEdit size={24} />
-                                </div>
-                                <div
-                                    className='holder'
-                                    onClick={() => setShowChangeWallet(true)}
-                                >
-                                    Edit Wallet
-                                </div>
-                            </div>
-                            <div
-                                className='disconnect-column bottom-column title_small'
-                                onClick={() =>
-                                    wallet && dispatch(UpdateAccount(''))
-                                }
-                            >
-                                <div className='icon'>
-                                    <RiLogoutBoxLine size={24} />
-                                </div>
-                                <div className='holder'>disconenct wallet</div>
-                            </div>
-                        </div>
-                    </div>
-                </span>
-
-                {twitter ? (
-                    <TwitterCard twitter={twitter} status={true} />
-                ) : (
-                    <TwitterCard twitter={TWITTER_DEFAULT} status={false} />
+                    </span>
+                )}
+                {['all', 'twitter'].includes(SectionActive) && (
+                    <>
+                        {twitter ? (
+                            <TwitterCard twitter={twitter} status={true} />
+                        ) : (
+                            <TwitterCard
+                                twitter={TWITTER_DEFAULT}
+                                status={false}
+                            />
+                        )}
+                    </>
                 )}
             </div>
             {ShowChangeWallet && (
@@ -216,6 +275,7 @@ const TwitterCard: FC<TwitterCardProps> = ({ twitter, status }) => {
 
     return (
         <span
+            id='twitter'
             className='column-container twitter animation boxShadow'
             style={{ animationDelay: '2.5s' }}
         >

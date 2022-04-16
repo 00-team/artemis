@@ -9,7 +9,7 @@ interface ErrorProps {
     description?: string
 }
 
-const Error: FC<ErrorProps> = ({ title, description }) => {
+const Error: FC<ErrorProps> = ({ title, code, description }) => {
     return (
         <div className='error-container'>
             <div className='stars'>
@@ -20,7 +20,7 @@ const Error: FC<ErrorProps> = ({ title, description }) => {
             <div className='lamp__wrap'>
                 <div className='lamp'>
                     <div className='cable'></div>
-                    <div className='cover'></div>
+                    <div className='cover title'>{code}</div>
                     <div className='in-cover'>
                         <div className='bulb'></div>
                     </div>
