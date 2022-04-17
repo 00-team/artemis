@@ -23,6 +23,10 @@ from .langs import CONTNET, TRANSLATED_CONTENT
 # config
 from .config import get_photo
 
+# logger
+import logging
+logger = logging.getLogger(__name__)
+
 
 @user_data
 def login(update: Update, lang, **kwargs):
@@ -84,8 +88,8 @@ def check_inviter(update: Update, bot_user: User):
         bot_user.update_inviter()
 
         inviter_user.send_message(CONTNET[inviter_lang]['success_invite'])
-    except:
-        return
+    except Exception as e:
+        logger.exception(e)
 
 
 @user_data

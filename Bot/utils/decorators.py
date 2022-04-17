@@ -1,7 +1,7 @@
 # traceback
 from traceback import print_exception
 
-from telegram import Update
+from telegram import Update, User as TelUser
 
 # user
 from .user import User
@@ -9,11 +9,17 @@ from .user import User
 # langs
 from .langs import TRANSLATED_CONTENT
 
+# logger
+import logging
+logger = logging.getLogger(__name__)
+
 
 def user_data(handler):
-
     def wrap(update: Update, context, *args, **kwargs):
         user = update.effective_user
+
+        if not isinstance(user, TelUser):
+            return
 
         if user.is_bot:
             return
@@ -44,8 +50,7 @@ def user_data(handler):
                 lang=lang,
             )
         except Exception as e:
-            print('Error while processing the user_data')
-            print_exception(e)
+            logger.exception(e)
 
     return wrap
 
