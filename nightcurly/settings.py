@@ -103,3 +103,31 @@ MEDIA_URL = '/m/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'main': {
+            'format': (
+                ('-' * 50) + '\n{asctime}\n'
+                '{levelname}:{name}\n'
+                '{message}\n'
+            ),
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': 'nightcurly.log',
+            'formatter': 'main'
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file'],
+        }
+    }
+}
