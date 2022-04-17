@@ -12,7 +12,8 @@ from .models import TwitterAccount
 class BotUserAdmin(admin.ModelAdmin):
     list_display = (
         '__str__', 'user_id', 'fullname',
-        'lang', 'total_invites', 'is_admin',
+        'lang', 'total_invites', 'inviter',
+        'CFI', 'is_admin',
     )
     readonly_fields = ('user_id', 'lang', 'invite_hash', 'has_logedin')
     list_filter = ('is_admin', 'lang')
