@@ -118,16 +118,26 @@ LOGGING = {
         },
     },
     'handlers': {
-        'file': {
+        'warning_file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': 'nightcurly.log',
+            'filename': 'warning.log',
+            'formatter': 'main'
+        },
+        'debug_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
             'formatter': 'main'
         },
     },
     'loggers': {
         '': {
-            'handlers': ['file'],
+            'handlers': ['warning_file'],
         }
-    }
+    },
+    'root': {
+        'handlers': ['debug_file'],
+        'level': 'DEBUG',
+    },
 }

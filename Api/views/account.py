@@ -41,6 +41,10 @@ from Account.models import Account, TwitterAccount
 # hreading
 from threading import Thread
 
+# logger
+import logging
+logger = logging.getLogger(__name__)
+
 
 AUTH_BASE_URL = 'https://twitter.com/i/oauth2/authorize'
 ACCESS_TOKEN_URL = 'https://api.twitter.com/2/oauth2/token'
@@ -140,7 +144,8 @@ def twitter_callback(request: HttpRequest):
         messages.error(request, e.message)
         return HttpResponseRedirect('/')
 
-    except:
+    except Exception as e:
+        logger.exception(e)
         messages.error(request, 'Error to get the Twitter Data')
         return HttpResponseRedirect('/')
 
@@ -183,9 +188,10 @@ def get_account(request: HttpRequest):
         get_token(request)
         user = request.user
         account = request.user.account
+        twitter = None
 
         try:
-            ta = TwitterAccount.objects.get(account=account)
+            ta = account.twitteraccount
             twitter = {
                 'user_id': ta.user_id,
                 'nickname': ta.nickname,
@@ -197,7 +203,7 @@ def get_account(request: HttpRequest):
                 'picture': ta._picture,
             }
         except:
-            twitter = None
+            pass
 
         return JsonResponse({
             'first_name': user.first_name,

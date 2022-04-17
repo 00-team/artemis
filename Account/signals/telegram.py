@@ -12,6 +12,11 @@ from utils.api import s1
 # webhooks
 from utils.webhook.hooks import account_hook, bot_user_hook
 
+# logger
+import logging
+logger = logging.getLogger(__name__)
+
+
 DEL_KWARGS = {'save': False}
 
 
@@ -41,8 +46,8 @@ def account_pre_save(sender, instance, **kwargs):
         if picture:
             instance.picture = picture
 
-    except:
-        pass
+    except Exception as e:
+        logger.exception(e)
 
 
 @receiver(post_save, sender=Account, weak=False)
@@ -50,8 +55,8 @@ def account_post_save(instance, created, **kwargs):
     try:
         status = 'new' if created else 'update'
         account_hook(instance, status)
-    except:
-        pass
+    except Exception as e:
+        logger.exception(e)
 
 
 @receiver(pre_delete, sender=Account, weak=False)
@@ -59,13 +64,15 @@ def account_pre_delete(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
         account_hook(instance, 'delete')
-    except:
-        pass
+    except Exception as e:
+        logger.exception(e)
 
 
-@receiver(pre_save, sender=BotUser, weak=False)
+@receiver(pre_save, sender=BotUser)
 def bot_user_pre_save(instance, **kwargs):
     try:
+        logger.debug('bot user pre save')
+
         if not instance.invite_hash:
             instance.invite_hash = s1(instance.user_id)
 
@@ -76,5 +83,5 @@ def bot_user_pre_save(instance, **kwargs):
             instance.CFI = False
 
         bot_user_hook(instance)
-    except:
-        pass
+    except Exception as e:
+        logger.exception(e)

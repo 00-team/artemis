@@ -35,6 +35,8 @@ def get_twitter_id(username: str) -> int:
 @receiver(pre_save, sender=Owner, weak=False)
 def owner_pre_save(sender, instance, **kwargs):
     try:
+        cowner = None
+
         try:
             cowner = sender.objects.get(id=instance.id)
 
@@ -46,7 +48,7 @@ def owner_pre_save(sender, instance, **kwargs):
                 if cowner.banner:
                     cowner.banner.delete(**DEL_KWARGS)
         except:
-            cowner = None
+            pass
 
         if instance.twitter:
             if not cowner:
@@ -64,6 +66,10 @@ def owner_pre_save(sender, instance, **kwargs):
 def owner_pre_delete(instance, **kwargs):
     try:
         instance.picture.delete(**DEL_KWARGS)
+    except:
+        pass
+
+    try:
         instance.banner.delete(**DEL_KWARGS)
     except:
         pass

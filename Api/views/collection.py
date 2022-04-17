@@ -33,7 +33,9 @@ def get_owners(request: HttpRequest):
                     'image': a.image.url
                 }
             except:
-                return {}
+                pass
+
+            return {}
 
         owners = filter(lambda o: o, map(GO, owners))
 
@@ -59,7 +61,9 @@ def get_owner(request: HttpRequest):
                     'description': a.description
                 }
             except:
-                return {}
+                pass
+
+            return {}
 
         response = {
             'username': owner.username,

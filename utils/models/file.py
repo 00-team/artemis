@@ -12,7 +12,12 @@ from django.core.files.temp import NamedTemporaryFile
 # requests
 from requests import get
 
+# mimetypes
 from mimetypes import guess_extension
+
+# logger
+import logging
+logger = logging.getLogger(__name__)
 
 
 @deconstructible
@@ -48,5 +53,5 @@ def download_file(url: str | None) -> File | None:
                 temp.write(chunk)
 
         return (File(temp), ext, content_type)
-    except:
-        pass
+    except Exception as e:
+        logger.exception(e)

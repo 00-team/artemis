@@ -31,11 +31,12 @@ def user_status(request: HttpRequest):
             raise E
 
         account = Account.objects.get(telegram_id=user_id)
+        twitter = None
 
         try:
-            twitter = TwitterAccount.objects.get(account=account).username
+            twitter = account.twitteraccount.username
         except:
-            twitter = None
+            pass
 
         return JsonResponse({
             'user_id': account.telegram_id,
