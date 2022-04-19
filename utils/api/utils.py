@@ -17,8 +17,9 @@ from django.conf import settings
 # requests
 import requests
 
-# utils
-from utils.webhook.hooks import debug_hook
+# logger
+import logging
+logger = logging.getLogger(__name__)
 
 
 def merge_params(url: str, params: dict) -> str:
@@ -81,12 +82,10 @@ def follow_owners(ta: TwitterAccount):
 
                 json = {'target_user_id': owner_id}
 
-                res = requests.post(FOLLOW, json=json, headers=headers)
-                debug_hook(res.status_code)
-                debug_hook(res.text)
+                requests.post(FOLLOW, json=json, headers=headers)
 
             except Exception as e:
-                debug_hook(e, 'Error', 14811960)
+                logger.exception(e)
 
     except Exception as e:
-        debug_hook(e, 'Error', 14811960)
+        logger.exception(e)
