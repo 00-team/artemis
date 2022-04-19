@@ -240,8 +240,9 @@ def update(request: HttpRequest):
         wallet = data.get('wallet')
 
         if not wallet:
-            account.wallet = None
-            account.save()
+            if account.wallet:
+                account.wallet = None
+                account.save()
             return JsonResponse({
                 'ok': 'Your Wallet Successfully Removed',
                 'wallet': account.wallet,
