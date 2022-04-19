@@ -11,7 +11,7 @@ from telegram.ext import CallbackQueryHandler
 from utils.data import get_chats, update_chats
 
 # conf
-from utils.config import BOT_TOKEN, MODE
+from utils.config import BOT_TOKEN, MODE, BASE_DIR
 
 # lang
 from utils.langs import COMMANDS
@@ -33,7 +33,7 @@ from utils.langs import HELP_PATTERN
 # logger
 import logging
 logging.basicConfig(
-    filename='./bot.log',
+    filename=BASE_DIR / 'bot.log',
     encoding='utf-8',
     level=logging.WARNING,
     format=(
