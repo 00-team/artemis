@@ -47,27 +47,41 @@ const App: FC = () => {
             })
     }, [dispatch])
 
-    if (typeof errorCode !== 'undefined')
-        return (
-            <Error
-                code={errorCode}
-                title={errorTitle}
-                description={errorDescription}
-            />
-        )
-
     return (
         <>
             <Navbar />
             <main>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/owners/:username' element={<Owner />} />
-                    <Route path='account' element={<Account />} />
-                </Routes>
+                {typeof errorCode === 'undefined' ? (
+                    <Router />
+                ) : (
+                    // <span>ss</span>
+                    <Error
+                        code={errorCode}
+                        title={errorTitle}
+                        description={errorDescription}
+                    />
+                )}
             </main>
             <Footer />
         </>
+    )
+}
+
+const Router: FC = () => {
+    return (
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/owners/:username' element={<Owner />} />
+            <Route path='account' element={<Account />} />
+
+            {/* Error */}
+            <Route
+                path='*'
+                element={
+                    <Error code='404' title='PAGE NOT FOUND' description=':(' />
+                }
+            />
+        </Routes>
     )
 }
 
