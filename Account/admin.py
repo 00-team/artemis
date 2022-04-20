@@ -48,12 +48,32 @@ def no_participated(modeladmin, request, queryset):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'telegram_id',
-                    'username', 'participated', 'pic')
-    readonly_fields = ('pic', )
+    list_display = (
+        '__str__', 'telegram_id', 'username',
+        'has_wallet', 'participated', 'pic'
+    )
+    readonly_fields = ('pic', 'has_wallet')
     search_fields = ('username', 'telegram_id')
     list_filter = ('participated', )
     actions = (participated, no_participated)
+
+    fieldsets = (
+        ('Info', {
+            'fields': ('telegram_id', 'username', 'wallet', 'participated')
+        }),
+        ('Relation', {
+            'fields': ('user', 'bot_user')
+        }),
+        ('Photo', {
+            'fields': ('picture_url', 'picture', 'pic')
+        }),
+    )
+
+    @admin.display
+    def has_wallet(self, obj):
+        return bool(obj.wallet)
+
+    has_wallet.boolean = True
 
     @admin.display
     def pic(self, obj):
