@@ -51,25 +51,8 @@
             }
         }
     }
-}
 
-#inpLock {
-    display: none;
-}
-
-@keyframes bling {
-    50% {
-        stroke-dasharray: 3;
-        stroke-dashoffset: 12;
-    }
-    100% {
-        stroke-dasharray: 3;
-        stroke-dashoffset: 9;
-    }
-}
-
-@keyframes locked {
-    50% {
-        transform: translateY(1px);
+    #inpLock {
+        display: none;
     }
 }
