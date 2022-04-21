@@ -34,6 +34,7 @@ import { Avatar } from '@00-team/utils'
 
 // components
 import CountUpAnim from 'components/utils/CountUpAnim'
+import WalletLock from 'components/utils/WalletLock'
 
 const Account: FC = () => {
     const dispatch = useDispatch()
@@ -240,6 +241,7 @@ const AccountContent: FC<AccountContentProps> = props => {
                                     </div>
                                 </div>
                             </div>
+                            {!twitter && <WalletLock />}
                         </div>
                     </span>
                 )}
