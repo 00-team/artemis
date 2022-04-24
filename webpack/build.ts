@@ -20,7 +20,7 @@ const BuildConfig: Configuration = {
     },
     plugins: [
         ...Main.plugins!,
-        new CssExtract(),
+        new CssExtract({ filename: '[name].[contenthash].css' }),
         new Compression({ exclude: /\.(html)$/ }),
         HtmlPG,
     ],
