@@ -96,7 +96,7 @@ def main():
         dp.add_handler(CommandHandler('invite', invite))
 
         # admin commands
-        dp.add_handler(CommandHandler('user', view_user))
+        dp.add_handler(CommandHandler(['user', 'u'], view_user))
         dp.add_handler(CommandHandler('admin', admin_help))
 
         dp.add_handler(
