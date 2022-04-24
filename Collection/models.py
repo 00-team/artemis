@@ -17,6 +17,7 @@ class Owner(Model):
     twitter = CharField(max_length=30, blank=True, null=True, unique=True)
     twitter_id = models.BigIntegerField(null=True, blank=True)
     instagram = CharField(max_length=30, blank=True, null=True)
+    tweet = models.TextField(default='')
 
     def __str__(self):
         return self.username

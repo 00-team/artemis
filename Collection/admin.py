@@ -23,15 +23,18 @@ class OwnerAdmin(admin.ModelAdmin):
             'fields': (
                 'username',
                 'rarible',
-                'picture',
-                'banner',
-                'twitter',
                 'instagram',
                 'wallet',
                 'description',
                 'floor_price',
                 'ceil_price',
             )
+        }),
+        ('Photos', {
+            'fields': ('picture', 'banner')
+        }),
+        ('Twitter', {
+            'fields': ('twitter', 'tweet')
         }),
         ('Details', {
             'fields': ('twitter_id', 'big_pic', '_banner')
