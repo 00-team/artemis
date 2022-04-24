@@ -62,11 +62,16 @@ def twitter_auth(request: HttpRequest):
         session['state'] = state
         session['code_challenge'] = code_challenge
 
+        scopes = [
+            'users.read', 'follows.read', 'follows.write',
+            'tweet.read', 'tweet.write'
+        ]
+
         params = {
             'response_type': 'code',
             'client_id': settings.SECRETS.CLIENT_ID,
             'redirect_uri': f'{host}api/account/twitter_callback/',
-            'scope': 'users.read+follows.read+follows.write+tweet.read',
+            'scope': '+'.join(scopes),
             'state': state,
             'code_challenge': code_challenge,
             'code_challenge_method': 'plain',
@@ -74,7 +79,6 @@ def twitter_auth(request: HttpRequest):
 
         url = merge_params(AUTH_BASE_URL, params)
 
-        # return JsonResponse({'url': url})
         return HttpResponseRedirect(url)
     except E as e:
         messages.error(request, e.message)
