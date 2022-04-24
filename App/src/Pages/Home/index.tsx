@@ -4,6 +4,7 @@ import React, { useEffect, FC } from 'react'
 import HeroSection from './HeroSection'
 import Owners from './Owners'
 import Faq from './Faq'
+import Stats from './Stats'
 
 // state
 import { useDispatch } from 'react-redux'
@@ -19,6 +20,7 @@ const Home: FC = () => {
     return (
         <main>
             <HeroSection />
+            <Stats />
             <Owners />
             <Faq />
         </main>
