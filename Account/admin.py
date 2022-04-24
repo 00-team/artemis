@@ -11,7 +11,7 @@ from .models import TwitterAccount
 @admin.register(BotUser)
 class BotUserAdmin(admin.ModelAdmin):
     list_display = (
-        '__str__', 'user_id', 'fullname',
+        'user_id', 'fullname',
         'lang', 'total_invites', 'inviter',
         'CFI', 'is_admin',
     )
@@ -69,11 +69,9 @@ class AccountAdmin(admin.ModelAdmin):
         }),
     )
 
-    @admin.display
+    @admin.display(boolean=True)
     def has_wallet(self, obj):
         return bool(obj.wallet)
-
-    has_wallet.boolean = True
 
     @admin.display
     def pic(self, obj):
