@@ -126,17 +126,20 @@ def update_join_chats(update: Update, bot_user, lang, **kwargs):
                 CONTNET[lang]['join_incomplete'],
                 reply_markup=join_keyboard(user_chats, lang),
             )
-        except:
+        except BadRequest:
             pass
 
         return
 
     check_inviter(update, bot_user)
 
-    query.message.edit_caption(
-        CONTNET[lang]['join_complete'],
-        reply_markup=None,
-    )
+    try:
+        query.message.edit_caption(
+            CONTNET[lang]['join_complete'],
+            reply_markup=None,
+        )
+    except BadRequest:
+        pass
 
 
 @user_data
@@ -193,7 +196,14 @@ def help_cmd(update: Update, lang, **kwargs):
 @user_data
 def help_callback(update: Update, lang, **kwrags):
     query = update.callback_query
-    query.message.edit_text(CONTNET[lang]['help_edit'], reply_markup=None)
+
+    try:
+        query.message.edit_text(
+            CONTNET[lang]['help_edit'],
+            reply_markup=None
+        )
+    except BadRequest:
+        pass
 
     match query.data[5:]:
         case 'join':
