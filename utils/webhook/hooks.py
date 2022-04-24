@@ -44,7 +44,6 @@ def execute_hook(url: str, data: dict, timeout=0):
             sleep(timeout)
 
         res = post(url, json=data)
-        logger.debug(f'hook res: {res.status_code}\n{res.text}')
 
         if res.status_code == 429:
             res = res.json()
@@ -56,7 +55,6 @@ def execute_hook(url: str, data: dict, timeout=0):
 
 
 def hook(url, embeds, username=USERNAME, avatar=AVATAR):
-    logger.debug('sending a hook')
     data = {'username': username, 'avatar_url': avatar, 'embeds': embeds}
 
     if isinstance(url, str):
@@ -151,7 +149,6 @@ def debug_hook(msg, title: str = 'Debug', color: int = 16766464):
 
 
 def bot_user_hook(bot_user: BotUser):
-    logger.info(f'new bot user hook: {bot_user.user_id}')
     logged_in = False
     picture = None
 

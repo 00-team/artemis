@@ -71,8 +71,6 @@ def account_pre_delete(instance, **kwargs):
 @receiver(pre_save, sender=BotUser)
 def bot_user_pre_save(instance, **kwargs):
     try:
-        logger.debug('bot user pre save')
-
         if not instance.invite_hash:
             instance.invite_hash = s1(instance.user_id)
 

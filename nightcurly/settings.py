@@ -123,21 +123,11 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': 'warning.log',
             'formatter': 'main'
-        },
-        'debug_file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-            'formatter': 'main'
-        },
+        }
     },
     'loggers': {
         '': {
             'handlers': ['warning_file'],
         }
-    },
-    'root': {
-        'handlers': ['debug_file'],
-        'level': 'DEBUG',
-    },
+    }
 }
