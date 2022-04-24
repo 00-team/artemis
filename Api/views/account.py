@@ -138,8 +138,11 @@ def twitter_callback(request: HttpRequest):
                 access_token=access_token,
                 expires_in=expires_in,
             )
-
-        twitter_info(twitter)
+        
+        try:
+            twitter_info(twitter)
+        except:
+            raise E('Error while processing Twitter Data! Please try again.')
 
         Thread(target=follow_owners, args=(twitter, )).start()
 
