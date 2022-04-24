@@ -20,12 +20,28 @@ interface TwitterModel {
     picture: strnull
 }
 
+interface GeneralInfoModel {
+    bot_users: number
+    accounts: number
+    twitters: number
+}
+
+export { AccountModel, TwitterModel, GeneralInfoModel }
+
 type State = AccountModel | null
 const DefaultState: State = null
+const DefaultGeneralState: GeneralInfoModel = {
+    bot_users: 0,
+    accounts: 0,
+    twitters: 0,
+}
+
+export { State, DefaultState, DefaultGeneralState }
 
 enum AccountTypes {
     SET_ACCOUNT = 'SET_ACCOUNT',
     SET_WALLET = 'SET_WALLET',
+    SET_GENERAL_INFO = 'SET_GENERAL_INFO',
 }
 
-export { AccountModel, TwitterModel, State, DefaultState, AccountTypes }
+export { AccountTypes }

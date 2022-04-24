@@ -20,4 +20,17 @@ const Account = (state = DefaultState, action: Action): State => {
     }
 }
 
-export { Account }
+import { DefaultGeneralState as DGS } from '../models/Account'
+import { GeneralInfoModel } from '../models/Account'
+
+const GeneralInfo = (state = DGS, action: Action): GeneralInfoModel => {
+    switch (action.type) {
+        case AccountTypes.SET_GENERAL_INFO:
+            return action.payload
+
+        default:
+            return state
+    }
+}
+
+export { Account, GeneralInfo }

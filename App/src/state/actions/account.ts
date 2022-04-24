@@ -76,3 +76,15 @@ const DisconnectTwitter: DT = () => async dispatch => {
     }
 }
 export { DisconnectTwitter }
+
+type UGT = () => (d: Dispatch<Action>) => Promise<void>
+const UpdateGeneralInfo: UGT = () => async dispatch => {
+    try {
+        const { data } = await axios.get(BASE_URL + 'general_info/')
+
+        dispatch({ type: AccountTypes.SET_GENERAL_INFO, payload: data })
+    } catch (error) {
+        HandleError(error)
+    }
+}
+export { UpdateGeneralInfo }

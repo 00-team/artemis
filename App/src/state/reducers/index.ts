@@ -3,12 +3,13 @@ import { combineReducers } from 'redux'
 import winScrollTop from './winScrollTop'
 
 // Account
-import { Account } from './account'
+import { Account, GeneralInfo } from './account'
 
 // Collection
 import { Xwners, Owner, FAQs } from './collection'
 
 const reducers = combineReducers({
+    GeneralInfo,
     Account,
     winScrollTop,
     Xwners,
