@@ -118,16 +118,16 @@ LOGGING = {
         },
     },
     'handlers': {
-        'warning_file': {
-            'level': 'WARNING',
+        'error_file': {
+            'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': 'warning.log',
+            'filename': 'error.log',
             'formatter': 'main'
         }
     },
     'loggers': {
         '': {
-            'handlers': ['warning_file'],
+            'handlers': ['error_file'],
         }
     }
 }
