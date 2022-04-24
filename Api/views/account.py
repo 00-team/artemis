@@ -36,7 +36,7 @@ from utils.api import twitter_info
 from django.utils.crypto import get_random_string as random_str
 
 # models
-from Account.models import Account, TwitterAccount
+from Account.models import Account, BotUser, TwitterAccount
 
 # hreading
 from threading import Thread
@@ -276,5 +276,19 @@ def disconnect_twitter(request: HttpRequest):
             pass
 
         return JsonResponse({'ok': 'your twitter was successfully disconnected'})
+    except E as e:
+        return e.response
+
+
+@require_GET
+def general_info(request: HttpRequest):
+    try:
+        data = {
+            'bot_users': BotUser.objects.count(),
+            'accounts': Account.objects.count(),
+            'twitters': TwitterAccount.objects.count(),
+        }
+
+        return JsonResponse(data)
     except E as e:
         return e.response

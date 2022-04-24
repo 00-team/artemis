@@ -23,6 +23,7 @@ urlpatterns = [
             path('logout/', account.logout),
             path('get/', account.get_account),
             path('update/', account.update),
+            path('general_info/', account.general_info),
         ]),
     ),
 
