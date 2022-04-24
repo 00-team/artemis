@@ -138,7 +138,7 @@ def twitter_callback(request: HttpRequest):
                 access_token=access_token,
                 expires_in=expires_in,
             )
-        
+
         try:
             twitter_info(twitter)
         except:
