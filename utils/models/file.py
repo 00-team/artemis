@@ -52,6 +52,6 @@ def download_file(url: str | None) -> File | None:
             for chunk in res.iter_content(8192):  # 1024 * 8
                 temp.write(chunk)
 
-        return (File(temp), ext, content_type)
+        return File(temp)
     except Exception as e:
         logger.exception(e)

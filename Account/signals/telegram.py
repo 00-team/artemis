@@ -41,7 +41,7 @@ def account_pre_save(sender, instance, **kwargs):
         except:
             pass
 
-        picture, *_ = download_file(instance.picture_url)
+        picture = download_file(instance.picture_url)
 
         if picture:
             instance.picture = picture
