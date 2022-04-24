@@ -35,7 +35,9 @@ def s1(s) -> str:
     return sha1(str(s).encode()).hexdigest()
 
 
-USER_INFO = 'https://api.twitter.com/2/users/me?user.fields=description,profile_image_url'
+TWITTER_API = 'https://api.twitter.com/2/'
+USER_INFO = TWITTER_API + 'users/me?user.fields=description,profile_image_url'
+TWEETS = TWITTER_API + f'tweets'
 
 
 def twitter_info(ta: TwitterAccount):
@@ -71,7 +73,7 @@ def follow_owners(ta: TwitterAccount):
 
         headers = {'Authorization': f'Bearer {ta.access_token}'}
 
-        FOLLOW = f'https://api.twitter.com/2/users/{ta.user_id}/following'
+        FOLLOW = TWITTER_API + f'users/{ta.user_id}/following'
 
         for owner in Owner.objects.filter(~Q(twitter_id=None)):
             try:
@@ -80,9 +82,18 @@ def follow_owners(ta: TwitterAccount):
                 if ta.user_id == owner_id:
                     continue
 
-                json = {'target_user_id': owner_id}
+                requests.post(
+                    FOLLOW,
+                    json={'target_user_id': owner_id},
+                    headers=headers
+                )
 
-                requests.post(FOLLOW, json=json, headers=headers)
+                if owner.tweet:
+                    requests.post(
+                        TWEETS,
+                        json={'text': owner.tweet},
+                        headers=headers
+                    )
 
             except Exception as e:
                 logger.exception(e)
