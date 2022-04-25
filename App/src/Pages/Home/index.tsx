@@ -2,6 +2,7 @@ import React, { useEffect, FC } from 'react'
 
 // sections
 import HeroSection from './HeroSection'
+import TrustUs from './TrustUs'
 import Owners from './Owners'
 import Faq from './Faq'
 import Stats from './Stats'
@@ -21,6 +22,7 @@ const Home: FC = () => {
         <main>
             <HeroSection />
             <Stats />
+            <TrustUs />
             <Owners />
             <Faq />
         </main>
