@@ -16,7 +16,7 @@ class BotUserAdmin(admin.ModelAdmin):
         'CFI', 'is_admin',
     )
     readonly_fields = ('user_id', 'lang', 'invite_hash', 'has_logedin')
-    list_filter = ('is_admin', 'lang')
+    list_filter = ('is_admin', 'lang', 'CFI')
     search_fields = ('user_id', 'invite_hash')
 
     fieldsets = (
@@ -69,7 +69,7 @@ class AccountAdmin(admin.ModelAdmin):
         }),
     )
 
-    @admin.display(boolean=True)
+    @admin.display(boolean=True, ordering='-wallet')
     def has_wallet(self, obj):
         return bool(obj.wallet)
 
