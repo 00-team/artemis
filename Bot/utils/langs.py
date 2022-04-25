@@ -50,7 +50,7 @@ CONTNET_EN = {
 
     'invite_button': 'TO GET NFT ENTER THE BOT ✅',
     'invites': (
-        'Ask three of your friends to join'
+        'Ask ten of your friends to join'
         'the bot with your special link. 🔗\n'
         'Your Link: {}\nYour total invites: {}/10'
     ),
@@ -61,7 +61,7 @@ CONTNET_EN = {
     ),
     'enough_invites': (
         'Congratulations, you have successfully'
-        'invited three people to the robot 🎉'
+        'invited ten people to the robot 🎉'
     ),
     'success_invite': 'You have succeeded adding someone into the bot 🎉',
     'unsuccess_invite': (
@@ -122,7 +122,7 @@ CONTNET_RU = {
 
     'invite_button': 'ЧТОБЫ ПОЛУЧИТЬ NFT, ВОЙДИТЕ В РОБОТА ✅',
     'invites': (
-        'Попросите трех своих друзей присоединиться '
+        'Попросите десять своих друзей присоединиться '
         'к роботу по вашей специальной ссылке. 🔗\n\n'
         'Ваша ссылка: {}\n\nВсего приглашений: {}/10'
     ),
@@ -133,7 +133,7 @@ CONTNET_RU = {
     ),
     'enough_invites': (
         'Поздравляем, вы успешно пригласили '
-        'в робота трех человек 🎉'
+        'в робота десять человек 🎉'
     ),
     'success_invite': 'Вам удалось добавить кого-то в бота 🎉',
     'unsuccess_invite': 'Неудачное приглашение ❌',
