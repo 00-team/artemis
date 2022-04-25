@@ -11,7 +11,7 @@ CONTNET_EN = {
 
         'Explains how users can get a free NFT\n'
         '1. Join all channels\n'
-        '2. Invite 3 ppl to the robot\n'
+        '2. Invite 10 ppl to the robot\n'
         '3. Log in to the website and give us your wallet\n'
         'After 24 hours, you will participate in the NFT lottery. '
         'We have 3 winners every night in the @XIXNFT channel.\n\n'
@@ -52,7 +52,7 @@ CONTNET_EN = {
     'invites': (
         'Ask three of your friends to join'
         'the bot with your special link. 🔗\n'
-        'Your Link: {}\nYour total invites: {}/3'
+        'Your Link: {}\nYour total invites: {}/10'
     ),
     'invite_banner': (
         'The first valid bot that gives free nft as a gift 🎁\n\n'
@@ -79,7 +79,7 @@ CONTNET_RU = {
 
         'Объясняет, как пользователи могут получить бесплатный NFT\n'
         '1. Присоединяйтесь ко всем каналам\n'
-        '2. Пригласить в робота 3 человека\n'
+        '2. Пригласить в робота 10 человека\n'
         '3. Войдите на сайт и дайте нам свой кошелек\n'
         'Через 24 часа вы будете участвовать в лотерее NFT. '
         'Каждую ночь на канале @XIXNFT у нас 3 победителя.\n\n'
@@ -121,7 +121,7 @@ CONTNET_RU = {
     'invites': (
         'Попросите трех своих друзей присоединиться '
         'к роботу по вашей специальной ссылке. 🔗\n\n'
-        'Ваша ссылка: {}\n\nВсего приглашений: {}/3'
+        'Ваша ссылка: {}\n\nВсего приглашений: {}/10'
     ),
     'invite_banner': (
         'Первый действующий бот, дающий бесплатный nft в подарок 🎁\n\n'

@@ -147,7 +147,7 @@ def invite(update: Update, bot_user: User, lang, **kwargs):
     user = update.effective_user
     chat = update.effective_chat
     bot_username = user.bot.username
-    enough_invites = bot_user.total_invites >= 3
+    enough_invites = bot_user.total_invites >= 10
 
     user_link = f'https://t.me/{bot_username}?start=invite-{bot_user.invite_hash}'
 

@@ -239,10 +239,10 @@ def update(request: HttpRequest):
             raise E('You first need to connect your twitter!')
 
         try:
-            if account.bot_user.total_invites < 3:
+            if account.bot_user.total_invites < 10:
                 raise
         except:
-            raise E('You need to invite 3 PPL in the bot first.')
+            raise E('You need to invite 10 PPL in the bot first.')
 
         wallet = data.get('wallet')
 
