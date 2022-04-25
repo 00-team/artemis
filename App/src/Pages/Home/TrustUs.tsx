@@ -11,28 +11,36 @@ import UnderlineText from 'components/utils/UnderlineText'
 // style
 import './style/trustus.scss'
 
-const _ = (n: number) => DisplayNumbers(n, 10e3, 10e9)
+const _ = (n: number) => DisplayNumbers(n, 1e3, 1e9)
+var UpdaterID: NodeJS.Timer | null = null
 
 const TrustUs = () => {
     const dispatch = useDispatch()
     const GeneralInfo = useSelector((s: RootState) => s.GeneralInfo)
 
     useEffect(() => {
-        dispatch(UpdateGeneralInfo())
+        const MakeUpdater = () => {
+            if (UpdaterID) clearInterval(UpdaterID)
+            dispatch(UpdateGeneralInfo())
+            UpdaterID = setInterval(() => dispatch(UpdateGeneralInfo()), 1_000)
+        }
 
-        let interval = setInterval(() => dispatch(UpdateGeneralInfo()), 7000)
+        MakeUpdater()
 
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') {
-                clearInterval(interval)
+        function ChangeTab() {
+            if (document.visibilityState === 'hidden' && UpdaterID) {
+                clearInterval(UpdaterID)
+                UpdaterID = null
+            } else if (document.visibilityState === 'visible' && !UpdaterID) {
+                MakeUpdater()
             }
-        })
+        }
+
+        document.addEventListener('visibilitychange', ChangeTab)
 
         return () => {
-            if (interval) {
-                clearInterval(interval)
-                document.removeEventListener('visibilitychange', () => {})
-            }
+            if (UpdaterID) clearInterval(UpdaterID)
+            document.removeEventListener('visibilitychange', ChangeTab)
         }
     }, [dispatch])
 
