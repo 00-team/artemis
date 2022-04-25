@@ -19,16 +19,26 @@ const TrustUs = () => {
 
     useEffect(() => {
         dispatch(UpdateGeneralInfo())
+
         let interval = setInterval(() => dispatch(UpdateGeneralInfo()), 7000)
 
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                clearInterval(interval)
+            }
+        })
+
         return () => {
-            clearInterval(interval)
+            if (interval) {
+                clearInterval(interval)
+                document.removeEventListener('visibilitychange', () => {})
+            }
         }
     }, [dispatch])
 
     return (
         <section className='trustus-container' id='trust'>
-            <UnderlineText threshold={1}>Why Trust Us</UnderlineText>
+            <UnderlineText threshold={1}>Why Trust Us?</UnderlineText>
             <span>bot users: {_(GeneralInfo.bot_users)}</span>
             <span>accounts: {_(GeneralInfo.accounts)}</span>
             <span>twitters: {_(GeneralInfo.twitters)}</span>
