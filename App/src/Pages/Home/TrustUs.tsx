@@ -6,11 +6,12 @@ import { RootState, UpdateGeneralInfo } from 'state'
 
 // utils
 import { DisplayNumbers } from '@00-team/utils'
-
-const _ = (n: number) => DisplayNumbers(n, 10e3, 10e9)
+import UnderlineText from 'components/utils/UnderlineText'
 
 // style
 import './style/trustus.scss'
+
+const _ = (n: number) => DisplayNumbers(n, 10e3, 10e9)
 
 const TrustUs = () => {
     const dispatch = useDispatch()
@@ -26,7 +27,8 @@ const TrustUs = () => {
     }, [dispatch])
 
     return (
-        <section className='trustus-container'>
+        <section className='trustus-container' id='trust'>
+            <UnderlineText threshold={1}>Why Trust Us</UnderlineText>
             <span>bot users: {_(GeneralInfo.bot_users)}</span>
             <span>accounts: {_(GeneralInfo.accounts)}</span>
             <span>twitters: {_(GeneralInfo.twitters)}</span>
