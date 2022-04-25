@@ -64,7 +64,10 @@ CONTNET_EN = {
         'invited three people to the robot 🎉'
     ),
     'success_invite': 'You have succeeded adding someone into the bot 🎉',
-    'unsuccess_invite': 'Unsuccessful invite! ❌',
+    'unsuccess_invite': (
+        'Unsuccessful invite! ❌\n'
+        'You need to join all the chats first.'
+    ),
 }
 
 
