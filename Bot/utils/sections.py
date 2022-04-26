@@ -75,6 +75,10 @@ def check_inviter(update: Update, bot_user: User):
         bot_user.update_inviter()
 
         inviter_user.send_message(CONTNET[inviter_lang]['success_invite'])
+
+    except Unauthorized:
+        pass
+
     except Exception as e:
         logger.exception(e)
 
