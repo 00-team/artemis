@@ -1,11 +1,10 @@
-from telegram import LoginUrl, Chat
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Chat, InlineKeyboardButton, InlineKeyboardMarkup, LoginUrl
 
 # conf
 from .config import EXTERNAL_HOST
-
 # langs
 from .langs import CONTNET
+
 
 LOGIN_URL = LoginUrl(EXTERNAL_HOST + '/api/account/telegram_callback/')
 
@@ -23,8 +22,8 @@ def help_keyboard(lang):
     return InlineKeyboardMarkup(keyboard)
 
 
-def login_keyboard(lang):
-    text = CONTNET[lang]['login_button']
+def login_keyboard(lang, lang_keyword=None):
+    text = CONTNET[lang][lang_keyword or 'login_button']
     keyboard = [[InlineKeyboardButton(text, login_url=LOGIN_URL)]]
 
     return InlineKeyboardMarkup(keyboard)

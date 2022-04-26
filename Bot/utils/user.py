@@ -6,6 +6,7 @@ import requests
 # conf
 from .config import HEADERS, INTERNAL_HOST
 
+
 HOST = INTERNAL_HOST + '/api/bot/'
 
 
@@ -31,6 +32,7 @@ class User:
     invites_counter: bool
     inviter: Inviter | None = None
     exists: bool
+    wallet: str | None
 
     def __init__(self, user_id, inviter=None, lang='en', fullname=None):
         self.user_id = user_id
@@ -63,6 +65,7 @@ class User:
         self.total_invites = res['total_invites']
         self.invites_counter = res['invites_counter']
         self.exists = res['exists']
+        self.wallet = res.get('wallet')
 
         if res['inviter']:
             self.inviter = Inviter(res['inviter'])

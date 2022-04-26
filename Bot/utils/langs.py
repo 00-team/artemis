@@ -68,6 +68,14 @@ CONTNET_EN = {
         'Unsuccessful invite! ❌\n'
         'You need to join all the chats first.'
     ),
+
+    'wallet': (
+        'Your Wallet: \n{}\n' +
+        ('-' * 42) +
+        '\nYou can edit your wallet in the website!'
+    ),
+    'no_wallet': 'Not Connected ❌',
+    'edit_wallet': 'Edit Your Wallet Here! 💳',
 }
 
 
@@ -137,6 +145,14 @@ CONTNET_RU = {
     ),
     'success_invite': 'Вам удалось добавить кого-то в бота 🎉',
     'unsuccess_invite': 'Неудачное приглашение ❌',
+
+    'wallet': (
+        'Ваш кошелек: \n{}\n' +
+        ('-' * 42) +
+        '\nВы можете редактировать свой кошелек на сайте!'
+    ),
+    'no_wallet': 'Не подключен ❌',
+    'edit_wallet': 'Отредактируйте свой кошелек здесь! 💳',
 }
 
 TRANSLATED_CONTENT = ['en', 'ru']
@@ -148,11 +164,13 @@ COMMANDS = (
         ('join', 'join to our channels'),
         ('invite', 'invite your friends into the bot!'),
         ('login', 'login to our website!'),
+        ('wallet', 'see your wallet'),
     )),
     ('ru', (
         ('help', 'помощь!'),
         ('join', 'присоединяйтесь к нашим каналам'),
         ('invite', 'пригласить друзей в бота!'),
         ('login', 'войти на наш сайт!'),
+        ('wallet', 'увидеть свой кошелек'),
     )),
 )

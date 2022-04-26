@@ -98,7 +98,8 @@ class BotUser(models.Model):
             'invite_hash': self.invite_hash,
             'total_invites': self.total_invites,
             'invites_counter': self.invites_counter,
-            'inviter': None
+            'inviter': None,
+            'wallet': None,
         }
 
         if self.inviter:
@@ -107,6 +108,12 @@ class BotUser(models.Model):
                 'invite_hash': self.inviter.invite_hash,
                 'total_invites': self.inviter.total_invites,
             }
+
+        try:
+            if self.account.wallet:
+                data['wallet'] = self.account.wallet
+        except:
+            pass
 
         return data
 

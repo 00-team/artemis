@@ -204,6 +204,10 @@ def help_callback(update: Update, lang, **kwrags):
 
 
 @user_data
-def wallet(update: Update, lang, **kwargs):
-    user = update.effective_user
-    user.send_message('gg')
+def wallet(update: Update, lang, bot_user, **kwargs):
+    no_wallet = CONTNET[lang]['no_wallet']
+    text = CONTNET[lang]['wallet'].format(bot_user.wallet or no_wallet)
+    update.effective_user.send_message(
+        text,
+        reply_markup=login_keyboard(lang, 'edit_wallet')
+    )
