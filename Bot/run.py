@@ -1,37 +1,18 @@
-# telegram api
-from telegram import Update
-from telegram.ext import Updater, Filters
-
-# handlers
-from telegram.ext import ChatMemberHandler, MessageHandler, CommandHandler
-from telegram.ext import CallbackQueryHandler
-
-
-# data
-from utils.data import get_chats, update_chats
-
-# conf
-from utils.config import BOT_TOKEN, MODE, BASE_DIR
-
-# lang
-from utils.langs import COMMANDS
-
-# decorators
-from utils.decorators import user_data
-
-# stages
-from utils.sections import join_chats, update_join_chats
-from utils.sections import invite, login, start
-from utils.sections import help_cmd, help_callback
-
-# admins
-from utils.admin import photo_info, view_user, admin_help
-
-# langs
-from utils.langs import HELP_PATTERN
-
-# logger
 import logging
+
+from telegram import Update
+from telegram.ext import CallbackQueryHandler, ChatMemberHandler
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+
+from utils.admin import admin_help, photo_info, view_user
+from utils.config import BASE_DIR, BOT_TOKEN, MODE
+from utils.data import get_chats, update_chats
+from utils.decorators import user_data
+from utils.langs import COMMANDS, HELP_PATTERN
+from utils.sections import help_callback, help_cmd, invite, join_chats, login
+from utils.sections import start, update_join_chats, wallet
+
+
 logging.basicConfig(
     filename=BASE_DIR / 'bot.log',
     encoding='utf-8',
@@ -94,6 +75,7 @@ def main():
         dp.add_handler(CommandHandler('login', login))
         dp.add_handler(CommandHandler('join', join_chats))
         dp.add_handler(CommandHandler('invite', invite))
+        dp.add_handler(CommandHandler('wallet', wallet))
 
         # admin commands
         dp.add_handler(CommandHandler(['user', 'u'], view_user))

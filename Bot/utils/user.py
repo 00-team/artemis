@@ -28,7 +28,7 @@ class User:
     lang: LANG
     invite_hash: str
     total_invites: int
-    CFI: bool
+    invites_counter: bool
     inviter: Inviter | None = None
     exists: bool
 
@@ -61,7 +61,7 @@ class User:
         self.lang = res['lang']
         self.invite_hash = res['invite_hash']
         self.total_invites = res['total_invites']
-        self.CFI = res['CFI']
+        self.invites_counter = res['invites_counter']
         self.exists = res['exists']
 
         if res['inviter']:

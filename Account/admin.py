@@ -13,15 +13,15 @@ class BotUserAdmin(admin.ModelAdmin):
     list_display = (
         'user_id', 'fullname',
         'lang', 'total_invites', 'inviter',
-        'CFI', 'is_admin',
+        'invites_counter', 'is_admin',
     )
     readonly_fields = ('user_id', 'lang', 'invite_hash', 'has_logedin')
-    list_filter = ('is_admin', 'lang', 'CFI')
+    list_filter = ('is_admin', 'lang', 'invites_counter')
     search_fields = ('user_id', 'invite_hash')
 
     fieldsets = (
         ('Data', {'fields': ('fullname', 'is_admin')}),
-        ('Invites', {'fields': ('total_invites', 'CFI', 'inviter')}),
+        ('Invites', {'fields': ('total_invites', 'invites_counter', 'inviter')}),
         ('Details', {
             'fields': ('user_id', 'invite_hash', 'lang', 'has_logedin')
         }),

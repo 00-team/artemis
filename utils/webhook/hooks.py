@@ -1,28 +1,23 @@
-from time import sleep
-from requests import post
-from django.utils.timezone import now
-
-from threading import Thread
-
+# logger
+import logging
 from collections.abc import Iterable
-
-# configs
-from .config import HOST, ACCOUNT, DEBUG_HOOK
-from .config import DEFAULT_USERNAME as USERNAME
-from .config import DEFAULT_AVATAR as AVATAR
-from .config import HR
-from .config import ACCOUNT_STATUS, TWITTER_STATUS
-
-from django.conf import settings
-
-# modeles
-from Account.models import Account, BotUser, TwitterAccount
-
+from threading import Thread
+from time import sleep
 # exception
 from traceback import format_exception
 
-# logger
-import logging
+# modeles
+from Account.models import Account, BotUser, TwitterAccount
+from django.conf import settings
+from django.utils.timezone import now
+from requests import post
+
+# configs
+from .config import ACCOUNT, ACCOUNT_STATUS, DEBUG_HOOK
+from .config import DEFAULT_AVATAR as AVATAR
+from .config import DEFAULT_USERNAME as USERNAME
+from .config import HOST, HR, TWITTER_STATUS
+
 logger = logging.getLogger(__name__)
 
 
@@ -168,7 +163,7 @@ def bot_user_hook(bot_user: BotUser):
         f'**User ID**: ||`{bot_user.user_id}`||{HR}'
         f'**Lang**: `{bot_user.lang}`{HR}'
         f'**Total Invites**: `{bot_user.total_invites}`{HR}'
-        f'**Counted for Inviter**: `{bot_user.CFI}`{HR}'
+        f'**Invites Counter**: `{bot_user.invites_counter}`{HR}'
         f'**Inviter**: {get_inviter()}{HR}'
         f'**Logged In**: `{logged_in}`{HR}'
     )

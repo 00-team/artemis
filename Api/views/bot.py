@@ -65,7 +65,7 @@ def get_bot_user(request: HttpRequest):
                 'lang': data.get('lang'),
                 'inviter': data.get('inviter'),
                 'total_invites': data.get('total_invites'),
-                'CFI': data.get('CFI'),
+                'invites_counter': data.get('invites_counter'),
             }
         except:
             raise E('user_id is invalid!')
@@ -92,8 +92,8 @@ def update_inviter(request: HttpRequest):
 
         inviter = bot_user.inviter
 
-        if inviter and not bot_user.CFI:
-            bot_user.CFI = True
+        if inviter and not bot_user.invites_counter:
+            bot_user.invites_counter = True
             bot_user.save()
 
             if increase:
