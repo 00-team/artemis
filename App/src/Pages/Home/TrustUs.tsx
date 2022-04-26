@@ -22,7 +22,7 @@ const TrustUs = () => {
         const MakeUpdater = () => {
             if (UpdaterID) clearInterval(UpdaterID)
             dispatch(UpdateGeneralInfo())
-            UpdaterID = setInterval(() => dispatch(UpdateGeneralInfo()), 1_000)
+            UpdaterID = setInterval(() => dispatch(UpdateGeneralInfo()), 7_000)
         }
 
         MakeUpdater()
