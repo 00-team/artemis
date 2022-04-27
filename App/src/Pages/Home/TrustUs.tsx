@@ -83,6 +83,10 @@ const TrustUs = () => {
                     <div className='holder'>Twitters</div>
                     <CountAnim end={GeneralInfo.twitters} />
                 </div>
+                <div className={'trust-item' + C(isIntersecting, 'active')}>
+                    <div className='holder'>Hits</div>
+                    <CountAnim end={GeneralInfo.hits} />
+                </div>
             </div>
         </section>
     )
