@@ -33,7 +33,7 @@ import { AccountModel, TwitterModel } from 'state/models/Account'
 import { Avatar } from '@00-team/utils'
 
 // components
-import CountUpAnim from 'components/utils/CountUpAnim'
+import { CountAnim } from '@00-team/utils'
 import WalletLock from 'components/utils/WalletLock'
 
 const Account: FC = () => {
@@ -316,19 +316,19 @@ const TwitterCard: FC<TwitterCardProps> = ({ twitter, status }) => {
                         <div className='status'>
                             <div className='holder'>Following</div>
                             <div className='data'>
-                                <CountUpAnim end={followings} speed={50} />
+                                <CountAnim end={followings} />
                             </div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Followers</div>
                             <div className='data'>
-                                <CountUpAnim end={followers} speed={50} />
+                                <CountAnim end={followers} />
                             </div>
                         </div>
                         <div className='status'>
                             <div className='holder'>Tweets</div>
                             <div className='data'>
-                                <CountUpAnim end={tweets} speed={50} />
+                                <CountAnim end={tweets} />
                             </div>
                         </div>
                     </div>

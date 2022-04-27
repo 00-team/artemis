@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, UpdateGeneralInfo } from 'state'
 
 // utils
+import { C, CountAnim } from '@00-team/utils'
 import UnderlineText from 'components/utils/UnderlineText'
-import CountUpAnim from 'components/utils/CountUpAnim'
 
 // style
 import './style/trustus.scss'
@@ -71,17 +71,17 @@ const TrustUs = () => {
         <section className='trustus-container' id='trust'>
             <UnderlineText threshold={1}>Why Trust Us?</UnderlineText>
             <div className='trust-wrapper' ref={LazyRef}>
-                <div className={`trust-item ${isIntersecting ? 'active' : ''}`}>
+                <div className={'trust-item' + C(isIntersecting, 'active')}>
                     <div className='holder'>Users</div>
-                    <CountUpAnim end={GeneralInfo.bot_users} speed={50} />
+                    <CountAnim end={GeneralInfo.bot_users} />
                 </div>
-                <div className={`trust-item ${isIntersecting ? 'active' : ''}`}>
+                <div className={'trust-item' + C(isIntersecting, 'active')}>
                     <div className='holder'>Customers</div>
-                    <CountUpAnim end={GeneralInfo.accounts} speed={50} />
+                    <CountAnim end={GeneralInfo.accounts} />
                 </div>
-                <div className={`trust-item ${isIntersecting ? 'active' : ''}`}>
+                <div className={'trust-item' + C(isIntersecting, 'active')}>
                     <div className='holder'>Twitters</div>
-                    <CountUpAnim end={GeneralInfo.twitters} speed={50} />
+                    <CountAnim end={GeneralInfo.twitters} />
                 </div>
             </div>
         </section>

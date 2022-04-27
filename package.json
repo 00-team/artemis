@@ -21,7 +21,7 @@
     },
     "homepage": "https://github.com/00-team/nightcurly#readme",
     "dependencies": {
-        "@00-team/utils": "^0.1.1",
+        "@00-team/utils": "^0.1.4",
         "@loadable/component": "^5.15.2",
         "@react-icons/all-files": "^4.1.0",
         "@redux-devtools/extension": "^3.2.2",
