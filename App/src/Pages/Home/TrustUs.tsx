@@ -5,14 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, UpdateGeneralInfo } from 'state'
 
 // utils
-import { DisplayNumbers } from '@00-team/utils'
 import UnderlineText from 'components/utils/UnderlineText'
 import CountUpAnim from 'components/utils/CountUpAnim'
 
 // style
 import './style/trustus.scss'
 
-const _ = (n: number) => DisplayNumbers(n, 1e3, 1e9)
 var UpdaterID: NodeJS.Timer | null = null
 
 const TrustUs = () => {
@@ -75,24 +73,15 @@ const TrustUs = () => {
             <div className='trust-wrapper' ref={LazyRef}>
                 <div className={`trust-item ${isIntersecting ? 'active' : ''}`}>
                     <div className='holder'>Users</div>
-                    <CountUpAnim
-                        end={Number(_(GeneralInfo.bot_users))}
-                        speed={50}
-                    />
+                    <CountUpAnim end={GeneralInfo.bot_users} speed={50} />
                 </div>
                 <div className={`trust-item ${isIntersecting ? 'active' : ''}`}>
                     <div className='holder'>Customers</div>
-                    <CountUpAnim
-                        end={Number(_(GeneralInfo.accounts))}
-                        speed={50}
-                    />
+                    <CountUpAnim end={GeneralInfo.accounts} speed={50} />
                 </div>
                 <div className={`trust-item ${isIntersecting ? 'active' : ''}`}>
                     <div className='holder'>Twitters</div>
-                    <CountUpAnim
-                        end={Number(_(GeneralInfo.twitters))}
-                        speed={50}
-                    />
+                    <CountUpAnim end={GeneralInfo.twitters} speed={50} />
                 </div>
             </div>
         </section>
