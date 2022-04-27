@@ -1,48 +1,24 @@
-from django.http import HttpRequest, HttpResponseRedirect, JsonResponse
-
-# requests
-from requests import post
-
-# messages
-from django.contrib import messages
-
-# time
-from django.utils.timezone import now
+import logging
 from datetime import timedelta
-
-# auth
-from django.contrib.auth import logout as system_logout
-from django.contrib.auth import login as system_login
-
-# decorators
-from django.views.decorators.http import require_GET, require_POST
-from Api.decorators import login_required
-
-# csrf
-from django.middleware.csrf import get_token
-
-# execptions
-from utils.api import E
-
-# conf
-from django.conf import settings
-
-# utils
-from utils.api import HOST, get_data
-from utils.api import validate_telegram_data
-from utils.api import merge_params, follow_owners
-from utils.api import twitter_info
-# django
-from django.utils.crypto import get_random_string as random_str
-
-# models
-from Account.models import Account, BotUser, TwitterAccount
-
-# hreading
 from threading import Thread
 
-# logger
-import logging
+from Account.models import Account, BotUser, TwitterAccount
+from Api.decorators import login_required
+from Collection.models import HitCount
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import login as system_login
+from django.contrib.auth import logout as system_logout
+from django.http import HttpRequest, HttpResponseRedirect, JsonResponse
+from django.middleware.csrf import get_token
+from django.utils.crypto import get_random_string as random_str
+from django.utils.timezone import now
+from django.views.decorators.http import require_GET, require_POST
+from requests import post
+from utils.api import HOST, E, follow_owners, get_data, merge_params
+from utils.api import twitter_info, validate_telegram_data
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -294,6 +270,7 @@ def general_info(request: HttpRequest):
             'bot_users': BotUser.objects.count(),
             'accounts': Account.objects.count(),
             'twitters': TwitterAccount.objects.count(),
+            'hits': HitCount.load().hits
         }
 
         return JsonResponse(data)

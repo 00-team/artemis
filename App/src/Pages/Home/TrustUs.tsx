@@ -50,6 +50,7 @@ const TrustUs = () => {
             <span>bot users: {_(GeneralInfo.bot_users)}</span>
             <span>accounts: {_(GeneralInfo.accounts)}</span>
             <span>twitters: {_(GeneralInfo.twitters)}</span>
+            <span>hits: {GeneralInfo.hits}</span>
         </section>
     )
 }
