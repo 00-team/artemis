@@ -1,11 +1,13 @@
 from django.contrib import admin
-
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 
-# models
-from .models import BotUser
-from .models import Account
-from .models import TwitterAccount
+from .models import Account, BotUser, TwitterAccount
+
+
+admin.site.unregister(User)
 
 
 @admin.register(BotUser)
@@ -121,3 +123,26 @@ class TwitterAccountAdmin(admin.ModelAdmin):
             ))
 
         return 'None'
+
+
+@admin.register(User)
+class UserAdmin(BaseUserAdmin):
+    readonly_fields = ('account', )
+
+    fieldsets = (
+        (None, {'fields': ('account', 'username', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (
+            _('Permissions'),
+            {
+                'fields': (
+                    'is_active',
+                    'is_staff',
+                    'is_superuser',
+                    'groups',
+                    'user_permissions',
+                ),
+            },
+        ),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )
