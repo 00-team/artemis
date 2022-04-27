@@ -5,7 +5,6 @@ import HeroSection from './HeroSection'
 import TrustUs from './TrustUs'
 import Owners from './Owners'
 import Faq from './Faq'
-import Stats from './Stats'
 
 // state
 import { useDispatch } from 'react-redux'
@@ -21,7 +20,6 @@ const Home: FC = () => {
     return (
         <main>
             <HeroSection />
-            <Stats />
             <TrustUs />
             <Owners />
             <Faq />
