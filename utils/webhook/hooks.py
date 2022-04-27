@@ -102,8 +102,10 @@ def twitter_hook(twitter: TwitterAccount, status: str):
                    f'**Link**: ||https://twitter.com/{twitter.username}||{HR}'
                    f'**Followers**: `{twitter.followers}`\n'
                    f'**Followings**: `{twitter.followings}`\n'
-                   f'**Tweets**: `{twitter.tweets}`{HR}'
-                   f'**Bio**: \n{twitter.description}{HR}')
+                   f'**Tweets**: `{twitter.tweets}`{HR}')
+
+    if twitter.description:
+        description += f'**Bio**: \n{twitter.description}{HR}'
 
     color, author_name = TWITTER_STATUS[status]
 
