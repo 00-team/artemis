@@ -1,30 +1,17 @@
-# types
-from telegram import Chat, Update
+import logging
 
-# exceptions
+from telegram import Chat, Update
 from telegram.error import BadRequest, Unauthorized
 
-# user
+from .config import get_photo
+from .data import get_chats, update_chats
+from .decorators import user_data
+from .keyboards import help_keyboard, invite_keyboard, join_keyboard
+from .keyboards import login_keyboard
+from .langs import CONTNET, TRANSLATED_CONTENT
 from .user import User
 
-# keyboards
-from .keyboards import help_keyboard, login_keyboard
-from .keyboards import join_keyboard, invite_keyboard
 
-# decorators
-from .decorators import user_data
-
-# data
-from .data import get_chats, update_chats
-
-# langs
-from .langs import CONTNET, TRANSLATED_CONTENT
-
-# config
-from .config import get_photo
-
-# logger
-import logging
 logger = logging.getLogger(__name__)
 
 
@@ -64,7 +51,7 @@ def user_not_joined(user: Chat) -> list[Chat]:
 
 
 def check_inviter(update: Update, bot_user: User):
-    if not bot_user.inviter or bot_user.CFI:
+    if not bot_user.inviter or bot_user.invites_counter:
         return
 
     the_bot = update.effective_user.bot
@@ -88,6 +75,10 @@ def check_inviter(update: Update, bot_user: User):
         bot_user.update_inviter()
 
         inviter_user.send_message(CONTNET[inviter_lang]['success_invite'])
+
+    except Unauthorized:
+        pass
+
     except Exception as e:
         logger.exception(e)
 
@@ -147,7 +138,7 @@ def invite(update: Update, bot_user: User, lang, **kwargs):
     user = update.effective_user
     chat = update.effective_chat
     bot_username = user.bot.username
-    enough_invites = bot_user.total_invites >= 3
+    enough_invites = bot_user.total_invites >= 10
 
     user_link = f'https://t.me/{bot_username}?start=invite-{bot_user.invite_hash}'
 
@@ -214,3 +205,13 @@ def help_callback(update: Update, lang, **kwrags):
             login(update=update, **kwrags)
         case _:
             return
+
+
+@user_data
+def wallet(update: Update, lang, bot_user, **kwargs):
+    no_wallet = CONTNET[lang]['no_wallet']
+    text = CONTNET[lang]['wallet'].format(bot_user.wallet or no_wallet)
+    update.effective_user.send_message(
+        text,
+        reply_markup=login_keyboard(lang, 'edit_wallet')
+    )

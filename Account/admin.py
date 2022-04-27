@@ -1,11 +1,13 @@
 from django.contrib import admin
-
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 
-# models
-from .models import BotUser
-from .models import Account
-from .models import TwitterAccount
+from .models import Account, BotUser, TwitterAccount
+
+
+admin.site.unregister(User)
 
 
 @admin.register(BotUser)
@@ -13,15 +15,15 @@ class BotUserAdmin(admin.ModelAdmin):
     list_display = (
         'user_id', 'fullname',
         'lang', 'total_invites', 'inviter',
-        'CFI', 'is_admin',
+        'invites_counter', 'is_admin',
     )
     readonly_fields = ('user_id', 'lang', 'invite_hash', 'has_logedin')
-    list_filter = ('is_admin', 'lang')
+    list_filter = ('is_admin', 'lang', 'invites_counter')
     search_fields = ('user_id', 'invite_hash')
 
     fieldsets = (
         ('Data', {'fields': ('fullname', 'is_admin')}),
-        ('Invites', {'fields': ('total_invites', 'CFI', 'inviter')}),
+        ('Invites', {'fields': ('total_invites', 'invites_counter', 'inviter')}),
         ('Details', {
             'fields': ('user_id', 'invite_hash', 'lang', 'has_logedin')
         }),
@@ -69,7 +71,7 @@ class AccountAdmin(admin.ModelAdmin):
         }),
     )
 
-    @admin.display(boolean=True)
+    @admin.display(boolean=True, ordering='-wallet')
     def has_wallet(self, obj):
         return bool(obj.wallet)
 
@@ -121,3 +123,26 @@ class TwitterAccountAdmin(admin.ModelAdmin):
             ))
 
         return 'None'
+
+
+@admin.register(User)
+class UserAdmin(BaseUserAdmin):
+    readonly_fields = ('account', )
+
+    fieldsets = (
+        (None, {'fields': ('account', 'username', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (
+            _('Permissions'),
+            {
+                'fields': (
+                    'is_active',
+                    'is_staff',
+                    'is_superuser',
+                    'groups',
+                    'user_permissions',
+                ),
+            },
+        ),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )

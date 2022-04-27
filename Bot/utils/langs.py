@@ -3,18 +3,18 @@ HELP_PATTERN = '^help_(join|invite|login)$'
 CONTNET_EN = {
     'start': (
         '🌀 Welcome to the Nightcurly Bot\n'
-        'if you join our chats and invite 3 ppl into the bot\n'
-        'we give you a free 15$ NFT'
+        'if you join our chats and invite 10 ppl into the bot\n'
+        'we give you a free 300$ NFT'
     ),
     'help': (
         '-------- Help Title --------\n\n'
 
         'Explains how users can get a free NFT\n'
         '1. Join all channels\n'
-        '2. Invite 3 ppl to the robot\n'
+        '2. Invite 10 ppl to the robot\n'
         '3. Log in to the website and give us your wallet\n'
         'After 24 hours, you will participate in the NFT lottery. '
-        'We have 3 winners every night in the @XIXNFT channel.\n\n'
+        'We have 50 winners every night in the @XIXNFT channel.\n\n'
 
         'Join! - To join our chats\n'
         'Invite - To invite your friends\n'
@@ -33,7 +33,7 @@ CONTNET_EN = {
     'login': (
         'Register for the last step on the site and send your wallet\n'
         'After 24 hours, you will participate in the NFT lottery. '
-        'We have 3 winners every night in the @XIXNFT channel.'
+        'We have 50 winners every night in the @XIXNFT channel.'
     ),
 
     'chats_check_button': 'Check ✅',
@@ -50,39 +50,50 @@ CONTNET_EN = {
 
     'invite_button': 'TO GET NFT ENTER THE BOT ✅',
     'invites': (
-        'Ask three of your friends to join'
+        'Ask ten of your friends to join'
         'the bot with your special link. 🔗\n'
-        'Your Link: {}\nYour total invites: {}/3'
+        'Your Link: {}\nYour total invites: {}/10'
     ),
     'invite_banner': (
         'The first valid bot that gives free nft as a gift 🎁\n\n'
-        'From the Rarible site ⛵️\n\n'
+        'From the OpenSea site ⛵️\n\n'
         'Gain multi-dollar nfts in just three steps 💵💰'
     ),
     'enough_invites': (
         'Congratulations, you have successfully'
-        'invited three people to the robot 🎉'
+        'invited ten people to the robot 🎉'
     ),
     'success_invite': 'You have succeeded adding someone into the bot 🎉',
-    'unsuccess_invite': 'Unsuccessful invite! ❌',
+    'unsuccess_invite': (
+        'Unsuccessful invite! ❌\n'
+        'You need to join all the chats first.'
+    ),
+
+    'wallet': (
+        'Your Wallet: \n{}\n' +
+        ('-' * 42) +
+        '\nYou can edit your wallet in the website!'
+    ),
+    'no_wallet': 'Not Connected ❌',
+    'edit_wallet': 'Edit Your Wallet Here! 💳',
 }
 
 
 CONTNET_RU = {
     'start': (
         '🌀Добро пожаловать в Nightcurly Bot\n'
-        'если вы присоединитесь к нашим чатам и пригласите 3 человека в бота\n'
-        'мы даем вам бесплатно 15 $ NFT'
+        'если вы присоединитесь к нашим чатам и пригласите 50 человека в бота\n'
+        'мы даем вам бесплатно 300 $ NFT'
     ),
     'help': (
         '-------- Название справки --------\n\n'
 
         'Объясняет, как пользователи могут получить бесплатный NFT\n'
         '1. Присоединяйтесь ко всем каналам\n'
-        '2. Пригласить в робота 3 человека\n'
+        '2. Пригласить в робота 10 человека\n'
         '3. Войдите на сайт и дайте нам свой кошелек\n'
         'Через 24 часа вы будете участвовать в лотерее NFT. '
-        'Каждую ночь на канале @XIXNFT у нас 3 победителя.\n\n'
+        'Каждую ночь на канале @XIXNFT у нас 50 победителя.\n\n'
 
         'Присоединиться! - Чтобы присоединиться к нашим чатам\n'
         'Пригласить - Пригласить друзей\n'
@@ -102,12 +113,12 @@ CONTNET_RU = {
         'Зарегистрируйтесь на последний шаг на '
         'сайте и отправьте свой кошелек\n'
         'Через 24 часа вы будете участвовать в лотерее NFT. '
-        'Каждую ночь на канале @XIXNFT у нас 3 победителя.'
+        'Каждую ночь на канале @XIXNFT у нас 50 победителя.'
     ),
 
     'chats_check_button': 'Проверьте ✅',
     'join_chats': 'Подпишитесь на канал ниже 👇',
-    'joined_chats': 'you already join all the channels',
+    'joined_chats': 'ты уже присоединился ко всем каналам',
     'join_complete': (
         'Поздравления\nУспешно присоединился к каналу 🎉\n'
         'Нажмите, чтобы перейти к следующему шагу 👉  /invite'
@@ -119,21 +130,29 @@ CONTNET_RU = {
 
     'invite_button': 'ЧТОБЫ ПОЛУЧИТЬ NFT, ВОЙДИТЕ В РОБОТА ✅',
     'invites': (
-        'Попросите трех своих друзей присоединиться '
+        'Попросите десять своих друзей присоединиться '
         'к роботу по вашей специальной ссылке. 🔗\n\n'
-        'Ваша ссылка: {}\n\nВсего приглашений: {}/3'
+        'Ваша ссылка: {}\n\nВсего приглашений: {}/10'
     ),
     'invite_banner': (
         'Первый действующий бот, дающий бесплатный nft в подарок 🎁\n\n'
-        'С сайта Рарибл\n\n'
+        'С сайта OpenSea ⛵️\n\n'
         'Получите многодолларовую NFT всего за три шага 💵💰'
     ),
     'enough_invites': (
         'Поздравляем, вы успешно пригласили '
-        'в робота трех человек 🎉'
+        'в робота десять человек 🎉'
     ),
     'success_invite': 'Вам удалось добавить кого-то в бота 🎉',
     'unsuccess_invite': 'Неудачное приглашение ❌',
+
+    'wallet': (
+        'Ваш кошелек: \n{}\n' +
+        ('-' * 42) +
+        '\nВы можете редактировать свой кошелек на сайте!'
+    ),
+    'no_wallet': 'Не подключен ❌',
+    'edit_wallet': 'Отредактируйте свой кошелек здесь! 💳',
 }
 
 TRANSLATED_CONTENT = ['en', 'ru']
@@ -145,11 +164,13 @@ COMMANDS = (
         ('join', 'join to our channels'),
         ('invite', 'invite your friends into the bot!'),
         ('login', 'login to our website!'),
+        ('wallet', 'see your wallet'),
     )),
     ('ru', (
         ('help', 'помощь!'),
         ('join', 'присоединяйтесь к нашим каналам'),
         ('invite', 'пригласить друзей в бота!'),
         ('login', 'войти на наш сайт!'),
+        ('wallet', 'увидеть свой кошелек'),
     )),
 )

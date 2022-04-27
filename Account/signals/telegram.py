@@ -78,7 +78,7 @@ def bot_user_pre_save(instance, **kwargs):
             instance.inviter = None
 
         if not instance.inviter:
-            instance.CFI = False
+            instance.invites_counter = False
 
         bot_user_hook(instance)
     except Exception as e:

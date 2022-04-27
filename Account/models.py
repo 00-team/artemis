@@ -1,9 +1,6 @@
-from django.db import models
-from django.db.models import CharField, PositiveBigIntegerField
-from django.db.models import SET_NULL
 from django.contrib.auth.models import User
-
-# utils
+from django.db import models
+from django.db.models import SET_NULL, CharField, PositiveBigIntegerField
 from utils.models import file_path, username
 
 
@@ -18,7 +15,7 @@ class BotUserManager(models.Manager):
         if fullname:
             fullname = str(fullname)[:200]
 
-        CFI = bool(kwargs.get('CFI'))
+        invites_counter = bool(kwargs.get('invites_counter'))
         exists = False
 
         try:
@@ -34,8 +31,8 @@ class BotUserManager(models.Manager):
                 bot_user.lang = lang
                 changed = True
 
-            if CFI and bot_user.CFI != CFI:
-                bot_user.CFI = CFI
+            if invites_counter and not bot_user.invites_counter:
+                bot_user.invites_counter = True
                 changed = True
 
             try:
@@ -61,8 +58,8 @@ class BotUserManager(models.Manager):
             if lang:
                 bot_user.lang = str(lang)[:10]
 
-            if CFI:
-                bot_user.CFI = CFI
+            if invites_counter:
+                bot_user.invites_counter = invites_counter
 
             try:
                 inviter = self.get(invite_hash=inviter_hash)
@@ -82,7 +79,7 @@ class BotUser(models.Model):
     lang = CharField(max_length=10, default='en')
     invite_hash = CharField(max_length=128, null=True, blank=True, unique=True)
     total_invites = PositiveBigIntegerField(default=0)
-    CFI = models.BooleanField(default=False, help_text='Counted for inviter')
+    invites_counter = models.BooleanField(default=False)
     inviter = models.ForeignKey(
         'BotUser',
         on_delete=SET_NULL,
@@ -100,8 +97,9 @@ class BotUser(models.Model):
             'lang': self.lang,
             'invite_hash': self.invite_hash,
             'total_invites': self.total_invites,
-            'CFI': self.CFI,
-            'inviter': None
+            'invites_counter': self.invites_counter,
+            'inviter': None,
+            'wallet': None,
         }
 
         if self.inviter:
@@ -110,6 +108,12 @@ class BotUser(models.Model):
                 'invite_hash': self.inviter.invite_hash,
                 'total_invites': self.inviter.total_invites,
             }
+
+        try:
+            if self.account.wallet:
+                data['wallet'] = self.account.wallet
+        except:
+            pass
 
         return data
 

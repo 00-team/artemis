@@ -24,6 +24,7 @@ interface GeneralInfoModel {
     bot_users: number
     accounts: number
     twitters: number
+    hits: number
 }
 
 export { AccountModel, TwitterModel, GeneralInfoModel }
@@ -34,6 +35,7 @@ const DefaultGeneralState: GeneralInfoModel = {
     bot_users: 0,
     accounts: 0,
     twitters: 0,
+    hits: 0,
 }
 
 export { State, DefaultState, DefaultGeneralState }

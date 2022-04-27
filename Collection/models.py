@@ -1,6 +1,6 @@
 from django.db import models
-from django.db.models import Model, ImageField, CharField
-
+from django.db.models import CharField, ImageField, Model
+from django.forms import ValidationError
 # utils
 from utils.models import file_path
 
@@ -40,3 +40,22 @@ class FAQ(Model):
 
     def __str__(self):
         return self.question
+
+
+class HitCount(Model):
+    hits = models.PositiveBigIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        self.pk = 0
+        return super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=0)
+        return obj
+
+    def __str__(self):
+        return f'hits: {self.hits}'

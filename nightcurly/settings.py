@@ -1,5 +1,6 @@
 from .secrets import BASE_DIR, Secrets
 
+
 SECRETS = Secrets()
 SECRET_KEY = SECRETS.SECRET_KEY
 
@@ -31,6 +32,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'nightcurly.middlewares.HitCountMiddleware'
 ]
 
 ROOT_URLCONF = 'nightcurly.urls'

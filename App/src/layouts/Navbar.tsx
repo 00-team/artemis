@@ -6,6 +6,7 @@ import './style/navbar.scss'
 // icons
 import { AiFillHome } from '@react-icons/all-files/ai/AiFillHome'
 import { FaWallet } from '@react-icons/all-files/fa/FaWallet'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     const [MenuActive, setMenuActive] = useState(false)
@@ -23,16 +24,16 @@ const Navbar = () => {
 
                 <li>
                     <div className='first'>
-                        <a href='/account'>
+                        <Link to='/account'>
                             <FaWallet size={25} />
-                        </a>
+                        </Link>
                     </div>
                 </li>
                 <li>
                     <div className='sec'>
-                        <a href='/'>
+                        <Link to='/'>
                             <AiFillHome size={25} />
-                        </a>
+                        </Link>
                     </div>
                 </li>
             </div>

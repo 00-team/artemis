@@ -1,10 +1,9 @@
 from django.contrib import admin
-
 # django utils
 from django.utils.html import format_html
 
 # models
-from .models import FAQ, Owner, Asset
+from .models import FAQ, Asset, HitCount, Owner
 
 
 def pic(url: str, height: int = 100):
@@ -79,3 +78,14 @@ class AssetAdmin(admin.ModelAdmin):
 @admin.register(FAQ)
 class FaqAdmin(admin.ModelAdmin):
     list_display = ('question', 'owner')
+
+
+@admin.register(HitCount)
+class HitCountAdmin(admin.ModelAdmin):
+
+    def get_actions(self, *args, **kwargs):
+        return []
+
+    def change_view(self, request, object_id, form_url='', extra_context={}):
+        extra_context['show_save_and_add_another'] = False
+        return super().change_view(request, object_id, form_url, extra_context)
