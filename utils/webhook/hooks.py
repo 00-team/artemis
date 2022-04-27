@@ -18,6 +18,7 @@ from .config import DEFAULT_AVATAR as AVATAR
 from .config import DEFAULT_USERNAME as USERNAME
 from .config import HOST, HR, TWITTER_STATUS
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -63,8 +64,8 @@ def hook(url, embeds, username=USERNAME, avatar=AVATAR):
 def account_hook(account: Account, status: str):
 
     description = (
-        f'**ID**: `{account.telegram_id}`{HR}'
-        f'**Wallet**: `{account.wallet}`{HR}'
+        f'**ID**: ||`{account.telegram_id}`||{HR}'
+        f'**Wallet**: ||`{account.wallet}`||{HR}'
         f'**Join Date**: `{date(account.user.date_joined)}`{HR}'
         f'**Participated**: `{account.participated}`'
     )
@@ -95,14 +96,14 @@ def account_hook(account: Account, status: str):
 
 def twitter_hook(twitter: TwitterAccount, status: str):
 
-    description = (f'**Account**: `{twitter.account.telegram_id}`{HR}'
+    description = (f'**Account**: ||`{twitter.account.telegram_id}`||{HR}'
                    f'**ID**: ||`{twitter.user_id}`||{HR}'
                    f'**Username**: ||`{twitter.username}`||{HR}'
                    f'**Link**: ||https://twitter.com/{twitter.username}||{HR}'
                    f'**Followers**: `{twitter.followers}`\n'
                    f'**Followings**: `{twitter.followings}`\n'
                    f'**Tweets**: `{twitter.tweets}`{HR}'
-                   f'**Bio**: \n||{twitter.description}||{HR}')
+                   f'**Bio**: \n{twitter.description}{HR}')
 
     color, author_name = TWITTER_STATUS[status]
 
@@ -155,7 +156,7 @@ def bot_user_hook(bot_user: BotUser):
 
     def get_inviter():
         if bot_user.inviter:
-            return f'||`{bot_user.inviter.fullname}`||'
+            return f'||{bot_user.inviter.fullname} - `{bot_user.inviter.user_id}`||'
 
         return '`None`'
 
