@@ -399,26 +399,28 @@ const ChangeWallet: FC<ChangeWalletProps> = ({ setShowChangeWallet }) => {
         return ReactAlert.info('your request has been sent')
     }
 
-    const SendForm = (wallet: string) => {
+    const SendForm = async (wallet: string) => {
         setLoadingStatus({
             show: true,
             status: 'loading',
             message: 'Sending Your Request...',
         })
-        setTimeout(() => {
-            dispatch(UpdateAccount(wallet))
-            setLoadingStatus({
-                show: true,
-                status: 'success',
-                message: 'There Was An error changing your wallet',
-            })
 
-            // to close change wallet
-            setTimeout(() => {
-                setShowChangeWallet(false)
-            }, 3000)
-            //
-        }, 3000)
+        let res = await dispatch(UpdateAccount(wallet))
+
+        setLoadingStatus({
+            show: true,
+            // @ts-ignore
+            status: res[0],
+            // @ts-ignore
+            message: res[1],
+        })
+
+        // to close change wallet
+        setTimeout(() => {
+            setShowChangeWallet(false)
+        }, 7000)
+        //
     }
 
     return (

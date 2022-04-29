@@ -10,14 +10,17 @@ import { get as GetCookies } from 'js-cookie'
 
 const BASE_URL = '/api/account/'
 
-const HandleError = (error: unknown) => {
+const HandleError = (error: unknown): string => {
     if (
         axios.isAxiosError(error) &&
         error.response &&
         error.response.data.error
     ) {
         ReactAlert.error(error.response.data.error)
+        return error.response.data.error
     }
+
+    return 'There Was An error changing your wallet'
 }
 type D = (d: Dispatch<Action>) => Promise<void>
 type GA = () => D
@@ -31,13 +34,13 @@ const GetAccount: GA = () => async dispatch => {
     }
 }
 
-type UA = (wallet: string) => D
+type UA = (wallet: string) => (d: Dispatch<Action>) => Promise<[string, string]>
 const UpdateAccount: UA = wallet => async dispatch => {
     try {
         const csrftoken = GetCookies('csrftoken')
         if (!csrftoken) {
             location.reload()
-            return
+            return ['error', 'Error! pls reload']
         }
 
         const config = {
@@ -54,12 +57,16 @@ const UpdateAccount: UA = wallet => async dispatch => {
             config
         )
 
-        if (data.ok) ReactAlert.success(data.ok)
-
-        dispatch({ type: AccountTypes.SET_WALLET, payload: data.wallet })
+        if (data.ok) {
+            dispatch({ type: AccountTypes.SET_WALLET, payload: data.wallet })
+            ReactAlert.success(data.ok)
+            return ['success', data.ok]
+        }
     } catch (error) {
-        HandleError(error)
+        return ['error', HandleError(error)]
     }
+
+    return ['error', 'An Unknown Error Happend.']
 }
 export { GetAccount, UpdateAccount }
 
