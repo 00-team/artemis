@@ -233,7 +233,7 @@ def update(request: HttpRequest):
 
         wallet = str(wallet)
 
-        if len(wallet) == 42:
+        if len(wallet) == 42 and account.wallet != wallet:
             account.wallet = wallet
             account.save()
             return JsonResponse({
