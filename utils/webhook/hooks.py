@@ -158,7 +158,7 @@ def bot_user_hook(bot_user: BotUser):
 
     def get_inviter():
         if bot_user.inviter:
-            return f'||{bot_user.inviter.fullname} - `{bot_user.inviter.user_id}`||'
+            return f'||`{bot_user.inviter.fullname}` - `{bot_user.inviter.user_id}`||'
 
         return '`None`'
 
