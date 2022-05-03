@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import CharField, ImageField, Model
-from django.forms import ValidationError
 # utils
 from utils.models import file_path
 
@@ -17,7 +16,7 @@ class Owner(Model):
     twitter = CharField(max_length=30, blank=True, null=True, unique=True)
     twitter_id = models.BigIntegerField(null=True, blank=True)
     instagram = CharField(max_length=30, blank=True, null=True)
-    tweet = models.TextField(default='')
+    tweet = models.TextField(default='', blank=True)
 
     def __str__(self):
         return self.username
