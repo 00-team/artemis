@@ -118,7 +118,8 @@ def twitter_callback(request: HttpRequest):
         try:
             twitter_info(twitter)
         except E as e:
-            raise e
+            messages.error(request, e.message)
+            return HttpResponseRedirect('/account/')
         except Exception:
             raise E('Error while processing Twitter Data! Please try again.')
 
