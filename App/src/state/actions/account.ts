@@ -95,3 +95,40 @@ const UpdateGeneralInfo: UGT = () => async dispatch => {
     }
 }
 export { UpdateGeneralInfo }
+
+enum MessageLevel {
+    INFO = 20,
+    SUCCESS = 25,
+    WARNING = 30,
+    ERROR = 40,
+}
+interface Message {
+    message: string
+    level: MessageLevel
+    tags: string
+}
+
+const GetMessages = async () => {
+    try {
+        const { data } = await axios.get(BASE_URL + 'messages/')
+        if (data.messages && typeof data.messages == 'object') {
+            data.messages.map(({ message, level }: Message) => {
+                switch (level) {
+                    case MessageLevel.INFO:
+                        ReactAlert.info(message)
+                        break
+                    case MessageLevel.SUCCESS:
+                        ReactAlert.success(message)
+                        break
+                    default:
+                        ReactAlert.error(message)
+                        break
+                }
+            })
+        }
+    } catch (error) {
+        HandleError(error)
+    }
+}
+
+export { GetMessages }

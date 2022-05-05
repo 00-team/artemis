@@ -1,9 +1,7 @@
-from django.urls import path, include
+from django.urls import include, path
 
-from .views import account
-from .views import bot
-from .views import collection
-from .views import tools
+from .views import account, bot, collection, tools
+
 
 urlpatterns = [
 
@@ -24,6 +22,7 @@ urlpatterns = [
             path('get/', account.get_account),
             path('update/', account.update),
             path('general_info/', account.general_info),
+            path('messages/', account.get_messages),
         ]),
     ),
 

@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { WinScrollTYPE } from 'state/models/WinScrollTop'
 import { GetFAQs } from 'state/actions/collection'
+import { GetMessages } from 'state'
 
 // alert
 import { useAlert } from 'react-alert'
@@ -46,6 +47,10 @@ const App: FC = () => {
                 payload: scrollY,
             })
     }, [dispatch])
+
+    useEffect(() => {
+        GetMessages()
+    }, [])
 
     return (
         <>

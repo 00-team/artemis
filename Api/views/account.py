@@ -278,3 +278,19 @@ def general_info(request: HttpRequest):
         return JsonResponse(data)
     except E as e:
         return e.response
+
+
+@require_GET
+def get_messages(request: HttpRequest):
+    storage = messages.get_messages(request)
+
+    def GM(m):
+        return {
+            'message': m.message,
+            'level': m.level,
+            'tags': m.tags,
+        }
+
+    user_messages = map(GM, storage)
+
+    return JsonResponse({'messages': list(user_messages)})
