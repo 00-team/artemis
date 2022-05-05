@@ -24,9 +24,9 @@ const Navbar = () => {
 
                 <li>
                     <div className='first'>
-                        <Link to='/account'>
+                        <a href='/account'>
                             <FaWallet size={25} />
-                        </Link>
+                        </a>
                     </div>
                 </li>
                 <li>
