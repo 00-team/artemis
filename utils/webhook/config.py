@@ -1,5 +1,7 @@
 # conf
 from django.conf import settings
+
+
 SECRETS = settings.SECRETS
 
 HOST = 'https://' + SECRETS.EXTERNAL_HOST
@@ -9,6 +11,7 @@ DEFAULT_USERNAME = 'Nightcurly'
 DEFAULT_AVATAR = 'https://cdn.discordapp.com/attachments/731174051170746500/814603567704047646/00_logo_f27.png'
 
 ACCOUNT = SECRETS.WEBHOOKS['ACCOUNT']
+BOT_USER = SECRETS.WEBHOOKS['BOT_USER']
 DEBUG_HOOK = SECRETS.WEBHOOKS['DEBUG']
 
 HR = '\n' + ('-' * 50) + '\n'
