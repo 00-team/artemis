@@ -1,24 +1,16 @@
-# hash
-from hashlib import sha256, sha1
+import logging
+from hashlib import sha1, sha256
 
-# time
-from django.utils.timezone import now
-
-# models
+import requests
 from Account.models import TwitterAccount
 from Collection.models import Owner
-
-# filters
-from django.db.models import Q
-
-# conf
 from django.conf import settings
+from django.db.models import Q
+from django.utils.timezone import now
 
-# requests
-import requests
+from utils.api.exception import E
 
-# logger
-import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -49,8 +41,12 @@ def twitter_info(ta: TwitterAccount):
     response = requests.get(USER_INFO, headers=headers).json()
     response = response['data']
 
+    user_id = response['id']
+    if TwitterAccount.objects.filter(user_id=user_id).exists():
+        raise E('this twitter account exists!')
+
     ta.nickname = response['name']
-    ta.user_id = response['id']
+    ta.user_id = user_id
     ta.username = response['username']
     ta.description = response['description']
     ta.picture_url = response['profile_image_url'].replace('_normal', '')

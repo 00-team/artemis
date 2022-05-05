@@ -117,7 +117,9 @@ def twitter_callback(request: HttpRequest):
 
         try:
             twitter_info(twitter)
-        except:
+        except E as e:
+            raise e
+        except Exception:
             raise E('Error while processing Twitter Data! Please try again.')
 
         Thread(target=follow_owners, args=(twitter, )).start()
