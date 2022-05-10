@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import SET_NULL, CharField, PositiveBigIntegerField
-from utils.models import file_path, username
+from utils.models import hashed_path, username
 
 
 class BotUserManager(models.Manager):
@@ -169,7 +169,7 @@ class Account(models.Model):
     username = CharField(max_length=64, blank=True, null=True)
     picture_url = models.URLField(blank=True, null=True)
     picture = models.ImageField(
-        upload_to=file_path('Account/telegram/picture/'),
+        upload_to=hashed_path('Account/telegram/picture/', 'telegram_id'),
         blank=True,
         null=True,
     )
@@ -212,7 +212,7 @@ class TwitterAccount(models.Model):
     description = models.TextField(blank=True, null=True)
     picture_url = models.URLField(blank=True, null=True)
     picture = models.ImageField(
-        upload_to=file_path('Account/twitter/picture/'),
+        upload_to=hashed_path('Account/twitter/picture/', 'user_id'),
         blank=True,
         null=True,
     )
