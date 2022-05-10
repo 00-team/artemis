@@ -17,12 +17,15 @@ logger = logging.getLogger(__name__)
 
 @user_data
 def login(update: Update, lang, **kwargs):
-    chat = update.effective_chat
+    try:
+        chat = update.effective_chat
 
-    chat.send_message(
-        CONTNET[lang]['login'],
-        reply_markup=login_keyboard(lang),
-    )
+        chat.send_message(
+            CONTNET[lang]['login'],
+            reply_markup=login_keyboard(lang),
+        )
+    except Unauthorized:
+        pass
 
 
 def user_not_joined(user: Chat) -> list[Chat]:
@@ -85,24 +88,27 @@ def check_inviter(update: Update, bot_user: User):
 
 @user_data
 def join_chats(update: Update, bot_user, lang, **kwargs):
-    user = update.effective_user
-    user_chats = user_not_joined(user)
-    chat = update.effective_chat
+    try:
+        user = update.effective_user
+        user_chats = user_not_joined(user)
+        chat = update.effective_chat
 
-    if user_chats:
+        if user_chats:
+            chat.send_photo(
+                get_photo(),
+                caption=CONTNET[lang]['join_chats'],
+                reply_markup=join_keyboard(user_chats, lang),
+            )
+
+            return
+
+        check_inviter(update, bot_user)
         chat.send_photo(
             get_photo(),
-            caption=CONTNET[lang]['join_chats'],
-            reply_markup=join_keyboard(user_chats, lang),
+            caption=CONTNET[lang]['joined_chats'],
         )
-
-        return
-
-    check_inviter(update, bot_user)
-    chat.send_photo(
-        get_photo(),
-        caption=CONTNET[lang]['joined_chats'],
-    )
+    except Unauthorized:
+        pass
 
 
 @user_data
@@ -119,6 +125,8 @@ def update_join_chats(update: Update, bot_user, lang, **kwargs):
             )
         except BadRequest:
             pass
+        except Unauthorized:
+            pass
 
         return
 
@@ -131,57 +139,71 @@ def update_join_chats(update: Update, bot_user, lang, **kwargs):
         )
     except BadRequest:
         pass
+    except Unauthorized:
+        pass
 
 
 @user_data
 def invite(update: Update, bot_user: User, lang, **kwargs):
-    user = update.effective_user
-    chat = update.effective_chat
-    bot_username = user.bot.username
-    enough_invites = bot_user.total_invites >= 10
+    try:
+        user = update.effective_user
+        chat = update.effective_chat
+        bot_username = user.bot.username
+        enough_invites = bot_user.total_invites >= 10
 
-    user_link = f'https://t.me/{bot_username}?start=invite-{bot_user.invite_hash}'
+        user_link = f'https://t.me/{bot_username}?start=invite-{bot_user.invite_hash}'
 
-    text = CONTNET[lang]['invites']
-    text = text.format(user_link, bot_user.total_invites)
+        text = CONTNET[lang]['invites']
+        text = text.format(user_link, bot_user.total_invites)
 
-    user.send_message(text)
+        user.send_message(text)
 
-    user.send_photo(
-        get_photo(),
-        CONTNET[lang]['invite_banner'],
-        reply_markup=invite_keyboard(user_link, lang),
-    )
+        user.send_photo(
+            get_photo(),
+            CONTNET[lang]['invite_banner'],
+            reply_markup=invite_keyboard(user_link, lang),
+        )
 
-    if enough_invites:
-        chat.send_message(CONTNET[lang]['enough_invites'])
+        if enough_invites:
+            chat.send_message(CONTNET[lang]['enough_invites'])
+
+    except Unauthorized:
+        pass
 
 
 @user_data
 def start(update: Update, context, lang, **kwargs):
-
-    user = update.effective_user
-
-    user.send_message(CONTNET[lang]['start'])
-    user.send_message(CONTNET[lang]['help'], reply_markup=help_keyboard(lang))
-
     try:
-        arg = context.args[0]
+        user = update.effective_user
 
-        if arg == 'login':
-            user.send_message(
-                CONTNET[lang]['external_login'],
-                reply_markup=login_keyboard(lang),
-            )
+        user.send_message(CONTNET[lang]['start'])
+        user.send_message(CONTNET[lang]['help'],
+                          reply_markup=help_keyboard(lang))
 
-    except:
+        try:
+            arg = context.args[0]
+
+            if arg == 'login':
+                user.send_message(
+                    CONTNET[lang]['external_login'],
+                    reply_markup=login_keyboard(lang),
+                )
+
+        except Exception:
+            pass
+
+    except Unauthorized:
         pass
 
 
 @user_data
 def help_cmd(update: Update, lang, **kwargs):
-    user = update.effective_user
-    user.send_message(CONTNET[lang]['help'], reply_markup=help_keyboard(lang))
+    try:
+        user = update.effective_user
+        user.send_message(CONTNET[lang]['help'],
+                          reply_markup=help_keyboard(lang))
+    except Unauthorized:
+        pass
 
 
 @user_data
@@ -194,6 +216,8 @@ def help_callback(update: Update, lang, **kwrags):
             reply_markup=None
         )
     except BadRequest:
+        pass
+    except Unauthorized:
         pass
 
     match query.data[5:]:
@@ -209,9 +233,12 @@ def help_callback(update: Update, lang, **kwrags):
 
 @user_data
 def wallet(update: Update, lang, bot_user, **kwargs):
-    no_wallet = CONTNET[lang]['no_wallet']
-    text = CONTNET[lang]['wallet'].format(bot_user.wallet or no_wallet)
-    update.effective_user.send_message(
-        text,
-        reply_markup=login_keyboard(lang, 'edit_wallet')
-    )
+    try:
+        no_wallet = CONTNET[lang]['no_wallet']
+        text = CONTNET[lang]['wallet'].format(bot_user.wallet or no_wallet)
+        update.effective_user.send_message(
+            text,
+            reply_markup=login_keyboard(lang, 'edit_wallet')
+        )
+    except Unauthorized:
+        pass
