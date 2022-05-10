@@ -1,8 +1,8 @@
-from os import environ
-from typing import Literal
-from pathlib import Path
-from json import load
 from base64 import b64encode
+from json import load
+from os import environ
+from pathlib import Path
+from typing import Literal
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +28,7 @@ class Secrets:
     mode: Literal['DEV', 'BUILD']
 
     SECRET_KEY: str
+    SECRET_TOKEN_FILE: str
 
     CLIENT_ID: str
     CLIENT_SECRET: str
@@ -58,6 +59,7 @@ class Secrets:
         self.data = data
 
         self.SECRET_KEY = data['SECRET_KEY']
+        self.SECRET_TOKEN_FILE = data['SECRET_TOKEN_FILE']
 
         self.CLIENT_ID = data['TWITTER']['CLIENT_ID']
         self.CLIENT_SECRET = data['TWITTER']['CLIENT_SECRET']
