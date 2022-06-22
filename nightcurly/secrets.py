@@ -44,6 +44,9 @@ class Secrets:
     BOT_SECRET: str
     BOT_USERNAME: str
 
+    DB_USER: str
+    DB_PASS: str
+
     data: dict
 
     def __init__(self):
@@ -73,6 +76,9 @@ class Secrets:
         self.BOT_TOKEN = data[self.mode]['BOT']['TOKEN']
         self.BOT_SECRET = data[self.mode]['BOT']['SECRET']
         self.BOT_USERNAME = data[self.mode]['BOT']['USERNAME']
+
+        self.DB_USER = data[self.mode]['DATABASE']['USER']
+        self.DB_PASS = data[self.mode]['DATABASE']['PASSWORD']
 
         self.__twitter_auth__()
 
