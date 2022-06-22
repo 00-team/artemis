@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import CharField, ImageField, Model
-# utils
 from utils.models import file_path
 
 
@@ -45,16 +44,23 @@ class HitCount(Model):
     hits = models.PositiveBigIntegerField(default=0)
 
     def save(self, *args, **kwargs):
-        self.pk = 0
+        first = HitCount.objects.first()
+        if first:
+            self.pk = first.pk
         return super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        pass
+        first = HitCount.objects.first()
+        if first:
+            if self.pk != first.pk:
+                super().delete(*args, **kwargs)
 
     @classmethod
     def load(cls):
-        obj, created = cls.objects.get_or_create(pk=0)
-        return obj
+        first = cls.objects.first()
+        if first:
+            return first
+        return cls.objects.create()
 
     def __str__(self):
         return f'hits: {self.hits}'
