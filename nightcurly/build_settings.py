@@ -14,6 +14,8 @@ BASE_DB = {
     'PORT': 3306,
     'USER': SECRETS.DB_USER,
     'PASSWORD': SECRETS.DB_PASS,
+    'charset': 'utf8mb4',
+    'use_unicode': True,
 }
 
 DATABASES = {
