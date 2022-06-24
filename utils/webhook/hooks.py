@@ -154,7 +154,7 @@ def bot_user_hook(bot_user: BotUser):
 
     def get_inviter():
         if bot_user.inviter:
-            return f'||`{bot_user.inviter.fullname}` - `{bot_user.inviter.user_id}`||'
+            return f'||`{bot_user.inviter._fullname}` - `{bot_user.inviter.user_id}`||'
 
         return '`None`'
 
@@ -168,7 +168,7 @@ def bot_user_hook(bot_user: BotUser):
     )
 
     embed = {
-        'title': bot_user.fullname,
+        'title': bot_user._fullname,
         'color': 2017768,
         'author': {
             'name': 'Bot User Update'

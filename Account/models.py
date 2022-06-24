@@ -1,3 +1,5 @@
+from base64 import standard_b64decode, standard_b64encode
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import SET_NULL, CharField, PositiveBigIntegerField
@@ -13,7 +15,8 @@ class BotUserManager(models.Manager):
 
         fullname = kwargs.get('fullname')
         if fullname:
-            fullname = str(fullname)[:200]
+            fullname = str(fullname)[:200].encode()
+            fullname = 'base64;' + str(standard_b64encode(fullname), 'utf-8')
 
         invites_counter = bool(kwargs.get('invites_counter'))
         exists = False
@@ -53,7 +56,7 @@ class BotUserManager(models.Manager):
             bot_user = BotUser(user_id=user_id)
 
             if fullname:
-                bot_user.fullname = str(fullname)[:200]
+                bot_user.fullname = fullname
 
             if lang:
                 bot_user.lang = str(lang)[:10]
@@ -73,7 +76,10 @@ class BotUserManager(models.Manager):
 
 
 class BotUser(models.Model):
-    fullname = CharField(max_length=200, default='None')
+    fullname = models.TextField(
+        default='None',
+        help_text='Encoded User Full Name'
+    )
     is_admin = models.BooleanField(default=False)
     user_id = models.BigIntegerField(unique=True)
     lang = CharField(max_length=10, default='en')
@@ -117,8 +123,16 @@ class BotUser(models.Model):
 
         return data
 
+    @property
+    def _fullname(self):
+
+        if self.fullname.startswith('base64;'):
+            return str(standard_b64decode(self.fullname[7:]), 'utf-8')
+
+        return self.fullname
+
     def __str__(self):
-        return f'{self.fullname} - {self.user_id}'
+        return f'{self._fullname} - {self.user_id}'
 
 
 class AccountManager(models.Manager):
