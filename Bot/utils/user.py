@@ -57,7 +57,10 @@ class User:
         )
 
         if res.status_code != 200:
-            raise WebServerError(f'Error Code: {res.status_code}')
+            raise WebServerError((
+                f'Error Code: {res.status_code}\n'
+                f'Error text: {res.text}'
+            ))
 
         res = res.json()
 
