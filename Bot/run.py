@@ -1,6 +1,6 @@
-import logging
 
 from telegram import Update
+from telegram.error import NetworkError
 from telegram.ext import CallbackQueryHandler, ChatMemberHandler
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
@@ -9,21 +9,13 @@ from utils.config import BASE_DIR, BOT_TOKEN, MODE
 from utils.data import get_chats, update_chats
 from utils.decorators import user_data
 from utils.langs import COMMANDS, HELP_PATTERN
+from utils.logger import get_logger
 from utils.sections import help_callback, help_cmd, invite, join_chats, login
 from utils.sections import start, update_join_chats, wallet
 
 
-logging.basicConfig(
-    filename=BASE_DIR / 'bot.log',
-    encoding='utf-8',
-    level=logging.WARNING,
-    format=(
-        ('-' * 50) + '\n%(asctime)s\n'
-        '%(levelname)s:%(name)s\n'
-        '%(message)s\n'
-    )
-)
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
+network_logger = get_logger('bot network', BASE_DIR / 'network.bot.log')
 
 
 DEBUG = MODE == 'DEV'
@@ -57,7 +49,7 @@ def member_update(update: Update, bot_user, **kwargs):
 
         update_chats(chats)
     except Exception as e:
-        logger.error(e)
+        logger.exception(e)
 
 
 def main():
@@ -105,6 +97,8 @@ def main():
         updater.start_polling()
         print('started!')
         updater.idle()
+    except NetworkError as e:
+        network_logger.error(e)
     except Exception as e:
         logger.exception(e)
 

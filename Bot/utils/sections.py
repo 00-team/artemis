@@ -1,4 +1,3 @@
-import logging
 
 from telegram import Chat, Update
 from telegram.error import BadRequest, Unauthorized
@@ -9,10 +8,11 @@ from .decorators import user_data
 from .keyboards import help_keyboard, invite_keyboard, join_keyboard
 from .keyboards import login_keyboard
 from .langs import CONTNET, TRANSLATED_CONTENT
+from .logger import get_logger
 from .user import User
 
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 @user_data

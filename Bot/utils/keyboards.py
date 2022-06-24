@@ -1,8 +1,6 @@
 from telegram import Chat, InlineKeyboardButton, InlineKeyboardMarkup, LoginUrl
 
-# conf
 from .config import EXTERNAL_HOST
-# langs
 from .langs import CONTNET
 
 

@@ -1,5 +1,6 @@
 from random import choice
-from .secrets import Secrets, BASE_DIR
+
+from .secrets import BASE_DIR, Secrets
 
 
 SECRETS = Secrets()

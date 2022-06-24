@@ -1,9 +1,7 @@
 from typing import Literal
 
-# requests
 import requests
 
-# conf
 from .config import HEADERS, INTERNAL_HOST
 
 
