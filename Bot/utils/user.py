@@ -10,6 +10,10 @@ from .config import HEADERS, INTERNAL_HOST
 HOST = INTERNAL_HOST + '/api/bot/'
 
 
+class WebServerError(Exception):
+    pass
+
+
 class Inviter:
     user_id: int
     invite_hash: str
@@ -55,7 +59,7 @@ class User:
         )
 
         if res.status_code != 200:
-            raise
+            raise WebServerError(f'Error Code: {res.status_code}')
 
         res = res.json()
 
