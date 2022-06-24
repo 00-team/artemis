@@ -1,9 +1,13 @@
+import logging
 from base64 import standard_b64decode, standard_b64encode
 
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import SET_NULL, CharField, PositiveBigIntegerField
 from utils.models import hashed_path, username
+
+
+logger = logging.getLogger(__name__)
 
 
 class BotUserManager(models.Manager):
@@ -125,9 +129,15 @@ class BotUser(models.Model):
 
     @property
     def _fullname(self):
+        try:
+            if self.fullname.startswith('base64;'):
+                return str(standard_b64decode(self.fullname[7:]), 'utf-8')
 
-        if self.fullname.startswith('base64;'):
-            return str(standard_b64decode(self.fullname[7:]), 'utf-8')
+            return self.fullname
+        except Exception as e:
+            logger.exception(e)
+            self.fullname = 'None'
+            self.save()
 
         return self.fullname
 
