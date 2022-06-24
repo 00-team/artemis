@@ -8,7 +8,7 @@ from django.conf import settings
 from django.db.models import Q
 from django.utils.timezone import now
 
-from utils.api.exception import E
+from utils.api.exception import VALID_TWITTER, E
 
 
 logger = logging.getLogger(__name__)
@@ -51,14 +51,21 @@ def twitter_info(ta: TwitterAccount):
     ta.description = response['description']
     ta.picture_url = response['profile_image_url'].replace('_normal', '')
 
+    if ta.picture_url.find('default_profile_images') != -1:
+        raise VALID_TWITTER
+
     USER_SHOW = f'https://api.twitter.com/1.1/users/show.json?user_id={ta.user_id}'
     headers = {'Authorization': f'Bearer {settings.SECRETS.TWITTER_BEARER}'}
 
     response = requests.get(USER_SHOW, headers=headers).json()
 
-    ta.followers = response['followers_count']
     ta.followings = response['friends_count']
+    ta.followers = response['followers_count']
     ta.tweets = response['statuses_count']
+
+    if ta.followers < 20 or ta.tweets < 100:
+        raise VALID_TWITTER
+
     ta.save()
 
 
