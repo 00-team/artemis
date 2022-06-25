@@ -236,6 +236,11 @@ def update(request: HttpRequest):
 
         wallet = str(wallet)
 
+        try:
+            wallet.encode('ascii')
+        except UnicodeEncodeError:
+            raise E('Invalid Wallet')
+
         if len(wallet) == 42 and account.wallet != wallet:
             account.wallet = wallet
             account.save()
