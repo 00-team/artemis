@@ -92,20 +92,20 @@ class AccountAdmin(admin.ModelAdmin):
 @admin.register(TwitterAccount)
 class TwitterAccountAdmin(admin.ModelAdmin):
     list_display = (
-        '__str__', 'nickname', 'username',
+        '__str__', '_nickname', 'username',
         'account', 'followers', 'pic'
     )
     readonly_fields = (
-        'account', 'access_token',
-        'expires_in', 'pic', 'user_id'
+        '_nickname', 'account', 'access_token',
+        'expires_in', 'pic', 'user_id', '_description'
     )
 
     fieldsets = (
         ('Info', {
             'fields': (
-                'nickname', 'username',
+                '_nickname', 'nickname', 'username',
                 'followers', 'followings', 'tweets',
-                'description'
+                'description', '_description'
             )
         }),
         ('picture', {'fields': ('picture_url', 'picture')}),

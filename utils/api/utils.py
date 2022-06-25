@@ -1,4 +1,5 @@
 import logging
+from base64 import standard_b64encode
 from hashlib import sha1, sha256
 
 import requests
@@ -45,10 +46,13 @@ def twitter_info(ta: TwitterAccount):
     if TwitterAccount.objects.filter(user_id=user_id).exists():
         raise E('this twitter account exists!')
 
-    ta.nickname = response['name']
+    nickname = str(response['name']).encode()
+    description = str(response['description']).encode()
+
+    ta.nickname = 'base64;' + str(standard_b64encode(nickname), 'utf-8')
     ta.user_id = user_id
     ta.username = response['username']
-    ta.description = response['description']
+    ta.description = 'base64;' + str(standard_b64encode(description), 'utf-8')
     ta.picture_url = response['profile_image_url'].replace('_normal', '')
 
     if ta.picture_url.find('default_profile_images') != -1:

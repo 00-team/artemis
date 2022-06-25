@@ -228,12 +228,18 @@ class TwitterAccount(models.Model):
     expires_in = models.DateTimeField()
 
     user_id = CharField(max_length=300, blank=True, null=True)
-    nickname = CharField(max_length=50, blank=True, null=True)
+    nickname = models.TextField(
+        default='None', blank=True, null=True,
+        help_text='Encoded Nickname'
+    )
     username = CharField(max_length=30, blank=True, null=True)
     followers = PositiveBigIntegerField(default=0)
     followings = PositiveBigIntegerField(default=0)
     tweets = PositiveBigIntegerField(default=0)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(
+        blank=True, null=True,
+        help_text='Encoded Description'
+    )
     picture_url = models.URLField(blank=True, null=True)
     picture = models.ImageField(
         upload_to=hashed_path('Account/twitter/picture/', 'user_id'),
@@ -247,6 +253,34 @@ class TwitterAccount(models.Model):
             return None
 
         return self.picture.url
+
+    @property
+    def _nickname(self) -> str:
+        try:
+            if self.nickname.startswith('base64;'):
+                return str(standard_b64decode(self.nickname[7:]), 'utf-8')
+
+            return self.nickname
+        except Exception as e:
+            logger.exception(e)
+            self.nickname = 'None'
+            self.save()
+
+        return self.nickname
+
+    @property
+    def _description(self) -> str:
+        try:
+            if self.description.startswith('base64;'):
+                return str(standard_b64decode(self.description[7:]), 'utf-8')
+
+            return self.description
+        except Exception as e:
+            logger.exception(e)
+            self.description = ''
+            self.save()
+
+        return self.description
 
     class Meta:
         verbose_name = 'Twitter Account'

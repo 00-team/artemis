@@ -100,13 +100,13 @@ def twitter_hook(twitter: TwitterAccount, status: str):
                    f'**Followings**: `{twitter.followings}`\n'
                    f'**Tweets**: `{twitter.tweets}`{HR}')
 
-    if twitter.description:
-        description += f'**Bio**: \n{twitter.description}{HR}'
+    if twitter._description:
+        description += f'**Bio**: \n{twitter._description}{HR}'
 
     color, author_name = TWITTER_STATUS[status]
 
     embed = {
-        'title': twitter.nickname,
+        'title': twitter._nickname,
         'color': color,
         'timestamp': str(now()),
         'author': {

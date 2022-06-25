@@ -180,12 +180,12 @@ def get_account(request: HttpRequest):
             ta = account.twitteraccount
             twitter = {
                 'user_id': ta.user_id,
-                'nickname': ta.nickname,
+                'nickname': ta._nickname,
                 'tweets': ta.tweets,
                 'username': ta.username,
                 'followers': ta.followers,
                 'followings': ta.followings,
-                'description': ta.description or None,
+                'description': ta._description or None,
                 'picture': ta._picture,
             }
         except:
