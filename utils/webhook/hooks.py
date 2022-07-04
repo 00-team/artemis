@@ -84,6 +84,8 @@ def account_hook(account: Account, status: str, picture: str = None):
         },
     }
 
+    logger.error(embed['thumbnail'])
+
     if status == 'delete':
         del embed['thumbnail']
 
