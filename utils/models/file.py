@@ -16,8 +16,16 @@ logger = logging.getLogger(__name__)
 TOKEN_FILE = settings.SECRETS.SECRET_TOKEN_FILE.encode('UTF-8')
 
 
+def get_hased_item(item) -> str:
+    return hmac.new(
+        TOKEN_FILE,
+        str(item).encode('UTF-8'),
+        digestmod=sha256
+    ).hexdigest()
+
+
 def get_ext(filename: str) -> str:
-    if filename.find('.') == -1:
+    if filename.rfind('.') == -1:
         return ''
     else:
         return filename.split('.')[-1]
@@ -32,6 +40,20 @@ class file_path(object):
     def __call__(self, instance, filename: str):
         ext = get_ext(filename)
         name = get_random_string(20)
+        return Path(self.path) / f'{name}.{ext}'
+
+
+@deconstructible
+class hashed_path:
+
+    def __init__(self, sub_path, attr):
+        self.path = sub_path
+        self.attr = attr
+
+    def __call__(self, instance, filename: str):
+        ext = get_ext(filename)
+        name = get_hased_item(getattr(instance, self.attr))
+
         return Path(self.path) / f'{name}.{ext}'
 
 
@@ -55,21 +77,3 @@ def download_file(url: str | None) -> File | None:
         return File(temp)
     except Exception as e:
         logger.exception(e)
-
-
-@deconstructible
-class hashed_path:
-
-    def __init__(self, sub_path, attr):
-        self.path = sub_path
-        self.attr = attr
-
-    def __call__(self, instance, filename: str):
-        ext = get_ext(filename)
-
-        message = str(getattr(instance, self.attr)).encode('UTF-8')
-
-        hmac_name = hmac.new(TOKEN_FILE, message, digestmod=sha256)
-        name = hmac_name.hexdigest()
-
-        return Path(self.path) / f'{name}.{ext}'

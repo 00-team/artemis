@@ -1,11 +1,10 @@
-from django.test import Client
-from django.test import TestCase
-
-from django.utils.timezone import now
-from django.conf import settings
-
-from hashlib import sha256
 import hmac
+from hashlib import sha256
+
+from django.conf import settings
+from django.test import Client, TestCase
+from django.utils.timezone import now
+
 
 c = Client()
 PHOTO_URL = 'https://cdn.discordapp.com/attachments/731174051170746500/836494236941680650/cock.png'
