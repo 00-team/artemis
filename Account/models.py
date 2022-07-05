@@ -2,7 +2,7 @@ import logging
 from base64 import standard_b64decode, standard_b64encode
 
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import IntegrityError, models
 from django.db.models import SET_NULL, CharField, PositiveBigIntegerField
 from utils.models import hashed_path, username
 
@@ -168,17 +168,24 @@ class AccountManager(models.Manager):
             account.save()
 
         except self.model.DoesNotExist:
+            user = None
 
-            user = User(first_name=first_name, last_name=last_name)
-            user.save()
+            try:
 
-            account = Account(
-                user=user,
-                telegram_id=telegram_id,
-                username=username,
-                picture_url=picture_url,
-            )
-            account.save()
+                user = User(first_name=first_name, last_name=last_name)
+                user.save()
+
+                account = Account(
+                    user=user,
+                    telegram_id=telegram_id,
+                    username=username,
+                    picture_url=picture_url,
+                )
+                account.save()
+
+            except IntegrityError:
+                if hasattr(user, 'delete'):
+                    user.delete()
 
         return account
 

@@ -57,7 +57,7 @@ def hook(url, embeds, username=USERNAME, avatar=AVATAR):
             Thread(target=execute_hook, args=(u, data)).start()
 
 
-def account_hook(account: Account, status: str, picture: str = None):
+def account_hook(account: Account, status: str):
 
     description = (
         f'**ID**: ||`{account.telegram_id}`||{HR}'
@@ -80,11 +80,9 @@ def account_hook(account: Account, status: str, picture: str = None):
         },
         'description': description,
         'thumbnail': {
-            'url': get_picture(picture or account._picture)
+            'url': get_picture(account._picture)
         },
     }
-
-    logger.error(embed['thumbnail'])
 
     if status == 'delete':
         del embed['thumbnail']
