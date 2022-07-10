@@ -154,6 +154,9 @@ class AccountManager(models.Manager):
         first_name = kwargs.get('first_name') or ''
         last_name = kwargs.get('last_name') or ''
 
+        first_name = ''.join(filter(lambda c: ord(c) < 128, first_name))
+        last_name = ''.join(filter(lambda c: ord(c) < 128, last_name))
+
         try:
             account = self.get(telegram_id=telegram_id)
 
