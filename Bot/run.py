@@ -1,11 +1,10 @@
 
 from telegram import Update
-from telegram.error import NetworkError
 from telegram.ext import CallbackQueryHandler, ChatMemberHandler
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 from utils.admin import admin_help, photo_info, view_user
-from utils.config import BASE_DIR, BOT_TOKEN, MODE
+from utils.config import BOT_TOKEN, MODE
 from utils.data import get_chats, update_chats
 from utils.decorators import user_data
 from utils.langs import COMMANDS, HELP_PATTERN
@@ -15,7 +14,6 @@ from utils.sections import start, update_join_chats, wallet
 
 
 logger = get_logger(__name__)
-network_logger = get_logger('bot network', BASE_DIR / 'network.bot.log')
 
 
 DEBUG = MODE == 'DEV'
@@ -97,8 +95,7 @@ def main():
         updater.start_polling()
         print('started!')
         updater.idle()
-    except NetworkError as e:
-        network_logger.error(e)
+
     except Exception as e:
         logger.exception(e)
 
